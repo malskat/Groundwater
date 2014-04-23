@@ -1,0 +1,52 @@
+
+ ** Groundwater roadmap
+
+
+ 	» FRONTEND
+
+		** validar a remoção de:
+			* i: logo na listagem inactivar o botão de remoção 
+			* épocas -> campanhas.
+			* espécies -> indivíduos. - DONE
+			* site -> plots.
+			* plots -> indivíduos.
+
+		** login
+			* serviço
+			* frontend
+				* ícone
+				* indicar o nome da pessoa
+				* botão para logout
+
+		** alerts
+			* ajustá-los todos de acordo com o que está feito no species-list.html
+
+	» DADOS
+
+		** inserir as novas espécies - DONE
+		** inserir os novos indivíduos
+			* donana - DONE
+			* osso da baleia
+			* ubatuba
+
+		** testar os gráficos do google
+			* testar o ajuste da interface com o javascript
+			* testar a criação dos gráficos com a APi do google
+
+	» MELHORAMENTOS
+		
+		** substituir todos os _ por -, nos nomes de ficheiros que são páginas - DONE
+
+		** criar classe para desenhar as listagens
+			* criar atributos para a informação que muda;
+			* criar método para desenhar o html;
+			* nos ficheiros .html instanciar a classe com a informação necessária e fazer echo do html que é gerado;
+			* VALIDAR - o tema sangoma, bootstrap para backoffices.
+
+
+
+ 	*** Problemas:
+
+ 		* na inserção de indivíduos de donana:
+ 			* inseri esta espécie Stauracanthus;sp. (genus, species), mas já existe outra Stauracanthus.
+ 			* os Pond;water não estava previstos, temos de falar sobre isto.

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<? include "../data/site_data.php"; 
+		$sites = getSites();
+	?>
+
+	<h1>Ground Water Information Center</h1>
+
+	<h2>Formul&aacute;rio de submiss&atilde;o de dados para Site Climate Data</h2>
+	<form name="form_site_data" action="../services/siteClimateSubmissionData.php" method="post">
+		Data: <input type="text" name="measureDate" value="aaaa-mm-dd hh:mm:ss"> 
+		Site: 
+			<select name="site_id">
+				  <? 
+				  	foreach($sites as $site){
+				  		echo '<option value=' . $site->site_id . '>' . $site->code . '</option>';
+				  	}
+				  ?>
+			</select>
+			<br/><br/>
+		Temperatura: <input type="text" name="temperature">
+		Precipita&ccedil;&atilde;o: <input type="text" name="precipitation"><br/><br/>
+		Precipita&ccedil;&atilde;o 18o: <input type="text" name="precipitation_18o">
+		Ground Water 18o: <input type="text" name="gw_18o"><br/><br/>
+		Humidade Relativa: <input type="text" name="relativeHumidity">
+		Par: <input type="text" name="par"><br/><br/>
+		<input type="hidden" value="form" name="submissionType" >
+		<a href="../index.html">voltar atr&aacute;s</a><input type="submit" value="Submeter">
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<? include "../data/site_data.php"; 
+		$sites = getSites();
+	?>
+
+	<h1>Ground Water Information Center</h1>
+
+	<h2>Submiss&atilde;o de excel de dados para Site Climate Data</h2>
+	<form name="form_site_data" enctype="multipart/form-data" action="../services/siteClimateSubmissionData.php" method="post">
+		<label>Site:</label> 
+			<select name="site_id">
+				  <? 
+				  	foreach($sites as $site){
+				  		echo '<option value=' . $site->site_id . '>' . $site->code . '</option>';
+				  	}
+				  ?>
+			</select>
+			<label>ficheiro:</label><input type="file" name="file" id="file"> 
+			<br/><br/>
+		<input type="hidden" value="excel" name="submissionType" >
+		<a href="../index.html">voltar atr&aacute;s</a><input type="submit" value="Submeter">
+	</form>
+
+</body>
+</html>
