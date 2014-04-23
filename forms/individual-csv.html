@@ -31,12 +31,6 @@
 
   <body>
 
-    <!-- incluir alertas -->
-    <div id="alert-message" class="alert-message" style="display:none">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>  
-      <p id="alert-text"></p>
-    </div>
-
   	<!-- incluir menu principal -->
     <?php include "../menu.php"; ?>
 
@@ -109,7 +103,7 @@
         if (hasErrors){
           $('#alert-message').show();
             $('#alert-message').addClass('danger');
-            $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros à época!");
+            $('#alert-text').html("<strong>Shit happens!</strong> Falta o ficheiro!");
           return false;
         } else {
           return true;

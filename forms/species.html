@@ -24,19 +24,12 @@
 
   <body>
 
-    <!-- incluir menu principal -->
-  	<?php include "../menu.php"; 
+  	<?
       if(isset ($_GET["species_id"])){
         include "../data/species_data.php"; 
         $specieObj = getSpeciesBy("species_id = " . $_GET["species_id"], -1);
       }
     ?>
-
-    <!-- incluir alertas -->
-    <div id="alert-message" class="alert-message" style="display:none">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>  
-      <p id="alert-text"></p>
-    </div>
 
     <!-- incluir menu principal -->
     <?php include "../menu.php"; ?>
