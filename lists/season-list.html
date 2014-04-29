@@ -25,7 +25,7 @@
 
     <? 
   		include "../data/season_data.php";
-  		$seasons = getSeasons(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalIndividuals = 1); 
+  		$seasons = getSeasons(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalCampaigns = 1); 
   		$fields = getSeasonFieldsListConf();
   	?>
   	
@@ -92,22 +92,28 @@
                 foreach ($seasons as $season) {
                 	if(isset($season->season_id)){
 	                    echo '<tr>
-	                        <td>' . $season->season_id . '</td>
-	                        <td>' . $season->code . '</td>
-	                        <td>' . $season->startDate . '</td>
-	                        <td>' . $season->endDate . '</td>
-                          <td><a href="campaign-list.html?season=' . $season->season_id .  '"><span class="badge">' . $season->totalCampaigns . '</span></a></td>
-	                       	<td>
-                            	<button onclick="location.href=\'../forms/season.html?season_id=' . $season->season_id . '\'" type="button" class="btn btn-info btn-xs">
-                                	<span class="glyphicon glyphicon glyphicon-edit"></span>
-                            	</button>
-                            </td>
-                            <td>
-                            	<button onclick="beginDelete(\'action=delete&class=season&id=' . $season->season_id . '\');" type="button" class="btn btn-danger btn-xs">
-                                	<span class="glyphicon glyphicon-remove-sign"></span>
-                              </button>
-	                        </td>
-	                    </tr>';
+		                        <td>' . $season->season_id . '</td>
+		                        <td>' . $season->code . '</td>
+		                        <td>' . $season->startDate . '</td>
+		                        <td>' . $season->endDate . '</td>
+	                          	<td><a href="campaign-list.html?season=' . $season->season_id .  '"><span class="badge">' . $season->totalCampaigns . '</span></a></td>
+		                       	<td>
+	                            	<button onclick="location.href=\'../forms/season.html?season_id=' . $season->season_id . '\'" type="button" class="btn btn-primary btn-xs">
+	                                	<span class="glyphicon glyphicon glyphicon-edit"></span>
+	                            	</button>
+	                            </td>
+	                       		<td>';
+
+							   
+						        if ($season->totalCampaigns == 0) {
+							        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $season->season_id . '\');" type="button" class="btn btn-danger btn-xs">
+							            <span class="glyphicon glyphicon-remove-sign"></span>
+							          </button>';
+						        } else {
+						        	echo '<span id="removeTooltip_' . $season->season_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem campanhas associados">É melhor não</span>'; 
+						        }
+						        echo '</td>
+					        </tr>';
                		}
                 }
             ?>
@@ -165,6 +171,15 @@
       </div>
     </div>
 
+    <script>
+    <?
+	    foreach ($seasons as $season) {
+	    	if (isset($season->season_id) && $season->totalCampaigns > 0) {
+		    	echo "$('#removeTooltip_" . $season->season_id . "').tooltip({trigger: 'hover'});";
+	    	}
+	    }
+	?>
+    </script>
 
   </body>
 </html>

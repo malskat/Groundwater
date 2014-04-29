@@ -50,3 +50,10 @@
  		* na inserção de indivíduos de donana:
  			* inseri esta espécie Stauracanthus;sp. (genus, species), mas já existe outra Stauracanthus.
  			* os Pond;water não estava previstos, temos de falar sobre isto.
+
+
+» DADOS PARA O SERVIDOR
+
+	* ftp host: cubocreation.net
+	* user: jbarbosa@cubocreation.net
+	* pass: ground

@@ -18,7 +18,7 @@
 
 
   //para os alertas
-  var params = getQueryParams(window.location.search);
+	var params = getQueryParams(window.location.search);
     if (params["sucess"] < 0){
 
       if(params["sucess"] == -3){
@@ -53,11 +53,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href=<?= PROJECT_URL . "index.html"?>>Groundwater</a>
+      <a class="navbar-brand" href=<?= PROJECT_URL?>>Groundwater</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li <?=(strpos($_SERVER['PHP_SELF'], 'index.html') !== false ? 'class="active"' :  '')?>><a href=<?= PROJECT_URL . "index.html"?> >Home</a></li>
+        <li <?=(strpos($_SERVER['PHP_SELF'], 'index.php') !== false ? 'class="active"' :  '')?>><a href=<?= PROJECT_URL . "index.php"?> >Home</a></li>
 
         <li <?=(strpos($_SERVER['PHP_SELF'], 'season') !== false || strpos($_SERVER['PHP_SELF'], 'campaign') !== false ? 'class="active"' :  '')?> class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campanhas <b class="caret"></b></a>
@@ -114,10 +114,14 @@
 		<div class="form-group">
 			<input type="password" placeholder="Password" class="form-control">
 		</div>
-		<button type="submit" class="btn btn-success">Sign in</button>
+		<button id="loginTooltip" type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Por implementar!">Sign in</button>
 	</form>
     </div>
   </div>
 </nav>
+
+<script>
+	$('#loginTooltip').tooltip({trigger: 'hover'});
+</script>
 
 

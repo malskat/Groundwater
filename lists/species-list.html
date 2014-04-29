@@ -135,7 +135,7 @@
 							        <td><a href="individual-list.html?species=' . $specie->species_id .  '"><span class="badge">' . $specie->totalIndividuals . '</span></a>
 							        </td>
 							        <td>
-							          	<button onclick="location.href=\'../forms/species.html?species_id=' . $specie->species_id . '\'" type="button" class="btn btn-info btn-xs">
+							          	<button onclick="location.href=\'../forms/species.html?species_id=' . $specie->species_id . '\'" type="button" class="btn btn-primary btn-xs">
 							          			<span class="glyphicon glyphicon-edit"></span>
 							          	</button>
 							        </td> 
@@ -146,9 +146,7 @@
 						            <span class="glyphicon glyphicon-remove-sign"></span>
 						          </button>';
 					        } else {
-					        	echo '<button type="button" class="btn btn-xs" disabled="disabled">
-					        			<span class="glyphicon glyphicon-remove-sign"></span>
-					        		</button>'; 
+					        	echo '<span id="removeTooltip_' . $specie->species_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem indivíduos associados">É melhor não</span>'; 
 					        }
 
 						        echo '</td>
@@ -212,6 +210,16 @@
         <div class="col-xs-4 col-lg-4"></div>
       </div>
     </div>
+
+    <script>
+    <?
+	    foreach ($species as $specie) {
+	    	if (isset($specie->species_id) && $specie->totalIndividuals > 0) {
+		    	echo "$('#removeTooltip_" . $specie->species_id . "').tooltip({trigger: 'hover'});";
+	    	}
+	    }
+	?>
+    </script>
 
   </body>
 </html>

@@ -145,24 +145,31 @@
                     if(isset($plot->plot_id)){
                       $plot_type = (isset($plot->plotType) && $plot->plotType != "" ? ($plot->plotType == 'ch' ? 'Charca' : 'Duna') : 'N.D.');
                				echo '<tr>
-    	            	    <td>' . $plot->plot_id . '</td>
-    	                	<td>' . $plot->code . '</td>
-                        <td>' . $plot->title . '</td>
-                        <td>' . $plot_type . '</td>
-    	                  	<td>' . (isset($plot->coordinateX) && $plot->coordinateX != "" && $plot->coordinateX !== "-1"? $plot->coordinateX : "N.D.") . '</td>
-    	                  	<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>
-                        <td><a href="individual-list.html?plot=' . $plot->plot_id .  '"><span class="badge">' . $plot->totalIndividuals . '</span></a></td>
-  	                  	<td>
-  	                  		<button onclick="location.href=\'../forms/plot.html?plot_id=' . $plot->plot_id . '\'" type="button" class="btn btn-info btn-xs">
-  	                  			<span class="glyphicon glyphicon-edit"></span>
-  	                  		</button>
-  	                  	</td>
-                        <td>
-                          <button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\');" type="button" class="btn btn-danger btn-xs">
-                            <span class="glyphicon glyphicon-remove-sign"></span>
-                          </button>
-                        </td>
-    	                </tr>';
+    	            	    		<td>' . $plot->plot_id . '</td>
+    	                			<td>' . $plot->code . '</td>
+                        			<td>' . $plot->title . '</td>
+                        			<td>' . $plot_type . '</td>
+    	                  			<td>' . (isset($plot->coordinateX) && $plot->coordinateX != "" && $plot->coordinateX !== "-1"? $plot->coordinateX : "N.D.") . '</td>
+    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>
+                        			<td><a href="individual-list.html?plot=' . $plot->plot_id .  '"><span class="badge">' . $plot->totalIndividuals . '</span></a></td>
+			  	                  	<td>
+			  	                  		<button onclick="location.href=\'../forms/plot.html?plot_id=' . $plot->plot_id . '\'" type="button" class="btn btn-primary btn-xs">
+			  	                  			<span class="glyphicon glyphicon-edit"></span>
+			  	                  		</button>
+			  	                  	</td>
+							        <td>';
+
+						   
+							        if ($plot->totalIndividuals == 0) {
+								        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\');" type="button" class="btn btn-danger btn-xs">
+								            <span class="glyphicon glyphicon-remove-sign"></span>
+								          </button>';
+							        } else {
+							        	echo '<span id="removeTooltip_' . $plot->plot_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem indivíduos associados">É melhor não</span>'; 
+							        }
+
+								    echo '</td>;
+    	                	</tr>';
                     }
              			}
                 } else {
@@ -223,6 +230,16 @@
         <div class="col-xs-4 col-lg-4"></div>
       </div>
     </div>
+
+    <script>
+    <?
+	    foreach ($plots as $plot) {
+	    	if (isset($plot->plot_id) && $plot->totalIndividuals > 0) {
+		    	echo "$('#removeTooltip_" . $plot->plot_id . "').tooltip({trigger: 'hover'});";
+	    	}
+	    }
+	?>
+    </script>
 
   </body>
 </html>
