@@ -11,18 +11,18 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != "" && isset($_POST["endD
 	&& isset($_POST["site_id"]) && $_POST["site_id"] != ""){
 
 	if(!isset($_POST["sampling_campaign_id"])){
-		$sucess = insertCampaign($_POST);
+		$success = insertCampaign($_POST);
 	}else{
-		$sucess = updateCampaign($_POST);
+		$success = updateCampaign($_POST);
 	}
 	
-	if($sucess == 1){
-		header('Location: ' . PROJECT_URL . 'lists/campaign-list.html?sucess=1');
+	if($success == 1){
+		header('Location: ' . PROJECT_URL . 'lists/campaign-list.html?success=1');
 	} else {
-		header('Location: ' . PROJECT_URL . 'lists/campaign-list.html?sucess=-3&reason=Não houve alteração nenhuma!');
+		header('Location: ' . PROJECT_URL . 'lists/campaign-list.html?success=-3&reason=Não houve alteração nenhuma!');
 	}
 
 	
 }else{
-	header('Location: ' . PROJECT_URL . 'forms/campaign.html?sucess=-1&reason=Faltam parametros!');
+	header('Location: ' . PROJECT_URL . 'forms/campaign.html?success=-1&reason=Faltam parametros!');
 }

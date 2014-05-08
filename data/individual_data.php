@@ -85,6 +85,5 @@ function updateIndividual($toUpdate){
 function delete_individual($where){
 
 	require_once '../core/core_database.php';
-
-	return deleteDB('individual', $where);
+	return deleteDB('individual', str_replace("individual_id", "individualCode", $where));
 }

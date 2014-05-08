@@ -4,23 +4,10 @@
 
  	» FRONTEND
 
-		** validar a remoção de:
-			* i: logo na listagem inactivar o botão de remoção 
-			* épocas -> campanhas.
-			* espécies -> indivíduos. - DONE
-			* site -> plots.
-			* plots -> indivíduos.
+ 		* login
+ 		* popups de delete no menu.php
 
-		** login
-			* serviço
-			* frontend
-				* ícone
-				* indicar o nome da pessoa
-				* botão para logout
-
-		** alerts
-			* ajustá-los todos de acordo com o que está feito no species-list.html
-
+		
 	» DADOS
 
 		** inserir as novas espécies - DONE
@@ -34,8 +21,6 @@
 			* testar a criação dos gráficos com a APi do google
 
 	» MELHORAMENTOS
-		
-		** substituir todos os _ por -, nos nomes de ficheiros que são páginas - DONE
 
 		** criar classe para desenhar as listagens
 			* criar atributos para a informação que muda;

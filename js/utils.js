@@ -12,8 +12,10 @@ function getQueryParams(qs) {
     return params;
 }
 
-function beginDelete(deleteOptions) {
+function beginDelete(deleteOptions, modalSentence) {
 	var deleteHref = "location.href=\"../core/core_action.php?" + deleteOptions + "\"";
 	$('#removeModalButton').attr('onclick', deleteHref);
+	$('#modalLabel').text('Remoção');
+	$('#modalDescription').text(modalSentence);
 	$('#removeModal').modal('show');
 }

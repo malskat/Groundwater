@@ -10,14 +10,10 @@ switch($action){
 		
 		//chamada dinamica da funcao
 		$deleteFunction = "delete_" . $_GET["class"];
-		if ($_GET["class"] != 'individual') {
-			$toReturn = $deleteFunction($_GET["class"] . "_id = " . $_GET["id"]);
-		} else {
-			$toReturn = $deleteFunction('individualCode = "' . $_GET["id"] . '"');
-		}
+		$toReturn = $deleteFunction($_GET["class"] . "_id = '" . $_GET["id"] . "'");
 		
 		if(isset($_GET["class"])){
-			header('Location: ' . PROJECT_URL . 'lists/' . $_GET["class"] . '-list.html?sucess=' . ($toReturn == 1 ? 2 : $toReturn));
+			header('Location: ' . PROJECT_URL . 'lists/' . $_GET["class"] . '-list.html?success=' . ($toReturn == 1 ? 2 : $toReturn));
 		} else {
 			header('Location: ' . PROJECT_URL . 'index.html?');
 		}
@@ -37,6 +33,12 @@ switch($action){
 		} else {
 			header('Location: ' . PROJECT_URL . 'lists/' . $_POST["class"] . '-list.html');
 		} 
+		break;
+	}
+
+	default : {
+		var_dump(PROJECT_URL);
+		header('Location: ' . PROJECT_URL );
 		break;
 	}
 }

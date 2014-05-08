@@ -24,9 +24,26 @@
   <body>
 
     <? 
-  		include "../data/season_data.php";
-  		$seasons = getSeasons(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalCampaigns = 1); 
-  		$fields = getSeasonFieldsListConf();
+  		include "../data/user_data.php";
+
+  		$users = array();
+	    $whereClause = "";
+	    $getParameters = "";
+
+  		if(isset($_GET["nameEmail"])){
+
+			$whereClause = " upper(b.first_name) like upper('%" . $_GET["nameEmail"] . "%') 
+							or upper(b.last_name) like upper('%" . $_GET["nameEmail"] . "%') 
+							or upper(b.email) like upper('%" . $_GET["nameEmail"] . "%')";
+
+		   	$getParameters = "nameEmail=" . $_GET["nameEmail"];
+			$users = getUserBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0));
+
+		} else {
+  			$users = getUsers(isset($_GET["page"]) ? $_GET["page"] : 0); 
+  		}
+  		
+  		$fields = getUserFieldsListConf();
   	?>
   	
     <!-- incluir menu principal -->
@@ -36,7 +53,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-         	<h1>Épocas</h1>
+         	<h1>Utilizadores</h1>
         </div>
       </div>
     </div>
@@ -45,9 +62,18 @@
     <!-- barra de accoes -->
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-lg-10"></div>
+        <div class="col-xs-12 col-lg-10">
+        	<form  class="form-inline" role="form" name="form_searchindividual_data" action="../core/core_action.php" method="post">
+            	<input type="hidden" value="search" name="action">
+            	<input type="hidden" value="user" name="class">
+	            <div class="form-group">
+	              <input type="text" class="form-control input-sm" name="nameEmail" placeholder="Nome ou Email" value=<?= (isset($_GET["nameEmail"]) ? '"' . $_GET["nameEmail"] . '"' : "") ?>>
+	            </div>
+	            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Filtrar</button>
+	        </form>
+        </div>
         <div class="col-xs-6 col-lg-2"> 
-          <button class="btn btn-primary btn-sm" onclick="location.href='../forms/season.html'">Inserir Época</button>
+          <button class="btn btn-primary btn-sm" onclick="location.href='../forms/user.html'">Inserir Utilizador</button>
         </div>
       </div>
     </div>
@@ -70,31 +96,23 @@
             </thead>
             <tbody>
             <?
-                foreach ($seasons as $season) {
-                	if(isset($season->season_id)){
+                foreach ($users as $user) {
+                	if(isset($user->biologyst_id)){
 	                    echo '<tr>
-		                        <td>' . $season->season_id . '</td>
-		                        <td>' . $season->code . '</td>
-		                        <td>' . $season->startDate . '</td>
-		                        <td>' . $season->endDate . '</td>
-	                          	<td><a href="campaign-list.html?season=' . $season->season_id .  '"><span class="badge">' . $season->totalCampaigns . '</span></a>
-	                          	</td>
+		                        <td>' . $user->biologyst_id . '</td>
+		                        <td>' . $user->first_name . ' ' .  $user->last_name . ' </td>
+		                        <td>' . $user->email . '</td>
+		                        <td>' . $user->creation_date . '</td>
 		                       	<td>
-	                            	<button onclick="location.href=\'../forms/season.html?season_id=' . $season->season_id . '\'" type="button" class="btn btn-primary btn-xs">
+	                            	<button onclick="location.href=\'../forms/user.html?user_id=' . $user->biologyst_id . '\'" type="button" class="btn btn-primary btn-xs">
 	                                	<span class="glyphicon glyphicon glyphicon-edit"></span>
 	                            	</button>
 	                            </td>
-	                       		<td>';
-
-							   
-						        if ($season->totalCampaigns == 0) {
-							        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $season->season_id . '\',\'Queres mesmo remover esta Época?\');" type="button" class="btn btn-danger btn-xs">
+	                       		<td>
+							    	<button onclick="beginDelete(\'action=delete&class=user&id=' . $user->biologyst_id . '\', \'Queres mesmo remover este utilizador?\');" type="button" class="btn btn-danger btn-xs">
 							            <span class="glyphicon glyphicon-remove-sign"></span>
-							          </button>';
-						        } else {
-						        	echo '<span id="removeTooltip_' . $season->season_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem campanhas associadas">É melhor não</span>'; 
-						        }
-						        echo '</td>
+							          </button>
+						      	<td>
 					        </tr>';
                		}
                 }
@@ -109,15 +127,15 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4 col-lg-4">
-          <h5>Total de registos <span class="badge"><?=$seasons[0]->totalRecords?></span></h5>
+          <h5>Total de registos <span class="badge"><?=$users[0]->totalRecords?></span></h5>
         </div>
         <div class="col-xs-4 col-lg-4"> 
           <div class="text-center">
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($seasons[0]->totalRecords % TOTAL_ROWS_SEASON) > 0 ? 1 : 0);
-                $nPages = floor($seasons[0]->totalRecords / TOTAL_ROWS_SEASON) + $addPage;
+                $addPage = (($users[0]->totalRecords % TOTAL_ROWS_USER) > 0 ? 1 : 0);
+                $nPages = floor($users[0]->totalRecords / TOTAL_ROWS_USER) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );
@@ -127,12 +145,12 @@
                     echo '<li class="disabled"><a >&laquo;</a></li>';
                   } else {
                     $newPage = ($currentPage - 1);
-                    echo '<li><a href="season-list.html?page=' . $newPage . '">&laquo;</a></li>';
+                    echo '<li><a href="user-list.html?page=' . $newPage . '">&laquo;</a></li>';
                   }
 
                   for ($i = 1; $i <= $nPages; $i++ ) {
                     $active = ((isset($_GET["page"]) && $_GET["page"] == $i)  ? 'class="active"' : (!isset($_GET["page"]) && $i == 1) ? 'class="active"' : "");
-                    echo '<li ' . $active . '><a href="season-list.html?page='. $i . '">' . $i . '</a></li>';
+                    echo '<li ' . $active . '><a href="user-list.html?page='. $i . '">' . $i . '</a></li>';
                   }
 
                   //botao para a frente
@@ -140,7 +158,7 @@
                     echo '<li class="disabled"><a >&raquo;</a></li>';
                   } else {
                     $newPage = ($currentPage   + 1);
-                    echo '<li><a href="season-list.html?page=' . $newPage . '">&raquo;</a></li>';
+                    echo '<li><a href="user-list.html?page=' . $newPage . '">&raquo;</a></li>';
                   }
 
                 }
@@ -152,16 +170,5 @@
         <div class="col-xs-4 col-lg-4"></div>
       </div>
     </div>
-
-    <script>
-    <?
-	    foreach ($seasons as $season) {
-	    	if (isset($season->season_id) && $season->totalCampaigns > 0) {
-		    	echo "$('#removeTooltip_" . $season->season_id . "').tooltip({trigger: 'hover'});";
-	    	}
-	    }
-	?>
-    </script>
-
   </body>
 </html>

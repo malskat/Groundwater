@@ -65,25 +65,6 @@
   	<!-- incluir menu principal -->
   	<?php include "../menu.php"; ?>
 
-    <!-- Modal -->
-    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Remoção</h4>
-          </div>
-          <div class="modal-body">
-            <p>Queres mesmo remover este Plot?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-            <button id="removeModalButton" type="button" class="btn btn-primary">Sim</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
       <div class="row">
       	<div class="page-header">
@@ -126,58 +107,58 @@
     <div class="container">
   		<div class="row spacer">
   			<div class="col-xs-12 col-lg-12">
-          <table class="table table-hover">
+          		<table class="table table-hover">
         		<thead>
-              <tr class="active">
-              	<?
-              		foreach ($fields as $field) {
-              			echo '<th>' . $field . '</th>';
-              		}
-              	?>
-                <th>Editar</th>
-                <th>Remover</th>
-              </tr>
-            </thead>
-            <tbody>
-          		<?
-                if(count($plots) > 1) {
-               		foreach ($plots as $plot) {
-                    if(isset($plot->plot_id)){
-                      $plot_type = (isset($plot->plotType) && $plot->plotType != "" ? ($plot->plotType == 'ch' ? 'Charca' : 'Duna') : 'N.D.');
-               				echo '<tr>
-    	            	    		<td>' . $plot->plot_id . '</td>
-    	                			<td>' . $plot->code . '</td>
-                        			<td>' . $plot->title . '</td>
-                        			<td>' . $plot_type . '</td>
-    	                  			<td>' . (isset($plot->coordinateX) && $plot->coordinateX != "" && $plot->coordinateX !== "-1"? $plot->coordinateX : "N.D.") . '</td>
-    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>
-                        			<td><a href="individual-list.html?plot=' . $plot->plot_id .  '"><span class="badge">' . $plot->totalIndividuals . '</span></a></td>
-			  	                  	<td>
-			  	                  		<button onclick="location.href=\'../forms/plot.html?plot_id=' . $plot->plot_id . '\'" type="button" class="btn btn-primary btn-xs">
-			  	                  			<span class="glyphicon glyphicon-edit"></span>
-			  	                  		</button>
-			  	                  	</td>
-							        <td>';
+              		<tr class="active">
+		              	<?
+		              		foreach ($fields as $field) {
+		              			echo '<th>' . $field . '</th>';
+		              		}
+		              	?>
+                		<th>Editar</th>
+                		<th>Remover</th>
+              		</tr>
+           		 </thead>
+	            <tbody>
+	          		<?
+	                if(count($plots) > 1) {
+	               		foreach ($plots as $plot) {
+	                    if(isset($plot->plot_id)){
+	                      $plot_type = (isset($plot->plotType) && $plot->plotType != "" ? ($plot->plotType == 'ch' ? 'Charca' : 'Duna') : 'N.D.');
+	               				echo '<tr>
+	    	            	    		<td>' . $plot->plot_id . '</td>
+	    	                			<td>' . $plot->code . '</td>
+	                        			<td>' . $plot->title . '</td>
+	                        			<td>' . $plot_type . '</td>
+	    	                  			<td>' . (isset($plot->coordinateX) && $plot->coordinateX != "" && $plot->coordinateX !== "-1"? $plot->coordinateX : "N.D.") . '</td>
+	    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>
+	                        			<td><a href="individual-list.html?plot=' . $plot->plot_id .  '"><span class="badge">' . $plot->totalIndividuals . '</span></a></td>
+				  	                  	<td>
+				  	                  		<button onclick="location.href=\'../forms/plot.html?plot_id=' . $plot->plot_id . '\'" type="button" class="btn btn-primary btn-xs">
+				  	                  			<span class="glyphicon glyphicon-edit"></span>
+				  	                  		</button>
+				  	                  	</td>
+								        <td>';
 
-						   
-							        if ($plot->totalIndividuals == 0) {
-								        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\');" type="button" class="btn btn-danger btn-xs">
-								            <span class="glyphicon glyphicon-remove-sign"></span>
-								          </button>';
-							        } else {
-							        	echo '<span id="removeTooltip_' . $plot->plot_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem indivíduos associados">É melhor não</span>'; 
-							        }
+							   
+								        if ($plot->totalIndividuals == 0) {
+									        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\', \'Queres mesmo remover este Plot?\');" type="button" class="btn btn-danger btn-xs">
+									            <span class="glyphicon glyphicon-remove-sign"></span>
+									          </button>';
+								        } else {
+								        	echo '<span id="removeTooltip_' . $plot->plot_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem indivíduos associados">É melhor não</span>'; 
+								        }
 
-								    echo '</td>;
-    	                	</tr>';
-                    }
-             			}
-                } else {
-                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>'; 
-                }
-           		?>
-            </tbody>
-          </table>
+									    echo '</td>
+	    	                		</tr>';
+	                    }
+	             			}
+	                } else {
+	                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>'; 
+	                }
+	           		?>
+	            </tbody>
+          	</table>
         </div>
   	  </div>
     </div>

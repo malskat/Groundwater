@@ -11,19 +11,19 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		unset($_POST["submissionType"]);
 
 		if (!isset($_POST["species_id"])) {
-			$sucess = insertSpecies($_POST);
+			$success = insertSpecies($_POST);
 		} else {
-			$sucess = updateSpecies($_POST);
+			$success = updateSpecies($_POST);
 		}
-		if ($sucess == 1) {
-			header('Location: ' . PROJECT_URL . 'lists/species-list.html?sucess=1');
+		if ($success == 1) {
+			header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=1');
 		} else {
-			header('Location: ' . PROJECT_URL . 'lists/species-list.html?sucess=-3&reason=Nao houve alteracao nenhuma!');
+			header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=-3&reason=Nao houve alteracao nenhuma!');
 		}
 
 		
 	} else {
-		header('Location: ' . PROJECT_URL . 'forms/species.html?sucess=-1&reason=Faltam parametros!');
+		header('Location: ' . PROJECT_URL . 'forms/species.html?success=-1&reason=Faltam parametros!');
 	}
 
 } else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
@@ -34,9 +34,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: ' . PROJECT_URL . 'forms/species-csv.html?sucess=-1&reason=Ficheiro tem de ser csv!');
+			header('Location: ' . PROJECT_URL . 'forms/species-csv.html?success=-1&reason=Ficheiro tem de ser csv!');
 	  	} else if (file_exists(PROJECT_DOCS_CENTER . $_FILES["file"]["name"])){
-			header('Location: ' . PROJECT_URL . 'forms/species-csv.html?sucess=-1&reason=Ficheiro ja foi processado!');
+			header('Location: ' . PROJECT_URL . 'forms/species-csv.html?success=-1&reason=Ficheiro ja foi processado!');
 	  	} else {
 			
 			//movimentacao do ficheiro da pasta temporaria para a pasta final
@@ -77,21 +77,21 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
 
 				if($errorString != ''){
-					header('Location: ' . PROJECT_URL . 'lists/species-list.html?sucess=-2&reason=' . $errorString);
+					header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=-2&reason=' . $errorString);
 				} else {
-					header('Location: ' . PROJECT_URL . 'lists/species-list.html?sucess=1&inserted=' . $inserted);	
+					header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=1&inserted=' . $inserted);	
 				}
 
 			} else {
   				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-				header('Location: ' . PROJECT_URL . 'lists/species-list.html?sucess=-1&reason=ficheiro nao passou para a directoria final');
+				header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=-1&reason=ficheiro nao passou para a directoria final');
 			}
 
   		}
 	} catch (Exception $e) {
 		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-  		header('Location: ' . PROJECT_URL . 'lists/species-list.html?sucess=-1&reason=' . $e);
+  		header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=-1&reason=' . $e);
 	}
 } else {
-	header('Location: ' . PROJECT_URL . 'forms/species.html?sucess=-1&reason=Tipo de submissão não suportado!');
+	header('Location: ' . PROJECT_URL . 'forms/species.html?success=-1&reason=Tipo de submissão não suportado!');
 }

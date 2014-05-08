@@ -34,47 +34,23 @@
   		include "../data/species_data.php";
   		
 	    $species = array();
+	    $whereClause = "";
 	    $getParameters = "";
 
 		if(isset($_GET["genusSpecies"])){
-
-			$whereClause = "";
-
-		if(isset($_GET["genusSpecies"])){
-		   $whereClause .= " upper(s.genus) like upper('%" . $_GET["genusSpecies"] . "%') or upper(s.species) like upper('%" . $_GET["genusSpecies"] . "%')";
-		   $getParameters .= "genusSpecies=" . $_GET["genusSpecies"];
-		}
-
+			$whereClause = " upper(s.genus) like upper('%" . $_GET["genusSpecies"] . "%') or upper(s.species) like upper('%" . $_GET["genusSpecies"] . "%')";
+		   	$getParameters = "genusSpecies=" . $_GET["genusSpecies"];
 			$species = getSpeciesBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1);
 
 		} else {
 			$species = getSpecies((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1); 
 		}
 
-      $fields = getSpeciesFieldsListConf();
+    	$fields = getSpeciesFieldsListConf();
   	?>
 
   	<!-- incluir menu principal -->
   	<?php include "../menu.php"; ?>
-
-    <!-- Modal -->
-    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Remoção</h4>
-          </div>
-          <div class="modal-body">
-            <p>Queres mesmo remover esta Espécie?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-            <button id="removeModalButton" type="button" class="btn btn-primary">Sim</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="container">
       <div class="row">
@@ -142,7 +118,7 @@
 							        <td>';
 						   
 					        if ($specie->totalIndividuals == 0) {
-						        echo '<button onclick="beginDelete(\'action=delete&class=species&id=' . $specie->species_id . '\');" type="button" class="btn btn-danger btn-xs">
+						        echo '<button onclick="beginDelete(\'action=delete&class=species&id=' . $specie->species_id . '\',\'Queres mesmo remover esta Espécie?\');" type="button" class="btn btn-danger btn-xs">
 						            <span class="glyphicon glyphicon-remove-sign"></span>
 						          </button>';
 					        } else {

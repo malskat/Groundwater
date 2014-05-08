@@ -5,21 +5,21 @@ require_once '../data/site_data.php';
 
 
 if(isset($_POST["code"]) && $_POST["code"] != "" && isset($_POST["country"]) && $_POST["country"] != "" 
-	&& isset($_POST["title"]) && $_POST["title"] != ""){
+	&& isset($_POST["title"]) && $_POST["title"] != "") {
 
-	if(!isset($_POST["site_id"])){
-		$sucess = insertSite($_POST);
-	}else{
-		$sucess = updateSite($_POST);
+	if(!isset($_POST["site_id"])) {
+		$success = insertSite($_POST);
+	} else {
+		$success = updateSite($_POST);
 	}
 	
-	if($sucess == 1){
-		header('Location: ' . PROJECT_URL . 'lists/site-list.html?sucess=1');
+	if($success == 1) {
+		header('Location: ' . PROJECT_URL . 'lists/site-list.html?success=1');
 	} else {
-		header('Location: ' . PROJECT_URL . 'lists/site-list.html?sucess=-3&reason=Não houve alteração nenhuma!');
+		header('Location: ' . PROJECT_URL . 'lists/site-list.html?success=-3&reason=Não houve alteração nenhuma!');
 	}
 
 	
 }else{
-	header('Location: ' . PROJECT_URL . 'forms/site.html?sucess=-1&reason=Faltam parametros!');
+	header('Location: ' . PROJECT_URL . 'forms/site.html?success=-1&reason=Faltam parametros ao local!');
 }

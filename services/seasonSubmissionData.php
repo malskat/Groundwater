@@ -8,19 +8,19 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != ""
 		isset($_POST["code"]) && $_POST["code"] != ""){
 
 	if(!isset($_POST["season_id"])){
-		$sucess = insertSeason($_POST);
+		$success = insertSeason($_POST);
 	}else{
-		$sucess = updateSeason($_POST);
+		$success = updateSeason($_POST);
 	}
 	
-	if($sucess == 1){
-		header('Location: ' . PROJECT_URL . 'lists/season-list.html?sucess=1');
+	if($success == 1){
+		header('Location: ' . PROJECT_URL . 'lists/season-list.html?success=1');
 	} else {
-		header('Location: ' . PROJECT_URL . 'lists/season-list.html?sucess=-3&reason=Não houve alteração nenhuma!');
+		header('Location: ' . PROJECT_URL . 'lists/season-list.html?success=-3&reason=Não houve alteração nenhuma!');
 	}
 
 	
 }else{
-	header('Location: ' . PROJECT_URL . 'forms/season.html?sucess=-1&reason=Faltam parametros!');
+	header('Location: ' . PROJECT_URL . 'forms/season.html?success=-1&reason=Faltam parametros!');
 }
 

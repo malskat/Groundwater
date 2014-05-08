@@ -21,3 +21,7 @@ body {
 	border-top:1px solid #e5e5e5;
 	*zoom:1;
 }
+
+.spacer {
+    margin-top: 40px;
+}

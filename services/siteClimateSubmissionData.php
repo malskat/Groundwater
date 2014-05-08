@@ -6,16 +6,16 @@ require_once '../data/site_climate_data.php';
 if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 	unset($_POST["submissionType"]);
-	$sucess = insertSiteClimateData($_POST);
+	$success = insertSiteClimateData($_POST);
 	
-	if($sucess == 1){
-		header('Location: ' . PROJECT_URL . 'index.html?sucess=1');
+	if($success == 1){
+		header('Location: ' . PROJECT_URL . 'index.html?success=1');
 	}
 
 	
 }else if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel'){
 	if ($_FILES["file"]["error"] > 0){
-		header('Location: ' . PROJECT_URL . 'index.html?sucess=-1&reason=' . $_FILES["file"]["error"]);
+		header('Location: ' . PROJECT_URL . 'index.html?success=-1&reason=' . $_FILES["file"]["error"]);
   	}else{
 
   		try{
@@ -27,9 +27,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		  	$extension = end($extensionParts);
 
 		  	if($extension != 'csv'){
-				header('Location: ' . PROJECT_URL . 'index.html?sucess=-1&reason=Ficheiro tem de ser csv');
+				header('Location: ' . PROJECT_URL . 'index.html?success=-1&reason=Ficheiro tem de ser csv');
 		  	} else if (file_exists(PROJECT_DOCS_CENTER . $_FILES["file"]["name"])){
-				header('Location: ' . PROJECT_URL . 'index.html?sucess=-1&reason=Ficheiro ja foi processado');
+				header('Location: ' . PROJECT_URL . 'index.html?success=-1&reason=Ficheiro ja foi processado');
 		  	}else{
 
 		  		//mover o ficheiro da pasta temporaria
@@ -54,7 +54,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 				        //inserir na BD
 				        if ($row > 1){
-							$sucess = insertSiteClimateData($toInsert);
+							$success = insertSiteClimateData($toInsert);
 				        }
 
 
@@ -68,17 +68,17 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 				//mudar o ficheiro para a pasta final
 				if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
-					header('Location: ' . PROJECT_URL . 'index.html?sucess=1');	
+					header('Location: ' . PROJECT_URL . 'index.html?success=1');	
 				}else{
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: ' . PROJECT_URL . 'index.html?sucess=-1&reason=ficheiro nao passou para a directoria final');
+					header('Location: ' . PROJECT_URL . 'index.html?success=-1&reason=ficheiro nao passou para a directoria final');
 				}
 
 
 		  	}
 	  	}catch(Exception $e){
 	  		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-	  		header('Location: ' . PROJECT_URL . 'index.html?sucess=-1&reason=' . $e);
+	  		header('Location: ' . PROJECT_URL . 'index.html?success=-1&reason=' . $e);
 	  	}
 	}
 }else{

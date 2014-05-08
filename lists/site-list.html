@@ -36,25 +36,6 @@
   	<!-- incluir menu principal -->
   	<?php include "../menu.php";?>
 
-    <!-- Modal -->
-    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Remoção</h4>
-          </div>
-          <div class="modal-body">
-            <p>Queres mesmo remover este Local?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-            <button id="removeModalButton" type="button" class="btn btn-primary">Sim</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- titulo -->
     <div class="container">
       <div class="row">
@@ -112,7 +93,7 @@
 											<td>';
 										   
 									        if ($site->totalPlots == 0) {
-										        echo '<button onclick="beginDelete(\'action=delete&class=site&id=' . $site->site_id . '\');" type="button" class="btn btn-danger btn-xs">
+										        echo '<button onclick="beginDelete(\'action=delete&class=site&id=' . $site->site_id . '\',\'Queres mesmo remover este Local?\');" type="button" class="btn btn-danger btn-xs">
 										            <span class="glyphicon glyphicon-remove-sign"></span>
 										          </button>';
 									        } else {
