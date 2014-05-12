@@ -128,7 +128,7 @@ function updateDB($table, $set, $where){
 	return $success;
 }
 
-function deleteDB($table, $where){
+function deleteDB ($table, $where){
 
 	include '../init.php';
 
@@ -159,4 +159,26 @@ function deleteDB($table, $where){
 
 	return $success;
 
+}
+
+function callBD ($routine) {
+
+	include '../init.php';
+
+	try {
+
+		$Database->beginTransaction();
+
+		$success = $Database->exec('CALL ' . $routine);
+
+		$Database->commit();
+		$Database = null;
+
+	} catch (PDOException $ex) {
+		$Database->rollBack();
+		echo ($ex->getMessage());
+		die;
+	}
+
+	return $success;
 }

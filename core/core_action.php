@@ -9,8 +9,9 @@ switch($action){
 		require_once "../data/" . $_GET["class"] ."_data.php";
 		
 		//chamada dinamica da funcao
+		$instance = new $_GET["class"];
 		$deleteFunction = "delete_" . $_GET["class"];
-		$toReturn = $deleteFunction($_GET["class"] . "_id = '" . $_GET["id"] . "'");
+		$toReturn = $instance->$deleteFunction($_GET["class"] . "_id = '" . $_GET["id"] . "'");
 		
 		if(isset($_GET["class"])){
 			header('Location: ' . PROJECT_URL . 'lists/' . $_GET["class"] . '-list.html?success=' . ($toReturn == 1 ? 2 : $toReturn));

@@ -10,7 +10,21 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 	&& isset($_POST["emailUser"]) && $_POST["emailUser"] != "") {
 
 	if (isset($_POST["passwordUser"]) && $_POST["passwordUser"] != "") {
-		$hashedPassword = crypt($_POST["passwordUser"]);
+
+		//validar se a funcao de encriptacao e validacao de password existe
+		$passHashCompatible = function_exists('password_hash');
+		if (!$passHashCompatible) {
+			require_once('../libs/password.php');
+		}
+
+		$options = array(
+			'cost' => 11,
+			'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+		);
+
+		$passwordFromPost = trim($_POST["passwordUser"]);
+		$hashedPassword = password_hash($passwordFromPost, PASSWORD_BCRYPT, $options);
+
 		$_POST["password"] = $hashedPassword;
 		unset($_POST["passwordUser"]);
 	}
@@ -18,15 +32,17 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 	$_POST["email"] = $_POST["emailUser"];
 	unset($_POST["emailUser"]);
 
+	$userData = new User(); 
 
-	if(!isset($_POST["user_id"])) { 
+
+	if(!isset($_POST["user_id"])) {
 
 		//validar se existe algum utilizador com o mesmo email
-		$user = getUserBy("email = '" . $_POST["email"] . "'", -1);
+		$user = $userData->getUserBy("email = '" . $_POST["email"] . "'", -1);
 		if (count($user) > 0) {
 			$success = -4;
 		} else {
-			$success = insertUser($_POST);
+			$success = $userData->insertUser($_POST);
 		}
 
 	} else {
@@ -35,11 +51,11 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 		$_POST["biologyst_id"] = $_POST["user_id"];
 		unset($_POST["user_id"]);
 
-		$user = getUserBy("email = '" . $_POST["email"] . "' and biologyst_id <> " . $_POST["biologyst_id"], -1);
+		$user = $userData->getUserBy("email = '" . $_POST["email"] . "' and biologyst_id <> " . $_POST["biologyst_id"], -1);
 		if (count($user) > 0) {
 			$success = -4;
 		} else {
-			$success = updateUser($_POST);
+			$success = $userData->updateUser($_POST);
 		}
 	}
 	

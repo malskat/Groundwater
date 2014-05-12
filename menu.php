@@ -12,6 +12,7 @@
 
 <?php 
 	require_once '/config/constants.php';
+	session_start();
 ?>
 <script src="../js/utils.js"></script>
 <script>
@@ -104,35 +105,57 @@
 			    <li><a href=<?= PROJECT_URL . "lists/individual-list.html"?>>Consultar</a></li> 
 			  </ul>
 			</li>
+		<?
+			if (isset($_SESSION['user'])) {
+				echo '<li ' . (strpos($_SERVER['PHP_SELF'], 'use') !== false ? 'class="active"' :  '') .  ' class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilizadores <b class="caret"></b></a>
+								  	<ul class="dropdown-menu">
+								    	<li><a href="' . PROJECT_URL . 'forms/user.html">Inserir</a></li>
+								    	<li><a href="' . PROJECT_URL . 'lists/user-list.html">Consultar</a></li> 
+								  	</ul>
+						</li>';
 
-			<li <?=(strpos($_SERVER['PHP_SELF'], 'user') !== false ? 'class="active"' :  '')?> class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilizadores <b class="caret"></b></a>
-			  	<ul class="dropdown-menu">
-			    	<li><a href=<?= PROJECT_URL . "forms/user.html"?>>Inserir</a></li>
-			    	<li><a href=<?= PROJECT_URL . "lists/user-list.html"?>>Consultar</a></li> 
-			  	</ul>
-			</li>
+			}
+		?>
 
 		</ul>
-		<div id="loginForm" name="loginForm" style="display:block;">
-		    <form class="navbar-form navbar-right" role="form" onsubmit="return validateLogin();" method="post">
-				<div id="emailInputGroup" class="form-group">
-					<input id="email" name="email" type="text" placeholder="Email" class="form-control">
-				</div> 
-				<div id="passInputGroup" class="form-group">
-					<input id="password" name="password" type="password" placeholder="Password" class="form-control">
-				</div>
-				<button id="loginTooltip" type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Por implementar!">Login</button>
-			</form>
-		</div>
-		<div id="loggedInfo" name="loggedInfo" style="display:none;">
-			<div class="navbar-collapse collapse">
-        		<ul class="nav navbar-nav navbar-right">
-            		<li><a href="#"><span class="glyphicon glyphicon glyphicon-user"></span> Cristina Antunes</a></li>
-            		<li><a href="#"><span class="glyphicon glyphicon glyphicon-off"></span></a></li>
-	            </ul>
-			</div>
-		</div>
+
+		<?
+
+			if (isset($_SESSION['user'])) {
+				//utilizador logado
+				echo '<div id="loggedInfo" name="loggedInfo">
+							<div class="navbar-collapse collapse">
+				        		<ul class="nav navbar-nav navbar-right">
+				            		<li class="dropdown">
+				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
+					            		<ul class="dropdown-menu">
+					            			<li><a href="'. PROJECT_URL . 'forms/user.html?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
+					            			<li><a href="' . PROJECT_URL . 'forms/user.html"?>Recuperar password</a></li>
+					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $_SERVER['PHP_SELF'] . '">Logout</a></li>
+					            		</ul>
+					            	</li>
+					            </ul>
+							</div>
+						</div>';
+			} else {
+				//formulario de utilizador
+				echo '<div id="loginForm" name="loginForm">
+							<form class="navbar-form navbar-right" role="form" onsubmit="return validateLogin();" action="../services/make_entrance.php" method="post">
+								<input id="destination" name="destination" type="hidden" value="' . $_SERVER['PHP_SELF'] . '"">
+								<div id="emailInputGroup" class="form-group">
+									<input id="email" name="email" type="text" placeholder="Email" class="form-control">
+								</div> 
+								<div id="passInputGroup" class="form-group">
+									<input id="password" name="password" type="password" placeholder="Password" class="form-control">
+								</div>
+								<button id="loginTooltip" type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Por implementar!">Login</button>
+							</form>
+						</div>';
+			}
+		?>
+		
+		
     </div>
   </div>
 </nav>
@@ -198,7 +221,7 @@
 			return false;
 		} else {
 			$("#loginForm").hide();
-			$("#loggedInfo").hide();
+			$("#loggedInfo").show();
 			return true;
 		}
 	}

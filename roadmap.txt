@@ -2,10 +2,13 @@
  ** Groundwater roadmap
 
 
+ 	» CLASSES
+ 		* transformar todos os ficheiros de data em classes (seguir o exemplo do user);
+
  	» FRONTEND
 
- 		* login
- 		* popups de delete no menu.php
+ 		* login - DONE
+ 		* popups de delete no menu.php - DONE
 
 		
 	» DADOS

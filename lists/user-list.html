@@ -26,6 +26,7 @@
     <? 
   		include "../data/user_data.php";
 
+  		$userData = new User();
   		$users = array();
 	    $whereClause = "";
 	    $getParameters = "";
@@ -37,13 +38,13 @@
 							or upper(b.email) like upper('%" . $_GET["nameEmail"] . "%')";
 
 		   	$getParameters = "nameEmail=" . $_GET["nameEmail"];
-			$users = getUserBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0));
+			$users = $userData->getUserBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0));
 
 		} else {
-  			$users = getUsers(isset($_GET["page"]) ? $_GET["page"] : 0); 
+  			$users = $userData->getUsers(isset($_GET["page"]) ? $_GET["page"] : 0); 
   		}
   		
-  		$fields = getUserFieldsListConf();
+  		$fields = $userData->getUserFieldsListConf();
   	?>
   	
     <!-- incluir menu principal -->
@@ -103,6 +104,7 @@
 		                        <td>' . $user->first_name . ' ' .  $user->last_name . ' </td>
 		                        <td>' . $user->email . '</td>
 		                        <td>' . $user->creation_date . '</td>
+		                        <td>' . (isset($user->last_login) ? $user->last_login : '--')  . '</td>
 		                       	<td>
 	                            	<button onclick="location.href=\'../forms/user.html?user_id=' . $user->biologyst_id . '\'" type="button" class="btn btn-primary btn-xs">
 	                                	<span class="glyphicon glyphicon glyphicon-edit"></span>
@@ -134,8 +136,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($users[0]->totalRecords % TOTAL_ROWS_USER) > 0 ? 1 : 0);
-                $nPages = floor($users[0]->totalRecords / TOTAL_ROWS_USER) + $addPage;
+                $addPage = (($users[0]->totalRecords % User::TOTAL_ROWS_USER) > 0 ? 1 : 0);
+                $nPages = floor($users[0]->totalRecords / User::TOTAL_ROWS_USER) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

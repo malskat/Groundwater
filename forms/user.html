@@ -28,7 +28,8 @@
   	<?
   		if(isset ($_GET["user_id"])){
   			include "../data/user_data.php"; 
-			$user = getUserBy("biologyst_id = " . $_GET["user_id"], -1);
+  			$userData = new User();
+			$user = $userData->getUserBy("biologyst_id = " . $_GET["user_id"], -1);
   		}
   	?>
 
@@ -80,6 +81,26 @@
 	  							<input type="text" class="form-control" id="passwordUser" name="passwordUser">
 	  					 	</div>
 	  					</div>
+
+	  					
+
+	  					<?
+	  						if(isset($user)) {
+	  							echo '<div class="form-group">
+				  						<label class="col-lg-3 control-label">Data de criação</label>
+				  						<div class="col-lg-4">
+				  							<p class="form-control-static">' . $user[0]->creation_date. '</p>
+				  					 	</div>
+				  					</div>
+				  					<div class="form-group">
+				  						<label class="col-lg-3 control-label">Último login</label>
+				  						<div class="col-lg-4">
+				  							<p class="form-control-static">' . (isset($user[0]->last_login) ? $user[0]->last_login : '--') . '</p>
+				  					 	</div>
+				  					</div>';
+	  						}
+
+	  					?>
 
 	  					<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 	  						<div class="text-center">
