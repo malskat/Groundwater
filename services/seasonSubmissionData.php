@@ -7,10 +7,12 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != ""
 	&& isset($_POST["endDate"]) && $_POST["endDate"] != "" && 
 		isset($_POST["code"]) && $_POST["code"] != ""){
 
+	$seasonData = new Season();
+
 	if(!isset($_POST["season_id"])){
-		$success = insertSeason($_POST);
+		$success = $seasonData->insertSeason($_POST);
 	}else{
-		$success = updateSeason($_POST);
+		$success = $seasonData->updateSeason($_POST);
 	}
 	
 	if($success == 1){

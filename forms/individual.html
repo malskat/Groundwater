@@ -28,13 +28,18 @@
 
   	<? 
 		include "../data/species_data.php";
-		include "../data/plot_data.php"; 
-		$species = getSpecies(-1);
-		$plots = getPlotsSite(-1);
+		include "../data/plot_data.php";
+
+		$speciesData = new Species(); 
+		$species = $speciesData->getSpecies(-1);
+
+		$plotData = new Plot();
+		$plots = $plotData->getPlotsSite(-1);
 
 		if(isset ($_GET["individualCode"])){
   			include "../data/individual_data.php"; 
-			$individual = getIndividualBy("individualCode = '" . $_GET["individualCode"] . "'", -1);
+  			$individualData = new Individual();
+			$individual = $individualData->getIndividualBy("individualCode = '" . $_GET["individualCode"] . "'", -1);
   		}
 	?>
 
@@ -66,7 +71,7 @@
 						     	<input type="hidden" value=<?= (isset($individual) ? '"edit"' : '"insert"')?> name="operationType" >
 
 						    	<div id="individualCodeInputGroup" class="form-group">
-							      	<label for="inputCode" class="col-lg-3 control-label">Código</label>
+							      	<label for="inputCode" class="col-lg-3 control-label">Código*</label>
 							      	<div class="col-lg-4">
 							        	<input type="text" class="form-control" id="individualCode" name="individualCode" placeholder="Código do indivíduo" value=<?= (isset($individual) ? '"' . $individual[0]->individualCode . '"' : "") ?>>
 						      		</div>
@@ -78,7 +83,7 @@
 						      	</div>
 						    	</div>
 						    	<div id="plotInputGroup" class="form-group">
-						      	<label for="inputGenus" class="col-lg-3 control-label">Plot</label>
+						      	<label for="inputGenus" class="col-lg-3 control-label">Plot*</label>
 						      	<div class="col-lg-4">
 						        	<div class="bfh-selectbox">
 						          	<input type="hidden" id="plot" name="plot_id" value=<?= (isset($individual) ? $individual[0]->plot_id : "") ?>>
@@ -102,7 +107,7 @@
 						      	</div>
 						        </div>
 						        <div id="speciesInputGroup" class="form-group">
-							    	<label for="inputGenus" class="col-lg-3 control-label">Espécie</label>
+							    	<label for="inputGenus" class="col-lg-3 control-label">Espécie*</label>
 							      	<div class="col-lg-4">
 							        	<div class="bfh-selectbox">
 							          	<input type="hidden" id="species" name="species_id" value=<?= (isset($individual) ? $individual[0]->species_id : "") ?>>
@@ -127,13 +132,13 @@
 						    	</div>
 
 						    	<div id="coordinateXInputGroup" class="form-group">
-							      	<label for="inputGenus" class="col-lg-3 control-label">Coordenada X</label>
+							      	<label for="inputGenus" class="col-lg-3 control-label">Coordenada X*</label>
 							      	<div class="col-lg-4">
 							        	<input type="text" class="form-control" id="coordinateX" name="coordinateX" placeholder="" value=<?= (isset($individual) ? '"' . $individual[0]->coordinateX . '"' : "")?>>
 							      	</div>
 						    	</div>
 						    	<div id="coordinateYInputGroup"  class="form-group">
-							      	<label for="inputGenus" class="col-lg-3 control-label">Coordenada Y</label>
+							      	<label for="inputGenus" class="col-lg-3 control-label">Coordenada Y*</label>
 							      	<div class="col-lg-4">
 							        	<input type="text" class="form-control" id="coordinateY" name="coordinateY" placeholder="" value=<?= (isset($individual) ? '"' . $individual[0]->coordinateY . '"' : "")?>>
 							      	</div>

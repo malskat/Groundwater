@@ -31,12 +31,18 @@
   	<?
   		include "../data/site_data.php"; 
   		include "../data/season_data.php"; 
-		$sites = getSites();
-		$seasons = getSeasons();
+
+  		$siteData = new Site();
+		$sites = $siteData->getSites();
+
+		$seasonData = new Season();
+		$seasons = $seasonData->getSeasons();
 
   		if(isset ($_GET["campaign_id"])){
   			include "../data/campaign_data.php"; 
-			$campaign = getCampaignBy("sampling_campaign_id = " . $_GET["campaign_id"], -1);
+
+  			$campaignData = new Campaign();
+			$campaign = $campaignData->getCampaignBy("sampling_campaign_id = " . $_GET["campaign_id"], -1);
   		}
   	?>
 
@@ -75,58 +81,42 @@
 							<!-- season -->
 							<div id="seasonInputGroup" class="form-group">
 								<label for="inputGenus" class="col-lg-2 control-label">Época*</label>
-								<div class="col-lg-4">
-									<div class="bfh-selectbox">
-									  <input type="hidden" id="season_id" name="season_id" value=<?= (isset($campaign) ? $campaign[0]->season_id : "") ?>>
-									  <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-									    <span class="bfh-selectbox-option input-medium" data-option="" > <?= (isset($campaign) ? $campaign[0]->seasonCode : "Escolhe uma »") ?> </span>
-									    <b class="caret"></b>
-									  </a>
-									  <div class="bfh-selectbox-options">
-									    <input type="text" class="bfh-selectbox-filter">
-									    <div role="listbox">
-									    <ul role="option">
-									      <? 
+								<div class="col-lg-6">
+									<select id="season_id" name="season_id" class="form-control input-sm">
+										<?
+											if (!isset($campaign[0]->site_id)){
+												echo '<option value="none">Escolhe uma</option>';
+											}
+
 										  	foreach($seasons as $season){
 										  		if(isset($season->season_id)) {
-										  			echo '<li> <a tabindex="-1" href="#" data-option=' . $season->season_id . '>' . $season->code . '</a></li>';
+										  			echo '<option ' . ($campaign[0]->season_id == $season->season_id ? 'selected' : '') . ' value="' . $season->season_id . '">' . $season->code . '</option>';
 										  		}
 										  	}
-										  ?>
-									    </ul>
-									  </div>
-									  </div>
-									</div>
+										?>	
+              						</select>								
 								</div>
 							</div>
 
 
 							<!-- site -->
 							<div id="siteInputGroup" class="form-group">
-								<label for="inputGenus" class="col-lg-2 control-label">Local*</label>
-								<div class="col-lg-4">
-									<div class="bfh-selectbox">
-									  <input type="hidden" id="site_id" name="site_id" value=<?= (isset($campaign) ? $campaign[0]->site_id : "") ?>>
-									  <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-									    <span class="bfh-selectbox-option input-medium" data-option="" > <?= (isset($campaign) ? $campaign[0]->siteTitle : "Escolhe um »") ?> </span>
-									    <b class="caret"></b>
-									  </a>
-									  <div class="bfh-selectbox-options">
-									    <input type="text" class="bfh-selectbox-filter">
-									    <div role="listbox">
-									    <ul role="option">
-									      <? 
+								<label for="inputSite" class="col-lg-2 control-label">Local*</label>
+								<div class="col-lg-6">
+									<select id="site_id" name="site_id" class="form-control input-sm">
+										<?
+											if (!isset($campaign[0]->site_id)){
+												echo '<option value="none">Escolhe um</option>';
+											}
+
 										  	foreach($sites as $site){
 										  		if(isset($site->site_id)) {
-										  			echo '<li> <a tabindex="-1" href="#" data-option=' . $site->site_id . '>' . $site->title . '</a></li>';
+										  			echo '<option ' . ($campaign[0]->site_id == $site->site_id ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
 										  		}
 										  	}
-										  ?>
-									    </ul>
-									  </div>
-									  </div>
-									</div>
-								</div>
+										?>	
+              						</select>
+              					</div>
 							</div>
 
 							<div id="startDateInputGroup" class="form-group">
@@ -269,14 +259,14 @@
     			$('#endDateInputGroup').removeClass('has-error');
     		}
 
-    		if(site == "" ) {
+    		if(site == "none" ) {
     			hasErrors = true;
     			$('#siteInputGroup').addClass('has-error');
     		} else {
     			$('#siteInputGroup').removeClass('has-error');
     		}
 
-    		if(season == "" ) {
+    		if(season == "none" ) {
     			hasErrors = true;
     			$('#seasonInputGroup').addClass('has-error');
     		} else {

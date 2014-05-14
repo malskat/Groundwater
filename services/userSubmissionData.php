@@ -9,6 +9,9 @@ $success = 0;
 if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["last_name"]) && $_POST["last_name"] != "" 
 	&& isset($_POST["emailUser"]) && $_POST["emailUser"] != "") {
 
+
+	$userData = new User(); 
+
 	if (isset($_POST["passwordUser"]) && $_POST["passwordUser"] != "") {
 
 		//validar se a funcao de encriptacao e validacao de password existe
@@ -17,13 +20,8 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 			require_once('../libs/password.php');
 		}
 
-		$options = array(
-			'cost' => 11,
-			'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-		);
-
 		$passwordFromPost = trim($_POST["passwordUser"]);
-		$hashedPassword = password_hash($passwordFromPost, PASSWORD_BCRYPT, $options);
+		$hashedPassword = password_hash($passwordFromPost, PASSWORD_BCRYPT, $userData->hashOptions);
 
 		$_POST["password"] = $hashedPassword;
 		unset($_POST["passwordUser"]);
@@ -31,8 +29,6 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 
 	$_POST["email"] = $_POST["emailUser"];
 	unset($_POST["emailUser"]);
-
-	$userData = new User(); 
 
 
 	if(!isset($_POST["user_id"])) {

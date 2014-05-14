@@ -25,8 +25,10 @@
 
     <? 
   		include "../data/season_data.php";
-  		$seasons = getSeasons(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalCampaigns = 1); 
-  		$fields = getSeasonFieldsListConf();
+
+  		$seasonData = new Season();
+  		$seasons = $seasonData->getSeasons(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalCampaigns = 1); 
+  		$fields = $seasonData->getSeasonFieldsListConf();
   	?>
   	
     <!-- incluir menu principal -->
@@ -88,11 +90,11 @@
 
 							   
 						        if ($season->totalCampaigns == 0) {
-							        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $season->season_id . '\',\'Queres mesmo remover esta Época?\');" type="button" class="btn btn-danger btn-xs">
+							        echo '<button onclick="beginDelete(\'action=delete&class=season&id=' . $season->season_id . '\',\'Queres mesmo remover esta Época?\');" type="button" class="btn btn-danger btn-xs">
 							            <span class="glyphicon glyphicon-remove-sign"></span>
 							          </button>';
 						        } else {
-						        	echo '<span id="removeTooltip_' . $season->season_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem campanhas associadas">É melhor não</span>'; 
+						        	echo '<span id="removeTooltip_' . $season->season_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="Tem campanhas associadas">É melhor não</span>'; 
 						        }
 						        echo '</td>
 					        </tr>';
@@ -116,8 +118,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($seasons[0]->totalRecords % TOTAL_ROWS_SEASON) > 0 ? 1 : 0);
-                $nPages = floor($seasons[0]->totalRecords / TOTAL_ROWS_SEASON) + $addPage;
+                $addPage = (($seasons[0]->totalRecords % Season::TOTAL_ROWS_SEASON) > 0 ? 1 : 0);
+                $nPages = floor($seasons[0]->totalRecords / Season::TOTAL_ROWS_SEASON) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

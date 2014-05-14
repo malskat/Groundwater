@@ -32,6 +32,8 @@
   	</script>
   	<? 
   		include "../data/species_data.php";
+
+  		$speciesData = new Species();
   		
 	    $species = array();
 	    $whereClause = "";
@@ -40,13 +42,13 @@
 		if(isset($_GET["genusSpecies"])){
 			$whereClause = " upper(s.genus) like upper('%" . $_GET["genusSpecies"] . "%') or upper(s.species) like upper('%" . $_GET["genusSpecies"] . "%')";
 		   	$getParameters = "genusSpecies=" . $_GET["genusSpecies"];
-			$species = getSpeciesBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1);
+			$species = $speciesData->getSpeciesBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1);
 
 		} else {
-			$species = getSpecies((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1); 
+			$species = $speciesData->getSpecies((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1); 
 		}
 
-    	$fields = getSpeciesFieldsListConf();
+    	$fields = $speciesData->getSpeciesFieldsListConf();
   	?>
 
   	<!-- incluir menu principal -->
@@ -122,7 +124,7 @@
 						            <span class="glyphicon glyphicon-remove-sign"></span>
 						          </button>';
 					        } else {
-					        	echo '<span id="removeTooltip_' . $specie->species_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem indivíduos associados">É melhor não</span>'; 
+					        	echo '<span id="removeTooltip_' . $specie->species_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="Tem indivíduos associados">É melhor não</span>'; 
 					        }
 
 						        echo '</td>
@@ -150,8 +152,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($species[0]->totalRecords % TOTAL_ROWS_SPECIES) > 0 ? 1 : 0);
-                $nPages = floor($species[0]->totalRecords / TOTAL_ROWS_SPECIES) + $addPage;
+                $addPage = (($species[0]->totalRecords % Species::TOTAL_ROWS_SPECIES) > 0 ? 1 : 0);
+                $nPages = floor($species[0]->totalRecords / Species::TOTAL_ROWS_SPECIES) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

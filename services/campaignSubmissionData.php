@@ -10,10 +10,12 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != "" && isset($_POST["endD
 	&& isset($_POST["season_id"]) && $_POST["season_id"] != ""
 	&& isset($_POST["site_id"]) && $_POST["site_id"] != ""){
 
+	$campaignData = new Campaign();
+
 	if(!isset($_POST["sampling_campaign_id"])){
-		$success = insertCampaign($_POST);
+		$success = $campaignData->insertCampaign($_POST);
 	}else{
-		$success = updateCampaign($_POST);
+		$success = $campaignData->updateCampaign($_POST);
 	}
 	
 	if($success == 1){

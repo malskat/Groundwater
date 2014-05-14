@@ -30,7 +30,8 @@
   	<?
   		if(isset ($_GET["season_id"])){
   			include "../data/season_data.php"; 
-			$season = getSeasonBy("season_id = " . $_GET["season_id"], -1);
+  			$seasonData = new Season();
+			$season = $seasonData->getSeasonBy("season_id = " . $_GET["season_id"], -1);
   		}
   	?>
 

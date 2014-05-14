@@ -29,10 +29,16 @@
 
   	<? 
   		include "../data/site_data.php"; 
-		$sites = getSites();
+
+		$siteData = new Site();
+		$sites = $siteData->getSites();
+
+
 		if(isset ($_GET["plot_id"])){
   			include "../data/plot_data.php"; 
-			$plot = getPlotBy("plot_id = " . $_GET["plot_id"], -1);
+
+  			$plotData = new Plot();
+			$plot = $plotData->getPlotBy("plot_id = " . $_GET["plot_id"], -1);
   		}
 	?>
 
@@ -71,52 +77,39 @@
 								
 								<!-- SITE -->
 								<div id="siteInputGroup" class="form-group">
-									<label for="inputGenus" class="col-lg-3 control-label">Local*</label>
+									<label for="inputSite" class="col-lg-3 control-label">Local*</label>
 									<div class="col-lg-4">
-										<div class="bfh-selectbox">
-										  <input type="hidden" id="site" name="site_id" value=<?= (isset($plot) ? $plot[0]->site_id : "") ?>>
-										  <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-										    <span class="bfh-selectbox-option input-medium" data-option="" > <?= (isset($plot) ? $plot[0]->title : "Escolhe um »") ?> </span>
-										    <b class="caret"></b>
-										  </a>
-										  <div class="bfh-selectbox-options">
-										    <input type="text" class="bfh-selectbox-filter">
-										    <div role="listbox">
-										    <ul role="option">
-										      <? 
+										<select id="site_id" name="site_id" class="form-control input-sm">
+											<?
+												if (!isset($plot[0]->site_id)){
+													echo '<option value="none">Escolhe um</option>';
+												}
+
 											  	foreach($sites as $site){
 											  		if(isset($site->site_id)) {
-											  			echo '<li> <a tabindex="-1" href="#" data-option=' . $site->site_id . '>' . $site->title . '</a></li>';
+											  			echo '<option ' . ($plot[0]->site_id == $site->site_id ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
 											  		}
 											  	}
-											  ?>
-										    </ul>
-										  </div>
-										  </div>
-										</div>
-									</div>
+											?>	
+	              						</select>
+	              					</div>
 								</div>
 
 								<!-- TIPO DE PLOT -->
 								<div class="form-group">
-									<label for="inputGenus" class="col-lg-3 control-label">Tipo de plot</label>
+									<label for="inputPlotType" class="col-lg-3 control-label">Tipo de plot</label>
 									<div class="col-lg-4">
-										<div class="bfh-selectbox">
-										  <input type="hidden" name="plotType" value=<?= (isset($plot) && $plot[0]->plotType != null ? $plot[0]->plotType : "") ?>>
-										  <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-										    <span class="bfh-selectbox-option input-medium" data-option="" > <?= (isset($plot) && $plot[0]->plotType != null ? ( $plot[0]->plotType == 'ch' ? 'Charca' : 'Duna' ) : "Escolhe um »") ?> </span>
-										    <b class="caret"></b>
-										  </a>
-										  <div class="bfh-selectbox-options">
-										    <input type="text" class="bfh-selectbox-filter">
-										    <div role="listbox">
-										    <ul role="option">
-										      <li> <a tabindex="-1" href="#" data-option="ch">Charca</a></li>
-										      <li> <a tabindex="-1" href="#" data-option="du">Duna</a></li>
-										    </ul>
-										  </div>
-										  </div>
-										</div>
+										<select id="plotType" name="plotType" class="form-control input-sm">
+
+											<?
+											if (!isset($plot[0]->plotType)){
+												echo '<option value="none" selected>Escolhe um</option>';
+											}
+											?>
+
+											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'ch' ? 'selected' : '') ?>  value="ch">Charca</option>
+											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'du' ? 'selected' : '') ?>  value="du">Duna</option>
+	              						</select>									    
 									</div>
 								</div>
 
@@ -167,7 +160,7 @@
     <script>
     	function validateForm(){
     		var code = $('#code').val();
-    		var site = $('#site').val();
+    		var site = $('#site_id').val();
     		var coordinateX = $('#coordinateX').val();
     		var coordinateY = $('#coordinateY').val();
     		var hasErrors = false;
@@ -179,7 +172,7 @@
     			$('#codeInputGroup').removeClass('has-error');
     		}
 
-			if(site == ""){
+			if(site == "none"){
     			hasErrors = true;
 				$('#siteInputGroup').addClass('has-error');
 			} else {
@@ -199,6 +192,7 @@
     		} else {
     			$('#coordinateYInputGroup').removeClass('has-error');
     		}
+
 
     		if (hasErrors){
     			$('#alert-message').show();

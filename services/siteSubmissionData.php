@@ -7,10 +7,12 @@ require_once '../data/site_data.php';
 if(isset($_POST["code"]) && $_POST["code"] != "" && isset($_POST["country"]) && $_POST["country"] != "" 
 	&& isset($_POST["title"]) && $_POST["title"] != "") {
 
+	$siteData = new Site();	
+
 	if(!isset($_POST["site_id"])) {
-		$success = insertSite($_POST);
+		$success = $siteData->insertSite($_POST);
 	} else {
-		$success = updateSite($_POST);
+		$success = $siteData->updateSite($_POST);
 	}
 	
 	if($success == 1) {

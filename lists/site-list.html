@@ -29,8 +29,10 @@
 
   	<? 
   		include "../data/site_data.php";
-  		$sites = getSites(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalPlots = 1); 
-  		$fields = getSiteFieldsListConf();
+
+  		$siteData = new Site();
+  		$sites = $siteData->getSites(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalPlots = 1); 
+  		$fields = $siteData->getSiteFieldsListConf();
   	?>
 
   	<!-- incluir menu principal -->
@@ -97,7 +99,7 @@
 										            <span class="glyphicon glyphicon-remove-sign"></span>
 										          </button>';
 									        } else {
-									        	echo '<span id="removeTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Tem plots associados" class="label label-info">É melhor não</span>'; 
+									        	echo '<span id="removeTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Tem plots associados" class="label label-default">É melhor não</span>'; 
 									        }
 
 										    echo '</td>
@@ -122,8 +124,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($sites[0]->totalRecords % TOTAL_ROWS_SITE) > 0 ? 1 : 0);
-                $nPages = floor($sites[0]->totalRecords / TOTAL_ROWS_SITE) + $addPage;
+                $addPage = (($sites[0]->totalRecords % Site::TOTAL_ROWS_SITE) > 0 ? 1 : 0);
+                $nPages = floor($sites[0]->totalRecords / Site::TOTAL_ROWS_SITE) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

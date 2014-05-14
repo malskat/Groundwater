@@ -12,6 +12,15 @@ class User {
 	const TOTAL_ROWS_USER = 10;
 	const ORDER_BY_USER = 'b.biologyst_id';
 
+	public $hashOptions;
+
+	function __construct() {
+		$this->hashOptions = array(
+						'cost' => 11,
+						'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+					);
+   }
+
 	function getUserFieldsListConf(){
 
 		return array("#", "Nome", "Email", "Data de criação", "Último login");
@@ -45,13 +54,8 @@ class User {
 
 		if (count($user) == 1){
 
-			$options = array(
-						'cost' => 11,
-						'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-					);
-
 			$passwordFromPost = trim($password);
-			$hashedPassword = password_hash($passwordFromPost, PASSWORD_BCRYPT, $options);
+			$hashedPassword = password_hash($passwordFromPost, PASSWORD_BCRYPT, $this->hashOptions);
 
 			if (password_verify($passwordFromPost, $user[0]->password)) {
 			    $logged = $user;

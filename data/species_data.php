@@ -1,79 +1,83 @@
 <?php
 
-define("TOTAL_ROWS_SPECIES", 10);
+class Species {
 
-function getSpeciesFieldsListConf(){
-	return array("#", "Genus", "Species", "Tipo", "Código", "Functional Group", "#Individuos");
-}
+	const TOTAL_ROWS_SPECIES = 10;
 
-function getSpecies($page = 0, $withTotalIndividuals = 0){
-	
-	include_once '../core/core_database.php';
-	$query = 'Select SQL_CALC_FOUND_ROWS s.* ' .
-				($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
-			From species s ' . 
-				($withTotalIndividuals == 1 ? ' Left Join Individual i On i.species_id = s.species_id ' : '') .
-				($withTotalIndividuals == 1 ? ' Group by s.species_id ' : '') .
-			' Order By s.genus, s.species';
-	return selectDBQuery($query, TOTAL_ROWS_SPECIES, $page);
-}
+	function getSpeciesFieldsListConf(){
+		return array("#", "Genus", "Species", "Tipo", "Código", "Functional Group", "#Individuos");
+	}
 
-function getSpeciesBy($whereClause, $page = 0, $withTotalIndividuals = 0){
-
-	include_once '../core/core_database.php';
-	$query = 'Select SQL_CALC_FOUND_ROWS s.* ' .
-				($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
-				From species s ' . 
-				($withTotalIndividuals == 1 ? ' Left Join Individual i On i.species_id = s.species_id ' : '') . 
-				' Where ' . $whereClause . ($withTotalIndividuals == 1 ? ' Group by s.species_id ' : '') .
-				' Order By s.genus, s.species';
-	return selectDBQuery($query, TOTAL_ROWS_SPECIES, $page);
-
-}
-
-function insertSpecies($toInsert = array()){
-
-	require_once '../core/core_database.php';
-
-	$fields = '';
-	$values = '';
-
-	foreach ($toInsert as $key => $value) {
+	function getSpecies($page = 0, $withTotalIndividuals = 0){
 		
-		if($value != ""){
-			$fields .= '`'. $key . '`, ';
-			$values .= "'" . $value . "', ";
-		}
+		include_once '../core/core_database.php';
+		$query = 'Select SQL_CALC_FOUND_ROWS s.* ' .
+					($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
+				From species s ' . 
+					($withTotalIndividuals == 1 ? ' Left Join Individual i On i.species_id = s.species_id ' : '') .
+					($withTotalIndividuals == 1 ? ' Group by s.species_id ' : '') .
+				' Order By s.genus, s.species';
+		return selectDBQuery($query, Species::TOTAL_ROWS_SPECIES, $page);
 	}
 
-	$fields = substr($fields, 0, -2);
-	$values = substr($values, 0, -2);
+	function getSpeciesBy($whereClause, $page = 0, $withTotalIndividuals = 0){
 
-	return insertDB('species',   $fields, $values);
+		include_once '../core/core_database.php';
+		$query = 'Select SQL_CALC_FOUND_ROWS s.* ' .
+					($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
+					From species s ' . 
+					($withTotalIndividuals == 1 ? ' Left Join Individual i On i.species_id = s.species_id ' : '') . 
+					' Where ' . $whereClause . ($withTotalIndividuals == 1 ? ' Group by s.species_id ' : '') .
+					' Order By s.genus, s.species';
+		return selectDBQuery($query, Species::TOTAL_ROWS_SPECIES, $page);
 
-}
-
-function updateSpecies($toUpdate){
-
-	require_once '../core/core_database.php';
-
-	$set = '';
-	foreach ($toUpdate as $key => $value) {
-		if($key != 'species_id'){
-			$set .= '`'. $key . '` = ' . "'" . $value . "', "; 
-		}
 	}
 
-	$set = substr($set, 0, -2);
-	$where = 'species_id = ' . $toUpdate["species_id"];
+	function insertSpecies($toInsert = array()){
 
-	return updateDB('species', $set, $where);
+		require_once '../core/core_database.php';
 
-}
+		$fields = '';
+		$values = '';
 
-function delete_species($where){
+		foreach ($toInsert as $key => $value) {
+			
+			if($value != ""){
+				$fields .= '`'. $key . '`, ';
+				$values .= "'" . $value . "', ";
+			}
+		}
 
-	require_once '../core/core_database.php';
+		$fields = substr($fields, 0, -2);
+		$values = substr($values, 0, -2);
 
-	return deleteDB('species', $where);
+		return insertDB('species',   $fields, $values);
+
+	}
+
+	function updateSpecies($toUpdate){
+
+		require_once '../core/core_database.php';
+
+		$set = '';
+		foreach ($toUpdate as $key => $value) {
+			if($key != 'species_id'){
+				$set .= '`'. $key . '` = ' . "'" . $value . "', "; 
+			}
+		}
+
+		$set = substr($set, 0, -2);
+		$where = 'species_id = ' . $toUpdate["species_id"];
+
+		return updateDB('species', $set, $where);
+
+	}
+
+	function delete_species($where){
+
+		require_once '../core/core_database.php';
+
+		return deleteDB('species', $where);
+	}
+	
 }

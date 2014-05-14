@@ -28,6 +28,10 @@
 		include "../data/site_data.php";
 		include "../data/season_data.php";
 
+		$seasonData = new Season();
+		$siteData = new Site();
+		$campaignData = new Campaign();
+
 
 		$campaigns = array();
 		$getParameters = "";
@@ -60,15 +64,15 @@
 				}
 			}
 
-			$campaigns = getCampaignBy($whereClause, isset($_GET["page"]) ? $_GET["page"] : 0);
+			$campaigns = $campaignData->getCampaignBy($whereClause, isset($_GET["page"]) ? $_GET["page"] : 0);
 
 		} else {
-			$campaigns = getCampaigns(isset($_GET["page"]) ? $_GET["page"] : 0);
+			$campaigns = $campaignData->getCampaigns(isset($_GET["page"]) ? $_GET["page"] : 0);
 		}
 
-		$sites = getSites(-1);
-		$seasons = getSeasons(-1);
-		$fields = getCampaignFieldsListConf();
+		$sites = $siteData->getSites(-1);
+		$seasons = $seasonData->getSeasons(-1);
+		$fields = $campaignData->getCampaignFieldsListConf();
   	?>
   	
     <!-- incluir menu principal -->
@@ -187,8 +191,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($campaigns[0]->totalRecords % TOTAL_ROWS_CAMPAIGN) > 0 ? 1 : 0);
-                $nPages = floor($campaigns[0]->totalRecords / TOTAL_ROWS_CAMPAIGN) + $addPage;
+                $addPage = (($campaigns[0]->totalRecords % Campaign::TOTAL_ROWS_CAMPAIGN) > 0 ? 1 : 0);
+                $nPages = floor($campaigns[0]->totalRecords / Campaign::TOTAL_ROWS_CAMPAIGN) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

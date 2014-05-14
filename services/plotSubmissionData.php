@@ -11,10 +11,16 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 		unset($_POST["submissionType"]);
 
+		if($_POST["plotType"] == "none") {
+			unset($_POST["plotType"]);
+		}
+
+		$plotData = new Plot();
+
 		if(!isset($_POST["plot_id"])){
-			$success = insertPlot($_POST);
+			$success = $plotData->insertPlot($_POST);
 		}else{
-			$success = updatePlot($_POST);
+			$success = $plotData->updatePlot($_POST);
 		}
 		
 		if($success == 1){
@@ -47,6 +53,8 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 	  		//inserir os plots
 	  		if (($handle = fopen(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], "r")) !== FALSE) {
 	  			
+	  			$plotData = new Plot();
+	  			$siteData = new Site();
 	  			$row = 1;
 	  			$errorString = '';
 			    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
@@ -56,7 +64,7 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 
 		        		$toInsert = array();
 
-		        		$site = getSiteBy("code = '". $data[0]."'", -1);
+		        		$site = $siteData->getSiteBy("code = '". $data[0]."'", -1);
 		        		if (count($site) == 1){
 
 	        				echo '<pre>';
@@ -65,7 +73,7 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 				        	$toInsert['coordinateX'] = $data[2];
 				        	$toInsert['coordinateY'] = $data[3];
 
-							$success = insertPlot($toInsert);
+							$success = $plotData->insertPlot($toInsert);
 
 		        			
 		        		}else{

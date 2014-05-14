@@ -27,7 +27,9 @@
   	<?
       if(isset ($_GET["species_id"])){
         include "../data/species_data.php"; 
-        $specieObj = getSpeciesBy("species_id = " . $_GET["species_id"], -1);
+
+        $speciesData = new Species();        
+        $specieObj = $speciesData->getSpeciesBy("species_id = " . $_GET["species_id"], -1);
       }
     ?>
 

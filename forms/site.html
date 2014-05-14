@@ -28,7 +28,10 @@
   	<?
   		if(isset ($_GET["site_id"])){
   			include "../data/site_data.php"; 
-			$site = getSiteBy("site_id = " . $_GET["site_id"], -1);
+
+
+  			$siteData = new Site();
+			$site = $siteData->getSiteBy("site_id = " . $_GET["site_id"], -1);
   		}
   	?>
 

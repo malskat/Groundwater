@@ -100,9 +100,14 @@
 			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Indivíduos <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
+			  	<li role="presentation" class="dropdown-header">Indivíduos</li>
 			    <li><a href=<?= PROJECT_URL . "forms/individual.html"?>>Inserir</a></li>
 			    <li><a href=<?= PROJECT_URL . "forms/individual-csv.html"?>>Inserir por CSV</a></li>
-			    <li><a href=<?= PROJECT_URL . "lists/individual-list.html"?>>Consultar</a></li> 
+			    <li><a href=<?= PROJECT_URL . "lists/individual-list.html"?>>Consultar</a></li>  
+			    
+			    <li role="presentation" class="divider"></li>
+			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
+			    <li><a href=<?= PROJECT_URL . "forms/individualEcoFisio-csv.html"?>>Inserir por CSV</a></li>
 			  </ul>
 			</li>
 		<?

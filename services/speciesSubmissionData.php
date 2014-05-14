@@ -10,10 +10,12 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 		unset($_POST["submissionType"]);
 
+		$speciesData = new Species();
+
 		if (!isset($_POST["species_id"])) {
-			$success = insertSpecies($_POST);
+			$success = $speciesData->insertSpecies($_POST);
 		} else {
-			$success = updateSpecies($_POST);
+			$success = $speciesData->updateSpecies($_POST);
 		}
 		if ($success == 1) {
 			header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=1');
@@ -46,6 +48,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	  		//inserir os individuos
 	  		if (($handle = fopen(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], "r")) !== FALSE) {
 	  			
+	  			$speciesData = new Species();
 	  			$row = 1;
 	  			$inserted = 0;
 	  			$errorString = '';
@@ -62,7 +65,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			        	$toInsert['code'] = $data[3];
 			        	$toInsert['functionalGroup'] = $data[4];
 			        	
-						if ( insertSpecies($toInsert) == 1) {
+						if ( $speciesData->insertSpecies($toInsert) == 1) {
 							$inserted++;
 						}
 			        }

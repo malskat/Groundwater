@@ -15,12 +15,14 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 		unset($_POST["submissionType"]);
 
+		$individualData = new Individual();
+
 		if($_POST["operationType"] == 'insert'){
 			unset($_POST["operationType"]);
-			$success = insertIndividual($_POST);
+			$success = $individualData->insertIndividual($_POST);
 		}else {
 			unset($_POST["operationType"]);
-			$success = updateIndividual($_POST);
+			$success = $individualData->updateIndividual($_POST);
 		}
 		
 		if($success == 1){
@@ -51,6 +53,10 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	  		//inserir os individuos
 	  		if (($handle = fopen(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], "r")) !== FALSE) {
 	  			
+	  			$individualData = new Individual();
+				$siteData = new Site();
+				$plotData = new Plot();
+				$speciesData = new Species();
 	  			$row = 1;
 	  			$errorString = '';
 			    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
@@ -59,14 +65,13 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			        if ($row > 1) {
 
 		        		$toInsert = array();
-
-		        		$site = getSiteBy("code = '". $data[0]."'", -1);
+		        		$site = $siteData->getSiteBy("code = '". $data[0]."'", -1);
 		        		if (count($site) == 1) {
 
-		        			$plot = getPlotBy("s.site_id = " . $site[0]->site_id . " and p.code = '" . $data[1] . "'", -1);
+		        			$plot = $plotData->getPlotBy("s.site_id = " . $site[0]->site_id . " and p.code = '" . $data[1] . "'", -1);
 		        			if (count($plot) == 1) {
 
-		        				$species = getSpeciesBy("upper(genus) = upper('". $data[2]."') and upper(species) = upper('" . $data[3] . "')", -1);
+		        				$species = $speciesData->getSpeciesBy("upper(genus) = upper('". $data[2]."') and upper(species) = upper('" . $data[3] . "')", -1);
 			        			
 			        			if (count($species) == 1) {
 
@@ -81,7 +86,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 						        	}
 
 						        	
-									$success = insertIndividual($toInsert);
+									$success = $individualData->insertIndividual($toInsert);
 
 			  					} else{
 			        				$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': espécie não foi encontrada; <br />';

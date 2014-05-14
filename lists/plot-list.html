@@ -31,6 +31,9 @@
   	<? 
   		include "../data/plot_data.php";
       	include "../data/site_data.php";
+			
+      		$plotData = new Plot();
+
 			$plots = array();
 			$getParameters = "";
 
@@ -53,13 +56,15 @@
 				  }
 				}
 
-				$plots = getPlotBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1);
+				$plots = $plotData->getPlotBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1);
 			} else {
-				$plots = getPlotsSite((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1); 
+				$plots = $plotData->getPlotsSite((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1); 
 			}
 
-	  		$fields = getPlotFieldsListConf();
-	      	$sites = getSites(-1);
+	  		$fields = $plotData->getPlotFieldsListConf();
+      		
+      		$siteData = new Site();
+	      	$sites = $siteData->getSites(-1);
 	  	?>
 
   	<!-- incluir menu principal -->
@@ -175,8 +180,8 @@
               <?
 
                 //paginas
-                $addPage = (($plots[0]->totalRecords % TOTAL_ROWS_PLOT) > 0 ? 1 : 0);
-                $nPages = floor($plots[0]->totalRecords / TOTAL_ROWS_PLOT) + $addPage;
+                $addPage = (($plots[0]->totalRecords % Plot::TOTAL_ROWS_PLOT) > 0 ? 1 : 0);
+                $nPages = floor($plots[0]->totalRecords / Plot::TOTAL_ROWS_PLOT) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );
