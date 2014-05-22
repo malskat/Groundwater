@@ -7,14 +7,21 @@ $action = (isset($_GET["action"]) ? $_GET["action"] : $_POST["action"]);
 switch($action){
 	case "delete" : {
 		require_once "../data/" . $_GET["class"] ."_data.php";
-		
+	
 		//chamada dinamica da funcao
 		$instance = new $_GET["class"];
 		$deleteFunction = "delete_" . $_GET["class"];
 		$toReturn = $instance->$deleteFunction($_GET["class"] . "_id = '" . $_GET["id"] . "'");
 		
 		if(isset($_GET["class"])){
-			header('Location: ' . PROJECT_URL . 'lists/' . $_GET["class"] . '-list.html?success=' . ($toReturn == 1 ? 2 : $toReturn));
+
+			$parameters = '';
+			$parametersIndex = strpos($_SERVER['HTTP_REFERER'], '?');
+			if ($parametersIndex !== false) {
+				$parameters = substr($_SERVER['HTTP_REFERER'], $parametersIndex + 1) . '&';
+			}
+
+			header('Location: ' . PROJECT_URL . 'lists/' . $_GET["class"] . '-list.html?' . $parameters . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
 		} else {
 			header('Location: ' . PROJECT_URL . 'index.html?');
 		}
@@ -38,7 +45,6 @@ switch($action){
 	}
 
 	default : {
-		var_dump(PROJECT_URL);
 		header('Location: ' . PROJECT_URL );
 		break;
 	}

@@ -85,9 +85,15 @@
 				    	                  	<td>' . $site->title . '</td>
 				    	                  	<td>' . $site->country . '</td>
 				    	                  	<td>' . (isset($site->coordinateX) && $site->coordinateX != "" ? $site->coordinateX : "N.D.") . '</td>
-				    	                  	<td>' . (isset($site->coordinateY) && $site->coordinateY != "" ? $site->coordinateY : "N.D.") . '</td>
-				                          	<td><a href="plot-list.html?site=' . $site->site_id .  '"><span class="badge">' . $site->totalPlots . '</span></a></td>
-				    	                  	<td>
+				    	                  	<td>' . (isset($site->coordinateY) && $site->coordinateY != "" ? $site->coordinateY : "N.D.") . '</td>';
+				                          	
+				                          	if ($site->totalPlots > 0) {
+				                          		echo '<td><a href="plot-list.html?site=' . $site->site_id .  '"><span id="accessTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os plots" class="badge">' . $site->totalPlots . '</span></a></td>';
+				                          	} else {
+				                          		echo '<td><span class="badge">' . $site->totalPlots . '</a></td>';
+				                          	}
+				    	                  	
+				    	                  	echo '<td>
 				    	                  		<button onclick="location.href=\'../forms/site.html?site_id=' . $site->site_id . '\'" type="button" class="btn btn-primary btn-xs">
 				    	                  			<span class="glyphicon glyphicon glyphicon-edit"></span>
 				    	                  		</button>
@@ -166,6 +172,9 @@
 	    foreach ($sites as $site) {
 	    	if (isset($site->site_id) && $site->totalPlots > 0) {
 		    	echo "$('#removeTooltip_" . $site->site_id . "').tooltip({trigger: 'hover'});";
+		    	if ($site->totalPlots > 0) {
+		    		echo "$('#accessTooltip_" . $site->site_id . "').tooltip({trigger: 'hover'});";
+		    	}
 	    	}
 	    }
 	?>

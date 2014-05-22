@@ -74,21 +74,23 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			    }
 			    
 			    fclose($handle);
-			}
 
-	  		//mudar o ficheiro para a pasta de ficheiros processados
-			if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
+			    
+		  		//mudar o ficheiro para a pasta de ficheiros processados
+				if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
 
-				if($errorString != ''){
-					header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=-2&reason=' . $errorString);
+					if($errorString != ''){
+						header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=-2&reason=' . $errorString);
+					} else {
+						header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=1&inserted=' . $inserted);	
+					}
+
 				} else {
-					header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=1&inserted=' . $inserted);	
+	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
+					header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=-1&reason=ficheiro nao passou para a directoria final');
 				}
-
-			} else {
-  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-				header('Location: ' . PROJECT_URL . 'lists/species-list.html?success=-1&reason=ficheiro nao passou para a directoria final');
 			}
+
 
   		}
 	} catch (Exception $e) {

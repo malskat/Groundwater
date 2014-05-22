@@ -29,14 +29,15 @@
   <body>
 
   	<?
+  		//dados necessarios para o formulario
   		include "../data/site_data.php"; 
   		include "../data/season_data.php"; 
 
   		$siteData = new Site();
-		$sites = $siteData->getSites();
+		$sites = $siteData->getSites(-1);
 
 		$seasonData = new Season();
-		$seasons = $seasonData->getSeasons();
+		$seasons = $seasonData->getSeasons(-1);
 
   		if(isset ($_GET["campaign_id"])){
   			include "../data/campaign_data.php"; 
@@ -277,7 +278,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros à campanha!");
+		        $('#alert-text').html("<strong>Shit could happen!</strong> Faltam parâmetros à campanha!");
     			return false;
     		} else {
     			return true;

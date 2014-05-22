@@ -4,6 +4,7 @@ class Campaign {
 
 	const TOTAL_ROWS_CAMPAIGN = 10;
 	const ORDER_BY_CAMPAIGN = 'sampling_campaign_id';
+	const DB_ENTITY_NAME = 'sampling_campaign';
 
 	function getCampaignFieldsListConf(){
 
@@ -51,7 +52,7 @@ class Campaign {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return insertDB('sampling_campaign',   $fields, $values);
+		return insertDB(Campaign::DB_ENTITY_NAME, $fields, $values);
 	}
 
 
@@ -70,7 +71,7 @@ class Campaign {
 		$where = '`sampling_campaign_id` = ' . $toUpdate["sampling_campaign_id"];
 
 
-		return updateDB('sampling_campaign', $set, $where);
+		return updateDB(Campaign::DB_ENTITY_NAME, $set, $where);
 	}
 
 	function delete_campaign($where){
@@ -78,6 +79,6 @@ class Campaign {
 		require_once '../core/core_database.php';
 		$where = str_replace("campaign", "sampling_campaign", $where);
 		
-		return deleteDB('sampling_campaign', $where);
+		return deleteDB(Campaign::DB_ENTITY_NAME, $where);
 	}
 }

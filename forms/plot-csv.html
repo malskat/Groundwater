@@ -11,8 +11,6 @@
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <!-- Bootstrap theme -->
-    <link href="../css/bootstrap-formhelpers.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap alerts -->
@@ -51,7 +49,7 @@
 
 				  				<div id="fileInputGroup" class="form-group spacer">
 				  					<label for="inputGenus" class="col-lg-2 control-label">Ficheiro*</label>
-				  					<div class="col-lg-4">
+				  					<div class="col-lg-6">
 				  						<input type="file" class="form-control" id="file" name="file" placeholder="">
 				  				 	</div>
 				  				</div>
@@ -71,7 +69,7 @@
 								<p>1. O ficheiro submetido tem de ter a extensão .csv .</p>
 								<p>2. Consegues isso guardando o ficheiro no excel, produrando esse formato na lista de possíveis formatos.</p>
 								<p>3. A primeira linha do ficheiro está guardada para o nome dos atributos.</p>
-								<p>4. São necessários os seguintes atributos, para inserir um Plot: siteCode, plotCode, coordinateX, coordinateY.</p>
+								<p>4. São necessários os seguintes atributos, para inserir um Plot: <strong>siteCode</strong>, <strong>plotCode</strong>, <strong>coordinateX</strong>, <strong>coordinateY</strong>.</p>
 								<p>5. Existe um ficheiro de referência para eventuais dúvidas que possam existir.</p>
 							</div>
 						</div>
@@ -92,6 +90,8 @@
     		if(file == "" ) {
     			hasErrors = true;
     			$('#fileInputGroup').addClass('has-error');
+    		} else {
+    			$('#fileInputGroup').removeClass('has-error');
     		}
 
     		if (hasErrors){

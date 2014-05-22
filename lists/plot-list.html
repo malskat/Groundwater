@@ -73,7 +73,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-       		<h1>Locais (Plots)</h1>
+       		<h1>Plots</h1>
       	</div>
       </div>
     </div>
@@ -136,9 +136,15 @@
 	                        			<td>' . $plot->title . '</td>
 	                        			<td>' . $plot_type . '</td>
 	    	                  			<td>' . (isset($plot->coordinateX) && $plot->coordinateX != "" && $plot->coordinateX !== "-1"? $plot->coordinateX : "N.D.") . '</td>
-	    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>
-	                        			<td><a href="individual-list.html?plot=' . $plot->plot_id .  '"><span class="badge">' . $plot->totalIndividuals . '</span></a></td>
-				  	                  	<td>
+	    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>';
+	    	                  			
+	    	                  			if ($plot->totalIndividuals > 0) {
+	                        				echo '<td><a href="individual-list.html?plot=' . $plot->plot_id .  '"><span id="accessTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os indivíduos" class="badge">' . $plot->totalIndividuals . '</span></a></td>';
+	    	                  			}else {
+	    	                  				echo '<td><span class="badge">' . $plot->totalIndividuals . '</a></td>';
+	    	                  			}
+
+				  	                  	echo '<td>
 				  	                  		<button onclick="location.href=\'../forms/plot.html?plot_id=' . $plot->plot_id . '\'" type="button" class="btn btn-primary btn-xs">
 				  	                  			<span class="glyphicon glyphicon-edit"></span>
 				  	                  		</button>
@@ -222,6 +228,9 @@
 	    foreach ($plots as $plot) {
 	    	if (isset($plot->plot_id) && $plot->totalIndividuals > 0) {
 		    	echo "$('#removeTooltip_" . $plot->plot_id . "').tooltip({trigger: 'hover'});";
+		    	if ($plot->totalIndividuals > 0) {
+		    		echo "$('#accessTooltip_" . $plot->plot_id . "').tooltip({trigger: 'hover'});";
+		    	}
 	    	}
 	    }
 	?>

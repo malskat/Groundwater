@@ -57,6 +57,7 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 	  			$siteData = new Site();
 	  			$row = 1;
 	  			$errorString = '';
+	  			$inserted = 0;
 			    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
 			        
 		       		//inserir na BD
@@ -73,8 +74,9 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 				        	$toInsert['coordinateX'] = $data[2];
 				        	$toInsert['coordinateY'] = $data[3];
 
-							$success = $plotData->insertPlot($toInsert);
-
+							if($plotData->insertPlot($toInsert) == 1) {
+								$inserted++;
+							}
 		        			
 		        		}else{
 
@@ -88,21 +90,22 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 			    }
 			    
 			    fclose($handle);
-			}
 
-	  		//mudar o ficheiro para a pasta de ficheiros processados
-			if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
+		  		//mudar o ficheiro para a pasta de ficheiros processados
+				if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
 
-				if($errorString != ''){
-					header('Location: ' . PROJECT_URL . 'lists/plot-list.html?success=-2&reason='.$errorString);
+					if($errorString != ''){
+						header('Location: ' . PROJECT_URL . 'lists/plot-list.html?success=-2&reason='.$errorString);
+					}else{
+						header('Location: ' . PROJECT_URL . 'lists/plot-list.html?success=1&inserted=' . $inserted);	
+					}
+
 				}else{
-					header('Location: ' . PROJECT_URL . 'lists/plot-list.html?success=1');	
+	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
+					header('Location: ' . PROJECT_URL . 'lists/plot-list.html?success=-1&reason=ficheiro nao passou para a directoria final!');
 				}
-
-			}else{
-  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-				header('Location: ' . PROJECT_URL . 'lists/plot-list.html?success=-1&reason=ficheiro nao passou para a directoria final');
 			}
+
 
 	  	}
 	}catch(Exception $e){

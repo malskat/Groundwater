@@ -12,7 +12,16 @@
 
 <?php 
 	require_once '/config/constants.php';
+
 	session_start();
+	$showloggedItens = false;
+	if(isset($_SESSION['user']) && ($_SESSION['user']['entrance'] + PROJECT_LOGGED_PERMITED_TIME) >= time()) {
+		$showloggedItens = true;
+	} else if (isset($_SESSION['user'])) {
+		//retirar o user de sessao caso tenha passado o tempo permitido de acesso autorizado
+		unset($_SESSION['user']);
+	}
+
 ?>
 <script src="../js/utils.js"></script>
 <script>
@@ -97,7 +106,7 @@
 			  </ul>
 			</li>
 
-			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false ? 'class="active"' :  '')?> class="dropdown">
+			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecoFisio') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Indivíduos <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Indivíduos</li>
@@ -107,11 +116,11 @@
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
-			    <li><a href=<?= PROJECT_URL . "forms/individualEcoFisio-csv.html"?>>Inserir por CSV</a></li>
+			    <li><a href=<?= PROJECT_URL . "forms/ecoFisio-csv.html"?>>Inserir por CSV</a></li>
 			  </ul>
 			</li>
 		<?
-			if (isset($_SESSION['user'])) {
+			if ($showloggedItens) {
 				echo '<li ' . (strpos($_SERVER['PHP_SELF'], 'use') !== false ? 'class="active"' :  '') .  ' class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilizadores <b class="caret"></b></a>
 								  	<ul class="dropdown-menu">
@@ -127,7 +136,7 @@
 
 		<?
 
-			if (isset($_SESSION['user'])) {
+			if ($showloggedItens) {
 				//utilizador logado
 				echo '<div id="loggedInfo" name="loggedInfo">
 							<div class="navbar-collapse collapse">
@@ -144,6 +153,7 @@
 							</div>
 						</div>';
 			} else {
+
 				//formulario de utilizador
 				echo '<div id="loginForm" name="loginForm">
 							<form class="navbar-form navbar-right" role="form" onsubmit="return validateLogin();" action="../services/make_entrance.php" method="post">

@@ -78,9 +78,15 @@
 		                        <td>' . $season->season_id . '</td>
 		                        <td>' . $season->code . '</td>
 		                        <td>' . $season->startDate . '</td>
-		                        <td>' . $season->endDate . '</td>
-	                          	<td><a href="campaign-list.html?season=' . $season->season_id .  '"><span class="badge">' . $season->totalCampaigns . '</span></a>
-	                          	</td>
+		                        <td>' . $season->endDate . '</td>';
+
+		                        if ($season->totalCampaigns > 0) {
+	                          		echo '<td><a href="campaign-list.html?season=' . $season->season_id .  '"><span id="accessTooltip_' . $season->season_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres as campanhas" class="badge">' . $season->totalCampaigns . '</span></a>';
+		                        } else {
+		                        	echo '<td><span class="badge">' . $season->totalCampaigns . '</a>';
+		                        }
+
+	                          	echo '</td>
 		                       	<td>
 	                            	<button onclick="location.href=\'../forms/season.html?season_id=' . $season->season_id . '\'" type="button" class="btn btn-primary btn-xs">
 	                                	<span class="glyphicon glyphicon glyphicon-edit"></span>
@@ -88,7 +94,6 @@
 	                            </td>
 	                       		<td>';
 
-							   
 						        if ($season->totalCampaigns == 0) {
 							        echo '<button onclick="beginDelete(\'action=delete&class=season&id=' . $season->season_id . '\',\'Queres mesmo remover esta Época?\');" type="button" class="btn btn-danger btn-xs">
 							            <span class="glyphicon glyphicon-remove-sign"></span>
@@ -160,6 +165,9 @@
 	    foreach ($seasons as $season) {
 	    	if (isset($season->season_id) && $season->totalCampaigns > 0) {
 		    	echo "$('#removeTooltip_" . $season->season_id . "').tooltip({trigger: 'hover'});";
+		    	if ($season->totalCampaigns > 0) {
+		    		echo "$('#accessTooltip_" . $season->season_id . "').tooltip({trigger: 'hover'});";
+		    	}
 	    	}
 	    }
 	?>

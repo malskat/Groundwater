@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Projecto Ground Water</title>
+
+    <script src="../js/jquery-1.10.2.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap alerts -->
+    <link href="../css/alerts.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/mainCore.css" rel="stylesheet">
+
+  </head>
+
+	<body>
+    
+	  	<!-- incluir menu principal -->
+	    <?php include "../menu.php"; ?>
+
+	    <div class="container">
+	      <div class="row">
+	      	<div class="page-header">
+	         		<h1>Eco-Fisiologia</h1>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="container">
+	  		<div class="row">
+	  			<div class="col-xs-12 col-lg-12">
+		  			<div class="panel panel-primary">
+			        	<div class="panel-heading">
+						   <h3 class="panel-title">Eco-Fisiologia do individuo <?=$_GET["individualCode"]?></h3>
+						</div>
+						<div class="panel-body">
+				        	<div class="col-xs-8 col-lg-8">
+				        		<div id="ecoFisioGraph">
+				        		</div>
+				        	</div>
+				        	<div class="col-xs-4 col-lg-4">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<p><span class="label label-default">Informações</span></p>
+										<p>Evolução temporal</p>
+									</div>
+								</div>
+							</div>
+				        </div>
+					</div>
+			    </div>
+
+	  		</div>
+	    </div>
+	</body>
+</html>

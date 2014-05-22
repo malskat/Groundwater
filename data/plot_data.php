@@ -3,6 +3,7 @@
 class Plot {
 
 	const TOTAL_ROWS_PLOT = 10;
+	const DB_ENTITY_NAME = 'plot';
 
 	function getPlotFieldsListConf(){
 
@@ -63,7 +64,7 @@ class Plot {
 		$values = substr($values, 0, -2);
 
 
-		return insertDB('plot', $fields, $values);
+		return insertDB(Plot::DB_ENTITY_NAME, $fields, $values);
 
 	}
 
@@ -85,7 +86,7 @@ class Plot {
 		$set = substr($set, 0, -2);
 		$where = '`plot_id` = ' . $toUpdate["plot_id"];
 
-		return updateDB('plot', $set, $where);
+		return updateDB(Plot::DB_ENTITY_NAME, $set, $where);
 
 	}
 
@@ -93,6 +94,6 @@ class Plot {
 
 		require_once '../core/core_database.php';
 
-		return deleteDB('plot', $where);
+		return deleteDB(Plot::DB_ENTITY_NAME, $where);
 	}
 }

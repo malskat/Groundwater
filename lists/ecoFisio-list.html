@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+		<title>Projecto Ground Water</title>
+
+		<script src="../js/jquery-1.10.2.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Bootstrap core CSS -->
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<!-- Bootstrap alerts -->
+		<link href="../css/alerts.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="../css/mainCore.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		  <script src="../../assets/js/html5shiv.js"></script>
+		  <script src="../../assets/js/respond.min.js"></script>
+		<![endif]-->
+
+		<!--Load the AJAX API-->
+    	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	</head>
+
+	  	<!-- incluir menu principal -->
+	  	<?php include "../menu.php";?>
+
+	  	<?
+			$ecoFisioValues = array();
+			if (isset($_GET['individualCode'])) {
+		    	include '../data/ecoFisio_data.php';
+		    	$ecoFisioData = new EcoFisio();
+		    	$ecoFisioValues = $ecoFisioData->getEcoFisioBy($where = 'ef.individualCode = "' . $_GET['individualCode'] . '"', $orderBy = 'ef.samplingDate ASC' , isset($_GET["page"]) ? $_GET["page"] : 0);
+				
+				$ecoFisioEncoded = json_encode($ecoFisioValues);
+			}
+
+
+			$fields = $ecoFisioData->getEcoFisioFieldsListConf();
+		?>
+
+	    <script type="text/javascript">
+
+			// Load the Visualization API and the piechart package.
+			google.load('visualization', '1.0', {'packages':['corechart']});
+
+			// Set a callback to run when the Google Visualization API is loaded.
+			google.setOnLoadCallback(drawChart);
+
+			// Callback that creates and populates a data table,
+			// instantiates the pie chart, passes in the data and
+			// draws it.
+			function drawChart() {
+
+				var graphData = [['Data', 'leaf_13c', 'twig_18o', 'Water Potencial']];
+
+				var _ecoFisioValues = <?=$ecoFisioEncoded?>;
+				if (_ecoFisioValues != "") {
+					for (ecoFisio in _ecoFisioValues){
+						if (_ecoFisioValues[ecoFisio].individualCode != null) {
+							graphData.push([_ecoFisioValues[ecoFisio].samplingDate, 
+							               Number(_ecoFisioValues[ecoFisio].leaf_13c), 
+							               Number(_ecoFisioValues[ecoFisio].twig_18o), 
+							               Number(_ecoFisioValues[ecoFisio].waterPotencial)]);
+						}
+					}
+				}
+
+				console.log(graphData);
+
+				// Create the data table.
+				var data = google.visualization.arrayToDataTable(graphData);
+
+
+				// Set chart options
+				var options = {'title':'Evolução',
+				               'width':520,
+				               'height':250};
+
+				// Instantiate and draw our chart, passing in some options.
+				var chart = new google.visualization.LineChart(document.getElementById('ecoFisioGraph'));
+				chart.draw(data, options);
+			}
+	    </script>
+
+	    <!-- titulo -->
+	    <div class="container">
+	      <div class="row">
+	      	<div class="page-header">
+	       		<h2>Eco-Fisiologia</h2>
+	       		<h5>Indivíduo <?=$_GET['individualCode']?></h5>
+	      	</div>
+	      </div>
+	    </div>
+
+	    <!-- gráfico -->
+		<div class="container">
+	  		<div class="row spacer">
+	  			<div class="col-xs-6 col-lg-6">
+	  				<table class="table table-hover">
+		        		<thead>
+			              <tr class="active">
+			              	<?
+			              		foreach ($fields as $field) {
+			              			echo '<th>' . $field . '</th>';
+			              		}
+			              	?>
+			                <th>Acções</th>
+			              </tr>
+		            	</thead>
+		            	<tbody>
+		            		<?
+				                if(count($ecoFisioValues) > 1) {
+				             		foreach ($ecoFisioValues as $ecoFisioValue) {
+					                    if(isset($ecoFisioValue->individualCode)){
+					                    	echo '<tr>
+	      	            	    					<td>' . $ecoFisioValue->leaf_13c . '</td>
+	      	            	    					<td>' . $ecoFisioValue->twig_18o . '</td>
+	      	            	    					<td>' . $ecoFisioValue->waterPotencial . '</td>
+	      	            	    					<td>' . $ecoFisioValue->photosyntheticIndices . '</td>
+	      	            	    					<td>
+	      	            	    						<div class="btn-group">
+	      	            	    							<button onclick="location.href=\'../forms/individual.html?individualCode=' . $ecoFisioValue->eco_fisio_id . '\'" type="button" class="btn btn-primary btn-xs">
+							      	                  			<span class="glyphicon glyphicon glyphicon-edit"></span>
+							      	                  		</button>
+							      	                  		<button onclick="beginDelete(\'action=delete&class=ecofisio&id=' . $ecoFisioValue->eco_fisio_id . '\', \'Queres mesmo remover esta amostragem de Eco-Fisiologia?\');" type="button" class="btn btn-danger btn-xs">
+								                            	<span class="glyphicon glyphicon-remove-sign"></span>
+								                            </button>
+	      	            	    						</div>
+	      	            	    					</td>
+	      	            	    				</tr>';
+					                    }
+					                }
+					            }
+					        ?>
+		            	</tbody>
+		            </table>
+
+		            <!-- paginacao -->
+				    <div class="container">
+				    	<div class="row">
+					        <div class="col-xs-2 col-lg-2">
+					          <h5>Total de registos <span class="badge"><?=$ecoFisioValues[0]->totalRecords?></span></h5>
+					        </div>
+					        <div class="col-xs-2 col-lg-2">
+					          <div class="text-center">
+					            <ul class="pagination">
+					              <?
+					                //paginas
+					                $addPage = (($ecoFisioValues[0]->totalRecords % EcoFisio::TOTAL_ROWS_ECO_FISIO) > 0 ? 1 : 0);
+					                $nPages = floor($ecoFisioValues[0]->totalRecords / EcoFisio::TOTAL_ROWS_ECO_FISIO) + $addPage;
+					                if ( $nPages > 1) {
+
+					                  $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );
+
+					                  //botao para tras
+					                  if ($currentPage == 1) {
+					                    echo '<li class="disabled"><a >&laquo;</a></li>';
+					                  } else {
+					                    $newPage = ($currentPage - 1);
+					                    echo '<li><a href="ecoFisio-list.html?individualCode=' . $_GET['individualCode'] . '&page=' . $newPage . '">&laquo;</a></li>';
+					                  }
+
+					                  $begin = (($currentPage - 3) > 1 ? ($currentPage - 3) :  1 ); 
+					                  $end = (($currentPage + 3) < $nPages ? ($currentPage + 3) :  $nPages ); 
+
+					                  for ($i = $begin; $i <= $end; $i++ ) {
+					                    $active = ($currentPage == $i  ? 'class="active"' : "");
+					                    echo '<li ' . $active . '><a href="ecoFisio-list.html?individualCode=' . $_GET['individualCode'] . '&page='. $i .'">' . $i . '</a></li>';
+					                  }
+
+					                  //botao para a frente
+					                  if ($currentPage == $nPages) {
+					                    echo '<li class="disabled"><a >&raquo;</a></li>';
+					                  } else {
+					                    $newPage = ($currentPage   + 1);
+					                    echo '<li><a href="ecoFisio-list.html?individualCode=' . $_GET['individualCode'] . '&page=' . $newPage .'">&raquo;</a></li>';
+					                  }
+
+					                }
+
+					              ?>
+					            </ul>
+					          </div>
+					        </div>
+				        	<div class="col-xs-2 col-lg-2"></div>
+				    	</div>
+				    </div>
+
+	  			</div>
+	  			<div class="col-xs-6 col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Evolução Temporal</h3>
+						</div>
+						<div class="panel-body">
+							<div id="ecoFisioGraph">
+				        	</div>
+						</div>
+					</div>
+			    </div>
+			</div>
+		</div>
+	</body>
+</html>
+

@@ -3,6 +3,7 @@
 class Species {
 
 	const TOTAL_ROWS_SPECIES = 10;
+	const DB_ENTITY_NAME = 'species';
 
 	function getSpeciesFieldsListConf(){
 		return array("#", "Genus", "Species", "Tipo", "Código", "Functional Group", "#Individuos");
@@ -51,7 +52,7 @@ class Species {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return insertDB('species',   $fields, $values);
+		return insertDB(Species::DB_ENTITY_NAME,   $fields, $values);
 
 	}
 
@@ -69,7 +70,7 @@ class Species {
 		$set = substr($set, 0, -2);
 		$where = 'species_id = ' . $toUpdate["species_id"];
 
-		return updateDB('species', $set, $where);
+		return updateDB(Species::DB_ENTITY_NAME, $set, $where);
 
 	}
 
@@ -77,7 +78,7 @@ class Species {
 
 		require_once '../core/core_database.php';
 
-		return deleteDB('species', $where);
+		return deleteDB(Species::DB_ENTITY_NAME, $where);
 	}
 	
 }

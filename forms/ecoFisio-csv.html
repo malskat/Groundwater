@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Projecto Ground Water</title>
+
+    <script src="../js/jquery-1.10.2.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap alerts -->
+    <link href="../css/alerts.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/mainCore.css" rel="stylesheet">
+
+  </head>
+
+	<body>
+	    
+	  	<!-- incluir menu principal -->
+	    <?php include "../menu.php"; ?>
+
+	    <div class="container">
+	      <div class="row">
+	      	<div class="page-header">
+	         		<h1>Eco-Fisiologia</h1>
+	        </div>
+	      </div>
+	    </div>
+
+	    <?
+	    	include '../data/campaign_data.php';
+	    	$campaignData = new Campaign();
+	    	$campaigns = $campaignData->getCampaigns(-1);
+	    ?>
+
+	     <div class="container">
+	  		<div class="row">
+	  			<div class="col-xs-12 col-lg-12">
+		  			<div class="panel panel-primary">
+			        	<div class="panel-heading">
+						   <h3 class="panel-title">Inserir amonstragens de Eco-Fisiologia por csv</h3>
+						</div>
+				        <div class="panel-body">
+				        	<div class="col-xs-8 col-lg-8">
+					        	<form class="form-horizontal" role="form" name="form_eco_fisio_csv_data" enctype="multipart/form-data" action="../services/ecoFisioSubmissionData.php" onsubmit="return validateForm();"  method="post">
+
+					        		<!-- campaigns -->
+									<div id="campaignsInputGroup" class="form-group spacer">
+										<label for="inputCampaigns" class="col-lg-2 control-label">Campanha*</label>
+										<div class="col-lg-6">
+											<select id="sampling_campaign_id" name="sampling_campaign_id" class="form-control input-sm">
+												<?
+													echo '<option selected value="none">Escolhe uma</option>';
+
+												  	foreach($campaigns as $campaign){
+												  		if(isset($campaign->sampling_campaign_id)) {
+												  			echo '<option value="' . $campaign->sampling_campaign_id . '">' . $campaign->designation	 . '</option>';
+												  		}
+												  	}
+												?>	
+		              						</select>								
+										</div>
+									</div>
+
+					  				<div id="fileInputGroup" class="form-group">
+					  					<label for="inputGenus" class="col-lg-2 control-label">Ficheiro*</label>
+					  					<div class="col-lg-6">
+					  						<input type="file" class="form-control" id="file" name="file" placeholder="">
+					  				 	</div>
+					  				</div>
+
+					  				<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
+										<div class="text-center">
+											<button onclick="location.href='../lists/plot-list.html'" type="button" class="btn btn-xs">Cancelar</button>
+											<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
+										</div>
+									</div>
+					  			</form>
+					  		</div>
+					  		<div class="col-xs-4 col-lg-4">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<p><span class="label label-default">Informações</span></p>
+										<p>Para inserir amonstragens eco-fisiológicas de indivíduos, numa determinada campanha.</p>
+										<p>1. O ficheiro submetido tem de ter a extensão .csv .</p>
+										<p>2. Consegues isso guardando o ficheiro no excel, produrando esse formato na lista de possíveis formatos.</p>
+										<p>3. A primeira linha do ficheiro está guardada para o nome dos atributos.</p>
+										<p>4. São necessários os seguintes atributos, para inserir um Plot: <strong>siteCode</strong>, <strong>plotCode</strong>, <strong>coordinateX</strong>, <strong>coordinateY</strong>.</p>
+										<p>5. Existe um ficheiro de referência para eventuais dúvidas que possam existir.</p>
+									</div>
+								</div>
+							</div>
+			        	</div>
+			    	</div>
+			    </div>
+
+	  		</div>
+	    </div>
+
+
+	    <script>
+	    	function validateForm(){
+	    		var campaign = $('#sampling_campaign_id').val();
+	    		var file = $('#file').val();
+	    		var hasErrors = false;
+
+	    		if(campaign == "none" ) {
+	    			hasErrors = true;
+	    			$('#campaignsInputGroup').addClass('has-error');
+	    		} else {
+	    			$('#campaignsInputGroup').removeClass('has-error');
+	    		}
+
+	    		if(file == "" ) {
+	    			hasErrors = true;
+	    			$('#fileInputGroup').addClass('has-error');
+	    		} else {
+	    			$('#fileInputGroup').removeClass('has-error');
+	    		}
+
+
+	    		if (hasErrors){
+	    			$('#alert-message').show();
+			        $('#alert-message').addClass('danger');
+			        $('#alert-text').html("<strong>Shit could happen!</strong> Faltam parâmetros à campanha!");
+	    			return false;
+	    		} else {
+	    			return true;
+	    		}
+
+	    	}
+	    </script>
+
+	</body>
+</html>

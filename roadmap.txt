@@ -3,16 +3,28 @@
 
 
  	» CLASSES
- 		* transformar todos os ficheiros de data em classes (seguir o exemplo do user);
+ 		* transformar todos os ficheiros de data em classes (seguir o exemplo do user); - DONE
+ 		* ecoFisio_data - DONE
 
  	» FRONTEND
 
- 		* no formulário de plots reverter para as selects originais.
+ 		* no formulário de plots reverter para as selects originais. - DONE
+ 		* formulário de inserção de medições eco-fisio. - DONE
+ 		* assinalar número de ecofisio de um indivíduo. - DONE
+ 		* não deixar remover indivíduos que tenham eco-fisio. - DONE
+ 		* mostrar gráfico de eco-fisio de um indivíduo. - DONE
+
+ 		* validar login recorrendo também ao timestamp - DONE
+ 		* listagem de amostragens - DONE
+ 		* edição de amostragem de ecoFisio
+ 			* para regressar ao local correcto da listagem de ecoFisio, tenho de colocar um hidden no formulário de edição com os parâmetros de filtragem do url anterior (não estou a ver outra forma de lá chegar).
+ 		* remoção de amostragem de ecoFisio - DONE
 
 		
 	» DADOS
 
-		* testar os gráficos do google
+		* EcoFisio - validar na inserção por .csv a existência do indivíduo - DONE
+		* testar os gráficos do google - DONE
 			* testar o ajuste da interface com o javascript
 			* testar a criação dos gráficos com a APi do google
 

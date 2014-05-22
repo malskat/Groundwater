@@ -9,7 +9,6 @@
 
     <title>Projecto Ground Water</title>
 
-
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <!-- Bootstrap core CSS -->
@@ -67,9 +66,9 @@
 			  }
 			}
 
-			$individuals = $individualData->getIndividualBy($whereClause, isset($_GET["page"]) ? $_GET["page"] : 0);
+			$individuals = $individualData->getIndividualBy($whereClause, isset($_GET["page"]) ? $_GET["page"] : 0, $withTotals = 1);
 		} else {
-			  $individuals = $individualData->getIndividualPlotSpecies(isset($_GET["page"]) ? $_GET["page"] : 0);
+			  $individuals = $individualData->getIndividualPlotSpecies(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotals = 1);
 		}
 
 		$fields = $individualData->getIndividualFieldsListConf();
@@ -151,27 +150,47 @@
             <tbody>
           		<?
                 if(count($individuals) > 1) {
-             			foreach ($individuals as $individual) {
-                    if(isset($individual->individualCode)){
-               				echo '<tr>
-      	            	    <td>' . $individual->individualCode . '</td>
-      	                	<td>' . (isset($individual->fenologicalType) && $individual->fenologicalType != "" ? $individual->fenologicalType : 'ND' ) . '</td>
-      	                  	<td>' . $individual->genus . ' - ' . $individual->species . '</td>
-                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>
-      	                  	<td>' . (isset($individual->coordinateX) && $individual->coordinateX != "" && $individual->coordinateX !== "-1"? $individual->coordinateX : "N.D.") . '</td>
-                            <td>' . (isset($individual->coordinateY) && $individual->coordinateY != "" && $individual->coordinateY !== "-1"? $individual->coordinateY : "N.D.") . '</td>
-      	                  	<td>
-      	                  		<button onclick="location.href=\'../forms/individual.html?individualCode=' . $individual->individualCode . '\'" type="button" class="btn btn-primary btn-xs">
-      	                  			<span class="glyphicon glyphicon glyphicon-edit"></span>
-      	                  		</button>
-      	                  	</td>
-                            <td>
-                              <button onclick="beginDelete(\'action=delete&class=individual&id=' . $individual->individualCode . '\', \'Queres mesmo remover este Indivíduo?\');" type="button" class="btn btn-danger btn-xs">
-                                <span class="glyphicon glyphicon-remove-sign"></span>
-                              </button>
-                            </td>
-      	                </tr>';
-                    }
+             		foreach ($individuals as $individual) {
+	                    if(isset($individual->individualCode)){
+	               			echo '<tr>
+	      	            	    <td>' . $individual->individualCode . '</td>
+	      	                	<td>' . (isset($individual->fenologicalType) && $individual->fenologicalType != "" ? $individual->fenologicalType : 'ND' ) . '</td>
+	      	                  	<td>' . $individual->genus . ' - ' . $individual->species . '</td>
+	                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>
+	      	                  	<td>' . (isset($individual->coordinateX) && $individual->coordinateX != "" && $individual->coordinateX !== "-1"? $individual->coordinateX : "N.D.") . '</td>
+	                            <td>' . (isset($individual->coordinateY) && $individual->coordinateY != "" && $individual->coordinateY !== "-1"? $individual->coordinateY : "N.D.") . '
+	                            </td>';
+	                        
+	                        //eco-fisio
+	                        if ($individual->totalEcoFisio > 0) {
+	                        	echo '<td>
+	                            		<a href="../lists/ecoFisio-list.html?individualCode=' . $individual->individualCode .  '"><span class="badge">' . $individual->totalEcoFisio . '</span></a>
+										</td>';
+	                        } else {
+	                        	echo '<td>
+		                            	<span class="badge">' . $individual->totalEcoFisio . '</span>
+									</td>';
+	                        }
+
+	                            
+	      	                echo '<td>
+	      	                  		<button onclick="location.href=\'../forms/individual.html?individualCode=' . $individual->individualCode . '\'" type="button" class="btn btn-primary btn-xs">
+	      	                  			<span class="glyphicon glyphicon glyphicon-edit"></span>
+	      	                  		</button>
+	      	                  	</td>';
+	  	                  	if ($individual->totalEcoFisio == 0) {
+	                            echo '<td>
+	                              <button onclick="beginDelete(\'action=delete&class=individual&id=' . $individual->individualCode . '\', \'Queres mesmo remover este Indivíduo?\');" type="button" class="btn btn-danger btn-xs">
+	                                <span class="glyphicon glyphicon-remove-sign"></span>
+	                              </button>
+	                            </td>';
+	                      	} else {
+	                      		echo '<td>
+	                      				<span id="removeTooltip_' . $individual->individualCode . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="Tem amostragens associadas">É melhor não</span> 
+	                      			</td>';
+	                      	}
+	      	                echo '</tr>';
+	                    }
                		}
                 } else {
                   echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>'; 
@@ -233,6 +252,17 @@
         <div class="col-xs-4 col-lg-4"></div>
       </div>
     </div>
+
+
+    <script>
+    <?
+	    foreach ($individuals as $individual) {
+	    	if (isset($individual->individualCode) && $individual->totalEcoFisio > 0) {
+		    	echo "$('#removeTooltip_" . $individual->individualCode . "').tooltip({trigger: 'hover'});";
+	    	}
+	    }
+	?>
+    </script>
 
 
   </body>

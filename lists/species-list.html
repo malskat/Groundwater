@@ -27,9 +27,6 @@
   </head>
 
   <body>
-  	<script>
-  		$('#notRemoveTooltip').tooltip({ trigger: "hover" });
-  	</script>
   	<? 
   		include "../data/species_data.php";
 
@@ -109,15 +106,19 @@
 							        <td>' . $specie->species . '</td>
 							        <td>' . $specie->type . '</td>
 							        <td>' .$specie->code . '</td>
-							        <td>' .$specie->functionalGroup . '</td>
-							        <td><a href="individual-list.html?species=' . $specie->species_id .  '"><span class="badge">' . $specie->totalIndividuals . '</span></a>
-							        </td>
-							        <td>
-							          	<button onclick="location.href=\'../forms/species.html?species_id=' . $specie->species_id . '\'" type="button" class="btn btn-primary btn-xs">
-							          			<span class="glyphicon glyphicon-edit"></span>
-							          	</button>
-							        </td> 
-							        <td>';
+							        <td>' .$specie->functionalGroup . '</td>';
+							if ($specie->totalIndividuals > 0) {
+								echo '<td><a href="individual-list.html?species=' . $specie->species_id .  '"><span id="accessTooltip_' . $specie->species_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os indivíduos" class="badge">' . $specie->totalIndividuals . '</span></a></td>';
+							} else {
+								echo '<td><span class="badge">' . $specie->totalIndividuals . '</span></td>';
+							}
+							
+						    echo '<td>
+						          	<button onclick="location.href=\'../forms/species.html?species_id=' . $specie->species_id . '\'" type="button" class="btn btn-primary btn-xs">
+						          			<span class="glyphicon glyphicon-edit"></span>
+						          	</button>
+						        </td> 
+						        <td>';
 						   
 					        if ($specie->totalIndividuals == 0) {
 						        echo '<button onclick="beginDelete(\'action=delete&class=species&id=' . $specie->species_id . '\',\'Queres mesmo remover esta Espécie?\');" type="button" class="btn btn-danger btn-xs">
@@ -194,6 +195,9 @@
 	    foreach ($species as $specie) {
 	    	if (isset($specie->species_id) && $specie->totalIndividuals > 0) {
 		    	echo "$('#removeTooltip_" . $specie->species_id . "').tooltip({trigger: 'hover'});";
+		    	if ($specie->totalIndividuals > 0) {
+		    		echo "$('#accessTooltip_" . $specie->species_id . "').tooltip({trigger: 'hover'});";
+		    	}
 	    	}
 	    }
 	?>

@@ -4,6 +4,7 @@ class Season {
 
 	const TOTAL_ROWS_SEASON = 10;
 	const ORDER_BY_SEASON = 's.season_id';
+	const DB_ENTITY_NAME = 'season';
 
 	function getSeasonFieldsListConf(){
 
@@ -53,7 +54,7 @@ class Season {
 		$values = substr($values, 0, -2);
 
 
-		return insertDB('season',   $fields, $values);
+		return insertDB(Season::DB_ENTITY_NAME,   $fields, $values);
 
 	}
 
@@ -72,13 +73,13 @@ class Season {
 		$where = '`season_id` = ' . $toUpdate["season_id"];
 
 
-		return updateDB('season', $set, $where);
+		return updateDB(Season::DB_ENTITY_NAME, $set, $where);
 	}
 
 	function delete_season($where){
 
 		require_once '../core/core_database.php';
 
-		return deleteDB('season', $where);
+		return deleteDB(Season::DB_ENTITY_NAME, $where);
 	}
 }

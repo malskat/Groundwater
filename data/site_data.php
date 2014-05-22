@@ -3,6 +3,7 @@
 class Site {
 
 	const TOTAL_ROWS_SITE = 10;
+	const DB_ENTITY_NAME = 'site';
 
 	function getSiteFieldsListConf(){
 
@@ -22,7 +23,7 @@ class Site {
 	function getSiteBy($whereClause, $page = 0){
 
 		include_once '../core/core_database.php';
-		$query = 'Select s.* From site s Where ' . $whereClause;
+		$query = 'Select SQL_CALC_FOUND_ROWS s.* From site s Where ' . $whereClause;
 		return selectDBQuery($query, self::TOTAL_ROWS_SITE, $page);
 
 	}
@@ -49,7 +50,7 @@ class Site {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return insertDB('site',   $fields, $values);
+		return insertDB(Site::DB_ENTITY_NAME,   $fields, $values);
 
 	}
 
@@ -71,7 +72,7 @@ class Site {
 		$set = substr($set, 0, -2);
 		$where = '`site_id` = ' . $toUpdate["site_id"];
 
-		return updateDB('site', $set, $where);
+		return updateDB(Site::DB_ENTITY_NAME, $set, $where);
 
 	}
 
@@ -79,6 +80,6 @@ class Site {
 
 		require_once '../core/core_database.php';
 
-		return deleteDB('site', $where);
+		return deleteDB(Site::DB_ENTITY_NAME, $where);
 	}
 }

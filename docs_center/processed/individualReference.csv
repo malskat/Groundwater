@@ -1,3 +1,4 @@
-siteCode;plotCode;Genus;Species;individualCode;coordinateX;coordinateY;fenologicalType;
-SOB;L1;Daphne;gnidium;teste;12,2;124.1;teste1;
-SOB;L1;Daphne;gnidium;teste1;12,2;124.1;teste2;
+siteCode;plotCode;Genus;Species;individualCode;coordinateX;coordinateY;FenelogicalType
+SU;L1;Cistus;libanotis;EXERCISE1;12,2;124.1;teste1;
+SU;L1;Erica;scoparia;EXERCISE2;12,2;124.1;teste2;
+SU;L1;Halimium;calycinum;EXERCISE3;12,2;124.1;teste2;
