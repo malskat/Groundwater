@@ -43,7 +43,7 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 
 	  	if($extension != 'csv'){
 			header('Location: ' . PROJECT_URL . 'forms/plot-csv.html?success=-1&reason=Ficheiro tem de ser csv.');
-	  	} else if (file_exists(PROJECT_DOCS_CENTER . $_FILES["file"]["name"])){
+	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
 			header('Location: ' . PROJECT_URL . 'forms/plot-csv.html?success=-1&reason=Ficheiro ja foi processado.');
 	  	}else{
 			//mover o ficheiro da pasta temporaria

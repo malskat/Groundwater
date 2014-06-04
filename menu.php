@@ -47,7 +47,7 @@
     } else if (params["success"] == 1) {
       	$('#alert-message').show();
       	$('#alert-message').addClass('success');
-      	$('#alert-text').html("<strong>Holy guacamole!</strong> Registo criado/alterado com sucesso." + (params["inserted"] != null && params["inserted"] != "" ? " Foram inseridos: " + params["inserted"] + " registos." : ""));
+      	$('#alert-text').html("<strong>Holy guacamole!</strong> Registo criado/alterado com sucesso." + (params["inserted"] != null && params["inserted"] != "" ? " Foram inseridos/actualizados: " + params["inserted"] + " registos." : ""));
     } else if (params["success"] == 2) {
       	$('#alert-message').show();
       	$('#alert-message').addClass('success');
@@ -116,7 +116,7 @@
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
-			    <li><a href=<?= PROJECT_URL . "forms/ecoFisio-csv.html"?>>Inserir por CSV</a></li>
+			    <li><a href=<?= PROJECT_URL . "forms/ecoFisio-csv.html"?>>Actualizar por CSV</a></li>
 			  </ul>
 			</li>
 		<?

@@ -60,14 +60,24 @@
 		<div class="row">
 			<div class="col-xs-12 col-lg-12">
 		        <div class="panel panel-primary">
-		        	<div class="panel-heading">
-					   <h3 class="panel-title"><?= (isset($individual) ? "Editar Indíviduo" : "Inserir Indíviduo") ?></h3>
+		        	<div class="panel-heading clearfix">
+				   		<h3 class="panel-title pull-left"><?= (isset($individual) ? "Editar Indíviduo" : "Inserir Indíviduo") ?></h3>
+				   		<div class="btn-group pull-right">
+							<button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+								Amonstragens <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="../lists/ecoFisio-list.html?individualCode=<?=$individual[0]->individualCode?>"><strong>Temporal Overview</strong></a></li>
+								<li><a href="#"><strong>Leaf 13C and PI / Xylem 18O</strong></a></li>
+								<li><a href="#"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
+							</ul>
+						</div>
 					</div>
 			        <div class="panel-body">
 						<div class="col-xs-8 col-lg-8">
 				        	<form class="form-horizontal" role="form" name="form_siteindividual_data" action="../services/individualSubmissionData.php" onsubmit="return validateForm();" method="post">
 
-						        <input type="hidden" value="form" name="submissionType" >
+						        <input type="hidden" value="form" name="submissionType">
 						     	<input type="hidden" value=<?= (isset($individual) ? '"edit"' : '"insert"')?> name="operationType" >
 
 						    	<div id="individualCodeInputGroup" class="form-group">
@@ -77,9 +87,9 @@
 						      		</div>
 						    	</div>
 						    	<div class="form-group">
-						      	<label for="inputGenus" class="col-lg-3 control-label">Fenological Type</label>
+						      	<label for="inputGenus" class="col-lg-3 control-label">Phenological Type</label>
 						      	<div class="col-lg-4">
-						        	<input type="text" class="form-control" id="fenologicalType" name="fenologicalType" placeholder="" value=<?= (isset($individual) ? '"' . $individual[0]->fenologicalType . '"' : "") ?>>
+						        	<input type="text" class="form-control" id="phenologicalType" name="phenologicalType" placeholder="" value=<?= (isset($individual) ? '"' . $individual[0]->phenologicalType . '"' : "") ?>>
 						      	</div>
 						    	</div>
 						    	<div id="plotInputGroup" class="form-group">

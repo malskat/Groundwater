@@ -43,7 +43,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 	  	if($extension != 'csv'){
 			header('Location: ' . PROJECT_URL . 'forms/individual-csv.html?success=-1&reason=Ficheiro tem de ser csv!');
-	  	} else if (file_exists(PROJECT_DOCS_CENTER . $_FILES["file"]["name"])){
+	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
 			header('Location: ' . PROJECT_URL . 'forms/individual-csv.html?success=-1&reason=Ficheiro ja foi processado!');
 	  	} else {
 			//mover o ficheiro da pasta temporaria
@@ -65,45 +65,52 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		       		//inserir na BD
 			        if ($row > 1) {
 
-		        		$toInsert = array();
-		        		$site = $siteData->getSiteBy("code = '". $data[0]."'", -1);
-		        		if (count($site) == 1) {
+			    		//validar se o individuo ja esta inserido
+			    		$individual = $individualData->getIndividualBy(" individualCode = '" . $data[4] . "'", $page = -1);
+			    		if (count($individual) == 0) {
 
-		        			$plot = $plotData->getPlotBy("s.site_id = " . $site[0]->site_id . " and p.code = '" . $data[1] . "'", -1);
-		        			if (count($plot) == 1) {
+			        		$toInsert = array();
+			        		$site = $siteData->getSiteBy("code = '". $data[0]."'", -1);
+			        		if (count($site) == 1) {
 
-		        				$species = $speciesData->getSpeciesBy("upper(genus) = upper('". $data[2]."') and upper(species) = upper('" . $data[3] . "')", -1);
-			        			
-			        			if (count($species) == 1) {
+			        			$plot = $plotData->getPlotBy("s.site_id = " . $site[0]->site_id . " and upper(p.code) = upper('" . $data[1] . "')", -1);
+			        			if (count($plot) == 1) {
 
-			        				$toInsert['plot_id'] = $plot[0]->plot_id;
-					        		$toInsert['species_id'] = $species[0]->species_id;
-						        	$toInsert['individualCode'] = $data[4];
-						        	$toInsert['coordinateX'] = $data[5];
-						        	$toInsert['coordinateY'] = $data[6];
-						        	
-						        	if ($data[7] != 'ND') {
-						        		$toInsert['fenologicalType'] = $data[7];
-						        	}
+			        				$species = $speciesData->getSpeciesBy("upper(genus) = upper('". $data[2]."') and upper(species) = upper('" . $data[3] . "')", -1);
+				        			
+				        			if (count($species) == 1) {
 
-									if($individualData->insertIndividual($toInsert) == 1) {
-										$inserted++;
-									}
+				        				$toInsert['plot_id'] = $plot[0]->plot_id;
+						        		$toInsert['species_id'] = $species[0]->species_id;
+							        	$toInsert['individualCode'] = $data[4];
+							        	$toInsert['coordinateX'] = $data[5];
+							        	$toInsert['coordinateY'] = $data[6];
+							        	
+							        	if ($data[7] != 'ND') {
+							        		$toInsert['phenologicalType'] = $data[7];
+							        	}
 
-			  					} else{
-			        				$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': espécie não foi encontrada; <br />';
+										if($individualData->insertIndividual($toInsert) == 1) {
+											$inserted++;
+										}
+
+				  					} else {
+				        				$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': espécie não foi encontrada; <br />';
+				        			}
+
+			        			} else {
+			        				$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': plot não foi encontrado; <br />';
 			        			}
 
-		        			} else {
-		        				$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': plot não foi encontrado; <br />';
-		        			}
+			        			
+			        		}else {
+			        			$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': local não foi encontrado; <br />';
+			        		}
 
-		        			
-		        		}else{
+			    		} else {
+			    			$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': já existe na BD; <br />';
+			    		}
 
-		        			$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': local não foi encontrado; <br />';
-
-		        		}
 			        }
 
 			        $row++;

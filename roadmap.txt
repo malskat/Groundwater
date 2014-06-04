@@ -8,28 +8,23 @@
 
  	» FRONTEND
 
- 		* no formulário de plots reverter para as selects originais. - DONE
- 		* formulário de inserção de medições eco-fisio. - DONE
- 		* assinalar número de ecofisio de um indivíduo. - DONE
- 		* não deixar remover indivíduos que tenham eco-fisio. - DONE
- 		* mostrar gráfico de eco-fisio de um indivíduo. - DONE
-
- 		* validar login recorrendo também ao timestamp - DONE
- 		* listagem de amostragens - DONE
+ 		* formulário de inserção de medições eco-fisio. 
+ 		* mostrar gráficos de eco-fisio de um indivíduo (leaf, leaf/twig...).
+ 		* listagem de amostragens por bloco
  		* edição de amostragem de ecoFisio
- 			* para regressar ao local correcto da listagem de ecoFisio, tenho de colocar um hidden no formulário de edição com os parâmetros de filtragem do url anterior (não estou a ver outra forma de lá chegar).
- 		* remoção de amostragem de ecoFisio - DONE
 
 		
 	» DADOS
 
-		* EcoFisio - validar na inserção por .csv a existência do indivíduo - DONE
-		* testar os gráficos do google - DONE
-			* testar o ajuste da interface com o javascript
-			* testar a criação dos gráficos com a APi do google
+		* login - não permitir a alteracao do email de um utilizador;
+		* inserir Eco-Fisios reais;
 
 	
 	» Melhoramentos
+
+ 		* colocar fontawesome no menu;
+ 		* edição de todos os elementos: quando terminar fica no mesmo local e mostra a mensagem de sucesso no formulário;
+ 		* listagens - empurrar o botão de inserir o mais para a direita possível. - DONE
 
  	
 

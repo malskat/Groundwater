@@ -29,6 +29,7 @@
   <body>
 
     <? 
+		include "../data/site_data.php";
 		include "../data/species_data.php";
 		include "../data/plot_data.php"; 
   		include "../data/individual_data.php";
@@ -37,16 +38,26 @@
     	$individuals = array();
       	$getParameters = "";
 
-		if(isset($_GET["plot"]) || isset($_GET["species"]) || isset($_GET["individualCode"])){
+		if(isset($_GET["site"]) || isset($_GET["plot"]) || isset($_GET["species"]) || isset($_GET["individualCode"])) {
 
 			$whereClause = "";
 
-			if(isset($_GET["plot"])){
-			   $whereClause .= "i.plot_id = " . $_GET["plot"];
-			   $getParameters .= "plot=" . $_GET["plot"];
+			if (isset($_GET["site"])) {
+				$whereClause .= "st.site_id = " . $_GET["site"];
+			   $getParameters .= "site=" . $_GET["site"];
 			}
 
-			if(isset($_GET["species"])){
+			if (isset($_GET["plot"])) {
+				if ($whereClause != "") {
+			   		$whereClause .= " and i.plot_id = " . $_GET["plot"];
+					$getParameters .= "&plot=" . $_GET["plot"];
+				} else {
+			   		$whereClause .= " i.plot_id = " . $_GET["plot"];
+			   		$getParameters .= "plot=" . $_GET["plot"];
+				}
+			}
+
+			if (isset($_GET["species"])) {
 			  if ($whereClause != "") {
 			    $whereClause .= " and i.species_id = " . $_GET["species"];
 			    $getParameters .= "&species=" . $_GET["species"];
@@ -56,7 +67,7 @@
 			  }
 			}
 
-			if(isset($_GET["individualCode"])){
+			if (isset($_GET["individualCode"])) {
 			  if ($whereClause != "") {
 			    $whereClause .= " and upper(i.individualCode) like upper('%" . $_GET["individualCode"] . "%')";
 			    $getParameters .= "individualCode=" . $_GET["individualCode"];
@@ -73,11 +84,18 @@
 
 		$fields = $individualData->getIndividualFieldsListConf();
 
-		$speciesData = new Species();
-		$species = $speciesData->getSpecies(-1);
+		$siteData = new Site();
+		$sites = $siteData->getSites(-1);
 
 		$plotData = new PLot();
-		$plots = $plotData->getPlotsSite(-1);
+		if (isset($_GET["site"])) {
+			$plots = $plotData->getPlotBy(' s.site_id = ' . $_GET["site"] , $page = -1);
+		} else {
+			$plots = $plotData->getPlotsSite(-1);
+		}
+
+		$speciesData = new Species();
+		$species = $speciesData->getSpecies(-1);
   	?>
   	
     <!-- incluir menu principal -->
@@ -99,14 +117,22 @@
             <input type="hidden" value="search" name="action">
             <input type="hidden" value="individual" name="class">
             <div class="form-group">
-              <select name="plot" class="form-control input-sm">
-                <option value="none">Plot</option>
-                <?
-                  foreach($plots as $plot){
-                    echo '<option ' . ($plot->plot_id == $_GET["plot"] ? 'selected' : '') . ' value="' . $plot->plot_id . '">' . $plot->title . " - " . $plot->code . '</option>';
-                  }
-                ?>
-              </select>
+				<select name="site" class="form-control input-sm">
+					<option value="none">Site</option>
+					<?
+					foreach($sites as $site){
+						echo '<option ' . ($site->site_id == $_GET["site"] ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
+					}
+					?>
+				</select>
+				<select name="plot" class="form-control input-sm">
+					<option value="none">Plot</option>
+					<?
+					  foreach($plots as $plot){
+					    echo '<option ' . ($plot->plot_id == $_GET["plot"] ? 'selected' : '') . ' value="' . $plot->plot_id . '">' . $plot->title . " - " . $plot->code . '</option>';
+					  }
+					?>
+				</select>
             </div>
             <div class="form-group">
               <select name="species" class="form-control input-sm">
@@ -126,7 +152,7 @@
         </div>
         <div class="col-xs-6 col-lg-2"> 
           <!-- insercao -->
-          <button class="btn btn-primary btn-sm" onclick="location.href='../forms/individual.html'">Inserir Indivíduo</button>
+          <button class="btn btn-primary btn-sm pull-right" onclick="location.href='../forms/individual.html'">Inserir Indivíduo</button>
         </div>
       </div>
     </div>
@@ -154,12 +180,9 @@
 	                    if(isset($individual->individualCode)){
 	               			echo '<tr>
 	      	            	    <td>' . $individual->individualCode . '</td>
-	      	                	<td>' . (isset($individual->fenologicalType) && $individual->fenologicalType != "" ? $individual->fenologicalType : 'ND' ) . '</td>
+	      	                	<td>' . (isset($individual->phenologicalType) && $individual->phenologicalType != "" ? $individual->phenologicalType : 'ND' ) . '</td>
 	      	                  	<td>' . $individual->genus . ' - ' . $individual->species . '</td>
-	                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>
-	      	                  	<td>' . (isset($individual->coordinateX) && $individual->coordinateX != "" && $individual->coordinateX !== "-1"? $individual->coordinateX : "N.D.") . '</td>
-	                            <td>' . (isset($individual->coordinateY) && $individual->coordinateY != "" && $individual->coordinateY !== "-1"? $individual->coordinateY : "N.D.") . '
-	                            </td>';
+	                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>';
 	                        
 	                        //eco-fisio
 	                        if ($individual->totalEcoFisio > 0) {

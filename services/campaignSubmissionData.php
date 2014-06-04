@@ -3,8 +3,6 @@
 require_once '../config/constants.php';
 require_once '../data/campaign_data.php';
 
-var_dump($_POST);
-
 if(isset($_POST["startDate"]) && $_POST["startDate"] != "" && isset($_POST["endDate"]) && $_POST["endDate"] != "" 
 	&& isset($_POST["designation"]) && $_POST["designation"] != "" 
 	&& isset($_POST["season_id"]) && $_POST["season_id"] != ""

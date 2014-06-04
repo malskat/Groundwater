@@ -7,7 +7,7 @@ $action = (isset($_GET["action"]) ? $_GET["action"] : $_POST["action"]);
 switch($action){
 	case "delete" : {
 		require_once "../data/" . $_GET["class"] ."_data.php";
-	
+		
 		//chamada dinamica da funcao
 		$instance = new $_GET["class"];
 		$deleteFunction = "delete_" . $_GET["class"];
