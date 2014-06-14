@@ -38,9 +38,9 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Projecto Groundwater</h1>
-			<p>Monitorização dos lençóis freáticos.</p>
-			<p>Por Cristina Antunes.</p>
+			<h1 class="text-center">GWTropiMed</h1>
+			<p class="text-center">Costal dune forests under scenarios of groundwater limitations: from tropics to mediterranean.</p>
+			<p class="text-center">Por Cristina Antunes.</p>
 		</div>
 	</div>
 
@@ -62,7 +62,7 @@
 
     <script>
       var params = getQueryParams(window.location.search);
-      if (params["sucess"] < 0){
+      if (params["sucess"] < 0){	
 
         if(params["sucess"] == -3){
             $('#alert-message').show();

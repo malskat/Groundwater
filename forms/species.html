@@ -30,6 +30,11 @@
 
         $speciesData = new Species();        
         $specieObj = $speciesData->getSpeciesBy("species_id = " . $_GET["species_id"], -1);
+
+        $backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
+  		if (false === strpos($backUrl, 'species-list')) {
+			$backUrl = '../lists/species-list.html';
+  		} 
       }
     ?>
 
@@ -94,7 +99,7 @@
 
     							<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
     								<div class="text-center">
-    									<button onclick="location.href='../lists/species-list.html'" type="button" class="btn btn-xs">Cancelar</button>
+    									<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
     									<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
     								</div>
     							</div>

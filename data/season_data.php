@@ -1,14 +1,15 @@
 <?php
 
-class Season {
+require_once '/gObject.php';
 
-	const TOTAL_ROWS_SEASON = 10;
-	const ORDER_BY_SEASON = 's.season_id';
-	const DB_ENTITY_NAME = 'season';
+class Season extends gObject {
 
-	function getSeasonFieldsListConf(){
 
-		return array("#", "Código", "Início (Europa)", "Fim (Europa)", "#Campanhas");
+	function __construct (){
+		$this->_entityName = 'season';
+		$this->_fieldList = array("#", "Código", "Início (Europa)", "Fim (Europa)", "#Campanhas");
+		$this->_totalRows = 10;
+		$this->_orderBy = 's.' . $this->_entityName . '_id';
 	}
 
 	function getSeasons($page = 0, $withTotalCampaings = 0){
@@ -19,8 +20,8 @@ class Season {
 				' From season s ' .
 				($withTotalCampaings == 1 ? ' Left Join sampling_campaign sc On sc.season_id = s.season_id ' : '') . 
 				($withTotalCampaings == 1 ? ' Group by s.season_id ' : '') .
-				' Order by ' . self::ORDER_BY_SEASON;
-		return selectDBQuery($query, self::TOTAL_ROWS_SEASON, $page);
+				' Order by ' . $this->_orderBy;
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 	}
 
 	function getSeasonBy($whereClause, $page = 0, $withTotalCampaings = 0){
@@ -31,8 +32,8 @@ class Season {
 				' From season s ' .
 				($withTotalCampaings == 1 ? ' Left Join sampling_campaign sc On cs.season_id = s.season_id ' : '') . 
 				' Where ' . $whereClause . ($withTotalCampaings == 1 ? ' Group by s.season_id ' : '') .
-				 ' Order By ' . self::ORDER_BY_SEASON;
-		return selectDBQuery($query, self::TOTAL_ROWS_SEASON, $page);
+				 ' Order By ' . $this->_orderBy;
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
@@ -54,7 +55,7 @@ class Season {
 		$values = substr($values, 0, -2);
 
 
-		return insertDB(Season::DB_ENTITY_NAME,   $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName,   $fields, $values);
 
 	}
 
@@ -73,13 +74,7 @@ class Season {
 		$where = '`season_id` = ' . $toUpdate["season_id"];
 
 
-		return updateDB(Season::DB_ENTITY_NAME, $set, $where);
+		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 	}
 
-	function delete_season($where){
-
-		require_once '../core/core_database.php';
-
-		return deleteDB(Season::DB_ENTITY_NAME, $where);
-	}
 }

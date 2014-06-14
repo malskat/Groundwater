@@ -40,6 +40,11 @@
   			$plotData = new Plot();
 			$plot = $plotData->getPlotBy("plot_id = " . $_GET["plot_id"], -1);
   		}
+
+  		$backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
+  		if (false === strpos($backUrl, 'plot-list')) {
+			$backUrl = '../lists/plot-list.html';
+  		} 
 	?>
 
   	<!-- incluir menu principal -->
@@ -130,7 +135,7 @@
 
 								<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 									<div class="text-center">
-										<button onclick="location.href='../lists/plot-list.html'" type="button" class="btn btn-xs">Cancelar</button>
+										<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
 										<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
 									</div>
 								</div>

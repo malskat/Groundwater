@@ -1,14 +1,14 @@
 <?php
 
-class Campaign {
+require_once '/gObject.php';
 
-	const TOTAL_ROWS_CAMPAIGN = 10;
-	const ORDER_BY_CAMPAIGN = 'sampling_campaign_id';
-	const DB_ENTITY_NAME = 'sampling_campaign';
+class Campaign extends gObject {	
 
-	function getCampaignFieldsListConf(){
-
-		return array("#", "Título", "Local", "Época", "Início", "Fim");
+	function __construct (){
+		$this->_entityName = 'sampling_campaign';
+		$this->_fieldList = array("#", "Título", "Local", "Época", "Início", "Fim");
+		$this->_totalRows = 10;
+		$this->_orderBy = $this->_entityName . '_id';
 	}
 
 	function getCampaigns($page = 0){
@@ -18,8 +18,8 @@ class Campaign {
 					From sampling_campaign sc
 					Join site s On s.site_id = sc.site_id
 					Join season se On se.season_id = sc.season_id 
-					Order By ' . Campaign::ORDER_BY_CAMPAIGN;
-		return selectDBQuery($query, Campaign::TOTAL_ROWS_CAMPAIGN, $page);
+					Order By sc.' . $this->_orderBy; 
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 	}
 
 	function getCampaignBy($whereClause, $page = 0){
@@ -30,8 +30,8 @@ class Campaign {
 					Join site s On s.site_id = sc.site_id
 					Join season se On se.season_id = sc.season_id 
 					Where ' . $whereClause . '
-					Order By ' . Campaign::ORDER_BY_CAMPAIGN;
-		return selectDBQuery($query, Campaign::TOTAL_ROWS_CAMPAIGN, $page);
+					Order By sc.' . $this->_orderBy;
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
@@ -52,7 +52,7 @@ class Campaign {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return insertDB(Campaign::DB_ENTITY_NAME, $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName, $fields, $values);
 	}
 
 
@@ -71,14 +71,14 @@ class Campaign {
 		$where = '`sampling_campaign_id` = ' . $toUpdate["sampling_campaign_id"];
 
 
-		return updateDB(Campaign::DB_ENTITY_NAME, $set, $where);
+		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 	}
 
-	function delete_campaign($where){
+	function delete($where){
 
 		require_once '../core/core_database.php';
 		$where = str_replace("campaign", "sampling_campaign", $where);
 		
-		return deleteDB(Campaign::DB_ENTITY_NAME, $where);
+		return CoreDatabase::deleteDB($this->_entityName, $where);
 	}
 }

@@ -28,7 +28,7 @@
 
   		$seasonData = new Season();
   		$seasons = $seasonData->getSeasons(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalCampaigns = 1); 
-  		$fields = $seasonData->getSeasonFieldsListConf();
+  		$fields = $seasonData->getFieldList();
   	?>
   	
     <!-- incluir menu principal -->
@@ -81,9 +81,9 @@
 		                        <td>' . $season->endDate . '</td>';
 
 		                        if ($season->totalCampaigns > 0) {
-	                          		echo '<td><a href="campaign-list.html?season=' . $season->season_id .  '"><span id="accessTooltip_' . $season->season_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres as campanhas" class="badge">' . $season->totalCampaigns . '</span></a>';
+	                          		echo '<td><a href="campaign-list.html?season=' . $season->season_id .  '"><span id="accessTooltip_' . $season->season_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres as campanhas" class="label label-default">' . $season->totalCampaigns . '</span></a>';
 		                        } else {
-		                        	echo '<td><span class="badge">' . $season->totalCampaigns . '</a>';
+		                        	echo '<td><span class="label label-default">' . $season->totalCampaigns . '</a>';
 		                        }
 
 	                          	echo '</td>
@@ -123,8 +123,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($seasons[0]->totalRecords % Season::TOTAL_ROWS_SEASON) > 0 ? 1 : 0);
-                $nPages = floor($seasons[0]->totalRecords / Season::TOTAL_ROWS_SEASON) + $addPage;
+                $addPage = (($seasons[0]->totalRecords % $seasonData->getTotalRows()) > 0 ? 1 : 0);
+                $nPages = floor($seasons[0]->totalRecords / $seasonData->getTotalRows()) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

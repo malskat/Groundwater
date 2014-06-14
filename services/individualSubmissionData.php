@@ -7,31 +7,35 @@ require_once '../data/plot_data.php';
 require_once '../data/species_data.php';
 
 
-if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
+if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
-	if(isset($_POST["individualCode"]) && $_POST["individualCode"] != "" && isset($_POST["coordinateX"]) && $_POST["coordinateX"] != ""
+	if (isset($_POST["individualCode"]) && $_POST["individualCode"] != "" && isset($_POST["coordinateX"]) && $_POST["coordinateX"] != ""
 		&& isset($_POST["coordinateY"]) && $_POST["coordinateY"] != "" && isset($_POST["plot_id"]) && $_POST["plot_id"] != ""
-		 && isset($_POST["species_id"]) && $_POST["species_id"] != ""){
+		 && isset($_POST["species_id"]) && $_POST["species_id"] != "") {
 
 		unset($_POST["submissionType"]);
 
 		$individualData = new Individual();
 
-		if($_POST["operationType"] == 'insert'){
+		if ($_POST["operationType"] == 'insert') {
 			unset($_POST["operationType"]);
-			$success = $individualData->insertIndividual($_POST);
+			$reply = $individualData->insertIndividual($_POST);
 		}else {
 			unset($_POST["operationType"]);
-			$success = $individualData->updateIndividual($_POST);
+			$reply = $individualData->updateIndividual($_POST);
 		}
+
+
+		$urlComplement = '&individualCode=' . $_POST["individualCode"];
+
 		
-		if($success == 1){
-			header('Location: ' . PROJECT_URL . 'lists/individual-list.html?success=1');
+		if ($reply['_success_'] == 1) {
+			header('Location: /forms/individual.html?success=1' . $urlComplement);
 		} else {
-			header('Location: ' . PROJECT_URL . 'lists/individual-list.html?success=-3&reason=Não houve alteração nenhuma!');
+			header('Location: /forms/individual.html?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
 		}
 	} else {
-		header('Location: ' . PROJECT_URL . 'forms/individual.html?success=-1&reason=Faltam parametros!');
+		header('Location: /forms/individual.html?success=-1&reason=Faltam parametros!');
 	}
 
 } else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel'){
@@ -42,9 +46,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: ' . PROJECT_URL . 'forms/individual-csv.html?success=-1&reason=Ficheiro tem de ser csv!');
+			header('Location: /forms/individual-csv.html?success=-1&reason=Ficheiro tem de ser csv!');
 	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-			header('Location: ' . PROJECT_URL . 'forms/individual-csv.html?success=-1&reason=Ficheiro ja foi processado!');
+			header('Location: /forms/individual-csv.html?success=-1&reason=Ficheiro ja foi processado!');
 	  	} else {
 			//mover o ficheiro da pasta temporaria
 	  		move_uploaded_file($_FILES["file"]["tmp_name"], PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
@@ -90,7 +94,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 							        		$toInsert['phenologicalType'] = $data[7];
 							        	}
 
-										if($individualData->insertIndividual($toInsert) == 1) {
+							        	$reply = $individualData->insertIndividual($toInsert);
+
+										if($reply['_success_'] == 1) {
 											$inserted++;
 										}
 
@@ -122,14 +128,14 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 				if (rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true) {
 
 					if($errorString != ''){
-						header('Location: ' . PROJECT_URL . 'lists/individual-list.html?success=-2&reason=' . $errorString);
+						header('Location: /lists/individual-list.html?success=-2&reason=' . $errorString);
 					} else {
-						header('Location: ' . PROJECT_URL . 'lists/individual-list.html?success=1&inserted=' . $inserted);	
+						header('Location: /lists/individual-list.html?success=1&inserted=' . $inserted);	
 					}
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: ' . PROJECT_URL . 'lists/individual-list.html?success=-1&reason=ficheiro nao passou para a directoria final!');
+					header('Location: /lists/individual-list.html?success=-1&reason=ficheiro nao passou para a directoria final!');
 				}
 			}
 
@@ -137,9 +143,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
   		}
 	} catch (Exception $e) {
 		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-  		header('Location: ' . PROJECT_URL . 'lists/individual-list.html?success=-1&reason=' . $e);
+  		header('Location: /lists/individual-list.html?success=-1&reason=' . $e);
 	}
 
 } else {
-	header('Location: ' . PROJECT_URL . 'lists/individual-list.html?success=-1&reason=N&atilde;o estamos preparados para mais nenhum tipo de carregamento de informa&ccedil;&atilde;o, a n&atilde;o ser por formul&aacute;rio ou excel.');
+	header('Location: /lists/individual-list.html?success=-1&reason=N&atilde;o estamos preparados para mais nenhum tipo de carregamento de informa&ccedil;&atilde;o, a n&atilde;o ser por formul&aacute;rio ou excel.');
 }

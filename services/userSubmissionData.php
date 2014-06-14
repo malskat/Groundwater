@@ -27,18 +27,21 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 		unset($_POST["passwordUser"]);
 	}
 
-	$_POST["email"] = $_POST["emailUser"];
-	unset($_POST["emailUser"]);
-
+	$urlComplement = '';
 
 	if(!isset($_POST["user_id"])) {
 
+		$_POST["email"] = $_POST["emailUser"];
+		unset($_POST["emailUser"]);
+
 		//validar se existe algum utilizador com o mesmo email
 		$user = $userData->getUserBy("email = '" . $_POST["email"] . "'", -1);
+		var_dump($user);
 		if (count($user) > 0) {
-			$success = -4;
+			$reply['_success_'] = -4;
 		} else {
-			$success = $userData->insertUser($_POST);
+			$reply = $userData->insertUser($_POST);
+			$urlComplement = '&user_id=' . $reply['_id_'];
 		}
 
 	} else {
@@ -46,24 +49,28 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 
 		$_POST["biologyst_id"] = $_POST["user_id"];
 		unset($_POST["user_id"]);
+		unset($_POST["emailUser"]);
 
-		$user = $userData->getUserBy("email = '" . $_POST["email"] . "' and biologyst_id <> " . $_POST["biologyst_id"], -1);
+		$reply = $userData->updateUser($_POST);
+		$urlComplement = '&user_id=' . $_POST["biologyst_id"];
+
+		/*$user = $userData->getUserBy("email = '" . $_POST["email"] . "' and biologyst_id <> " . $_POST["biologyst_id"], -1);
 		if (count($user) > 0) {
 			$success = -4;
 		} else {
 			$success = $userData->updateUser($_POST);
-		}
+		}*/
 	}
 	
-	if($success == 1) {
-		header('Location: ' . PROJECT_URL . 'lists/user-list.html?success=1');
-	} else if ($success == -4) {
-		header('Location: ' . PROJECT_URL . 'forms/user.html?' . (isset($_POST["biologyst_id"]) ? "user_id=" . $_POST["biologyst_id"] . "&" : "")  . 'success=-1&reason=Já existe um utilizador com este email!');
+	if($reply['_success_'] == 1) {
+		header('Location: /forms/user.html?success=1' . $urlComplement);
+	} else if ($reply['_success_'] == -4) {
+		header('Location: /forms/user.html?success=-1&reason=Já existe um utilizador com este email!');
 	} else {
-		header('Location: ' . PROJECT_URL . 'lists/user-list.html?success=-3&reason=Não houve alteração nenhuma!');
+		header('Location: /forms/user.html?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
 	}
 
 	
 } else {
-	header('Location: ' . PROJECT_URL . 'forms/user.html?success=-1&reason=Faltam parametros ao utilizador!');
+	header('Location: forms/user.html?success=-1&reason=Faltam parametros ao utilizador!');
 }

@@ -245,14 +245,6 @@
     		var samplingDate = $('#samplingDate').val();
     		var hasErrors = false;
 
-
-    		if(code == "" ) {
-    			hasErrors = true;
-    			$('#codeInputGroup').addClass('has-error');
-    		} else {
-    			$('#codeInputGroup').removeClass('has-error');
-    		}
-
 			if(samplingDate == ""){
     			hasErrors = true;
 				$('#samplingDateInputGroup').addClass('has-error');
@@ -263,7 +255,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros à época!");
+		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros à amostragem!");
     			return false;
     		} else {
     			return true;

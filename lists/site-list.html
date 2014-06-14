@@ -32,7 +32,7 @@
 
   		$siteData = new Site();
   		$sites = $siteData->getSites(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotalPlots = 1); 
-  		$fields = $siteData->getSiteFieldsListConf();
+  		$fields = $siteData->getFieldList();
   	?>
 
   	<!-- incluir menu principal -->
@@ -88,9 +88,9 @@
 				    	                  	<td>' . (isset($site->coordinateY) && $site->coordinateY != "" ? $site->coordinateY : "N.D.") . '</td>';
 				                          	
 				                          	if ($site->totalPlots > 0) {
-				                          		echo '<td><a href="plot-list.html?site=' . $site->site_id .  '"><span id="accessTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os plots" class="badge">' . $site->totalPlots . '</span></a></td>';
+				                          		echo '<td><a href="plot-list.html?site=' . $site->site_id .  '"><span id="accessTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os plots" class="label label-default">' . $site->totalPlots . '</span></a></td>';
 				                          	} else {
-				                          		echo '<td><span class="badge">' . $site->totalPlots . '</a></td>';
+				                          		echo '<td><span class="label label-default">' . $site->totalPlots . '</a></td>';
 				                          	}
 				    	                  	
 				    	                  	echo '<td>
@@ -130,8 +130,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($sites[0]->totalRecords % Site::TOTAL_ROWS_SITE) > 0 ? 1 : 0);
-                $nPages = floor($sites[0]->totalRecords / Site::TOTAL_ROWS_SITE) + $addPage;
+                $addPage = (($sites[0]->totalRecords % $siteData->getTotalRows()) > 0 ? 1 : 0);
+                $nPages = floor($sites[0]->totalRecords / $siteData->getTotalRows()) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

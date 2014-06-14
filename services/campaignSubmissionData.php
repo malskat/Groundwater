@@ -10,19 +10,23 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != "" && isset($_POST["endD
 
 	$campaignData = new Campaign();
 
+	$urlComplement = '';
+
 	if(!isset($_POST["sampling_campaign_id"])){
-		$success = $campaignData->insertCampaign($_POST);
+		$reply = $campaignData->insertCampaign($_POST);
+		$urlComplement = '&campaign_id=' . $reply['_id_'];
 	}else{
-		$success = $campaignData->updateCampaign($_POST);
+		$reply = $campaignData->updateCampaign($_POST);
+		$urlComplement = '&campaign_id=' . $_POST["sampling_campaign_id"];
 	}
 	
-	if($success == 1){
-		header('Location: ' . PROJECT_URL . 'lists/campaign-list.html?success=1');
+	if($reply['_success_'] == 1){
+		header('Location: /forms/campaign.html?success=1' . $urlComplement);
 	} else {
-		header('Location: ' . PROJECT_URL . 'lists/campaign-list.html?success=-3&reason=Não houve alteração nenhuma!');
+		header('Location: /forms/campaign.html?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
 	}
 
 	
 }else{
-	header('Location: ' . PROJECT_URL . 'forms/campaign.html?success=-1&reason=Faltam parametros!');
+	header('Location: /forms/campaign.html?success=-1&reason=Faltam parametros!');
 }

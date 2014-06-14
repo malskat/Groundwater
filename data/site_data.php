@@ -1,13 +1,13 @@
 <?php
 
-class Site {
+require_once '/gObject.php';
 
-	const TOTAL_ROWS_SITE = 10;
-	const DB_ENTITY_NAME = 'site';
+class Site extends gObject {
 
-	function getSiteFieldsListConf(){
-
-		return array("#", "Código", "Designação", "País", "CoordenadaX", "CoordenadaY", "#Plots");
+	function __construct (){
+		$this->_entityName = 'site';
+		$this->_fieldList = array("#", "Código", "Designação", "País", "CoordenadaX", "CoordenadaY", "#Plots");
+		$this->_totalRows = 10;
 	}
 
 	function getSites($page = 0, $withTotalPlots = 0){
@@ -17,18 +17,18 @@ class Site {
 				($withTotalPlots == 1 ? ', count(p.plot_id) as totalPlots' : '') . 
 				' From site s' . 
 				($withTotalPlots == 1 ? ' Left Join plot p On p.site_id = s.site_id Group by s.site_id ' : '');
-		return selectDBQuery($query, self::TOTAL_ROWS_SITE, $page);
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 	}
 
 	function getSiteBy($whereClause, $page = 0){
 
 		include_once '../core/core_database.php';
 		$query = 'Select SQL_CALC_FOUND_ROWS s.* From site s Where ' . $whereClause;
-		return selectDBQuery($query, self::TOTAL_ROWS_SITE, $page);
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
-	function insertSite($toInsert = array()){
+	function insert ($toInsert = array()){
 
 		require_once '../core/core_database.php';
 
@@ -50,11 +50,11 @@ class Site {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return insertDB(Site::DB_ENTITY_NAME,   $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName, $fields, $values);
 
 	}
 
-	function updateSite($toUpdate){
+	function update ($toUpdate){
 
 		require_once '../core/core_database.php';
 
@@ -72,14 +72,7 @@ class Site {
 		$set = substr($set, 0, -2);
 		$where = '`site_id` = ' . $toUpdate["site_id"];
 
-		return updateDB(Site::DB_ENTITY_NAME, $set, $where);
+		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 
-	}
-
-	function delete_site($where){
-
-		require_once '../core/core_database.php';
-
-		return deleteDB(Site::DB_ENTITY_NAME, $where);
 	}
 }

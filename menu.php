@@ -72,12 +72,12 @@
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campanhas <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    <li role="presentation" class="dropdown-header">Épocas</li>
-			    <li><a href=<?= PROJECT_URL . "forms/season.html" ?>>Inserir</a></li>
-			    <li><a href=<?= PROJECT_URL . "lists/season-list.html"?>>Consultar</a></li>
+			    <li><a href=<?="/forms/season.html" ?>>Inserir</a></li>
+			    <li><a href=<?="/lists/season-list.html"?>>Consultar</a></li>
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Campanhas</li>
-			    <li><a href=<?= PROJECT_URL . "forms/campaign.html" ?>>Inserir</a></li>
-			    <li><a href=<?= PROJECT_URL . "lists/campaign-list.html"?>>Consultar</a></li>
+			    <li><a href=<?="/forms/campaign.html" ?>>Inserir</a></li>
+			    <li><a href=<?= "/lists/campaign-list.html"?>>Consultar</a></li>
 			  </ul>
 			</li>
 
@@ -86,23 +86,23 @@
 			  <ul class="dropdown-menu">
 			    
 			    <li role="presentation" class="dropdown-header">Site</li>
-			    <li><a href=<?= PROJECT_URL . "forms/site.html"?>>Inserir</a></li>
-			    <li><a href=<?= PROJECT_URL . "lists/site-list.html"?>>Consultar</a></li> 
+			    <li><a href=<?="/forms/site.html"?>>Inserir</a></li>
+			    <li><a href=<?="/lists/site-list.html"?>>Consultar</a></li> 
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Plot</li>
-			    <li><a href=<?= PROJECT_URL . "forms/plot.html"?>>Inserir</a></li>
-			    <li><a href=<?= PROJECT_URL . "forms/plot-csv.html"?>>Inserir por CSV</a></li>
-			    <li><a href=<?= PROJECT_URL . "lists/plot-list.html"?>>Consultar</a></li> 
+			    <li><a href=<?="/forms/plot.html"?>>Inserir</a></li>
+			    <li><a href=<?="/forms/plot-csv.html"?>>Inserir por CSV</a></li>
+			    <li><a href=<?="/lists/plot-list.html"?>>Consultar</a></li> 
 			  </ul>
 			</li>
 
 			<li <?=(strpos($_SERVER['PHP_SELF'], 'species') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espécies <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			    <li><a href=<?= PROJECT_URL . "forms/species.html"?>>Inserir</a></li>
-			    <li><a href=<?= PROJECT_URL . "forms/species-csv.html"?>>Inserir por CSV</a></li>
-			    <li><a href=<?= PROJECT_URL . "lists/species-list.html"?>>Consultar</a></li> 
+			    <li><a href=<?="/forms/species.html"?>>Inserir</a></li>
+			    <li><a href=<?="/forms/species-csv.html"?>>Inserir por CSV</a></li>
+			    <li><a href=<?="/lists/species-list.html"?>>Consultar</a></li> 
 			  </ul>
 			</li>
 
@@ -110,13 +110,13 @@
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Indivíduos <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Indivíduos</li>
-			    <li><a href=<?= PROJECT_URL . "forms/individual.html"?>>Inserir</a></li>
-			    <li><a href=<?= PROJECT_URL . "forms/individual-csv.html"?>>Inserir por CSV</a></li>
-			    <li><a href=<?= PROJECT_URL . "lists/individual-list.html"?>>Consultar</a></li>  
+			    <li><a href=<?="/forms/individual.html"?>>Inserir</a></li>
+			    <li><a href=<?="/forms/individual-csv.html"?>>Inserir por CSV</a></li>
+			    <li><a href=<?="/lists/individual-list.html"?>>Consultar</a></li>  
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
-			    <li><a href=<?= PROJECT_URL . "forms/ecoFisio-csv.html"?>>Actualizar por CSV</a></li>
+			    <li><a href=<?="/forms/ecoFisio-csv.html"?>>Actualizar por CSV</a></li>
 			  </ul>
 			</li>
 		<?
@@ -124,8 +124,8 @@
 				echo '<li ' . (strpos($_SERVER['PHP_SELF'], 'use') !== false ? 'class="active"' :  '') .  ' class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilizadores <b class="caret"></b></a>
 								  	<ul class="dropdown-menu">
-								    	<li><a href="' . PROJECT_URL . 'forms/user.html">Inserir</a></li>
-								    	<li><a href="' . PROJECT_URL . 'lists/user-list.html">Consultar</a></li> 
+								    	<li><a href="' .'/forms/user.html">Inserir</a></li>
+								    	<li><a href="' .'/lists/user-list.html">Consultar</a></li> 
 								  	</ul>
 						</li>';
 
@@ -144,9 +144,9 @@
 				            		<li class="dropdown">
 				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
-					            			<li><a href="'. PROJECT_URL . 'forms/user.html?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
-					            			<li><a href="' . PROJECT_URL . 'forms/user.html"?>Recuperar password</a></li>
-					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $_SERVER['PHP_SELF'] . '">Logout</a></li>
+					            			<li><a href="'.'/forms/user.html?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
+					            			<li><a href="' .'/forms/user.html"?>Recuperar password</a></li>
+					            			<li><a href="'.'/services/make_exit.php?destination=' . $_SERVER['PHP_SELF'] . '">Logout</a></li>
 					            		</ul>
 					            	</li>
 					            </ul>

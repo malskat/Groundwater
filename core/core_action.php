@@ -10,8 +10,7 @@ switch($action){
 		
 		//chamada dinamica da funcao
 		$instance = new $_GET["class"];
-		$deleteFunction = "delete_" . $_GET["class"];
-		$toReturn = $instance->$deleteFunction($_GET["class"] . "_id = '" . $_GET["id"] . "'");
+		$toReturn = $instance->delete($_GET["class"] . "_id = '" . $_GET["id"] . "'");
 		
 		if(isset($_GET["class"])){
 
@@ -19,11 +18,17 @@ switch($action){
 			$parametersIndex = strpos($_SERVER['HTTP_REFERER'], '?');
 			if ($parametersIndex !== false) {
 				$parameters = substr($_SERVER['HTTP_REFERER'], $parametersIndex + 1) . '&';
+				$parameters = str_replace("success=1", "", $parameters);
+				$parameters = str_replace("success=2", "", $parameters);
 			}
-
-			header('Location: ' . PROJECT_URL . 'lists/' . $_GET["class"] . '-list.html?' . $parameters . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
+	
+			if (isset($_GET["redirect"])) {
+				header('Location: ' . $_GET["redirect"] . '?' . ($parameters != '&' ? $parameters : '') . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
+			} else {
+				header('Location: /lists/' . $_GET["class"] . '-list.html?' . ($parameters != '&' ? $parameters : '') . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
+			}
 		} else {
-			header('Location: ' . PROJECT_URL . 'index.html?');
+			header('Location: index.html');
 		}
 		break;
 	}
@@ -37,9 +42,9 @@ switch($action){
 				}
 			}
 			$filterOptions = substr($filterOptions, 0, -1);
-			header('Location: ' . PROJECT_URL . 'lists/' . $_POST["class"] . '-list.html' . $filterOptions);
+			header('Location: /lists/' . $_POST["class"] . '-list.html' . $filterOptions);
 		} else {
-			header('Location: ' . PROJECT_URL . 'lists/' . $_POST["class"] . '-list.html');
+			header('Location: /lists/' . $_POST["class"] . '-list.html');
 		} 
 		break;
 	}

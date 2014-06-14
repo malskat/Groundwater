@@ -1,13 +1,14 @@
 <?php
 
-class EcoFisio {
+require_once '/gObject.php';
 
-	const TOTAL_ROWS_ECO_FISIO = 5;
-	const DB_ENTITY_NAME = 'eco_fisio';
+class EcoFisio extends gObject {
 
-	function getEcoFisioFieldsListConf (){
-
-		return array("Campanha", "Data de Amostragem", "Leaf_13C", "Leaf_15N", "XylenWater_18O", "PhotoSynthetic_PI");
+	function __construct (){
+		$this->_entityName = 'eco_fisio';
+		$this->_fieldList = array("Campanha", "Data de Amostragem", "Leaf_13C", "Leaf_15N", "XylenWater_18O", "PhotoSynthetic_PI");
+		$this->_totalRows = 5;
+		$this->_orderBy = $this->_entityName . '_id';
 	}
 
 	function getEcoFisioDataBlocks () {
@@ -20,12 +21,14 @@ class EcoFisio {
 	function getEcoFisioBy ($whereClause, $orderBy = '', $page = 0){
 
 		require_once '../core/core_database.php';
+
 		$query = 'Select SQL_CALC_FOUND_ROWS ef.*, sc.designation as campaignDesignation
 					From eco_fisio ef
 					Join sampling_campaign sc On sc.sampling_campaign_id = ef.sampling_campaign_id
 					Where ' . $whereClause . 
 					($orderBy != '' ? ' Order By ' . $orderBy : '');
-		return selectDBQuery($query, EcoFisio::TOTAL_ROWS_ECO_FISIO, $page);
+
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
@@ -51,7 +54,7 @@ class EcoFisio {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return insertDB(EcoFisio::DB_ENTITY_NAME, $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName, $fields, $values);
 	}
 
 	function updateEcoFisio ($toUpdate){
@@ -60,11 +63,13 @@ class EcoFisio {
 
 		$set = '';
 		foreach ($toUpdate as $key => $value) {
-			if($key != 'individualCode' && $key != 'sampling_campaign_id'){
-				if ($key != 'samplingDate') {
-					$set .= '`'. $key . '` = ' . str_replace(",", ".", $value) . ', ';
-				} else {
-					$set .= '`'. $key . '` = ' . "'" . $value . "', "; 
+			if($value != "") {
+				if($key != 'individualCode' && $key != 'sampling_campaign_id'){
+					if ($key != 'samplingDate') {
+						$set .= '`'. $key . '` = ' . str_replace(",", ".", $value) . ', ';
+					} else {
+						$set .= '`'. $key . '` = ' . "'" . $value . "', "; 
+					}
 				}
 			}
 		}
@@ -72,18 +77,52 @@ class EcoFisio {
 		$set = substr($set, 0, -2);
 		$where = " individualCode = '" . $toUpdate["individualCode"] . "' and sampling_campaign_id	 = " . $toUpdate["sampling_campaign_id"];
 
-		return updateDB(EcoFisio::DB_ENTITY_NAME, $set, $where);
+		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 	}
 
-	function delete_ecoFisio ($parameters = '' ){
+	function delete ($parameters = '' ){
 
 		list($dummyKey, $privateKeys) = explode("=", $parameters);
 		list($individualCode, $sampling_campaign_id) = explode("|", $privateKeys);
 		$where = " individualCode = " . $individualCode . "' and sampling_campaign_id = '" . $sampling_campaign_id;
 
 		require_once '../core/core_database.php';
+		
 		$where = str_replace("ecofisio", "eco_fisio", $where);
-		return deleteDB(EcoFisio::DB_ENTITY_NAME, $where);
+		return CoreDatabase::deleteDB($this->_entityName, $where);
+	}
+
+	function fillEcoAttributes (&$arrayToFill, $line, $block, $hasSamplingDate) {
+
+		$starter = 0;
+		if ($hasSamplingDate){
+			$starter = 2;
+		} else {
+			$starter = 1;
+		}
+
+		switch ($block) {
+			case "leaf" : {
+				$arrayToFill['leaf_13C'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
+	        	$arrayToFill['leaf_15N'] = ($line[$starter + 1] != "" ? $line[$starter + 1] : 'NULL');
+	        	$arrayToFill['leaf_perN'] = ($line[$starter + 2] != "" ? $line[$starter + 2] : 'NULL');
+	        	$arrayToFill['leaf_perC'] = ($line[$starter + 3] != "" ? $line[$starter + 3] : 'NULL');
+	        	$arrayToFill['leaf_CN'] = ($line[$starter + 4] != "" ? $line[$starter + 4] : 'NULL');
+				break;
+			}
+			case "xylem" : {
+				$arrayToFill['xylemWater_18O'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
+				break;
+			}
+			case "photo" : {
+				$arrayToFill['photosynthetic_PI'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
+	        	$arrayToFill['photosynthetic_NWI'] = ($line[$starter + 1] != "" ? $line[$starter + 1] : 'NULL');
+	        	$arrayToFill['photosynthetic_BP'] = ($line[$starter + 2] != "" ? $line[$starter + 2] : 'NULL');
+				break;
+			}
+
+		}
+
 	}
 
 }

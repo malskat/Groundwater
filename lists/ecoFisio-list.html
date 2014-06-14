@@ -24,29 +24,30 @@
 		  <script src="../../assets/js/respond.min.js"></script>
 		<![endif]-->
 
-		<!--Load the AJAX API-->
-    	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	</head>
+
+	<body>
 
 	  	<!-- incluir menu principal -->
 	  	<?php include "../menu.php";?>
 
 	  	<?
+		    include '../data/ecoFisio_data.php';
+
 			$ecoFisioValues = array();
+		    $ecoFisioData = new EcoFisio();
+
 			if (isset($_GET['individualCode'])) {
-		    	include '../data/ecoFisio_data.php';
-		    	$ecoFisioData = new EcoFisio();
 		    	$ecoFisioValues = $ecoFisioData->getEcoFisioBy($where = 'ef.individualCode = "' . $_GET['individualCode'] . '"', $orderBy = 'ef.samplingDate ASC' , 
 		    	                                               isset($_GET["page"]) ? $_GET["page"] : 0);
 			}
 
-			$fields = $ecoFisioData->getEcoFisioFieldsListConf();
+			$fields = $ecoFisioData->getFieldList();
 
-			$backParameters = '';
-			$parametersIndex = strpos($_SERVER['HTTP_REFERER'], '?');
-			if ($parametersIndex !== false) {
-				$backParameters = substr($_SERVER['HTTP_REFERER'], $parametersIndex + 1);
-			}
+			$backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
+	  		if (false === strpos($backUrl, 'individual.html') && false === strpos($backUrl, 'individual-list')) {
+				$backUrl = '../lists/individual-list.html';
+	  		}
 		?>
 
 	    <!-- titulo -->
@@ -54,12 +55,12 @@
 			<div class="row">
 				<div class="page-header">
 					<h2>Eco-Fisiologia</h2>
-					<h5>Indivíduo <?=$_GET['individualCode']?></h5>
+					<h5>Indivíduo - <?=$_GET['individualCode']?></h5>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-6 col-lg-8">
-					<button class="btn btn-link" onclick="location.href='../lists/individual-list.html<?=($backParameters != '' ? '?' . $backParameters : '')?>'">« voltar</button>
+					<button class="btn btn-link" onclick="location.href='<?=$backUrl?>'">« voltar</button>
 				</div>
 				<div class="col-xs-6 col-lg-4">
 					<div class="btn-group pull-right">
@@ -68,9 +69,9 @@
 								Gráficos <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a href="../lists/ecoFisio-list.html?individualCode=<?=$individual[0]->individualCode?>"><strong>Temporal Overview</strong></a></li>
-								<li><a href="#"><strong>Leaf 13C and PI / Xylem 18O</strong></a></li>
-								<li><a href="#"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
+								<li><a href="../charts/ecofisio-temporaloverview.html?individualCode=<?=$_GET['individualCode']?>"><strong>Temporal Overview</strong></a></li>
+								<li><a href="../charts/ecofisio-leaf13CphotoPI.html?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 13C and PI / Xylem 18O</strong></a></li>
+								<li><a href="../charts/ecofisio-leaf15NleafCN.html?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
 							</ul>
 						</div>
 						<button type="button" class="btn btn-primary btn-sm" onclick="location.href='../forms/ecoFisio.html?individualCode=<?=$_GET['individualCode']?>'">Inserir Amostragem</button>
@@ -119,6 +120,8 @@
 	      	            	    				</tr>';
 					                    }
 					                }
+					            } else {
+					            	echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>';
 					            }
 					        ?>
 		            	</tbody>
@@ -138,8 +141,8 @@
 		            <ul class="pagination">
 		              <?
 		                //paginas
-		                $addPage = (($ecoFisioValues[0]->totalRecords % EcoFisio::TOTAL_ROWS_ECO_FISIO) > 0 ? 1 : 0);
-		                $nPages = floor($ecoFisioValues[0]->totalRecords / EcoFisio::TOTAL_ROWS_ECO_FISIO) + $addPage;
+		                $addPage = (($ecoFisioValues[0]->totalRecords % $ecoFisioData->getTotalRows()) > 0 ? 1 : 0);
+		                $nPages = floor($ecoFisioValues[0]->totalRecords / $ecoFisioData->getTotalRows()) + $addPage;
 		                if ( $nPages > 1) {
 
 		                  $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

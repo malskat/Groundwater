@@ -61,7 +61,7 @@
 				$plots = $plotData->getPlotsSite((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1); 
 			}
 
-	  		$fields = $plotData->getPlotFieldsListConf();
+	  		$fields = $plotData->getFieldList();
       		
       		$siteData = new Site();
 	      	$sites = $siteData->getSites(-1);
@@ -93,7 +93,7 @@
                 <option value="none">Site</option>
                 <?
                   foreach($sites as $site){
-                    echo '<option ' . ($site->site_id == $_GET["site"] ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
+                    echo '<option ' . (isset($_GET["site"]) && $site->site_id == $_GET["site"] ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
                   }
                 ?>
               </select>
@@ -139,9 +139,9 @@
 	    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>';
 	    	                  			
 	    	                  			if ($plot->totalIndividuals > 0) {
-	                        				echo '<td><a href="individual-list.html?plot=' . $plot->plot_id .  '"><span id="accessTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os indivíduos" class="badge">' . $plot->totalIndividuals . '</span></a></td>';
+	                        				echo '<td><a href="individual-list.html?plot=' . $plot->plot_id .  '"><span id="accessTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os indivíduos" class="label label-default">' . $plot->totalIndividuals . '</span></a></td>';
 	    	                  			}else {
-	    	                  				echo '<td><span class="badge">' . $plot->totalIndividuals . '</a></td>';
+	    	                  				echo '<td><span class="label label-default">' . $plot->totalIndividuals . '</a></td>';
 	    	                  			}
 
 				  	                  	echo '<td>
@@ -186,8 +186,8 @@
               <?
 
                 //paginas
-                $addPage = (($plots[0]->totalRecords % Plot::TOTAL_ROWS_PLOT) > 0 ? 1 : 0);
-                $nPages = floor($plots[0]->totalRecords / Plot::TOTAL_ROWS_PLOT) + $addPage;
+                $addPage = (($plots[0]->totalRecords % $plotData->getTotalRows()) > 0 ? 1 : 0);
+                $nPages = floor($plots[0]->totalRecords / $plotData->getTotalRows()) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

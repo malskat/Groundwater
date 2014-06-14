@@ -9,20 +9,24 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != ""
 
 	$seasonData = new Season();
 
+	$urlComplement = '';
+
 	if(!isset($_POST["season_id"])){
-		$success = $seasonData->insertSeason($_POST);
+		$reply = $seasonData->insertSeason($_POST);
+		$urlComplement = '&season_id=' . $reply['_id_'];
 	}else{
-		$success = $seasonData->updateSeason($_POST);
+		$reply = $seasonData->updateSeason($_POST);
+		$urlComplement = '&season_id=' . $_POST["season_id"];
 	}
 	
-	if($success == 1){
-		header('Location: ' . PROJECT_URL . 'lists/season-list.html?success=1');
+	if($reply['_success_'] == 1){
+		header('Location: /forms/season.html?success=1' . $urlComplement);
 	} else {
-		header('Location: ' . PROJECT_URL . 'lists/season-list.html?success=-3&reason=Não houve alteração nenhuma!');
+		header('Location: /forms/season.html?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
 	}
 
 	
 }else{
-	header('Location: ' . PROJECT_URL . 'forms/season.html?success=-1&reason=Faltam parametros!');
+	header('Location: /forms/season.html?success=-1&reason=Faltam parametros!');
 }
 

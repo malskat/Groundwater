@@ -3,29 +3,45 @@
 
 
  	» CLASSES
- 		* transformar todos os ficheiros de data em classes (seguir o exemplo do user); - DONE
- 		* ecoFisio_data - DONE
+ 		* rever todos os nomes dos métodos de inserção e actualização:
+ 			* site 
+ 			* season
+ 			* campaign
+ 			* species
+ 			* plot
+ 			* individual
+ 			* ecoFisio
+ 			* user
 
  	» FRONTEND
 
- 		* formulário de inserção de medições eco-fisio. 
- 		* mostrar gráficos de eco-fisio de um indivíduo (leaf, leaf/twig...).
- 		* listagem de amostragens por bloco
- 		* edição de amostragem de ecoFisio
+ 		* resolver o && que fica depois de eliminarmos vários registos seguidos.
+
+
+ 	» SERVIÇOS
+
+ 		* recuperar password;
+ 		* inserir struture massivo;
 
 		
 	» DADOS
 
-		* login - não permitir a alteracao do email de um utilizador;
-		* inserir Eco-Fisios reais;
+		* login - não permitir a alteracao do email de um utilizador - DONE
+		* inserir Eco-Fisios reais - parcialmente DONE;
+		* inserir struture reais
+			* pode actualizar coordenadas do indivíduo.
 
 	
 	» Melhoramentos
 
  		* colocar fontawesome no menu;
- 		* edição de todos os elementos: quando terminar fica no mesmo local e mostra a mensagem de sucesso no formulário;
- 		* listagens - empurrar o botão de inserir o mais para a direita possível. - DONE
+ 		* evitar SQL injection;
+ 		* incluir modificationDate em todas as tabelas, com trigger adicionado ao update.
 
  	
 
  	» Problemas
+
+ 		* SOBL52FP1 - este indivíduo não tinha valor para xylem water, na primavera de 2013.
+ 		* SOBL51FRAIZ P2;-4,38 - medida presente no ficheiro de xylem water, do verão de osso da baleia.
+		* SOBL8A1;2013-08-20;;;;;#DIV/0!; - erro no ficheiro .csv de leaf, do verão de osso da baleia.

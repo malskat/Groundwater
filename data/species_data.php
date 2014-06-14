@@ -1,12 +1,13 @@
 <?php
 
-class Species {
+require_once '/gObject.php';
 
-	const TOTAL_ROWS_SPECIES = 10;
-	const DB_ENTITY_NAME = 'species';
+class Species extends gObject {
 
-	function getSpeciesFieldsListConf(){
-		return array("#", "Genus", "Species", "Tipo", "Código", "Functional Group", "#Individuos");
+	function __construct (){
+		$this->_entityName = 'species';
+		$this->_fieldList = array("#", "Genus", "Species", "Tipo", "Código", "Functional Group", "#Individuos");
+		$this->_totalRows = 10;
 	}
 
 	function getSpecies($page = 0, $withTotalIndividuals = 0){
@@ -18,7 +19,7 @@ class Species {
 					($withTotalIndividuals == 1 ? ' Left Join Individual i On i.species_id = s.species_id ' : '') .
 					($withTotalIndividuals == 1 ? ' Group by s.species_id ' : '') .
 				' Order By s.genus, s.species';
-		return selectDBQuery($query, Species::TOTAL_ROWS_SPECIES, $page);
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 	}
 
 	function getSpeciesBy($whereClause, $page = 0, $withTotalIndividuals = 0){
@@ -30,7 +31,7 @@ class Species {
 					($withTotalIndividuals == 1 ? ' Left Join Individual i On i.species_id = s.species_id ' : '') . 
 					' Where ' . $whereClause . ($withTotalIndividuals == 1 ? ' Group by s.species_id ' : '') .
 					' Order By s.genus, s.species';
-		return selectDBQuery($query, Species::TOTAL_ROWS_SPECIES, $page);
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
@@ -52,7 +53,7 @@ class Species {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return insertDB(Species::DB_ENTITY_NAME,   $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName, $fields, $values);
 
 	}
 
@@ -62,7 +63,7 @@ class Species {
 
 		$set = '';
 		foreach ($toUpdate as $key => $value) {
-			if($key != 'species_id'){
+			if($key != 'species_id' && $value != ""){
 				$set .= '`'. $key . '` = ' . "'" . $value . "', "; 
 			}
 		}
@@ -70,15 +71,8 @@ class Species {
 		$set = substr($set, 0, -2);
 		$where = 'species_id = ' . $toUpdate["species_id"];
 
-		return updateDB(Species::DB_ENTITY_NAME, $set, $where);
+		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 
-	}
-
-	function delete_species($where){
-
-		require_once '../core/core_database.php';
-
-		return deleteDB(Species::DB_ENTITY_NAME, $where);
 	}
 	
 }

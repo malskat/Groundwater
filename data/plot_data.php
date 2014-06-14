@@ -1,30 +1,25 @@
 <?php
 
-class Plot {
+require_once '/gObject.php';
 
-	const TOTAL_ROWS_PLOT = 10;
-	const DB_ENTITY_NAME = 'plot';
+class Plot extends gObject {
 
-	function getPlotFieldsListConf(){
-
-		return array("#", "Código", "Site", "Tipo", "CoordenadaX", "CoordenadaY", "#Indivíduos");
+	function __construct (){
+		$this->_entityName = 'plot';
+		$this->_fieldList = array("#", "Código", "Site", "Tipo", "CoordenadaX", "CoordenadaY", "#Indivíduos");
+		$this->_totalRows = 10;
 	}
 
-	function getPlots($page = 0){
-
-		include_once '../core/core_database.php';
-		return selectDB('plot', Plot::TOTAL_ROWS_PLOT, $page);
-	}
 
 	function getPlotsSite($page = 0, $withTotalIndividuals = 0){
 
 		include_once '../core/core_database.php';
-		return selectDBQuery('Select SQL_CALC_FOUND_ROWS p.*, s.code as siteCode, s.title ' .
+		return CoreDatabase::selectDBQuery('Select SQL_CALC_FOUND_ROWS p.*, s.code as siteCode, s.title ' .
 							($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
 							From Plot p 
 							Join Site s On s.site_id = p.site_id ' . 
 							($withTotalIndividuals == 1 ? ' Left Join Individual i On i.plot_id = p.plot_id Group by p.plot_id ' : '') . '
-							Order By s.title', Plot::TOTAL_ROWS_PLOT, $page);
+							Order By s.title', $this->_totalRows, $page);
 	}
 
 	function getPlotBy($whereClause, $page = 0, $withTotalIndividuals = 0){
@@ -38,7 +33,7 @@ class Plot {
 				Where ' . $whereClause . ($withTotalIndividuals == 1 ? ' Group by p.plot_id ' : '') . 
 				' Order By s.title';
 				
-		return selectDBQuery($query, Plot::TOTAL_ROWS_PLOT, $page);
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
@@ -64,7 +59,7 @@ class Plot {
 		$values = substr($values, 0, -2);
 
 
-		return insertDB(Plot::DB_ENTITY_NAME, $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName, $fields, $values);
 
 	}
 
@@ -86,14 +81,7 @@ class Plot {
 		$set = substr($set, 0, -2);
 		$where = '`plot_id` = ' . $toUpdate["plot_id"];
 
-		return updateDB(Plot::DB_ENTITY_NAME, $set, $where);
+		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 
-	}
-
-	function delete_plot($where){
-
-		require_once '../core/core_database.php';
-
-		return deleteDB(Plot::DB_ENTITY_NAME, $where);
 	}
 }

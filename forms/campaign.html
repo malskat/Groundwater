@@ -45,6 +45,11 @@
   			$campaignData = new Campaign();
 			$campaign = $campaignData->getCampaignBy("sampling_campaign_id = " . $_GET["campaign_id"], -1);
   		}
+
+  		$backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
+  		if (false === strpos($backUrl, 'campaign-list')) {
+			$backUrl = '../lists/campaign-list.html';
+  		} 
   	?>
 
   	<!-- incluir menu principal -->
@@ -205,7 +210,7 @@
 
 							<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 								<div class="text-center">
-									<button onclick="location.href='../lists/campaign-list.html'" type="button" class="btn btn-xs">Cancelar</button>
+									<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
 									<button class="btn btn-xs btn-primary" type="submit"><?=(isset($campaign) ? "Alterar" : "Submeter")?></button>
 								</div>
 							</div>

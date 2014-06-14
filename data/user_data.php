@@ -1,5 +1,7 @@
 <?php
 
+require_once '/gObject.php';
+
 $passHashCompatible = function_exists('password_hash');
 
 //validar se a funcao existe, porque em php 5.3 nao existe, portanto usamos uma lib:
@@ -7,32 +9,30 @@ if (!$passHashCompatible) {
 	require_once('../libs/password.php');
 }
 
-class User {
-
-	const TOTAL_ROWS_USER = 10;
-	const ORDER_BY_USER = 'b.biologyst_id';
+class User extends gObject {
 
 	public $hashOptions;
 
 	function __construct() {
+
+		$this->_entityName = 'biologyst';
+		$this->_fieldList = array("#", "Nome", "Email", "Data de criação", "Último login");
+		$this->_totalRows = 10;
+		$this->_orderBy = $this->_entityName . '_id';
+
 		$this->hashOptions = array(
 						'cost' => 11,
 						'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
 					);
    }
 
-	function getUserFieldsListConf(){
-
-		return array("#", "Nome", "Email", "Data de criação", "Último login");
-	}
-
 	function getUsers($page = 0){
 		
 		require_once '../core/core_database.php';
 		$query = 'Select SQL_CALC_FOUND_ROWS b.*
 				From biologyst b
-				Order by ' . self::ORDER_BY_USER;
-		return selectDBQuery($query, self::TOTAL_ROWS_USER, $page);
+				Order by b.' . $this->_orderBy;
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 	}
 
 	function getUserBy($whereClause, $page = 0){
@@ -41,8 +41,8 @@ class User {
 		$query = 'Select SQL_CALC_FOUND_ROWS b.*
 				 	From biologyst b
 				 	Where ' . $whereClause .
-				 ' Order By ' . self::ORDER_BY_USER;
-		return selectDBQuery($query, self::TOTAL_ROWS_USER, $page);
+				 ' Order By b.' . $this->_orderBy;
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
@@ -84,7 +84,7 @@ class User {
 		$values = substr($values, 0, -2);
 
 
-		return insertDB('biologyst',   $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName,   $fields, $values);
 
 	}
 
@@ -94,7 +94,7 @@ class User {
 
 		$set = '';
 		foreach ($toUpdate as $key => $value) {
-			if($key != 'biologyst_id' && $value != ""){
+			if($key != 'biologyst_id' && $key != 'email' && $value != ""){
 				$set .= '`'. $key . '` = ' . "'" . $value . "', "; 
 			}
 		}
@@ -102,19 +102,20 @@ class User {
 		$set = substr($set, 0, -2);
 		$where = '`biologyst_id` = ' . $toUpdate["biologyst_id"];
 
-		return updateDB('biologyst', $set, $where);
+		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 	}
 
-	function delete_user($where){
+	function delete($where){
 
 		require_once '../core/core_database.php';
-		return deleteDB('biologyst', str_replace("user_id", "biologyst_id", $where));
+		return CoreDatabase::deleteDB($this->_entityName, str_replace("user_id", "biologyst_id", $where));
 	}
 
 	function updateLastLogin ($biologyst_id) {
 
 		require_once '../core/core_database.php';
-		return callBD('update_last_login(' . $biologyst_id . ')');
+
+		return CoreDatabase::callBD('update_last_login(' . $biologyst_id . ')');
 
 	}
 

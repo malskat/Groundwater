@@ -1,49 +1,51 @@
 <?php
 
-class Individual {
-	
-	const TOTAL_ROWS_INDIVIDUAL = 10;
-	const DB_ENTITY_NAME = 'individual';
+require_once '/gObject.php';
 
-	function getIndividualFieldsListConf (){
+class Individual extends gObject {
 
-		return array("Código", "Phenological Type", "Espécie (Genus-Species)", "Plot", "#Eco-Fisio");
-	}
-
-	function getIndividuals ($page = 0){
-		
-		include '../core/core_database.php';
-		return selectDB('individual', self::TOTAL_ROWS_INDIVIDUAL, $page);
+	function __construct (){
+		$this->_entityName = 'individual';
+		$this->_fieldList = array("Código", "Espécie (Genus-Species)", "Plot", "#Eco-Fisio", "#Struture");
+		$this->_totalRows = 10;
 	}
 
 	function getIndividualPlotSpecies ($page = 0, $withTotals = 0){
 
 		require_once '../core/core_database.php';
+
 		$query = 'Select SQL_CALC_FOUND_ROWS i.*, s.species, s.genus, p.code as plotCode, st.title as siteTitle ' .
 					($withTotals == 1 ? ', count(ef.individualCode) as totalEcoFisio' : '') .
+					($withTotals == 1 ? ', str.struture_id' : '') .
 					' From individual i 
 					Join plot p on p.plot_id = i.plot_id
 					Join site st on st.site_id = p.site_id
 					Join species s on s.species_id = i.species_id ' . 
+					($withTotals == 1 ? 'left Join struture str On str.individualCode = i.individualCode ' : '') .
 					($withTotals == 1 ? 'left Join eco_fisio ef On ef.individualCode = i.individualCode Group By i.individualCode' : '') . 
 					' Order by i.individualCode';
-		return selectDBQuery($query, self::TOTAL_ROWS_INDIVIDUAL, $page);
+
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
 	function getIndividualBy ($whereClause, $page = 0, $withTotals = 0){
 
 		require_once '../core/core_database.php';
+
 		$query = 'Select SQL_CALC_FOUND_ROWS i.*, s.species, s.genus, p.code as plotCode, st.title as siteTitle ' .
 					($withTotals == 1 ? ', count(ef.individualCode) as totalEcoFisio' : '') .
+					($withTotals == 1 ? ', str.struture_id' : '') .
 					' From individual i 
 					Join plot p on p.plot_id = i.plot_id
 					Join site st on st.site_id = p.site_id
 					Join species s on s.species_id = i.species_id ' . 
 					($withTotals == 1 ? 'left Join eco_fisio ef On ef.individualCode = i.individualCode ' : '') . 
+					($withTotals == 1 ? 'left Join struture str On str.individualCode = i.individualCode ' : '') .
 					' Where ' . $whereClause . ($withTotals == 1 ? ' Group By i.individualCode' : '') . 
 					' Order By i.individualCOde';
-		return selectDBQuery($query, self::TOTAL_ROWS_INDIVIDUAL, $page);
+					
+		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
@@ -69,7 +71,7 @@ class Individual {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return insertDB(Individual::DB_ENTITY_NAME,   $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName,   $fields, $values);
 	}
 
 	function updateIndividual ($toUpdate){
@@ -86,13 +88,13 @@ class Individual {
 		$set = substr($set, 0, -2);
 		$where = "`individualCode` = '" . $toUpdate["individualCode"] . "'";
 
-		return updateDB(Individual::DB_ENTITY_NAME, $set, $where);
+		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 	}
 
-	function delete_individual ($where){
+	function delete ($where){
 
 		require_once '../core/core_database.php';
-		return deleteDB(Individual::DB_ENTITY_NAME, str_replace("individual_id", "individualCode", $where));
+		return CoreDatabase::deleteDB($this->_entityName, str_replace("individual_id", "individualCode", $where));
 	}
 	
 }

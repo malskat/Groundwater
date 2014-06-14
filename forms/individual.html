@@ -41,6 +41,11 @@
   			$individualData = new Individual();
 			$individual = $individualData->getIndividualBy("individualCode = '" . $_GET["individualCode"] . "'", -1);
   		}
+
+  		$backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
+  		if (false === strpos($backUrl, 'individual-list')) {
+			$backUrl = '../lists/individual-list.html';
+  		} 
 	?>
 
 
@@ -67,9 +72,10 @@
 								Amonstragens <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a href="../lists/ecoFisio-list.html?individualCode=<?=$individual[0]->individualCode?>"><strong>Temporal Overview</strong></a></li>
-								<li><a href="#"><strong>Leaf 13C and PI / Xylem 18O</strong></a></li>
-								<li><a href="#"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
+								<li><a href="../lists/ecofisio-list.html?individualCode=<?=$individual[0]->individualCode?>"><strong>Valores de Eco-Fisiologia</strong></a></li>
+								<li><a href="../charts/ecofisio-temporaloverview.html?individualCode=<?=$individual[0]->individualCode?>"><strong>Temporal Overview</strong></a></li>
+								<li><a href="../charts/ecofisio-leaf13CphotoPI.html?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 13C and PI / Xylem 18O</strong></a></li>
+								<li><a href="../charts/ecofisio-leaf15NleafCN.html?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
 							</ul>
 						</div>
 					</div>
@@ -80,42 +86,60 @@
 						        <input type="hidden" value="form" name="submissionType">
 						     	<input type="hidden" value=<?= (isset($individual) ? '"edit"' : '"insert"')?> name="operationType" >
 
-						    	<div id="individualCodeInputGroup" class="form-group">
-							      	<label for="inputCode" class="col-lg-3 control-label">Código*</label>
-							      	<div class="col-lg-4">
-							        	<input type="text" class="form-control" id="individualCode" name="individualCode" placeholder="Código do indivíduo" value=<?= (isset($individual) ? '"' . $individual[0]->individualCode . '"' : "") ?>>
-						      		</div>
-						    	</div>
+						     	<?
+						     		if (!isset($individual)) {
+
+								    	echo '<div id="individualCodeInputGroup" class="form-group">
+										      	<label for="inputCode" class="col-lg-3 control-label">Código*</label>
+										      	<div class="col-lg-4">
+										        	<input type="text" class="form-control" id="individualCode" name="individualCode" placeholder="Código do indivíduo">
+									      		</div>
+									    	</div>';
+
+						     		} else {
+						     			echo '<input type="hidden" value="' . $individual[0]->individualCode . '" name="individualCode">';
+						     			echo '<div class="form-group">
+						  						<label class="col-lg-3 control-label">Código</label>
+						  						<div class="col-lg-4">
+						  							<p class="form-control-static">' . $individual[0]->individualCode . '</p>
+						  					 	</div>
+						  					</div>';
+						     		}
+						     	?>
+
+
 						    	<div class="form-group">
-						      	<label for="inputGenus" class="col-lg-3 control-label">Phenological Type</label>
-						      	<div class="col-lg-4">
-						        	<input type="text" class="form-control" id="phenologicalType" name="phenologicalType" placeholder="" value=<?= (isset($individual) ? '"' . $individual[0]->phenologicalType . '"' : "") ?>>
-						      	</div>
+							      	<label for="inputGenus" class="col-lg-3 control-label">Phenological Type</label>
+							      	<div class="col-lg-4">
+							        	<input type="text" class="form-control" id="phenologicalType" name="phenologicalType" placeholder="" value=<?= (isset($individual) ? '"' . $individual[0]->phenologicalType . '"' : "") ?>>
+							      	</div>
 						    	</div>
+
 						    	<div id="plotInputGroup" class="form-group">
-						      	<label for="inputGenus" class="col-lg-3 control-label">Plot*</label>
-						      	<div class="col-lg-4">
-						        	<div class="bfh-selectbox">
-						          	<input type="hidden" id="plot" name="plot_id" value=<?= (isset($individual) ? $individual[0]->plot_id : "") ?>>
-						          	<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-						            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->siteTitle . ' - ' . $individual[0]->plotCode : " Escolhe um » ") ?></span>
-						            	<b class="caret"></b>
-						          	</a>
-						          	<div class="bfh-selectbox-options">
-						            	<input type="text" class="bfh-selectbox-filter">
-						            	<div role="listbox">
-						            	<ul role="option">
-						              	<? 
-						              	foreach($plots as $plot){
-						                	echo '<li> <a tabindex="-1" href="#" data-option=' . $plot->plot_id . '>' . $plot->title . " - " . $plot->code . '</a></li>';
-						              	}
-						            	?>
-						            	</ul>
-						          	</div>
-						          	</div>
-						        	</div>
-						      	</div>
+							      	<label for="inputGenus" class="col-lg-3 control-label">Plot*</label>
+							      	<div class="col-lg-4">
+							        	<div class="bfh-selectbox">
+							          	<input type="hidden" id="plot" name="plot_id" value=<?= (isset($individual) ? $individual[0]->plot_id : "") ?>>
+							          	<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
+							            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->siteTitle . ' - ' . $individual[0]->plotCode : " Escolhe um » ") ?></span>
+							            	<b class="caret"></b>
+							          	</a>
+							          	<div class="bfh-selectbox-options">
+							            	<input type="text" class="bfh-selectbox-filter">
+							            	<div role="listbox">
+							            	<ul role="option">
+							              	<? 
+							              	foreach($plots as $plot){
+							                	echo '<li> <a tabindex="-1" href="#" data-option=' . $plot->plot_id . '>' . $plot->title . " - " . $plot->code . '</a></li>';
+							              	}
+							            	?>
+							            	</ul>
+							          	</div>
+							          	</div>
+							        	</div>
+							      	</div>
 						        </div>
+
 						        <div id="speciesInputGroup" class="form-group">
 							    	<label for="inputGenus" class="col-lg-3 control-label">Espécie*</label>
 							      	<div class="col-lg-4">
@@ -158,7 +182,7 @@
 
 						    	<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 									<div class="text-center">
-										<button onclick="location.href='../lists/individual-list.html'" type="button" class="btn btn-xs">Cancelar</button>
+										<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
 										<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
 									</div>
 								</div>

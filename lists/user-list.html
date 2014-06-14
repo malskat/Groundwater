@@ -44,7 +44,7 @@
   			$users = $userData->getUsers(isset($_GET["page"]) ? $_GET["page"] : 0); 
   		}
   		
-  		$fields = $userData->getUserFieldsListConf();
+  		$fields = $userData->getFieldList();
   	?>
   	
     <!-- incluir menu principal -->
@@ -136,8 +136,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($users[0]->totalRecords % User::TOTAL_ROWS_USER) > 0 ? 1 : 0);
-                $nPages = floor($users[0]->totalRecords / User::TOTAL_ROWS_USER) + $addPage;
+                $addPage = (($users[0]->totalRecords % $userData->getTotalRows()) > 0 ? 1 : 0);
+                $nPages = floor($users[0]->totalRecords / $userData->getTotalRows()) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

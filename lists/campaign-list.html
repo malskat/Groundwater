@@ -72,7 +72,7 @@
 
 		$sites = $siteData->getSites(-1);
 		$seasons = $seasonData->getSeasons(-1);
-		$fields = $campaignData->getCampaignFieldsListConf();
+		$fields = $campaignData->getFieldList();
   	?>
   	
     <!-- incluir menu principal -->
@@ -104,7 +104,7 @@
                 <option value="none">Site</option>
                 <?
                   foreach($sites as $site){
-                    echo '<option ' . ($site->site_id == $_GET["site"] ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
+                    echo '<option ' . (isset($_GET["site"]) && $site->site_id == $_GET["site"] ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
                   }
                 ?>
               </select>
@@ -115,7 +115,7 @@
                 <option value="none">Época</option>
                 <?
                   foreach($seasons as $season){
-                    echo '<option ' . ($season->season_id == $_GET["season"] ? 'selected' : '') . ' value="' . $season->season_id . '">' . $season->code . '</option>';
+                    echo '<option ' . (isset($_GET["season"]) && $season->season_id == $_GET["season"] ? 'selected' : '') . ' value="' . $season->season_id . '">' . $season->code . '</option>';
                   }
                 ?>
               </select>
@@ -191,8 +191,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($campaigns[0]->totalRecords % Campaign::TOTAL_ROWS_CAMPAIGN) > 0 ? 1 : 0);
-                $nPages = floor($campaigns[0]->totalRecords / Campaign::TOTAL_ROWS_CAMPAIGN) + $addPage;
+                $addPage = (($campaigns[0]->totalRecords % $campaignData->getTotalRows()) > 0 ? 1 : 0);
+                $nPages = floor($campaigns[0]->totalRecords / $campaignData->getTotalRows()) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );

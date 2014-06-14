@@ -82,7 +82,7 @@
 			  $individuals = $individualData->getIndividualPlotSpecies(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotals = 1);
 		}
 
-		$fields = $individualData->getIndividualFieldsListConf();
+		$fields = $individualData->getFieldList();
 
 		$siteData = new Site();
 		$sites = $siteData->getSites(-1);
@@ -121,7 +121,7 @@
 					<option value="none">Site</option>
 					<?
 					foreach($sites as $site){
-						echo '<option ' . ($site->site_id == $_GET["site"] ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
+						echo '<option ' . (isset($_GET["site"]) && $site->site_id == $_GET["site"] ? 'selected' : '') . ' value="' . $site->site_id . '">' . $site->title . '</option>';
 					}
 					?>
 				</select>
@@ -129,7 +129,7 @@
 					<option value="none">Plot</option>
 					<?
 					  foreach($plots as $plot){
-					    echo '<option ' . ($plot->plot_id == $_GET["plot"] ? 'selected' : '') . ' value="' . $plot->plot_id . '">' . $plot->title . " - " . $plot->code . '</option>';
+					    echo '<option ' . (isset($_GET["plot"]) && $plot->plot_id == $_GET["plot"] ? 'selected' : '') . ' value="' . $plot->plot_id . '">' . $plot->title . " - " . $plot->code . '</option>';
 					  }
 					?>
 				</select>
@@ -139,7 +139,7 @@
                 <option value="none">Espécie</option>
                 <?
                   foreach($species as $specie){
-                    echo '<option ' . ($specie->species_id == $_GET["species"] ? 'selected' : '') . ' value="' . $specie->species_id . '">' . $specie->genus . ' - ' . $specie->species . '</option>';
+                    echo '<option ' . (isset($_GET["species"]) && $specie->species_id == $_GET["species"] ? 'selected' : '') . ' value="' . $specie->species_id . '">' . $specie->genus . ' - ' . $specie->species . '</option>';
                   }
                 ?>
               </select>
@@ -180,28 +180,33 @@
 	                    if(isset($individual->individualCode)){
 	               			echo '<tr>
 	      	            	    <td>' . $individual->individualCode . '</td>
-	      	                	<td>' . (isset($individual->phenologicalType) && $individual->phenologicalType != "" ? $individual->phenologicalType : 'ND' ) . '</td>
 	      	                  	<td>' . $individual->genus . ' - ' . $individual->species . '</td>
 	                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>';
 	                        
 	                        //eco-fisio
 	                        if ($individual->totalEcoFisio > 0) {
 	                        	echo '<td>
-	                            		<a href="../lists/ecoFisio-list.html?individualCode=' . $individual->individualCode .  '"><span class="badge">' . $individual->totalEcoFisio . '</span></a>
+	                            		<a href="../lists/ecoFisio-list.html?individualCode=' . $individual->individualCode .  '"><span class="label label-info">' . $individual->totalEcoFisio . '</span></a>
 										</td>';
 	                        } else {
 	                        	echo '<td>
-		                            	<span class="badge">' . $individual->totalEcoFisio . '</span>
+		                            	<span class="label label-default">' . $individual->totalEcoFisio . '</span>
 									</td>';
 	                        }
 
-	                            
+	                        if(isset($individual->struture_id)) {
+	                        	echo '<td><a href="../forms/struture.html?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Sim</span></a></td>';
+	                        } else {
+	                        	echo '<td><a href="../forms/struture.html?individualCode=' . $individual->individualCode .  '"><span class="label label-default">Não</span></a></td>';
+	                        }
+
 	      	                echo '<td>
 	      	                  		<button onclick="location.href=\'../forms/individual.html?individualCode=' . $individual->individualCode . '\'" type="button" class="btn btn-primary btn-xs">
 	      	                  			<span class="glyphicon glyphicon glyphicon-edit"></span>
 	      	                  		</button>
 	      	                  	</td>';
-	  	                  	if ($individual->totalEcoFisio == 0) {
+
+	  	                  	if ($individual->totalEcoFisio || isset($individual->struture_id) == 0) {
 	                            echo '<td>
 	                              <button onclick="beginDelete(\'action=delete&class=individual&id=' . $individual->individualCode . '\', \'Queres mesmo remover este Indivíduo?\');" type="button" class="btn btn-danger btn-xs">
 	                                <span class="glyphicon glyphicon-remove-sign"></span>
@@ -236,8 +241,8 @@
             <ul class="pagination">
               <?
                 //paginas
-                $addPage = (($individuals[0]->totalRecords % Individual::TOTAL_ROWS_INDIVIDUAL) > 0 ? 1 : 0);
-                $nPages = floor($individuals[0]->totalRecords / Individual::TOTAL_ROWS_INDIVIDUAL) + $addPage;
+                $addPage = (($individuals[0]->totalRecords % $individualData->getTotalRows()) > 0 ? 1 : 0);
+                $nPages = floor($individuals[0]->totalRecords / $individualData->getTotalRows()) + $addPage;
                 if ( $nPages > 1) {
 
                   $currentPage = (isset($_GET["page"]) ? $_GET["page"] : 1 );
