@@ -106,7 +106,7 @@
 			  </ul>
 			</li>
 
-			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecoFisio') !== false ? 'class="active"' :  '')?> class="dropdown">
+			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecoFisio') !== false || strpos($_SERVER['PHP_SELF'], 'struture') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Indivíduos <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Indivíduos</li>
@@ -117,6 +117,10 @@
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
 			    <li><a href=<?="/forms/ecoFisio-csv.html"?>>Actualizar por CSV</a></li>
+			    
+			    <li role="presentation" class="divider"></li>
+			    <li role="presentation" class="dropdown-header">Struture</li>
+			    <li><a href=<?="/forms/struture-csv.html"?>>Actualizar por CSV</a></li>
 			  </ul>
 			</li>
 		<?
@@ -144,9 +148,9 @@
 				            		<li class="dropdown">
 				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
-					            			<li><a href="'.'/forms/user.html?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
-					            			<li><a href="' .'/forms/user.html"?>Recuperar password</a></li>
-					            			<li><a href="'.'/services/make_exit.php?destination=' . $_SERVER['PHP_SELF'] . '">Logout</a></li>
+					            			<li><a href="/forms/user.html?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
+					            			<li><a href="/forms/user.html"?>Recuperar password</a></li>
+					            			<li><a href="/services/make_exit.php?destination=' . $_SERVER['HTTP_REFERER'] . '">Logout</a></li>
 					            		</ul>
 					            	</li>
 					            </ul>

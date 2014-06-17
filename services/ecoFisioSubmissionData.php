@@ -82,16 +82,16 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 				        		if (count($ecoFisioExists) == 0) {
 				        			//insercao de eco-fisiologia
-									if ($ecoFisioData->insertEcoFisio($ecoFisioRecord) == 1) {
-										$operated++;
-									}
+									$reply = $ecoFisioData->insertEcoFisio($ecoFisioRecord);
 
 				        		} else {
 									//actualizacao de eco-fisiologia
-				        			if ($ecoFisioData->updateEcoFisio($ecoFisioRecord) == 1){
-				        				$operated++;
-				        			}
+				        			$reply = $ecoFisioData->updateEcoFisio($ecoFisioRecord);
 				        		}
+
+				        		if ($reply['_success_'] == 1) {
+			        				$operated++;
+			        			}
 
 
 				        	} else {

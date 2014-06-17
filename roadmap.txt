@@ -15,14 +15,14 @@
 
  	» FRONTEND
 
+ 		* formulário de inserção de Struture por .csv - DONE
  		* resolver o && que fica depois de eliminarmos vários registos seguidos.
 
 
  	» SERVIÇOS
 
  		* recuperar password;
- 		* inserir struture massivo;
-
+ 		* inserir struture massivo - DONE
 		
 	» DADOS
 

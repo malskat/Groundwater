@@ -43,7 +43,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 	  	if($extension != 'csv'){
 			header('Location: /forms/species-csv.html?success=-1&reason=Ficheiro tem de ser csv!');
-	  	} else if (file_exists(PROJECT_DOCS_CENTER . $_FILES["file"]["name"])){
+	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
 			header('Location: /forms/species-csv.html?success=-1&reason=Ficheiro ja foi processado!');
 	  	} else {
 			
@@ -88,14 +88,14 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 				if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
 
 					if($errorString != ''){
-						header('Location: /lists/species-list.html?success=-2&reason=' . $errorString);
+						header('Location: /forms/species-csv.html?success=-2&reason=' . $errorString);
 					} else {
-						header('Location: /lists/species-list.html?success=1&inserted=' . $inserted);	
+						header('Location: /forms/species-csv.html?success=1&inserted=' . $inserted);	
 					}
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /lists/species-list.html?success=-1&reason=ficheiro nao passou para a directoria final');
+					header('Location: /forms/species-list.html?success=-1&reason=ficheiro não passou para a directoria final!');
 				}
 			}
 
@@ -103,8 +103,8 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
   		}
 	} catch (Exception $e) {
 		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-  		header('Location: /lists/species-list.html?success=-1&reason=' . $e);
+  		header('Location: /forms/species-list.html?success=-1&reason=' . $e);
 	}
 } else {
-	header('Location: /forms/species.html?success=-1&reason=Tipo de submissão não suportado!');
+	header('Location: /forms/species-csv.html?success=-1&reason=Tipo de submissão não suportado!');
 }
