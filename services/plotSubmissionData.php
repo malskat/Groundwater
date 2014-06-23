@@ -27,14 +27,14 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		}
 		
 		if ($reply['_success_'] == 1){
-			header('Location: /forms/plot.html?success=1' . $urlComplement);
+			header('Location: /forms/plot.php?success=1' . $urlComplement);
 		} else {
-			header('Location: /forms/plot.html?success=-3&reason=Nao houve alteracao nenhuma!' . $urlComplement);
+			header('Location: /forms/plot.php?success=-3&reason=Nao houve alteracao nenhuma!' . $urlComplement);
 		}
 
 		
 	}else{
-		header('Location: /forms/plot.html?success=-1&reason=Faltam parametros!');
+		header('Location: /forms/plot.php?success=-1&reason=Faltam parametros!');
 	}
 }
 else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel'){
@@ -45,9 +45,9 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: /forms/plot-csv.html?success=-1&reason=Ficheiro tem de ser csv.');
+			header('Location: /forms/plot-csv.php?success=-1&reason=Ficheiro tem de ser csv.');
 	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-			header('Location: /forms/plot-csv.html?success=-1&reason=Ficheiro ja foi processado.');
+			header('Location: /forms/plot-csv.php?success=-1&reason=Ficheiro ja foi processado.');
 	  	}else{
 			//mover o ficheiro da pasta temporaria
 	  		move_uploaded_file($_FILES["file"]["tmp_name"], PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
@@ -99,14 +99,14 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 				if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
 
 					if($errorString != ''){
-						header('Location: /lists/plot-list.html?success=-2&reason='.$errorString);
+						header('Location: /lists/plot-list.php?success=-2&reason='.$errorString);
 					}else{
-						header('Location: /lists/plot-list.html?success=1&inserted=' . $inserted);	
+						header('Location: /lists/plot-list.php?success=1&inserted=' . $inserted);	
 					}
 
 				}else{
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /lists/plot-list.html?success=-1&reason=ficheiro nao passou para a directoria final!');
+					header('Location: /lists/plot-list.php?success=-1&reason=ficheiro nao passou para a directoria final!');
 				}
 			}
 
@@ -114,6 +114,6 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 	  	}
 	}catch(Exception $e){
 		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-  		header('Location: /lists/plot-list.html?success=-1&reason=' . $e);
+  		header('Location: /lists/plot-list.php?success=-1&reason=' . $e);
 	}
 }

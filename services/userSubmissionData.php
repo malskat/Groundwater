@@ -63,14 +63,14 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 	}
 	
 	if($reply['_success_'] == 1) {
-		header('Location: /forms/user.html?success=1' . $urlComplement);
+		header('Location: /forms/user.php?success=1' . $urlComplement);
 	} else if ($reply['_success_'] == -4) {
-		header('Location: /forms/user.html?success=-1&reason=Já existe um utilizador com este email!');
+		header('Location: /forms/user.php?success=-1&reason=Já existe um utilizador com este email!');
 	} else {
-		header('Location: /forms/user.html?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+		header('Location: /forms/user.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
 	}
 
 	
 } else {
-	header('Location: forms/user.html?success=-1&reason=Faltam parametros ao utilizador!');
+	header('Location: forms/user.php?success=-1&reason=Faltam parametros ao utilizador!');
 }

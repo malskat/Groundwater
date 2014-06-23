@@ -21,12 +21,12 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != "" && isset($_POST["endD
 	}
 	
 	if($reply['_success_'] == 1){
-		header('Location: /forms/campaign.html?success=1' . $urlComplement);
+		header('Location: /forms/campaign.php?success=1' . $urlComplement);
 	} else {
-		header('Location: /forms/campaign.html?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+		header('Location: /forms/campaign.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
 	}
 
 	
 }else{
-	header('Location: /forms/campaign.html?success=-1&reason=Faltam parametros!');
+	header('Location: /forms/campaign.php?success=-1&reason=Faltam parametros!');
 }

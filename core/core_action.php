@@ -25,10 +25,10 @@ switch($action){
 			if (isset($_GET["redirect"])) {
 				header('Location: ' . $_GET["redirect"] . '?' . ($parameters != '&' ? $parameters : '') . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
 			} else {
-				header('Location: /lists/' . $_GET["class"] . '-list.html?' . ($parameters != '&' ? $parameters : '') . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
+				header('Location: /lists/' . $_GET["class"] . '-list.php?' . ($parameters != '&' ? $parameters : '') . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
 			}
 		} else {
-			header('Location: index.html');
+			header('Location: index.php');
 		}
 		break;
 	}
@@ -42,9 +42,9 @@ switch($action){
 				}
 			}
 			$filterOptions = substr($filterOptions, 0, -1);
-			header('Location: /lists/' . $_POST["class"] . '-list.html' . $filterOptions);
+			header('Location: /lists/' . $_POST["class"] . '-list.php' . $filterOptions);
 		} else {
-			header('Location: /lists/' . $_POST["class"] . '-list.html');
+			header('Location: /lists/' . $_POST["class"] . '-list.php');
 		} 
 		break;
 	}

@@ -20,13 +20,13 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != ""
 	}
 	
 	if($reply['_success_'] == 1){
-		header('Location: /forms/season.html?success=1' . $urlComplement);
+		header('Location: /forms/season.php?success=1' . $urlComplement);
 	} else {
-		header('Location: /forms/season.html?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+		header('Location: /forms/season.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
 	}
 
 	
 }else{
-	header('Location: /forms/season.html?success=-1&reason=Faltam parametros!');
+	header('Location: /forms/season.php?success=-1&reason=Faltam parametros!');
 }
 

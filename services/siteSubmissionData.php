@@ -19,12 +19,12 @@ if (isset($_POST["code"]) && $_POST["code"] != "" && isset($_POST["country"]) &&
 	}
 	
 	if($reply['_success_'] == 1) {
-		header('Location: /forms/site.html?success=1' . $urlComplement);
+		header('Location: /forms/site.php?success=1' . $urlComplement);
 	} else {
-		header('Location: /forms/site.html?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+		header('Location: /forms/site.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
 	}
 
 	
 } else {
-	header('Location: /forms/site.html?success=-1&reason=Faltam parametros ao local!');
+	header('Location: /forms/site.php?success=-1&reason=Faltam parametros ao local!');
 }

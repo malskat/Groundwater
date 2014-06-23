@@ -11,8 +11,7 @@
 </div>	
 
 <?php 
-	require_once '/config/constants.php';
-
+	require_once 'config/constants.php';
 	session_start();
 	$showloggedItens = false;
 	if(isset($_SESSION['user']) && ($_SESSION['user']['entrance'] + PROJECT_LOGGED_PERMITED_TIME) >= time()) {
@@ -72,12 +71,12 @@
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campanhas <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    <li role="presentation" class="dropdown-header">Épocas</li>
-			    <li><a href=<?="/forms/season.html" ?>>Inserir</a></li>
-			    <li><a href=<?="/lists/season-list.html"?>>Consultar</a></li>
+			    <li><a href=<?="/forms/season.php" ?>>Inserir</a></li>
+			    <li><a href=<?="/lists/season-list.php"?>>Consultar</a></li>
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Campanhas</li>
-			    <li><a href=<?="/forms/campaign.html" ?>>Inserir</a></li>
-			    <li><a href=<?= "/lists/campaign-list.html"?>>Consultar</a></li>
+			    <li><a href=<?="/forms/campaign.php" ?>>Inserir</a></li>
+			    <li><a href=<?= "/lists/campaign-list.php"?>>Consultar</a></li>
 			  </ul>
 			</li>
 
@@ -86,23 +85,23 @@
 			  <ul class="dropdown-menu">
 			    
 			    <li role="presentation" class="dropdown-header">Site</li>
-			    <li><a href=<?="/forms/site.html"?>>Inserir</a></li>
-			    <li><a href=<?="/lists/site-list.html"?>>Consultar</a></li> 
+			    <li><a href=<?="/forms/site.php"?>>Inserir</a></li>
+			    <li><a href=<?="/lists/site-list.php"?>>Consultar</a></li> 
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Plot</li>
-			    <li><a href=<?="/forms/plot.html"?>>Inserir</a></li>
-			    <li><a href=<?="/forms/plot-csv.html"?>>Inserir por CSV</a></li>
-			    <li><a href=<?="/lists/plot-list.html"?>>Consultar</a></li> 
+			    <li><a href=<?="/forms/plot.php"?>>Inserir</a></li>
+			    <li><a href=<?="/forms/plot-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?="/lists/plot-list.php"?>>Consultar</a></li> 
 			  </ul>
 			</li>
 
 			<li <?=(strpos($_SERVER['PHP_SELF'], 'species') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espécies <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			    <li><a href=<?="/forms/species.html"?>>Inserir</a></li>
-			    <li><a href=<?="/forms/species-csv.html"?>>Inserir por CSV</a></li>
-			    <li><a href=<?="/lists/species-list.html"?>>Consultar</a></li> 
+			    <li><a href=<?="/forms/species.php"?>>Inserir</a></li>
+			    <li><a href=<?="/forms/species-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?="/lists/species-list.php"?>>Consultar</a></li> 
 			  </ul>
 			</li>
 
@@ -110,26 +109,26 @@
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Indivíduos <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Indivíduos</li>
-			    <li><a href=<?="/forms/individual.html"?>>Inserir</a></li>
-			    <li><a href=<?="/forms/individual-csv.html"?>>Inserir por CSV</a></li>
-			    <li><a href=<?="/lists/individual-list.html"?>>Consultar</a></li>  
+			    <li><a href=<?="/forms/individual.php"?>>Inserir</a></li>
+			    <li><a href=<?="/forms/individual-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?="/lists/individual-list.php"?>>Consultar</a></li>  
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
-			    <li><a href=<?="/forms/ecoFisio-csv.html"?>>Actualizar por CSV</a></li>
+			    <li><a href=<?="/forms/ecoFisio-csv.php"?>>Actualizar por CSV</a></li>
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Struture</li>
-			    <li><a href=<?="/forms/struture-csv.html"?>>Actualizar por CSV</a></li>
+			    <li><a href=<?="/forms/struture-csv.php"?>>Actualizar por CSV</a></li>
 			  </ul>
 			</li>
-		<?
+		<?php
 			if ($showloggedItens) {
 				echo '<li ' . (strpos($_SERVER['PHP_SELF'], 'use') !== false ? 'class="active"' :  '') .  ' class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilizadores <b class="caret"></b></a>
 								  	<ul class="dropdown-menu">
-								    	<li><a href="' .'/forms/user.html">Inserir</a></li>
-								    	<li><a href="' .'/lists/user-list.html">Consultar</a></li> 
+								    	<li><a href="' .'/forms/user.php">Inserir</a></li>
+								    	<li><a href="' .'/lists/user-list.php">Consultar</a></li> 
 								  	</ul>
 						</li>';
 
@@ -138,7 +137,7 @@
 
 		</ul>
 
-		<?
+		<?php
 
 			if ($showloggedItens) {
 				//utilizador logado
@@ -148,8 +147,8 @@
 				            		<li class="dropdown">
 				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
-					            			<li><a href="/forms/user.html?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
-					            			<li><a href="/forms/user.html"?>Recuperar password</a></li>
+					            			<li><a href="/forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
+					            			<li><a href="/forms/user.php"?>Recuperar password</a></li>
 					            			<li><a href="/services/make_exit.php?destination=' . $_SERVER['HTTP_REFERER'] . '">Logout</a></li>
 					            		</ul>
 					            	</li>
