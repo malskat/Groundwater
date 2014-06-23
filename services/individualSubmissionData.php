@@ -19,10 +19,10 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
 		if ($_POST["operationType"] == 'insert') {
 			unset($_POST["operationType"]);
-			$reply = $individualData->insertIndividual($_POST);
+			$reply = $individualData->insert($_POST);
 		}else {
 			unset($_POST["operationType"]);
-			$reply = $individualData->updateIndividual($_POST);
+			$reply = $individualData->update($_POST);
 		}
 
 
@@ -94,7 +94,7 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 							        		$toInsert['phenologicalType'] = $data[7];
 							        	}
 
-							        	$reply = $individualData->insertIndividual($toInsert);
+							        	$reply = $individualData->insert($toInsert);
 
 										if($reply['_success_'] == 1) {
 											$inserted++;

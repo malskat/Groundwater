@@ -32,7 +32,7 @@ class EcoFisio extends gObject {
 
 	}
 
-	function insertEcoFisio ($toInsert = array()){
+	function insert ($toInsert = array()){
 
 		require_once '../core/core_database.php';
 
@@ -57,7 +57,7 @@ class EcoFisio extends gObject {
 		return CoreDatabase::insertDB($this->_entityName, $fields, $values);
 	}
 
-	function updateEcoFisio ($toUpdate){
+	function update ($toUpdate){
 
 		require_once '../core/core_database.php';
 

@@ -3,15 +3,15 @@
 
 
  	» CLASSES
- 		* rever todos os nomes dos métodos de inserção e actualização:
- 			* site 
- 			* season
- 			* campaign
- 			* species
- 			* plot
- 			* individual
- 			* ecoFisio
- 			* user
+ 		* rever todos os nomes dos métodos de inserção e actualização:  - DONE
+ 			* site - DONE
+ 			* season - DONE
+ 			* campaign - DONE
+ 			* species - DONE
+ 			* plot - DONE
+ 			* individual - DONE
+ 			* ecoFisio - DONE
+ 			* user - DONE
 
  	» FRONTEND
 

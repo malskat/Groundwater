@@ -13,10 +13,10 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != "" && isset($_POST["endD
 	$urlComplement = '';
 
 	if(!isset($_POST["sampling_campaign_id"])){
-		$reply = $campaignData->insertCampaign($_POST);
+		$reply = $campaignData->insert($_POST);
 		$urlComplement = '&campaign_id=' . $reply['_id_'];
 	}else{
-		$reply = $campaignData->updateCampaign($_POST);
+		$reply = $campaignData->update($_POST);
 		$urlComplement = '&campaign_id=' . $_POST["sampling_campaign_id"];
 	}
 	

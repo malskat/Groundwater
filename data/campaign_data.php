@@ -35,7 +35,7 @@ class Campaign extends gObject {
 
 	}
 
-	function insertCampaign($toInsert = array()){
+	function insert($toInsert = array()){
 
 		require_once '../core/core_database.php';
 
@@ -56,7 +56,7 @@ class Campaign extends gObject {
 	}
 
 
-	function updateCampaign($toUpdate){
+	function update($toUpdate){
 
 		require_once '../core/core_database.php';
 

@@ -15,10 +15,10 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		$urlComplement = '';
 
 		if (!isset($_POST["species_id"])) {
-			$reply = $speciesData->insertSpecies($_POST);
+			$reply = $speciesData->insert($_POST);
 			$urlComplement = '&species_id=' . $reply['_id_'];
 		} else {
-			$reply = $speciesData->updateSpecies($_POST);
+			$reply = $speciesData->update($_POST);
 			$urlComplement = '&species_id=' . $_POST["species_id"];
 		}
 
@@ -71,7 +71,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			        	$toInsert['code'] = $data[3];
 			        	$toInsert['functionalGroup'] = $data[4];
 
-			        	$reply = $speciesData->insertSpecies($toInsert);
+			        	$reply = $speciesData->insert($toInsert);
 			        	
 						if ($reply['_success_'] == 1) {
 							$inserted++;

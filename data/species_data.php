@@ -35,7 +35,7 @@ class Species extends gObject {
 
 	}
 
-	function insertSpecies($toInsert = array()){
+	function insert($toInsert = array()){
 
 		require_once '../core/core_database.php';
 
@@ -57,7 +57,7 @@ class Species extends gObject {
 
 	}
 
-	function updateSpecies($toUpdate){
+	function update($toUpdate){
 
 		require_once '../core/core_database.php';
 

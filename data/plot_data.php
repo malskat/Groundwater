@@ -37,7 +37,7 @@ class Plot extends gObject {
 
 	}
 
-	function insertPlot($toInsert = array()){
+	function insert($toInsert = array()){
 
 		require_once '../core/core_database.php';
 
@@ -63,7 +63,7 @@ class Plot extends gObject {
 
 	}
 
-	function updatePlot($toUpdate){
+	function update($toUpdate){
 
 		require_once '../core/core_database.php';
 

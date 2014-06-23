@@ -14,10 +14,10 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 		if($_POST["operationType"] == 'insert'){
 			unset($_POST["operationType"]);
-			$reply = $ecoFisioData->insertEcoFisio($_POST);
+			$reply = $ecoFisioData->insert($_POST);
 		}else {
 			unset($_POST["operationType"]);
-			$reply = $ecoFisioData->updateEcoFisio($_POST);
+			$reply = $ecoFisioData->update($_POST);
 		}
 
 		if($reply['_success_'] == 1){
@@ -82,11 +82,11 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 				        		if (count($ecoFisioExists) == 0) {
 				        			//insercao de eco-fisiologia
-									$reply = $ecoFisioData->insertEcoFisio($ecoFisioRecord);
+									$reply = $ecoFisioData->insert($ecoFisioRecord);
 
 				        		} else {
 									//actualizacao de eco-fisiologia
-				        			$reply = $ecoFisioData->updateEcoFisio($ecoFisioRecord);
+				        			$reply = $ecoFisioData->update($ecoFisioRecord);
 				        		}
 
 				        		if ($reply['_success_'] == 1) {

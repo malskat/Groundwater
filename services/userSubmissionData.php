@@ -40,7 +40,7 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 		if (count($user) > 0) {
 			$reply['_success_'] = -4;
 		} else {
-			$reply = $userData->insertUser($_POST);
+			$reply = $userData->insert($_POST);
 			$urlComplement = '&user_id=' . $reply['_id_'];
 		}
 
@@ -51,7 +51,7 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 		unset($_POST["user_id"]);
 		unset($_POST["emailUser"]);
 
-		$reply = $userData->updateUser($_POST);
+		$reply = $userData->update($_POST);
 		$urlComplement = '&user_id=' . $_POST["biologyst_id"];
 
 		/*$user = $userData->getUserBy("email = '" . $_POST["email"] . "' and biologyst_id <> " . $_POST["biologyst_id"], -1);

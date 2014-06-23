@@ -37,7 +37,7 @@ class Season extends gObject {
 
 	}
 
-	function insertSeason($toInsert = array()){
+	function insert($toInsert = array()){
 
 		require_once '../core/core_database.php';
 
@@ -59,7 +59,7 @@ class Season extends gObject {
 
 	}
 
-	function updateSeason($toUpdate){
+	function update($toUpdate){
 
 		require_once '../core/core_database.php';
 

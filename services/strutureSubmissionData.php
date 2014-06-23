@@ -97,7 +97,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		        				$individualToUpdate['coordinateX'] = ($data[6] != "" ? $data[6] : '-1');
 		        				$individualToUpdate['coordinateY'] = ($data[7] != "" ? $data[7] : '-1');
 
-		        				$success = $individualData->updateIndividual($individualToUpdate);
+		        				$success = $individualData->update($individualToUpdate);
 
 		        				if ($success['_success_'] != 1) {
 			        				$errorString .= "» Linha " . $row . ", individualCode " . $data[0] . " não foi possível actualizar as coordenadas; <br />";

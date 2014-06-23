@@ -66,7 +66,7 @@ class User extends gObject {
 		return $logged;
 	}
 
-	function insertUser($toInsert = array()){
+	function insert($toInsert = array()){
 
 		require_once '../core/core_database.php';
 
@@ -88,7 +88,7 @@ class User extends gObject {
 
 	}
 
-	function updateUser($toUpdate){
+	function update($toUpdate){
 
 		require_once '../core/core_database.php';
 

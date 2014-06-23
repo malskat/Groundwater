@@ -49,7 +49,7 @@ class Individual extends gObject {
 
 	}
 
-	function insertIndividual ($toInsert = array()){
+	function insert ($toInsert = array()){
 
 		require_once '../core/core_database.php';
 
@@ -74,7 +74,7 @@ class Individual extends gObject {
 		return CoreDatabase::insertDB($this->_entityName,   $fields, $values);
 	}
 
-	function updateIndividual ($toUpdate){
+	function update ($toUpdate){
 
 		require_once '../core/core_database.php';
 

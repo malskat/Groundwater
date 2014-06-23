@@ -12,10 +12,10 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != ""
 	$urlComplement = '';
 
 	if(!isset($_POST["season_id"])){
-		$reply = $seasonData->insertSeason($_POST);
+		$reply = $seasonData->insert($_POST);
 		$urlComplement = '&season_id=' . $reply['_id_'];
 	}else{
-		$reply = $seasonData->updateSeason($_POST);
+		$reply = $seasonData->update($_POST);
 		$urlComplement = '&season_id=' . $_POST["season_id"];
 	}
 	

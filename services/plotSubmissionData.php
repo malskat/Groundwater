@@ -19,10 +19,10 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		$urlComplement = '';
 
 		if (!isset($_POST["plot_id"])){
-			$reply = $plotData->insertPlot($_POST);
+			$reply = $plotData->insert($_POST);
 			$urlComplement = '&plot_id=' . $reply["_id_"];
 		} else {
-			$reply = $plotData->updatePlot($_POST);
+			$reply = $plotData->update($_POST);
 			$urlComplement = '&plot_id=' . $_POST["plot_id"];
 		}
 		
@@ -76,7 +76,7 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 				        	$toInsert['coordinateX'] = $data[2];
 				        	$toInsert['coordinateY'] = $data[3];
 
-				        	$reply = $plotData->insertPlot($toInsert);
+				        	$reply = $plotData->insert($toInsert);
 
 							if ($reply['_success_'] == 1 ) {
 								$inserted++;
