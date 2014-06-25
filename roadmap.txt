@@ -3,37 +3,36 @@
 
 
  	» CLASSES
- 		* rever todos os nomes dos métodos de inserção e actualização:  - DONE
- 			* site - DONE
- 			* season - DONE
- 			* campaign - DONE
- 			* species - DONE
- 			* plot - DONE
- 			* individual - DONE
- 			* ecoFisio - DONE
- 			* user - DONE
+ 		* criar classe para os logs;
 
  	» FRONTEND
 
- 		* formulário de inserção de Struture por .csv - DONE
+ 		* não permitir actualizações sem existir um utilizador logado;
+ 			* mostrar popup a sugerir login;
+ 		* formulário para recuperação de password:
+ 			* popup com recolha de email;
+ 		
  		* resolver o && que fica depois de eliminarmos vários registos seguidos.
 
 
  	» SERVIÇOS
 
  		* recuperar password;
+ 			* configurar o envio de emails;
+ 			* enviar email com nova password;
+ 			* validar se email existe na BD;
  		* inserir struture massivo - DONE
 		
 	» DADOS
 
 		* login - não permitir a alteracao do email de um utilizador - DONE
 		* inserir Eco-Fisios reais - parcialmente DONE;
+		* criar mecanismo de logs para relacionar utilizadores com actualizações;
 		* inserir struture reais
 			* pode actualizar coordenadas do indivíduo.
 
 	» SERVIDOR
 
-		* nos ficheiros de _data retirar a / em todos os require_once
 		* actualizar tabela plot_climate (plot_attributes) e site_climate_data
 
 	
@@ -41,7 +40,6 @@
 
  		* colocar fontawesome no menu;
  		* evitar SQL injection;
- 		* incluir modificationDate em todas as tabelas, com trigger adicionado ao update.
 
  	
 

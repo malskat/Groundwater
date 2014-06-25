@@ -147,21 +147,12 @@
 					            </ul>
 							</div>
 						</div>';
-			} else {
+			} else if (strpos($_SERVER['PHP_SELF'], 'login') === false) {
 
 				//formulario de utilizador
-				echo '<div id="loginForm" name="loginForm">
-							<form class="navbar-form navbar-right" role="form" onsubmit="return validateLogin();" action="'. PROJECT_URL . 'services/make_entrance.php" method="post">
-								<input id="destination" name="destination" type="hidden" value="' . $_SERVER['PHP_SELF'] . '"">
-								<div id="emailInputGroup" class="form-group">
-									<input id="email" name="email" type="text" placeholder="Email" class="form-control">
-								</div> 
-								<div id="passInputGroup" class="form-group">
-									<input id="password" name="password" type="password" placeholder="Password" class="form-control">
-								</div>
-								<button id="loginTooltip" type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Por implementar!">Login</button>
-							</form>
-						</div>';
+				echo '<div id="loginForm" name="loginForm" class="navbar-form navbar-right">
+						<button id="loginTooltip" class="btn btn-success btn-sm" onclick="location.href=\'../forms/login.php\'">Login</button>
+					</div>';
 			}
 		?>
 		
@@ -192,9 +183,6 @@
 </div>
 
 <script>
-
-	//para mostrar a tooltip do login
-	$('#loginTooltip').tooltip({trigger: 'hover'});
 
 	//para fechar o alert;
 	$(function(){

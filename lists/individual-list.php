@@ -165,73 +165,73 @@
     <div class="container">
   		<div class="row spacer">
   			<div class="col-xs-12 col-lg-12">
-          <table class="table table-hover">
-        		<thead>
-              <tr class="active">
-              	<?php
-              		foreach ($fields as $field) {
-              			echo '<th>' . $field . '</th>';
-              		}
-              	?>
-                <th>Editar</th>
-                <th>Remover</th>
-              </tr>
-            </thead>
-            <tbody>
-          		<?php
-                if(count($individuals) > 1) {
-             		foreach ($individuals as $individual) {
-	                    if(isset($individual->individualCode)){
-	               			echo '<tr>
-	      	            	    <td>' . $individual->individualCode . '</td>
-	      	                  	<td>' . $individual->genus . ' - ' . $individual->species . '</td>
-	                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>';
-	                        
-	                        //eco-fisio
-	                        if ($individual->totalEcoFisio > 0) {
-	                        	echo '<td>
-	                            		<a href="../lists/ecofisio-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">' . $individual->totalEcoFisio . '</span></a>
-										</td>';
-	                        } else {
-	                        	echo '<td>
-		                            	<a href="../forms/ecoFisio.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">' . $individual->totalEcoFisio . '</span></a>
-									</td>';
-	                        }
+          		<table class="table table-hover">
+	        		<thead>
+		              <tr class="active">
+		              	<?php
+		              		foreach ($fields as $field) {
+		              			echo '<th>' . $field . '</th>';
+		              		}
+		              	?>
+		                <th>Editar</th>
+		                <th>Remover</th>
+		              </tr>
+	            	</thead>
+		            <tbody>
+		          		<?php
+		                if(count($individuals) > 1) {
+		             		foreach ($individuals as $individual) {
+			                    if(isset($individual->individualCode)){
+			               			echo '<tr>
+			      	            	    <td>' . $individual->individualCode . '</td>
+			      	                  	<td>' . $individual->genus . ' - ' . $individual->species . '</td>
+			                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>';
+			                        
+			                        //eco-fisio
+			                        if ($individual->totalEcoFisio > 0) {
+			                        	echo '<td>
+			                            		<a href="../lists/ecofisio-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">' . $individual->totalEcoFisio . '</span></a>
+												</td>';
+			                        } else {
+			                        	echo '<td>
+				                            	<a href="../forms/ecoFisio.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">' . $individual->totalEcoFisio . '</span></a>
+											</td>';
+			                        }
 
-	                        if(isset($individual->struture_id)) {
-	                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Sim</span></a></td>';
-	                        } else {
-	                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">Não</span></a></td>';
-	                        }
+			                        if(isset($individual->struture_id)) {
+			                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Sim</span></a></td>';
+			                        } else {
+			                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">Não</span></a></td>';
+			                        }
 
-	      	                echo '<td>
-	      	                  		<button onclick="location.href=\'../forms/individual.php?individualCode=' . $individual->individualCode . '\'" type="button" class="btn btn-primary btn-xs">
-	      	                  			<span class="glyphicon glyphicon glyphicon-edit"></span>
-	      	                  		</button>
-	      	                  	</td>';
+			      	                echo '<td>
+			      	                  		<button onclick="location.href=\'../forms/individual.php?individualCode=' . $individual->individualCode . '\'" type="button" class="btn btn-primary btn-xs">
+			      	                  			<span class="glyphicon glyphicon glyphicon-edit"></span>
+			      	                  		</button>
+			      	                  	</td>';
 
-	  	                  	if ($individual->totalEcoFisio || isset($individual->struture_id) == 0) {
-	                            echo '<td>
-	                              <button onclick="beginDelete(\'action=delete&class=individual&id=' . $individual->individualCode . '\', \'Queres mesmo remover este Indivíduo?\');" type="button" class="btn btn-danger btn-xs">
-	                                <span class="glyphicon glyphicon-remove-sign"></span>
-	                              </button>
-	                            </td>';
-	                      	} else {
-	                      		echo '<td>
-	                      				<span id="removeTooltip_' . $individual->individualCode . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="Tem amostragens associadas">É melhor não</span> 
-	                      			</td>';
-	                      	}
-	      	                echo '</tr>';
-	                    }
-               		}
-                } else {
-                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>'; 
-                }
-             	?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+			  	                  	if ($individual->totalEcoFisio || isset($individual->struture_id) == 0) {
+			                            echo '<td>
+			                              <button onclick="beginDelete(\'action=delete&class=individual&id=' . $individual->individualCode . '\', \'Queres mesmo remover este Indivíduo?\');" type="button" class="btn btn-danger btn-xs">
+			                                <span class="glyphicon glyphicon-remove-sign"></span>
+			                              </button>
+			                            </td>';
+			                      	} else {
+			                      		echo '<td>
+			                      				<span id="removeTooltip_' . $individual->individualCode . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="Tem amostragens associadas">É melhor não</span> 
+			                      			</td>';
+			                      	}
+			      	                echo '</tr>';
+			                    }
+		               		}
+		                } else {
+		                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>'; 
+		                }
+		             	?>
+		            </tbody>
+          		</table>
+        	</div>
+      	</div>
     </div>
 
     <!-- paginacao -->
