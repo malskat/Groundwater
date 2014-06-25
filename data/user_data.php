@@ -1,6 +1,6 @@
 <?php
 
-require_once '/gObject.php';
+require_once 'gObject.php';
 
 $passHashCompatible = function_exists('password_hash');
 

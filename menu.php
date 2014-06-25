@@ -1,3 +1,6 @@
+<?php
+	require_once 'config/constants.php';
+?>
 <!-- incluir alertas -->
 <div class="container">
 	<div class="row">
@@ -10,18 +13,7 @@
 	</div>
 </div>	
 
-<?php 
-	require_once 'config/constants.php';
-	session_start();
-	$showloggedItens = false;
-	if(isset($_SESSION['user']) && ($_SESSION['user']['entrance'] + PROJECT_LOGGED_PERMITED_TIME) >= time()) {
-		$showloggedItens = true;
-	} else if (isset($_SESSION['user'])) {
-		//retirar o user de sessao caso tenha passado o tempo permitido de acesso autorizado
-		unset($_SESSION['user']);
-	}
 
-?>
 <script src="../js/utils.js"></script>
 <script>
 
@@ -71,12 +63,12 @@
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campanhas <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    <li role="presentation" class="dropdown-header">Épocas</li>
-			    <li><a href=<?="/forms/season.php" ?>>Inserir</a></li>
-			    <li><a href=<?="/lists/season-list.php"?>>Consultar</a></li>
+			    <li><a href=<?=PROJECT_URL . "forms/season.php" ?>>Inserir</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/season-list.php"?>>Consultar</a></li>
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Campanhas</li>
-			    <li><a href=<?="/forms/campaign.php" ?>>Inserir</a></li>
-			    <li><a href=<?= "/lists/campaign-list.php"?>>Consultar</a></li>
+			    <li><a href=<?=PROJECT_URL . "forms/campaign.php" ?>>Inserir</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/campaign-list.php"?>>Consultar</a></li>
 			  </ul>
 			</li>
 
@@ -85,23 +77,23 @@
 			  <ul class="dropdown-menu">
 			    
 			    <li role="presentation" class="dropdown-header">Site</li>
-			    <li><a href=<?="/forms/site.php"?>>Inserir</a></li>
-			    <li><a href=<?="/lists/site-list.php"?>>Consultar</a></li> 
+			    <li><a href=<?=PROJECT_URL . "forms/site.php"?>>Inserir</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/site-list.php"?>>Consultar</a></li> 
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Plot</li>
-			    <li><a href=<?="/forms/plot.php"?>>Inserir</a></li>
-			    <li><a href=<?="/forms/plot-csv.php"?>>Inserir por CSV</a></li>
-			    <li><a href=<?="/lists/plot-list.php"?>>Consultar</a></li> 
+			    <li><a href=<?=PROJECT_URL . "forms/plot.php"?>>Inserir</a></li>
+			    <li><a href=<?=PROJECT_URL . "forms/plot-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/plot-list.php"?>>Consultar</a></li> 
 			  </ul>
 			</li>
 
 			<li <?=(strpos($_SERVER['PHP_SELF'], 'species') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espécies <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			    <li><a href=<?="/forms/species.php"?>>Inserir</a></li>
-			    <li><a href=<?="/forms/species-csv.php"?>>Inserir por CSV</a></li>
-			    <li><a href=<?="/lists/species-list.php"?>>Consultar</a></li> 
+			    <li><a href=<?=PROJECT_URL . "forms/species.php"?>>Inserir</a></li>
+			    <li><a href=<?=PROJECT_URL . "forms/species-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/species-list.php"?>>Consultar</a></li> 
 			  </ul>
 			</li>
 
@@ -109,26 +101,26 @@
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Indivíduos <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Indivíduos</li>
-			    <li><a href=<?="/forms/individual.php"?>>Inserir</a></li>
-			    <li><a href=<?="/forms/individual-csv.php"?>>Inserir por CSV</a></li>
-			    <li><a href=<?="/lists/individual-list.php"?>>Consultar</a></li>  
+			    <li><a href=<?=PROJECT_URL . "forms/individual.php"?>>Inserir</a></li>
+			    <li><a href=<?=PROJECT_URL . "forms/individual-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/individual-list.php"?>>Consultar</a></li>  
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
-			    <li><a href=<?="/forms/ecoFisio-csv.php"?>>Actualizar por CSV</a></li>
+			    <li><a href=<?=PROJECT_URL . "forms/ecoFisio-csv.php"?>>Actualizar por CSV</a></li>
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Struture</li>
-			    <li><a href=<?="/forms/struture-csv.php"?>>Actualizar por CSV</a></li>
+			    <li><a href=<?=PROJECT_URL . "forms/struture-csv.php"?>>Actualizar por CSV</a></li>
 			  </ul>
 			</li>
 		<?php
-			if ($showloggedItens) {
+			if ($_BIOLOGYST_LOGGED) {
 				echo '<li ' . (strpos($_SERVER['PHP_SELF'], 'use') !== false ? 'class="active"' :  '') .  ' class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilizadores <b class="caret"></b></a>
 								  	<ul class="dropdown-menu">
-								    	<li><a href="' .'/forms/user.php">Inserir</a></li>
-								    	<li><a href="' .'/lists/user-list.php">Consultar</a></li> 
+								    	<li><a href="' . PROJECT_URL .'forms/user.php">Inserir</a></li>
+								    	<li><a href="' . PROJECT_URL . 'lists/user-list.php">Consultar</a></li> 
 								  	</ul>
 						</li>';
 
@@ -139,7 +131,7 @@
 
 		<?php
 
-			if ($showloggedItens) {
+			if ($_BIOLOGYST_LOGGED) {
 				//utilizador logado
 				echo '<div id="loggedInfo" name="loggedInfo">
 							<div class="navbar-collapse collapse">
@@ -147,9 +139,9 @@
 				            		<li class="dropdown">
 				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
-					            			<li><a href="/forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
-					            			<li><a href="/forms/user.php"?>Recuperar password</a></li>
-					            			<li><a href="/services/make_exit.php?destination=' . $_SERVER['HTTP_REFERER'] . '">Logout</a></li>
+					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
+					            			<li><a href="'. PROJECT_URL . 'forms/user.php"?>Recuperar password</a></li>
+					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $_SERVER['HTTP_REFERER'] . '">Logout</a></li>
 					            		</ul>
 					            	</li>
 					            </ul>
@@ -159,7 +151,7 @@
 
 				//formulario de utilizador
 				echo '<div id="loginForm" name="loginForm">
-							<form class="navbar-form navbar-right" role="form" onsubmit="return validateLogin();" action="../services/make_entrance.php" method="post">
+							<form class="navbar-form navbar-right" role="form" onsubmit="return validateLogin();" action="'. PROJECT_URL . 'services/make_entrance.php" method="post">
 								<input id="destination" name="destination" type="hidden" value="' . $_SERVER['PHP_SELF'] . '"">
 								<div id="emailInputGroup" class="form-group">
 									<input id="email" name="email" type="text" placeholder="Email" class="form-control">

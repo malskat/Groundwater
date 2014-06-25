@@ -1,3 +1,6 @@
+<?php
+	include "../checkBiologyst.php";
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,7 +36,7 @@
 	  		$individualCode = '';
 	  		$campaigns = array();
 	  		if(isset($_GET["individualCode"]) && isset($_GET["sampling_campaign_id"])){
-	  			include "../data/ecoFisio_data.php"; 
+	  			include "../data/ecofisio_data.php"; 
 	  			
 	  			$ecoFisioData = new EcoFisio();
 				$ecoFisio = $ecoFisioData->getEcoFisioBy(" ef.individualCode = '" . $_GET["individualCode"] . "' and ef.sampling_campaign_id = " . $_GET["sampling_campaign_id"], $orderBy = '', $page = -1);
@@ -218,7 +221,7 @@
 
 		  					<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 		  						<div class="text-center">
-		  							<button onclick="location.href='../lists/ecoFisio-list.php?individualCode=<?=$individualCode?>'" type="button" class="btn btn-xs">Cancelar</button>
+		  							<button onclick="location.href='../lists/ecofisio-list.php?individualCode=<?=$individualCode?>'" type="button" class="btn btn-xs">Cancelar</button>
 		  							<button class="btn btn-xs btn-primary" type="submit"><?=(isset($ecoFisio) ? "Alterar" : "Submeter")?></button>
 		  						</div>
 		  					</div>

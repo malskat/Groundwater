@@ -1,7 +1,7 @@
-8<?php
+<?php
 
 require_once '../config/constants.php';
-require_once '../data/ecoFisio_data.php';
+require_once '../data/ecofisio_data.php';
 require_once '../data/individual_data.php';
 
 if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
@@ -21,9 +21,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		}
 
 		if($reply['_success_'] == 1){
-			header('Location: /lists/ecoFisio-list.php?individualCode=' . $_POST["individualCode"] . '&success=1');
+			header('Location: /lists/ecofisio-list.php?individualCode=' . $_POST["individualCode"] . '&success=1');
 		} else {
-			header('Location: /lists/ecoFisio-list.php?individualCode=' . $_POST["individualCode"] . '&success=-3&reason=Não houve alteração nenhuma!');
+			header('Location: /lists/ecofisio-list.php?individualCode=' . $_POST["individualCode"] . '&success=-3&reason=Não houve alteração nenhuma!');
 		}
 	} else {
 		header('Location: /forms/ecoFisio.php?success=-1&reason=Faltam parametros!');

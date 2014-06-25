@@ -1,7 +1,7 @@
 <?php
 
-require_once '/gObject.php';
-
+require_once 'gObject.php';
+ 
 class Species extends gObject {
 
 	function __construct (){
@@ -16,7 +16,7 @@ class Species extends gObject {
 		$query = 'Select SQL_CALC_FOUND_ROWS s.* ' .
 					($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
 				From species s ' . 
-					($withTotalIndividuals == 1 ? ' Left Join Individual i On i.species_id = s.species_id ' : '') .
+					($withTotalIndividuals == 1 ? ' Left Join individual i On i.species_id = s.species_id ' : '') .
 					($withTotalIndividuals == 1 ? ' Group by s.species_id ' : '') .
 				' Order By s.genus, s.species';
 		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
@@ -28,7 +28,7 @@ class Species extends gObject {
 		$query = 'Select SQL_CALC_FOUND_ROWS s.* ' .
 					($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
 					From species s ' . 
-					($withTotalIndividuals == 1 ? ' Left Join Individual i On i.species_id = s.species_id ' : '') . 
+					($withTotalIndividuals == 1 ? ' Left Join individual i On i.species_id = s.species_id ' : '') . 
 					' Where ' . $whereClause . ($withTotalIndividuals == 1 ? ' Group by s.species_id ' : '') .
 					' Order By s.genus, s.species';
 		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);

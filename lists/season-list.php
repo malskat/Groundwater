@@ -1,3 +1,6 @@
+<?php
+	include "../checkBiologyst.php";
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

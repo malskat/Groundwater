@@ -1,6 +1,6 @@
 <?php
 
-require_once '/gObject.php';
+require_once 'gObject.php';
 
 class Site extends gObject {
 

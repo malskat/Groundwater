@@ -15,7 +15,8 @@
 		$_SESSION['user']['user_id'] = $user[0]->biologyst_id;
 		$_SESSION['user']['entrance'] = time(); 
 		$_SESSION['user']['first_name'] = $user[0]->first_name;
-		$_SESSION['user']['last_name'] = $user[0]->last_name; 
+		$_SESSION['user']['last_name'] = $user[0]->last_name;
+		session_write_close(); 
 
 		header('Location: ' . $_POST['destination']);
 	} else {

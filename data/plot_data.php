@@ -1,6 +1,6 @@
 <?php
 
-require_once '/gObject.php';
+require_once 'gObject.php';
 
 class Plot extends gObject {
 
@@ -16,9 +16,9 @@ class Plot extends gObject {
 		include_once '../core/core_database.php';
 		return CoreDatabase::selectDBQuery('Select SQL_CALC_FOUND_ROWS p.*, s.code as siteCode, s.title ' .
 							($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
-							From Plot p 
-							Join Site s On s.site_id = p.site_id ' . 
-							($withTotalIndividuals == 1 ? ' Left Join Individual i On i.plot_id = p.plot_id Group by p.plot_id ' : '') . '
+							From plot p 
+							Join site s On s.site_id = p.site_id ' . 
+							($withTotalIndividuals == 1 ? ' Left Join individual i On i.plot_id = p.plot_id Group by p.plot_id ' : '') . '
 							Order By s.title', $this->_totalRows, $page);
 	}
 
@@ -28,8 +28,8 @@ class Plot extends gObject {
 		$query = 'Select SQL_CALC_FOUND_ROWS p.*, s.code as siteCode, s.title' .
 					($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . '
 				From plot p
-				Join Site s On s.site_id = p.site_id ' . 
-					($withTotalIndividuals == 1 ? ' Left Join Individual i On i.plot_id = p.plot_id ' : '') . '
+				Join site s On s.site_id = p.site_id ' . 
+					($withTotalIndividuals == 1 ? ' Left Join individual i On i.plot_id = p.plot_id ' : '') . '
 				Where ' . $whereClause . ($withTotalIndividuals == 1 ? ' Group by p.plot_id ' : '') . 
 				' Order By s.title';
 				

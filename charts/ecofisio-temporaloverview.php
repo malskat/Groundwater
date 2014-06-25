@@ -1,3 +1,6 @@
+<?php
+	include "../checkBiologyst.php";
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -38,7 +41,7 @@
 
 			$ecoFisioValues = array();
 			if (isset($_GET['individualCode'])) {
-		    	include '../data/ecoFisio_data.php';
+		    	include '../data/ecofisio_data.php';
 		    	$ecoFisioData = new EcoFisio();
 		    	$ecoFisioValues = $ecoFisioData->getEcoFisioBy($where = 'ef.individualCode = "' . $_GET['individualCode'] . '"', $orderBy = 'ef.samplingDate ASC' , -1);
 			

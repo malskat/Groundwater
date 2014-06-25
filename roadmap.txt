@@ -31,6 +31,11 @@
 		* inserir struture reais
 			* pode actualizar coordenadas do indivíduo.
 
+	» SERVIDOR
+
+		* nos ficheiros de _data retirar a / em todos os require_once
+		* actualizar tabela plot_climate (plot_attributes) e site_climate_data
+
 	
 	» Melhoramentos
 

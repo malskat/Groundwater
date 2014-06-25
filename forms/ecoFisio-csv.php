@@ -1,3 +1,6 @@
+<?php
+	include "../checkBiologyst.php";
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,7 +42,7 @@
 	    	$campaignData = new Campaign();
 	    	$campaigns = $campaignData->getCampaigns(-1);
 
-	    	include '../data/ecoFisio_data.php';
+	    	include '../data/ecofisio_data.php';
 	    	$ecoData = new EcoFisio();
 	    	$ecoBlocks = $ecoData->getEcoFisioDataBlocks();
 	    ?>

@@ -1,3 +1,6 @@
+<?php
+	include "../checkBiologyst.php";
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -32,7 +35,7 @@
 	  	<?php include "../menu.php";?>
 
 	  	<?
-		    include '../data/ecoFisio_data.php';
+		    include '../data/ecofisio_data.php';
 
 			$ecoFisioValues = array();
 		    $ecoFisioData = new EcoFisio();
@@ -152,7 +155,7 @@
 		                    echo '<li class="disabled"><a >&laquo;</a></li>';
 		                  } else {
 		                    $newPage = ($currentPage - 1);
-		                    echo '<li><a href="ecoFisio-list.php?individualCode=' . $_GET['individualCode'] . '&page=' . $newPage . '">&laquo;</a></li>';
+		                    echo '<li><a href="ecofisio-list.php?individualCode=' . $_GET['individualCode'] . '&page=' . $newPage . '">&laquo;</a></li>';
 		                  }
 
 		                  $begin = (($currentPage - 3) > 1 ? ($currentPage - 3) :  1 ); 
@@ -160,7 +163,7 @@
 
 		                  for ($i = $begin; $i <= $end; $i++ ) {
 		                    $active = ($currentPage == $i  ? 'class="active"' : "");
-		                    echo '<li ' . $active . '><a href="ecoFisio-list.php?individualCode=' . $_GET['individualCode'] . '&page='. $i .'">' . $i . '</a></li>';
+		                    echo '<li ' . $active . '><a href="ecofisio-list.php?individualCode=' . $_GET['individualCode'] . '&page='. $i .'">' . $i . '</a></li>';
 		                  }
 
 		                  //botao para a frente
@@ -168,7 +171,7 @@
 		                    echo '<li class="disabled"><a >&raquo;</a></li>';
 		                  } else {
 		                    $newPage = ($currentPage   + 1);
-		                    echo '<li><a href="ecoFisio-list.php?individualCode=' . $_GET['individualCode'] . '&page=' . $newPage .'">&raquo;</a></li>';
+		                    echo '<li><a href="ecofisio-list.php?individualCode=' . $_GET['individualCode'] . '&page=' . $newPage .'">&raquo;</a></li>';
 		                  }
 
 		                }

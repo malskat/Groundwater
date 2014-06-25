@@ -1,3 +1,6 @@
+<?php
+	include "../checkBiologyst.php";
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -187,7 +190,7 @@
 	                        //eco-fisio
 	                        if ($individual->totalEcoFisio > 0) {
 	                        	echo '<td>
-	                            		<a href="../lists/ecoFisio-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">' . $individual->totalEcoFisio . '</span></a>
+	                            		<a href="../lists/ecofisio-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">' . $individual->totalEcoFisio . '</span></a>
 										</td>';
 	                        } else {
 	                        	echo '<td>
