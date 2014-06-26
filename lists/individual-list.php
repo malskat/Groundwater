@@ -194,7 +194,7 @@
 												</td>';
 			                        } else {
 			                        	echo '<td>
-				                            	<a href="../forms/ecoFisio.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">' . $individual->totalEcoFisio . '</span></a>
+				                            	<a href="../forms/ecofisio.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">' . $individual->totalEcoFisio . '</span></a>
 											</td>';
 			                        }
 

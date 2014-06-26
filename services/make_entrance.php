@@ -20,7 +20,7 @@
 
 		header('Location: ' . $_POST['destination']);
 	} else {
-		header('Location: ' . $_POST['destination'] . '?success=-4&reason=login inválido');
+		header('Location: ' . PROJECT_URL . 'forms/login.php?success=-4');
 	}
 
 ?>

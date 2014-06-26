@@ -20,6 +20,7 @@
 
   //para os alertas
 	var params = getQueryParams(window.location.search);
+    
     if (params["success"] < 0) {
 
       	if(params["success"] == -3) {
@@ -30,11 +31,17 @@
         	$('#alert-message').show();
           	$('#alert-message').addClass('warning');
           	$('#alert-text').html("<strong>Ups daisy!</strong> Operação concluída com sucesso. No entanto verifica o seguinte: <br />" + params["reason"]);
-      	} else {
+      	} else if(params["success"] == -4) {
+        	$('#alert-message').show();
+          	$('#alert-message').addClass('danger');
+          	$('#alert-text').html("<strong>Ups daisy!</strong> Login Inválido. Tenta novamente.");
+      	}else {
         	$('#alert-message').show();
         	$('#alert-message').addClass('danger');
         	$('#alert-text').html("<strong>Shit happens!</strong> Atenção. " + params["reason"]);
       	}
+
+
     } else if (params["success"] == 1) {
       	$('#alert-message').show();
       	$('#alert-message').addClass('success');
@@ -63,11 +70,11 @@
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campanhas <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    <li role="presentation" class="dropdown-header">Épocas</li>
-			    <li><a href=<?=PROJECT_URL . "forms/season.php" ?>>Inserir</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/season.php" : PROJECT_URL . "forms/login.php")?>>Inserir</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/season-list.php"?>>Consultar</a></li>
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Campanhas</li>
-			    <li><a href=<?=PROJECT_URL . "forms/campaign.php" ?>>Inserir</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/campaign.php" : PROJECT_URL . "forms/login.php")?>>Inserir</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/campaign-list.php"?>>Consultar</a></li>
 			  </ul>
 			</li>
@@ -77,13 +84,13 @@
 			  <ul class="dropdown-menu">
 			    
 			    <li role="presentation" class="dropdown-header">Site</li>
-			    <li><a href=<?=PROJECT_URL . "forms/site.php"?>>Inserir</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/site.php" : PROJECT_URL . "forms/login.php")?>>Inserir</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/site-list.php"?>>Consultar</a></li> 
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Plot</li>
-			    <li><a href=<?=PROJECT_URL . "forms/plot.php"?>>Inserir</a></li>
-			    <li><a href=<?=PROJECT_URL . "forms/plot-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot.php" : PROJECT_URL . "forms/login.php")?>>Inserir</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot-csv.php" : PROJECT_URL . "forms/login.php")?>>Inserir por CSV</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/plot-list.php"?>>Consultar</a></li> 
 			  </ul>
 			</li>
@@ -91,27 +98,27 @@
 			<li <?=(strpos($_SERVER['PHP_SELF'], 'species') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espécies <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			    <li><a href=<?=PROJECT_URL . "forms/species.php"?>>Inserir</a></li>
-			    <li><a href=<?=PROJECT_URL . "forms/species-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species.php" : PROJECT_URL . "forms/login.php")?>>Inserir</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species-csv.php" : PROJECT_URL . "forms/login.php")?>>Inserir por CSV</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/species-list.php"?>>Consultar</a></li> 
 			  </ul>
 			</li>
 
-			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecoFisio') !== false || strpos($_SERVER['PHP_SELF'], 'struture') !== false ? 'class="active"' :  '')?> class="dropdown">
+			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecofisio') !== false || strpos($_SERVER['PHP_SELF'], 'struture') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Indivíduos <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Indivíduos</li>
-			    <li><a href=<?=PROJECT_URL . "forms/individual.php"?>>Inserir</a></li>
-			    <li><a href=<?=PROJECT_URL . "forms/individual-csv.php"?>>Inserir por CSV</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual.php" : PROJECT_URL . "forms/login.php")?>>Inserir</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual-csv.php" : PROJECT_URL . "forms/login.php")?>>Inserir por CSV</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/individual-list.php"?>>Consultar</a></li>  
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
-			    <li><a href=<?=PROJECT_URL . "forms/ecoFisio-csv.php"?>>Actualizar por CSV</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/ecofisio-csv.php" : PROJECT_URL . "forms/login.php")?>>Actualizar por CSV</a></li>
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Struture</li>
-			    <li><a href=<?=PROJECT_URL . "forms/struture-csv.php"?>>Actualizar por CSV</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/struture-csv.php" : PROJECT_URL . "forms/login.php")?>>Actualizar por CSV</a></li>
 			  </ul>
 			</li>
 		<?php
@@ -133,6 +140,11 @@
 
 			if ($_BIOLOGYST_LOGGED) {
 				//utilizador logado
+
+				require_once 'core/core_system.php';
+
+				$destination = CoreSystem::retriveReturnUrl($_SERVER['PHP_SELF']);
+
 				echo '<div id="loggedInfo" name="loggedInfo">
 							<div class="navbar-collapse collapse">
 				        		<ul class="nav navbar-nav navbar-right">
@@ -141,7 +153,7 @@
 					            		<ul class="dropdown-menu">
 					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>Consultar</a></li>
 					            			<li><a href="'. PROJECT_URL . 'forms/user.php"?>Recuperar password</a></li>
-					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $_SERVER['HTTP_REFERER'] . '">Logout</a></li>
+					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $destination . '">Logout</a></li>
 					            		</ul>
 					            	</li>
 					            </ul>

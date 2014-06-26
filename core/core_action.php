@@ -15,17 +15,25 @@ switch($action){
 		if(isset($_GET["class"])){
 
 			$parameters = '';
-			$parametersIndex = strpos($_SERVER['HTTP_REFERER'], '?');
-			if ($parametersIndex !== false) {
-				$parameters = substr($_SERVER['HTTP_REFERER'], $parametersIndex + 1) . '&';
+			$parametersStartIndex = strpos($_SERVER['HTTP_REFERER'], '?');
+			if ($parametersStartIndex !== false) {
+				$parameters = substr($_SERVER['HTTP_REFERER'], $parametersStartIndex + 1);
 				$parameters = str_replace("success=1", "", $parameters);
 				$parameters = str_replace("success=2", "", $parameters);
+
+				if (substr($parameters, -1) === '&') {
+					$parameters =substr($parameters, 0,-1);
+				}
+
+				if (substr($parameters, 0, 1) === '&') {
+					$parameters =substr($parameters, 1);
+				}
 			}
 	
 			if (isset($_GET["redirect"])) {
-				header('Location: ' . $_GET["redirect"] . '?' . ($parameters != '&' ? $parameters : '') . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
+				header('Location: ' . $_GET["redirect"] . '?' . ($parameters != '&' ? $parameters : '') . '&success=' . ($toReturn == 1 ? '2' : $toReturn));
 			} else {
-				header('Location: /lists/' . $_GET["class"] . '-list.php?' . ($parameters != '&' ? $parameters : '') . 'success=' . ($toReturn == 1 ? 2 : $toReturn));
+				header('Location: /lists/' . $_GET["class"] . '-list.php?' . ($parameters != '&' ? $parameters : '') . '&success=' . ($toReturn == 1 ? '2' : $toReturn));
 			}
 		} else {
 			header('Location: index.php');
