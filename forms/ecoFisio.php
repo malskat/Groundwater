@@ -258,7 +258,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros à amostragem!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros à amostragem!");
     			return false;
     		} else {
     			return true;

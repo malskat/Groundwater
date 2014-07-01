@@ -11,8 +11,8 @@
  		* formulário para recuperação de password:
  			* popup com recolha de email;
 
- 		* não permitir actualizações sem existir um utilizador logado - DONE
- 		* resolver o && que fica depois de eliminarmos vários registos seguidos. - DONE
+ 		* no menu, não permitir actualizações sem existir um utilizador logado - DONE
+ 		* resolver o && que fica depois de eliminarmos vários registos seguidos - DONE
 
 
  	» SERVIÇOS
@@ -24,7 +24,8 @@
  			* configurar o envio de emails;
  			* enviar email com nova password;
  			* validar se email existe na BD;
- 		* "fechar" os submissionData para não executarem acções sem existir utilizador logado.
+ 		* "fechar" os submissionData para não executarem acções sem existir utilizador logado - DONE
+ 		* não permitir a remoção sem utilizador logado;
 
  		* inserir struture massivo - DONE
 		

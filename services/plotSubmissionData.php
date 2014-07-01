@@ -4,6 +4,12 @@ require_once '../config/constants.php';
 require_once '../data/plot_data.php';
 require_once '../data/site_data.php';
 
+if (!$_BIOLOGYST_LOGGED) {
+	header('Location: /forms/login.php?success=-1&reason=Não existe nenhum utilizador com login activo.');
+	die;
+} 
+
+
 
 if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	if(isset($_POST["code"]) && $_POST["code"] != "" && isset($_POST["coordinateX"]) && $_POST["coordinateX"] != ""

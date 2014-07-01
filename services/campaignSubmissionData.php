@@ -3,6 +3,12 @@
 require_once '../config/constants.php';
 require_once '../data/campaign_data.php';
 
+if (!$_BIOLOGYST_LOGGED) {
+	header('Location: /forms/login.php?success=-1&reason=Não existe nenhum utilizador com login activo.');
+	die;
+} 
+
+
 if(isset($_POST["startDate"]) && $_POST["startDate"] != "" && isset($_POST["endDate"]) && $_POST["endDate"] != "" 
 	&& isset($_POST["designation"]) && $_POST["designation"] != "" 
 	&& isset($_POST["season_id"]) && $_POST["season_id"] != ""

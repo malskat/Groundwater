@@ -110,7 +110,7 @@
 			if (hasErrors){
 				$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros ao login (email e password são obrigatórios)!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros ao login (email e password são obrigatórios)!");
 				return false;
 			} else {
 				$("#loginForm").hide();

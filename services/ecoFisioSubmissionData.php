@@ -4,6 +4,12 @@ require_once '../config/constants.php';
 require_once '../data/ecofisio_data.php';
 require_once '../data/individual_data.php';
 
+if (!$_BIOLOGYST_LOGGED) {
+	header('Location: /forms/login.php?success=-1&reason=Não existe nenhum utilizador com login activo.');
+	die;
+} 
+
+
 if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	if(isset($_POST["individualCode"]) && $_POST["individualCode"] != "" && isset($_POST["samplingDate"]) && $_POST["samplingDate"] != "" && 
 	   	isset($_POST["sampling_campaign_id"]) && $_POST["sampling_campaign_id"] != "") {

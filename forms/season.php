@@ -264,7 +264,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros à época!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros à época!");
     			return false;
     		} else {
     			return true;

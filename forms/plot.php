@@ -205,7 +205,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros ao Plot!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros ao Plot!");
     			return false;
     		} else {
     			return true;

@@ -194,7 +194,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros a este utilizador!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros a este utilizador!");
     			return false;
     		} else {
     			return true;

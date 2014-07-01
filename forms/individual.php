@@ -258,7 +258,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros ao indivíduo!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros ao indivíduo!");
     			return false;
     		} else {
     			return true;

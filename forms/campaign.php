@@ -286,7 +286,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit could happen!</strong> Faltam parâmetros à campanha!");
+		        $('#alert-text').html("<strong>Shit could happen!</strong>Atenção. Faltam parâmetros à campanha!");
     			return false;
     		} else {
     			return true;

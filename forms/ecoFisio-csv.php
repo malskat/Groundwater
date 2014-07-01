@@ -161,7 +161,7 @@
 	    		if (hasErrors){
 	    			$('#alert-message').show();
 			        $('#alert-message').addClass('danger');
-			        $('#alert-text').html("<strong>Shit could happen!</strong> Faltam parâmetros à submissão!");
+			        $('#alert-text').html("<strong>Shit could happen!</strong>Atenção. Faltam parâmetros à submissão!");
 	    			return false;
 	    		} else {
 	    			return true;

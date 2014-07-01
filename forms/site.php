@@ -157,7 +157,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros ao Local!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros ao Local!");
     			return false;
     		} else {
     			return true;

@@ -18,7 +18,12 @@
 		$_SESSION['user']['last_name'] = $user[0]->last_name;
 		session_write_close(); 
 
-		header('Location: ' . $_POST['destination']);
+		$next_address = $_POST['destination'];
+		if (strpos($_POST['destination'], 'login') !== false) {
+			$next_address = '/lists/individual-list.php';
+		}
+
+		header('Location: ' . $next_address);
 	} else {
 		header('Location: ' . PROJECT_URL . 'forms/login.php?success=-4');
 	}
