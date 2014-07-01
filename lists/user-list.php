@@ -77,7 +77,7 @@
 	        </form>
         </div>
         <div class="col-xs-6 col-lg-2"> 
-          <button class="btn btn-primary btn-sm" onclick="location.href='../forms/user.php'">Inserir Utilizador</button>
+          <button class="btn btn-primary btn-sm" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/user.php'">Inserir Utilizador</button>
         </div>
       </div>
     </div>

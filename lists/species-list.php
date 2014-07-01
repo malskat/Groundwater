@@ -77,7 +77,7 @@
         </div>
         <div class="col-xs-6 col-lg-2"> 
           <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" onclick="location.href='../forms/species.php'">Inserir Espécie</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/species.php'">Inserir Espécie</button>
         </div>
       </div>
     </div>

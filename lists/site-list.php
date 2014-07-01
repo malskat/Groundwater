@@ -57,7 +57,7 @@
       <div class="row">
         <div class="col-xs-12 col-lg-10"></div>
         <div class="col-xs-6 col-lg-2">
-          <button class="btn btn-primary btn-sm pull-right" onclick="location.href='../forms/site.php'">Inserir Local</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/site.php'">Inserir Local</button>
         </div>
       </div>
     </div>

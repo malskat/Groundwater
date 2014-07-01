@@ -77,7 +77,7 @@
 								<li><a href="../charts/ecofisio-leaf15NleafCN.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
 							</ul>
 						</div>
-						<button type="button" class="btn btn-primary btn-sm" onclick="location.href='../forms/ecofisio.php?individualCode=<?=$_GET['individualCode']?>'">Inserir Amostragem</button>
+						<button type="button" class="btn btn-primary btn-sm" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/ecofisio.php?individualCode=<?=$_GET['individualCode']?>'">Inserir Amostragem</button>
 					</div>
 				</div>
 			</div>
