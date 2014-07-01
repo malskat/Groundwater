@@ -28,7 +28,7 @@
 
   	<?
   		if(isset ($_GET["user_id"])){
-  			include "../data/user_data.php"; 
+  			require_once "../data/user_data.php"; 
   			$userData = new User();
 			$user = $userData->getUserBy("biologyst_id = " . $_GET["user_id"], -1);
   		}

@@ -27,7 +27,7 @@
   <body>
 
     <?php
-  		include "../data/user_data.php";
+  		require_once "../data/user_data.php";
 
   		$userData = new User();
   		$users = array();

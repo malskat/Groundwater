@@ -66,6 +66,22 @@ class User extends gObject {
 		return $logged;
 	}
 
+	function validateActiveUser() {
+		
+		$logged = false;
+		session_start();
+		
+		if(isset($_SESSION['user']) && ($_SESSION['user']['entrance'] + PROJECT_LOGGED_PERMITED_TIME) >= time()) {
+			$logged = true;
+		} else if (isset($_SESSION['user'])) {
+			//retirar o user de sessao caso tenha passado o tempo permitido de acesso autorizado
+			unset($_SESSION['user']);
+		}
+
+		return $logged;
+
+	}
+
 	function insert($toInsert = array()){
 
 		require_once '../core/core_database.php';

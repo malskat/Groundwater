@@ -1,14 +1,10 @@
 <?php 	
-	session_start();
 	require_once 'config/constants.php';
+	require_once 'data/user_data.php';
 
-	$_BIOLOGYST_LOGGED = false;
-	if(isset($_SESSION['user']) && ($_SESSION['user']['entrance'] + PROJECT_LOGGED_PERMITED_TIME) >= time()) {
-		$_BIOLOGYST_LOGGED = true;
-	} else if (isset($_SESSION['user'])) {
-		//retirar o user de sessao caso tenha passado o tempo permitido de acesso autorizado
-		unset($_SESSION['user']);
-	}
+	$userData = new User();
+	$_BIOLOGYST_LOGGED = $userData->validateActiveUser();
+	
 
 	ini_set('display_errors',1);
 	ini_set('display_startup_erros',1);

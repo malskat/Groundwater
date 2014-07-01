@@ -3,6 +3,7 @@
 require_once '../config/constants.php';
 require_once '../data/plot_data.php';
 require_once '../data/site_data.php';
+require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
 	header('Location: /forms/login.php?success=-1&reason=Não existe nenhum utilizador com login activo.');
