@@ -13,9 +13,9 @@ class EcoFisio extends gObject {
 
 	function getEcoFisioDataBlocks () {
 
-		return array(array("code" => "leaf", "designation" => "Leaf", "attributes" => array("leaf_13C", "leaf_15N", "leaf_perN", "leaf_perC", "leaf_CN")), 
-		            array("code" => "xylem", "designation" => "Xylem Water", "attributes" => array("xylemWater_18O")), 
-		            array("code" => "photo", "designation" => "Photo Synthetic", "attributes" => array("photosinthetic_PI", "photosinthetic_NWI", "photosinthetic_BP")));
+		return array(array("code" => "leaf", "designation" => "Leaf", "show" => true, "attributes" => array("leaf_13C", "leaf_15N", "leaf_perN", "leaf_perC", "leaf_CN")),
+		            array("code" => "xylem", "designation" => "Xylem Water", "show" => true, "attributes" => array("xylemWater_18O")),
+		            array("code" => "photo", "designation" => "Photo Synthetic", "show" => false, "attributes" => array("photosinthetic_PI", "photosinthetic_NWI", "photosinthetic_BP")));
 	}
 
 	function getEcoFisioBy ($whereClause, $orderBy = '', $page = 0){

@@ -1,12 +1,12 @@
 <?php
 
-require_once 'gObject.php';
+require_once  PROJECT_PATH . 'data/gObject.php';
 
 $passHashCompatible = function_exists('password_hash');
 
 //validar se a funcao existe, porque em php 5.3 nao existe, portanto usamos uma lib:
 if (!$passHashCompatible) {
-	require_once('../libs/password.php');
+	require_once PROJECT_PATH . 'libs/password.php';
 }
 
 class User extends gObject {

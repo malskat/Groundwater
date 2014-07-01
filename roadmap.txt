@@ -51,6 +51,7 @@
 	
 	» Melhoramentos
 
+ 		* o caminho dos require e includes está relativo e não absoluto, pode dar problemas tal como deu na seuqência de includes e requires do index.php;
  		* colocar fontawesome no menu;
  		* evitar SQL injection;
 

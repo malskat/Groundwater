@@ -7,7 +7,7 @@ $action = (isset($_GET["action"]) ? $_GET["action"] : $_POST["action"]);
 switch($action){
 	case "delete" : {
 		
-		require_once "../data/user_data.php";
+		require_once PROJECT_PATH . "data/user_data.php";
 
 		$newLocation = '';
 		$parameters = '';
@@ -30,7 +30,7 @@ switch($action){
 		
 		if ($userData->validateActiveUser()) {
 
-			require_once "../data/" . $_GET["class"] ."_data.php";
+			require_once PROJECT_PATH . "data/" . $_GET["class"] ."_data.php";
 
 			//chamada dinamica da funcao
 			$instance = new $_GET["class"];

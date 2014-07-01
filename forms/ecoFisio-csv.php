@@ -87,7 +87,9 @@
 													echo '<option selected value="none">Escolhe um</option>';
 
 												  	foreach ($ecoBlocks as $block) {
-												  		echo '<option value="' . $block["code"] . '">' . $block["designation"]	 . '</option>';
+												  		if ($block["show"]) {
+												  			echo '<option value="' . $block["code"] . '">' . $block["designation"]	 . '</option>';
+												  		}
 												  	}
 												?>	
 		              						</select>								
@@ -114,9 +116,9 @@
 									<div class="panel-body">
 										<p><span class="label label-default">Informações</span></p>
 										<p>Para inserir/actualizar amonstragens eco-fisiológicas de indivíduos, numa determinada campanha.</p>
-										<p>As actualizações estão divididas por blocos: Leaf, Xylen Water e Photo Synthetic.</p>
+										<p>As actualizações estão divididas por 2 blocos: Leaf e Xylen Water.</p>
 										<p>Apenas podem ser submetidos ficheiros com a extensão .csv e com a estrutura criada para a actualização do respectivo bloco.</p>
-										<p>Os ficheiros devem seguir a seguinte estrutura: <strong>individualCode</strong>,<strong>samplingDate</strong> (só é obrigatório se for a primeira amostragem da campanha para esses indivíduos),<strong>valores do bloco</strong> (por exemplo: leaf_13C, leaf_15N, leaf_perN, leaf_perC, leaf_CN).</p>
+										<p>Os ficheiros devem seguir a seguinte estrutura: <strong>individualCode</strong>, <strong>samplingDate</strong> (só é obrigatório se for a primeira amostragem da campanha para esses indivíduos),<strong>valores do bloco</strong> (por exemplo: leaf_13C, leaf_15N, leaf_perN, leaf_perC, leaf_CN).</p>
 										<p><strong>Atenção</strong>: o serviço de inserção faz actualizações de amostragens, desde que para isso o indivíduo já tenho um registo para a campanha escolhida.</p>
 									</div>
 								</div>

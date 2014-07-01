@@ -43,7 +43,6 @@
 		<div class="container">
 			<h1 class="text-center">GWTropiMed</h1>
 			<p class="text-center">Costal dune forests under scenarios of groundwater limitations: from tropics to mediterranean.</p>
-			<p class="text-center">Por Cristina Antunes.</p>
 		</div>
 	</div>
 
