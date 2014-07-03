@@ -37,7 +37,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-         		<h1>Espécies</h1>
+         		<h1>Species</h1>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
       		<div class="col-xs-12 col-lg-12">
 	  			<div class="panel panel-primary">
 		        	<div class="panel-heading">
-					   <h3 class="panel-title">Inserir Espécies por csv</h3>
+					   <h3 class="panel-title">Insert Species by CSV</h3>
 					</div>
 			        <div class="panel-body">
 			        	<div class="col-xs-8 col-lg-8">
@@ -55,7 +55,7 @@
 				  				<input type="hidden" value="excel" name="submissionType" >
 
 				  				<div id="fileInputGroup" class="form-group spacer">
-				  					<label for="inputGenus" class="col-lg-2 control-label">Ficheiro*</label>
+				  					<label for="inputGenus" class="col-lg-2 control-label">File*</label>
 				  					<div class="col-lg-6">
 				  						<input type="file" class="form-control" id="file" name="file" placeholder="">
 				  				 	</div>
@@ -64,8 +64,8 @@
 
 				  				<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 									<div class="text-center">
-										<button onclick="location.href='../lists/species-list.html'" type="button" class="btn btn-xs">Cancelar</button>
-										<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
+										<button onclick="location.href='../lists/species-list.html'" type="button" class="btn btn-xs">Cancel</button>
+										<button class="btn btn-xs btn-primary" type="submit">Submit</button>
 									</div>
 								</div>
 
@@ -74,12 +74,11 @@
 				  		<div class="col-xs-4 col-lg-4">
 				  			<div class="panel panel-default">
 								<div class="panel-body">
-									<p><span class="label label-default">Informações</span></p>
-									<p>1. O ficheiro submetido tem de ter a extensão .csv .</p>
-									<p>2. Podes criar um ficheiro desse tipo no excel. Quando fores gravar selecciona o tipo de ficheiro .csv, da lista de tipos disponíveis.</p>
-									<p>3. A primeira linha do ficheiro está guardada para o nome dos atributos de uma espécie (estes nomes são obrigatórios): <strong>genus</strong>, <strong>species</strong>, <strong>type</strong>, <strong>code</strong> e <strong>functionalGroup</strong>.</p>
-									<p>4. As restantes linhas são as espécies que queres inserir, dispostas de acordo com o títulos da coluna.</p>
-									<p>5. Existe um ficheiro de referência para eventuais dúvidas que possas ter.</p>
+									<p><span class="label label-default">Info</span></p>
+									<p>This form allows you to insert a lot of Individual Species, by submiting a file.</p>
+									<p>Submitted files must have be csv extension.</p>
+									<p>The submitted files must follow this structure: <strong>genus</strong>, <strong>species</strong>, <strong>type</strong>, <strong>code</strong> e <strong>functionalGroup</strong>.</p>
+									<p>Remember, there is always a reference file to consult.</p>
 								</div>
 							</div>
 						</div>

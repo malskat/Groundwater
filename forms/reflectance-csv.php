@@ -32,7 +32,7 @@
 	    <div class="container">
 	      <div class="row">
 	      	<div class="page-header">
-         		<h1>Eco-Physiology</h1>
+         		<h1>Unispec - Reflectance</h1>
 				<h5>Individual - <?=$_GET['individualCode']?></h5>
 	        </div>
 	      </div>
@@ -106,7 +106,7 @@
 										<p>To update reflectance indexes provided by Unispec.</p>
 										<p>Only .csv files are accepted.</p>
 										<p>The submitted files must follow the struture created by the Unispec:<strong>wavelength</strong>, <strong>reflectance value</strong> and <strong>reflectance white reference</strong>.</p>
-										<p><strong>Note</strong>: this service automaticaly updates the individual eco-physiology values (WI, PRI, CHL, CHL NDI and NDVI), through the reflectance indexes provided.</p>
+										<p><strong>Note</strong>: this service automaticaly updates the individual eco-physiology values (WI, PRI, CHL, CHL NDI and NDVI), through the reflectance values provided.</p>
 									</div>
 								</div>
 							</div>

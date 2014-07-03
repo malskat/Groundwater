@@ -28,17 +28,19 @@
   <body>
 
   	<?
-      if(isset ($_GET["species_id"])){
-        include "../data/species_data.php"; 
+		if(isset ($_GET["species_id"])){
+			include "../data/species_data.php"; 
 
-        $speciesData = new Species();        
-        $specieObj = $speciesData->getSpeciesBy("species_id = " . $_GET["species_id"], -1);
+			$speciesData = new Species();        
+			$specieObj = $speciesData->getSpeciesBy("species_id = " . $_GET["species_id"], -1);
 
-        $backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
-  		if (false === strpos($backUrl, 'species-list')) {
+		}
+
+
+		$backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
+		if (false === strpos($backUrl, 'species-list')) {
 			$backUrl = '../lists/species-list.php';
-  		} 
-      }
+		} 
     ?>
 
     <!-- incluir menu principal -->
@@ -47,7 +49,7 @@
     <div class="container">
     	<div class="row">
 	    	<div class="page-header">
-	     		<h1>Espécie</h1>
+	     		<h1>Species</h1>
 	    	</div>
 	    </div>
 	</div>
@@ -57,7 +59,7 @@
   			<div class="col-xs-12 col-lg-12">
 		        <div class="panel panel-primary">
 		        	<div class="panel-heading">
-					   <h3 class="panel-title"><?=((isset($specieObj) && count($specieObj) > 0) ? "Editar Espécie" : "Inserir Espécie")?></h3>
+					   <h3 class="panel-title"><?=((isset($specieObj) && count($specieObj) > 0) ? "Edit Species" : "Insert Species")?></h3>
 					</div>
 			        <div class="panel-body">
                         <div class="col-xs-8 col-lg-8">
@@ -69,7 +71,7 @@
     					        <div id="genusInputGroup" class="form-group">
     					        	<label for="inputGenus" class="col-lg-2 control-label">Genus*</label>
     					        	<div class="col-lg-5">
-    					          	<input type="text" class="form-control" id="genus" name="genus" placeholder="Genus da espécie" value=<?= (isset($specieObj) ? '"' . $specieObj[0]->genus . '"' : "") ?>>
+    					          	<input type="text" class="form-control" id="genus" name="genus" placeholder="Species Genus" value=<?= (isset($specieObj) ? '"' . $specieObj[0]->genus . '"' : "") ?>>
     					        	</div>
     					      	</div>
     					      	<div id="speciesInputGroup" class="form-group">
@@ -79,14 +81,14 @@
     					        	</div>
     					      	</div>
     					      	<div id="typeInputGroup" class="form-group">
-    					        	<label for="inputType" class="col-lg-2 control-label">Tipo*</label>
+    					        	<label for="inputType" class="col-lg-2 control-label">Type*</label>
     					        	<div class="col-lg-5">
     					          	<input type="text" class="form-control" id="type" name="type" placeholder="" value=<?= (isset($specieObj) ? '"' . $specieObj[0]->type . '"' : "") ?>>
     					        	</div>
     					      	</div>
 
     					      	<div id="codeInputGroup" class="form-group">
-    					        	<label for="inputCode" class="col-lg-2 control-label">Código*</label>
+    					        	<label for="inputCode" class="col-lg-2 control-label">Code*</label>
     					        	<div class="col-lg-5">
     					          	<input type="text" class="form-control" id="code" name="code" placeholder="" value=<?= (isset($specieObj) ? '"' . $specieObj[0]->code . '"' : "") ?>>
     					        	</div>
@@ -102,8 +104,8 @@
 
     							<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
     								<div class="text-center">
-    									<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
-    									<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
+    									<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancel</button>
+    									<button class="btn btn-xs btn-primary" type="submit"><?=(isset($specieObj) ? "Change" : "Submit")?></button>
     								</div>
     							</div>
                             </form>
@@ -112,9 +114,9 @@
                         <div class="col-xs-4 col-lg-4">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <p><span class="label label-default">Informações</span></p>
-                                    <p>Neste formulário podes inserir ou alterar as espécies que caracterizam os teus indivíduos.</p>
-                                    <p><strong>Todos os campos com * são obrigatórios.</strong></p>
+                                    <p><span class="label label-default">Info</span></p>
+                                    <p>To insert and update Individual Species.</p>
+                                    <p><strong>All fields with * are mandatory.</strong></p>
                                 </div>
                             </div>
                         </div>

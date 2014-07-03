@@ -5,7 +5,7 @@ require_once '../data/species_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=There is no logged user. Please login.');
+	header('Location: /forms/login.php?success=-1&reason=There is no user logged in. Please log in to continue.');
 	die;
 } 
 

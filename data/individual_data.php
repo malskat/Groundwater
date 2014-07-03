@@ -6,7 +6,7 @@ class Individual extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'individual';
-		$this->_fieldList = array("Code", "Species (Genus-Species)", "Plot", "Eco-Physioloy", "Struture", "Unispec Values");
+		$this->_fieldList = array("Code", "Species (Genus-Species)", "Plot", "Eco-Physiology", "Struture", "Unispec - Reflectance");
 		$this->_totalRows = 10;
 	}
 

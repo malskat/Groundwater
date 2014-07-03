@@ -61,7 +61,7 @@
     <div class="container">
     	<div class="row">
 	    	<div class="page-header">
-	       		<h1>Campanha</h1>
+	       		<h1>Campaign</h1>
 	      	</div>
 	    </div>
 	</div>
@@ -72,7 +72,7 @@
 		<div class="col-xs-12 col-lg-12">
 	        <div class="panel panel-primary">
 	        	<div class="panel-heading">
-				   <h3 class="panel-title"><?=((isset($campaign) && is_array($campaign) && count($campaign) > 0) ? "Editar Campanha" : "Inserir Campanha")?></h3>
+				   <h3 class="panel-title"><?=((isset($campaign) && is_array($campaign) && count($campaign) > 0) ? "Edit Campaign" : "Insert Campaign")?></h3>
 				</div>
 		        <div class="panel-body">
 		        	<div class="col-xs-8 col-lg-8">
@@ -81,20 +81,20 @@
 							<?= (isset($campaign) ?'<input type="hidden" value="' . $campaign[0]->sampling_campaign_id . '" name="sampling_campaign_id" >' : '')?>
 
 							<div id="designationInputGroup" class="form-group">
-								<label for="designation" class="col-lg-2 control-label">Título*</label>
+								<label for="designation" class="col-lg-2 control-label">Title*</label>
 								<div class="col-lg-6">
-									<input type="text" class="form-control" id="designation" name="designation" placeholder="Título da campanha" value=<?= (isset($campaign) ? '"' . $campaign[0]->designation . '"' : "") ?>>
+									<input type="text" class="form-control" id="designation" name="designation" placeholder="Campaign Title" value=<?= (isset($campaign) ? '"' . $campaign[0]->designation . '"' : "") ?>>
 							 	</div>
 							</div>
 
 							<!-- season -->
 							<div id="seasonInputGroup" class="form-group">
-								<label for="inputGenus" class="col-lg-2 control-label">Época*</label>
+								<label for="inputGenus" class="col-lg-2 control-label">Season*</label>
 								<div class="col-lg-6">
 									<select id="season_id" name="season_id" class="form-control input-sm">
 										<?php
 											if (!isset($campaign[0]->site_id)){
-												echo '<option value="none">Escolhe uma</option>';
+												echo '<option value="none">Choose one</option>';
 											}
 
 										  	foreach($seasons as $season){
@@ -110,12 +110,12 @@
 
 							<!-- site -->
 							<div id="siteInputGroup" class="form-group">
-								<label for="inputSite" class="col-lg-2 control-label">Local*</label>
+								<label for="inputSite" class="col-lg-2 control-label">Site*</label>
 								<div class="col-lg-6">
 									<select id="site_id" name="site_id" class="form-control input-sm">
 										<?
 											if (!isset($campaign[0]->site_id)){
-												echo '<option value="none">Escolhe um</option>';
+												echo '<option value="none">Choose one</option>';
 											}
 
 										  	foreach($sites as $site){
@@ -129,7 +129,7 @@
 							</div>
 
 							<div id="startDateInputGroup" class="form-group">
-								<label for="inputCode" class="col-lg-2 control-label">Início*</label>
+								<label for="inputCode" class="col-lg-2 control-label">Begin*</label>
 								<div class="col-lg-4">
 									<div class="bfh-datepicker">
 									  <div data-toggle="bfh-datepicker">
@@ -163,7 +163,7 @@
 							</div>
 
 							<div id="endDateInputGroup" class="form-group">
-								<label for="inputCode" class="col-lg-2 control-label">Fim*</label>
+								<label for="inputCode" class="col-lg-2 control-label">End*</label>
 								<div class="col-lg-4">
 									<div class="bfh-datepicker">
 									  <div class="input-prepend bfh-datepicker-toggle" data-toggle="bfh-datepicker">
@@ -197,14 +197,14 @@
 							</div>
 
 							<div class="form-group">
-								<label for="methodology" class="col-lg-2 control-label">Metodologia</label>
+								<label for="methodology" class="col-lg-2 control-label">Methodology</label>
 								<div class="col-lg-6">
 									<textarea name="methodology" class="form-control" rows="4"><?= (isset($campaign) ? $campaign[0]->methodology : "") ?></textarea>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="description" class="col-lg-2 control-label">Descrição</label>
+								<label for="description" class="col-lg-2 control-label">Description</label>
 								<div class="col-lg-6">
 									<textarea name="description" class="form-control" rows="4"><?= (isset($campaign) ? $campaign[0]->description : "") ?></textarea>
 								</div>
@@ -213,8 +213,8 @@
 
 							<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 								<div class="text-center">
-									<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
-									<button class="btn btn-xs btn-primary" type="submit"><?=(isset($campaign) ? "Alterar" : "Submeter")?></button>
+									<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancel</button>
+									<button class="btn btn-xs btn-primary" type="submit"><?=(isset($campaign) ? "Change" : "Submit")?></button>
 								</div>
 							</div>
 
@@ -224,10 +224,10 @@
 		        	<div class="col-xs-4 col-lg-4">
 				        <div class="panel panel-default">
 					        <div class="panel-body">
-					        	<p><span class="label label-default">Informações</span></p>
-					        	<p>Neste formulário podes inserir ou alterar as tuas campanhas.</p>
-					        	<p>As campanhas permitem identificar os períodos de amostragem.</p>
-						    	<p><strong>Todos os campos com * são obrigatórios.</strong></p>
+					        	<p><span class="label label-default">Info</span></p>
+					        	<p>Insert and update Sampling Campaigns info through this form.</p>
+					        	<p>Sampling Campaigns are important to identify different Individual samples.</p>
+						    	<p><strong>All fields with * are mandatory.</strong></p>
 					        </div>
 				        </div>
 			   		</div>
@@ -286,7 +286,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit could happen!</strong>Atenção. Faltam parâmetros à campanha!");
+		        $('#alert-text').html("<strong>Shit could happen!</strong>Atention. Missing parameters!");
     			return false;
     		} else {
     			return true;

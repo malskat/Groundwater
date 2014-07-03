@@ -59,7 +59,7 @@
     <div class="container">
     	<div class="row">
 	    	<div class="page-header">
-	       		<h1>Indivíduo</h1>
+	       		<h1>Individual</h1>
 	      	</div>
 	    </div>
 	</div>
@@ -69,13 +69,14 @@
 			<div class="col-xs-12 col-lg-12">
 		        <div class="panel panel-primary">
 		        	<div class="panel-heading clearfix">
-				   		<h3 class="panel-title pull-left"><?= (isset($individual) ? "Editar Indíviduo" : "Inserir Indíviduo") ?></h3>
+				   		<h3 class="panel-title pull-left"><?= (isset($individual) ? "Edit Individual" : "Insert Individual") ?></h3>
 				   		<div class="btn-group pull-right">
 							<button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
-								Amonstragens <span class="caret"></span>
+								Samples and Graphs <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a href="../lists/ecofisio-list.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Valores de Eco-Fisiologia</strong></a></li>
+								<li><a href="../lists/ecofisio-list.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Eco-Physiology</strong></a></li>
+								<li><a href="../lists/reflectance-list.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Unispec - Reflectance</strong></a></li>
 								<li><a href="../charts/ecofisio-temporaloverview.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Temporal Overview</strong></a></li>
 								<li><a href="../charts/ecofisio-leaf13CphotoPI.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 13C and PI / Xylem 18O</strong></a></li>
 								<li><a href="../charts/ecofisio-leaf15NleafCN.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
@@ -93,16 +94,16 @@
 						     		if (!isset($individual)) {
 
 								    	echo '<div id="individualCodeInputGroup" class="form-group">
-										      	<label for="inputCode" class="col-lg-3 control-label">Código*</label>
+										      	<label for="inputCode" class="col-lg-3 control-label">Code*</label>
 										      	<div class="col-lg-4">
-										        	<input type="text" class="form-control" id="individualCode" name="individualCode" placeholder="Código do indivíduo">
+										        	<input type="text" class="form-control" id="individualCode" name="individualCode" placeholder="Individual Code">
 									      		</div>
 									    	</div>';
 
 						     		} else {
 						     			echo '<input type="hidden" value="' . $individual[0]->individualCode . '" name="individualCode">';
 						     			echo '<div class="form-group">
-						  						<label class="col-lg-3 control-label">Código</label>
+						  						<label class="col-lg-3 control-label">Code</label>
 						  						<div class="col-lg-4">
 						  							<p class="form-control-static">' . $individual[0]->individualCode . '</p>
 						  					 	</div>
@@ -124,7 +125,7 @@
 							        	<div class="bfh-selectbox">
 							          	<input type="hidden" id="plot" name="plot_id" value=<?= (isset($individual) ? $individual[0]->plot_id : "") ?>>
 							          	<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-							            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->siteTitle . ' - ' . $individual[0]->plotCode : " Escolhe um » ") ?></span>
+							            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->siteTitle . ' - ' . $individual[0]->plotCode : " - Choose one -") ?></span>
 							            	<b class="caret"></b>
 							          	</a>
 							          	<div class="bfh-selectbox-options">
@@ -144,12 +145,12 @@
 						        </div>
 
 						        <div id="speciesInputGroup" class="form-group">
-							    	<label for="inputGenus" class="col-lg-3 control-label">Espécie*</label>
+							    	<label for="inputGenus" class="col-lg-3 control-label">Species*</label>
 							      	<div class="col-lg-4">
 							        	<div class="bfh-selectbox">
 							          	<input type="hidden" id="species" name="species_id" value=<?= (isset($individual) ? $individual[0]->species_id : "") ?>>
 							          	<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-							            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->genus . ' - ' . $individual[0]->species : " Escolhe uma » ") ?></span>
+							            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->genus . ' - ' . $individual[0]->species : " - Choose one -") ?></span>
 							            	<b class="caret"></b>
 							          	</a>
 							          	<div class="bfh-selectbox-options">
@@ -169,13 +170,13 @@
 						    	</div>
 
 						    	<div id="coordinateXInputGroup" class="form-group">
-							      	<label for="inputGenus" class="col-lg-3 control-label">Coordenada X*</label>
+							      	<label for="inputGenus" class="col-lg-3 control-label">Coordinate X*</label>
 							      	<div class="col-lg-4">
 							        	<input type="text" class="form-control" id="coordinateX" name="coordinateX" placeholder="" value=<?= (isset($individual) ? '"' . $individual[0]->coordinateX . '"' : "")?>>
 							      	</div>
 						    	</div>
 						    	<div id="coordinateYInputGroup"  class="form-group">
-							      	<label for="inputGenus" class="col-lg-3 control-label">Coordenada Y*</label>
+							      	<label for="inputGenus" class="col-lg-3 control-label">Coordinate Y*</label>
 							      	<div class="col-lg-4">
 							        	<input type="text" class="form-control" id="coordinateY" name="coordinateY" placeholder="" value=<?= (isset($individual) ? '"' . $individual[0]->coordinateY . '"' : "")?>>
 							      	</div>
@@ -185,8 +186,8 @@
 
 						    	<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 									<div class="text-center">
-										<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
-										<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
+										<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancel</button>
+										<button class="btn btn-xs btn-primary" type="submit"><?=(isset($individual) ? "Change" : "Submit")?></button>
 									</div>
 								</div>
 
@@ -196,9 +197,9 @@
 						<div class="col-xs-4 col-lg-4">
 					        <div class="panel panel-default">
 						        <div class="panel-body">
-						        	<p><span class="label label-default">Informações</span></p>
-						        	<p>Neste formulário podes inserir ou alterar os indivíduos que são amonstrados.</p>	
-							    	<p><strong>Todos os campos com * são obrigatórios.</strong></p>
+						        	<p><span class="label label-default">Info</span></p>
+						        	<p>To insert and update Individuals general information.</p>	
+							    	<p><strong>All fields with * are mandatory.</strong></p>
 						        </div>
 					        </div>
 				   		</div>

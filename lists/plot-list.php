@@ -106,7 +106,7 @@
         </div>
         <div class="col-xs-6 col-lg-2"> 
           <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/plot.php'">Plot Insert</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/plot.php'">Insert Plot</button>
         </div>
       </div>
     </div>
@@ -132,7 +132,7 @@
 	                if(count($plots) > 1) {
 	               		foreach ($plots as $plot) {
 	                    if(isset($plot->plot_id)){
-	                      $plot_type = (isset($plot->plotType) && $plot->plotType != "" ? ($plot->plotType == 'ch' ? 'Charca' : 'Duna') : 'N.D.');
+	                      $plot_type = (isset($plot->plotType) && $plot->plotType != "" ? ($plot->plotType == 'ch' ? 'Pond' : 'Dune') : 'N.D.');
 	               				echo '<tr>
 	    	            	    		<td>' . $plot->plot_id . '</td>
 	    	                			<td>' . $plot->code . '</td>

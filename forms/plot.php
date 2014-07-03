@@ -66,7 +66,7 @@
     		<div class="col-xs-12 col-lg-12">
 		        <div class="panel panel-primary">
 		        	<div class="panel-heading">
-					   <h3 class="panel-title"><?=((isset($plot) && count($plot) > 0) ? "Editar Plot" : "Inserir Plot")?></h3>
+					   <h3 class="panel-title"><?=((isset($plot) && count($plot) > 0) ? "Edit Plot" : "Insert Plot")?></h3>
 					</div>
 			        <div class="panel-body">
 			        	<div class="col-xs-8 col-lg-8">
@@ -77,20 +77,20 @@
 								<?= (isset($plot) && is_array($plot) && count($plot)  ?'<input type="hidden" value="' . $plot[0]->plot_id . '" name="plot_id" >' : '')?>
 
 								<div id="codeInputGroup" class="form-group">
-									<label for="inputCode" class="col-lg-3 control-label">Código*</label>
+									<label for="inputCode" class="col-lg-3 control-label">Code*</label>
 									<div class="col-lg-4">
-										<input type="text" class="form-control" id="code" name="code" placeholder="Código do plot" value=<?= (isset($plot) ? '"' . $plot[0]->code . '"' : "") ?>>
+										<input type="text" class="form-control" id="code" name="code" placeholder="Plot code" value=<?= (isset($plot) ? '"' . $plot[0]->code . '"' : "") ?>>
 								 	</div>
 								</div>
 								
 								<!-- SITE -->
 								<div id="siteInputGroup" class="form-group">
-									<label for="inputSite" class="col-lg-3 control-label">Local*</label>
+									<label for="inputSite" class="col-lg-3 control-label">Site*</label>
 									<div class="col-lg-4">
 										<select id="site_id" name="site_id" class="form-control input-sm">
 											<?
 												if (!isset($plot[0]->site_id)){
-													echo '<option value="none">Escolhe um</option>';
+													echo '<option value="none">Choose one</option>';
 												}
 
 											  	foreach($sites as $site){
@@ -105,30 +105,30 @@
 
 								<!-- TIPO DE PLOT -->
 								<div class="form-group">
-									<label for="inputPlotType" class="col-lg-3 control-label">Tipo de plot</label>
+									<label for="inputPlotType" class="col-lg-3 control-label">Plot type</label>
 									<div class="col-lg-4">
 										<select id="plotType" name="plotType" class="form-control input-sm">
 
 											<?
 											if (!isset($plot[0]->plotType)){
-												echo '<option value="none" selected>Escolhe um</option>';
+												echo '<option value="none" selected>Choose one</option>';
 											}
 											?>
 
 											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'ch' ? 'selected' : '') ?>  value="ch">Charca</option>
-											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'du' ? 'selected' : '') ?>  value="du">Duna</option>
+											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'du' ? 'selected' : '') ?>  value="du">Pond</option>
 	              						</select>									    
 									</div>
 								</div>
 
 								<div id="coordinateXInputGroup" class="form-group">
-									<label for="inputCoordenateX" class="col-lg-3 control-label">Coordenada X*</label>
+									<label for="inputCoordenateX" class="col-lg-3 control-label">Coordinate X*</label>
 									<div class="col-lg-4">
 										<input type="text" class="form-control" id="coordinateX" name="coordinateX" placeholder="" value=<?= (isset($plot) ? '"' . $plot[0]->coordinateX . '"' : "") ?>>
 								 	</div>
 								</div>
 								<div id="coordinateYInputGroup"  class="form-group">
-									<label for="inputCoordinateY" class="col-lg-3 control-label">Coordenada Y*</label>
+									<label for="inputCoordinateY" class="col-lg-3 control-label">Coordinate Y*</label>
 									<div class="col-lg-4">
 										<input type="text" class="form-control" id="coordinateY" name="coordinateY" placeholder="" value=<?= (isset($plot) ? '"' . $plot[0]->coordinateY . '"' : "") ?>>
 								 	</div>
@@ -138,8 +138,8 @@
 
 								<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 									<div class="text-center">
-										<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
-										<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
+										<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancel</button>
+										<button class="btn btn-xs btn-primary" type="submit"><?=(isset($plot) ? "Change" : "Submit")?></button>
 									</div>
 								</div>
 
@@ -149,10 +149,9 @@
 						<div class="col-xs-4 col-lg-4">
 				        	<div class="panel panel-default">
 						        <div class="panel-body">
-						        	<p><span class="label label-default">Informações</span></p>
-						        	<p>Neste formulário podes inserir ou alterar os plots de um Local (Site).</p>
-							    	<p><strong>Todos os campos com * são obrigatórios.</strong></p>
-						        	<p>Apesar de não ser assinaldo, após a validação dos campos obrigatórios, o campo Local do formulário é obrigatório.</p>
+						        	<p><span class="label label-default">Info</span></p>
+						        	<p>To insert and update Site Plots.</p>
+							    	<p><strong>All fields with * are mandatory.</strong></p>
 						        </div>
 				        	</div>
 			   			</div>

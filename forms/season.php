@@ -44,7 +44,7 @@
     <div class="container">
     	<div class="row">
 	    	<div class="page-header">
-	       		<h1>Época</h1>
+	       		<h1>Season</h1>
 	      	</div>
 	    </div>
 	</div>
@@ -55,7 +55,7 @@
 		<div class="col-xs-12 col-lg-12">
 	        <div class="panel panel-primary">
 	        	<div class="panel-heading">
-				   <h3 class="panel-title"><?=((isset($season) && is_array($season) && count($season) > 0) ? "Editar Época" : "Inserir Época")?></h3>
+				   <h3 class="panel-title"><?=((isset($season) && is_array($season) && count($season) > 0) ? "Edit Season" : "Insert Season")?></h3>
 				</div>
 		        <div class="panel-body">
 		        	<div class="col-xs-8 col-lg-8">
@@ -64,14 +64,14 @@
 							<?= (isset($season) ?'<input type="hidden" value="' . $season[0]->season_id . '" name="season_id" >' : '')?>
 
 							<div id="codeInputGroup" class="form-group">
-								<label for="inputCode" class="col-lg-3 control-label">Código*</label>
+								<label for="inputCode" class="col-lg-3 control-label">Code*</label>
 								<div class="col-lg-4">
-									<input type="text" class="form-control" id="code" name="code" placeholder="Código da época" value=<?= (isset($season) ? '"' . $season[0]->code . '"' : "") ?>>
+									<input type="text" class="form-control" id="code" name="code" placeholder="Season code" value=<?= (isset($season) ? '"' . $season[0]->code . '"' : "") ?>>
 							 	</div>
 							</div>
 
 							<div id="startDateInputGroup" class="form-group">
-								<label for="inputCode" class="col-lg-3 control-label">Início (Europa)*</label>
+								<label for="inputCode" class="col-lg-3 control-label">Begin (Europe)*</label>
 								<div class="col-lg-4">
 									<div class="bfh-datepicker">
 									  <div data-toggle="bfh-datepicker">
@@ -105,7 +105,7 @@
 							</div>
 
 							<div id="endDateInputGroup" class="form-group">
-								<label for="inputCode" class="col-lg-3 control-label">Fim (Europa)*</label>
+								<label for="inputCode" class="col-lg-3 control-label">End (Europe)*</label>
 								<div class="col-lg-4">
 									<div class="bfh-datepicker">
 									  <div class="input-prepend bfh-datepicker-toggle" data-toggle="bfh-datepicker">
@@ -139,7 +139,7 @@
 							</div>
 
 							<div class="form-group">
-								<label for="inputCode" class="col-lg-3 control-label">Início (Trópicos)</label>
+								<label for="inputCode" class="col-lg-3 control-label">Begin (Tropics)</label>
 								<div class="col-lg-4">
 									<div class="bfh-datepicker">
 									  <div data-toggle="bfh-datepicker">
@@ -173,7 +173,7 @@
 							</div>
 
 							<div class="form-group">
-								<label for="inputCode" class="col-lg-3 control-label">Fim (Trópicos)</label>
+								<label for="inputCode" class="col-lg-3 control-label">End (Tropics)</label>
 								<div class="col-lg-4">
 									<div class="bfh-datepicker">
 									  <div class="input-prepend bfh-datepicker-toggle" data-toggle="bfh-datepicker">
@@ -208,8 +208,8 @@
 
 							<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 								<div class="text-center">
-									<button onclick="location.href='../lists/season-list.php'" type="button" class="btn btn-xs">Cancelar</button>
-									<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
+									<button onclick="location.href='../lists/season-list.php'" type="button" class="btn btn-xs">Cancel</button>
+									<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Change" : "Submit")?></button>
 								</div>
 							</div>
 
@@ -219,10 +219,10 @@
 		        	<div class="col-xs-4 col-lg-4">
 				        <div class="panel panel-default">
 					        <div class="panel-body">
-					        	<p><span class="label label-default">Informações</span></p>
-					        	<p>Neste formulário podes inserir ou alterar as épocas de amostragem.</p>
-					        	<p>Estas épocas são usadas, por exemplo, para agregar campanhas feitas em locais distintos.</p>
-						    	<p><strong>Todos os campos com * são obrigatórios.</strong></p>
+					        	<p><span class="label label-default">Info</span></p>
+					        	<p>This form allows you to insert and update sampling Seasons.</p>
+					        	<p>Seasons are important to group sampling campaigns.</p>
+						    	<p><strong>All fields with * are mandatory.</strong></p>
 					        </div>
 				        </div>
 			   		</div>
@@ -264,7 +264,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros à época!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atention. Missing parameters on this season!");
     			return false;
     		} else {
     			return true;

@@ -127,7 +127,7 @@
           </form>
         </div>
         <div class="col-xs-6 col-lg-2"> 
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/campaign.php'">Campaign Insert</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/campaign.php'">Insert Campaign</button>
         </div>
       </div>
     </div>

@@ -76,6 +76,7 @@
 								<div class="panel-body">
 									<p><span class="label label-default">Info</span></p>
 									<p>To update massive individuals structure.</p>
+									<p>Submitted files must have de .csv extension.</p>
 									<p>The submitted files must follow this structure:<strong>individualCode</strong>, <strong>samplingDate</strong>, <strong>diameter1</strong>, <strong>diameter2</strong>, <strong>height</strong> and <strong>perimeter</strong>.</p>
 									<p>This service also allows for individuals coordinate updates. For that you must join to the end of each row the fields, <strong>coordinateX</strong> and <strong>coordinateY</strong>.</p>
 									<p>Remember, there is always a reference file to consult.</p>

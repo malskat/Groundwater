@@ -48,7 +48,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-          <h1>Local</h1>
+          <h1>Site</h1>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
         <div class="col-xs-12 col-lg-12">
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title"><?= (isset($site) ? "Editar Local" : "Inserir Local") ?></h3>
+              <h3 class="panel-title"><?= (isset($site) ? "Edit Site" : "Insert Site") ?></h3>
             </div>
             <div class="panel-body">
 				<div class="col-xs-8 col-lg-8">
@@ -67,31 +67,31 @@
 	  					<?= (isset($site) ?'<input type="hidden" value="' . $site[0]->site_id . '" name="site_id" >' : '')?>
 
 	  					<div id="codeInputGroup" class="form-group">
-	  						<label for="inputCode" class="col-lg-3 control-label">Código*</label>
+	  						<label for="inputCode" class="col-lg-3 control-label">Code*</label>
 	  						<div class="col-lg-4">
-	  							<input type="text" class="form-control" id="code" name="code" placeholder="Código do local" value=<?= (isset($site) ? '"' . $site[0]->code . '"' : "")?> >
+	  							<input type="text" class="form-control" id="code" name="code" placeholder="Site Code" value=<?= (isset($site) ? '"' . $site[0]->code . '"' : "")?> >
 	  					 	</div>
 	  					</div>
 	  					<div id="titleInputGroup" class="form-group">
-	  						<label for="inputGenus" class="col-lg-3 control-label">Designação*</label>
+	  						<label for="inputGenus" class="col-lg-3 control-label">Title*</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="title" name="title" value=<?= (isset($site) ? '"' . $site[0]->title . '"' : "")?> >
 	  					 	</div>
 	  					</div>
 	  					<div id="countryInputGroup" class="form-group">
-	  						<label for="inputGenus" class="col-lg-3 control-label">País*</label>
+	  						<label for="inputGenus" class="col-lg-3 control-label">Country*</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="country" name="country" value=<?= (isset($site) ? '"' . $site[0]->country . '"' : "")?> >
 	  					 	</div>
 	  					</div>
 	  					<div class="form-group">
-	  						<label for="inputGenus" class="col-lg-3 control-label">Coordenada X</label>
+	  						<label for="inputGenus" class="col-lg-3 control-label">Coordinate X</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="coordinateX" name="coordinateX" value=<?= (isset($site) ? '"' . $site[0]->coordinateX . '"' : "")?>>
 	  					 	</div>
 	  					</div>
 	  					<div class="form-group">
-	  						<label for="inputGenus" class="col-lg-3 control-label">Coordenada Y</label>
+	  						<label for="inputGenus" class="col-lg-3 control-label">Coordinate Y</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="coordinateY" name="coordinateY" value=<?= (isset($site) ? '"' . $site[0]->coordinateY . '"' : "")?>>
 	  					 	</div>
@@ -99,8 +99,8 @@
 
 	  					<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 	  						<div class="text-center">
-	  							<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
-	  							<button class="btn btn-xs btn-primary" type="submit"><?=(isset($site) ? "Alterar" : "Submeter")?></button>
+	  							<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancel</button>
+	  							<button class="btn btn-xs btn-primary" type="submit"><?=(isset($site) ? "Change" : "Submit")?></button>
 	  						</div>
 	  					</div>
 	  				</form>
@@ -109,9 +109,9 @@
             	<div class="col-xs-4 col-lg-4">
 			        <div class="panel panel-default">
 				        <div class="panel-body">
-				        	<p><span class="label label-default">Informações</span></p>
-				        	<p>Neste formulário podes inserir ou alterar os locais de amostragem.</p>
-					    	<p><strong>Todos os campos com * são obrigatórios.</strong></p>
+				        	<p><span class="label label-default">Info</span></p>
+				        	<p>Insert and update sampling Sites.</p>
+					    	<p><strong>All fiedls with * are mandatory.</strong></p>
 				        </div>
 			        </div>
 		   		</div>
@@ -157,7 +157,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros ao Local!");
+		        $('#alert-text').html("<strong>Shit happens!</strong>Atention. Missing parameters to this Site!");
     			return false;
     		} else {
     			return true;

@@ -9,7 +9,7 @@ class Reflectance extends gObject {
 	function __construct (){
 		$this->_entityName = 'individual_reflectance';
 		$this->_fieldList = array("Campaign", "File", "529.6", "569.8", "680.0", "700.0", "Creation Date");
-		$this->_totalRows = 5;
+		$this->_totalRows = 10;
 		$this->_orderBy = $this->_entityName . '_id';
 	}
 

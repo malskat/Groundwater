@@ -156,7 +156,7 @@
         </div>
         <div class="col-xs-6 col-lg-2"> 
           <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/individual.php'">Individual Insert</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/individual.php'">Insert Individual</button>
         </div>
       </div>
     </div>
