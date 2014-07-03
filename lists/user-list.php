@@ -57,7 +57,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-         	<h1>Utilizadores</h1>
+         	<h1>Users</h1>
         </div>
       </div>
     </div>
@@ -71,13 +71,13 @@
             	<input type="hidden" value="search" name="action">
             	<input type="hidden" value="user" name="class">
 	            <div class="form-group">
-	              <input type="text" class="form-control input-sm" name="nameEmail" placeholder="Nome ou Email" value=<?= (isset($_GET["nameEmail"]) ? '"' . $_GET["nameEmail"] . '"' : "") ?>>
+	              <input type="text" class="form-control input-sm" name="nameEmail" placeholder="Name or Email" value=<?= (isset($_GET["nameEmail"]) ? '"' . $_GET["nameEmail"] . '"' : "") ?>>
 	            </div>
-	            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Filtrar</button>
+	            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search</button>
 	        </form>
         </div>
         <div class="col-xs-6 col-lg-2"> 
-          <button class="btn btn-primary btn-sm" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/user.php'">Inserir Utilizador</button>
+          <button class="btn btn-primary btn-sm" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/user.php'">User Insert</button>
         </div>
       </div>
     </div>
@@ -94,8 +94,8 @@
                     echo '<th>' . $field . '</th>';
                   }
                 ?>
-                <th>Editar</th>
-                <th>Remover</th>
+                <th>Edit</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -114,7 +114,7 @@
 	                            	</button>
 	                            </td>
 	                       		<td>
-							    	<button onclick="beginDelete(\'action=delete&class=user&id=' . $user->biologyst_id . '\', \'Queres mesmo remover este utilizador?\');" type="button" class="btn btn-danger btn-xs">
+							    	<button onclick="beginDelete(\'action=delete&class=user&id=' . $user->biologyst_id . '\', \'Do you want to remove this User?\');" type="button" class="btn btn-danger btn-xs">
 							            <span class="glyphicon glyphicon-remove-sign"></span>
 							          </button>
 						      	</td>
@@ -132,7 +132,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4 col-lg-4">
-          <h5>Total de registos <span class="badge"><?=$users[0]->totalRecords?></span></h5>
+          <h5>Total records <span class="badge"><?=$users[0]->totalRecords?></span></h5>
         </div>
         <div class="col-xs-4 col-lg-4"> 
           <div class="text-center">

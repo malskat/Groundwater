@@ -16,7 +16,7 @@ class User extends gObject {
 	function __construct() {
 
 		$this->_entityName = 'biologyst';
-		$this->_fieldList = array("#", "Nome", "Email", "Data de criação", "Último login");
+		$this->_fieldList = array("#", "Name", "Email", "Creation Date", "Last Login");
 		$this->_totalRows = 10;
 		$this->_orderBy = $this->_entityName . '_id';
 
