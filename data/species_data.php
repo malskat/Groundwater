@@ -6,7 +6,7 @@ class Species extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'species';
-		$this->_fieldList = array("#", "Genus", "Species", "Tipo", "Código", "Functional Group", "#Individuos");
+		$this->_fieldList = array("#", "Genus", "Species", "Type", "Code", "Functional Group", "#Individuals");
 		$this->_totalRows = 10;
 	}
 

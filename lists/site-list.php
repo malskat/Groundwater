@@ -46,7 +46,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-       		<h1>Locais (Sites)</h1>
+       		<h1>Sites</h1>
       	</div>
       </div>
     </div>
@@ -57,7 +57,7 @@
       <div class="row">
         <div class="col-xs-12 col-lg-10"></div>
         <div class="col-xs-6 col-lg-2">
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/site.php'">Inserir Local</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/site.php'">Site Insert</button>
         </div>
       </div>
     </div>
@@ -92,7 +92,7 @@
 				    	                  	<td>' . (isset($site->coordinateY) && $site->coordinateY != "" ? $site->coordinateY : "N.D.") . '</td>';
 				                          	
 				                          	if ($site->totalPlots > 0) {
-				                          		echo '<td><a href="plot-list.php?site=' . $site->site_id .  '"><span id="accessTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os plots" class="label label-default">' . $site->totalPlots . '</span></a></td>';
+				                          		echo '<td><a href="plot-list.php?site=' . $site->site_id .  '"><span id="accessTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Plots" class="label label-default">' . $site->totalPlots . '</span></a></td>';
 				                          	} else {
 				                          		echo '<td><span class="label label-default">' . $site->totalPlots . '</a></td>';
 				                          	}
@@ -105,11 +105,11 @@
 											<td>';
 										   
 									        if ($site->totalPlots == 0) {
-										        echo '<button onclick="beginDelete(\'action=delete&class=site&id=' . $site->site_id . '\',\'Queres mesmo remover este Local?\');" type="button" class="btn btn-danger btn-xs">
+										        echo '<button onclick="beginDelete(\'action=delete&class=site&id=' . $site->site_id . '\',\'Do you want to remove this Site?\');" type="button" class="btn btn-danger btn-xs">
 										            <span class="glyphicon glyphicon-remove-sign"></span>
 										          </button>';
 									        } else {
-									        	echo '<span id="removeTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Tem plots associados" class="label label-default">É melhor não</span>'; 
+									        	echo '<span id="removeTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="It has some Plots associated" class="label label-default">Better not</span>'; 
 									        }
 
 										    echo '</td>
@@ -127,7 +127,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4 col-lg-4">
-          <h5>Total de registos <span class="badge"><?=$sites[0]->totalRecords?></span></h5>
+          <h5>Total records <span class="badge"><?=$sites[0]->totalRecords?></span></h5>
        </div>
         <div class="col-xs-4 col-lg-4">
           <div class="text-center"> 

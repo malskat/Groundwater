@@ -12,17 +12,22 @@
  			* popup com recolha de email;
 
  		* listagem de indivíduos - o remover está a ser permitido para indivíduos que já possuem amostragens.
+ 		* listagem de campanhas - o remover também está disponível, mesmo quando existem amostragens associadas.
 
 
  		* botões de inserir, nas listagens, devem estar inactivos quando não há nenhum utilizador logado - DONE
  		* no menu, não permitir actualizações sem existir um utilizador logado - DONE
  		* resolver o && que fica depois de eliminarmos vários registos seguidos - DONE
 
-
  	» SERVIÇOS
 
 		* criar mecanismo de logs para relacionar utilizadores com actualizações;
-			* tabela de BD;
+			* tabela de BD
+				- user_id
+				- data
+				- entidade
+				- acção - delete, update, create
+				- sql ???
 			* registo de logs após acções;
  		* recuperar password;
  			* configurar o envio de emails;
@@ -45,11 +50,12 @@
 
 	» SERVIDOR
 
-		* enviar sql da tabela individual_reflectance
-		* enviar e actualizar sql das alterações da tabela eco_fisio
-		* enviar e actualizar sql da view que foi criada
-		* actualizar código no servidor
-		* actualizar código no github
+		* enviar sql da tabela individual_reflectance - DONE
+		* enviar e actualizar sql das alterações da tabela eco_fisio - DONE
+		* enviar e actualizar sql da view que foi criada - DONE
+		* enviar e actualizar sql do procedimento - DONE
+		* actualizar código no servidor - DONE
+		* actualizar código no github - DONE
 
 		* actualizar tabela plot_climate (plot_attributes) e site_climate_data - DONE
 		* criar tabela site_climate_month - DONE
@@ -57,6 +63,7 @@
 	
 	» Melhoramentos
 
+ 		* passar todas as strings para inglês.
  		* o caminho dos require e includes está relativo e não absoluto, pode dar problemas tal como deu na seuqência de includes e requires do index.php;
  		* colocar fontawesome no menu;
  		* evitar SQL injection;

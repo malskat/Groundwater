@@ -57,7 +57,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-       		<h1>Espécies</h1>
+       		<h1>Species</h1>
       	</div>
       </div>
     </div>
@@ -70,14 +70,14 @@
             <input type="hidden" value="search" name="action">
             <input type="hidden" value="species" name="class">
             <div class="form-group">
-              <input type="text" class="form-control input-sm" name="genusSpecies" placeholder="Genus ou Species" value=<?= (isset($_GET["genusSpecies"]) ? '"' . $_GET["genusSpecies"] . '"' : "") ?>>
+              <input type="text" class="form-control input-sm" name="genusSpecies" placeholder="Genus or Species" value=<?= (isset($_GET["genusSpecies"]) ? '"' . $_GET["genusSpecies"] . '"' : "") ?>>
             </div>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Filtrar</button>
+            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search</button>
           </form>
         </div>
         <div class="col-xs-6 col-lg-2"> 
           <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/species.php'">Inserir Espécie</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/species.php'">Species Insert</button>
         </div>
       </div>
     </div>
@@ -94,8 +94,8 @@
               			echo '<th>' . $field . '</th>';
               		}
               	?>
-                <th>Editar</th>
-                <th>Remover</th>
+                <th>Edit</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -124,11 +124,11 @@
 						        <td>';
 						   
 					        if ($specie->totalIndividuals == 0) {
-						        echo '<button onclick="beginDelete(\'action=delete&class=species&id=' . $specie->species_id . '\',\'Queres mesmo remover esta Espécie?\');" type="button" class="btn btn-danger btn-xs">
+						        echo '<button onclick="beginDelete(\'action=delete&class=species&id=' . $specie->species_id . '\',\'Do you want to remove this Species?\');" type="button" class="btn btn-danger btn-xs">
 						            <span class="glyphicon glyphicon-remove-sign"></span>
 						          </button>';
 					        } else {
-					        	echo '<span id="removeTooltip_' . $specie->species_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="Tem indivíduos associados">É melhor não</span>'; 
+					        	echo '<span id="removeTooltip_' . $specie->species_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="It has Individuals associated">Better not</span>'; 
 					        }
 
 						        echo '</td>
@@ -136,7 +136,7 @@
 						}
                		}
                 } else {
-                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>'; 
+                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">No data to show!</td></tr>'; 
                 }
              	?>
             </tbody>
@@ -149,7 +149,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4 col-lg-4">
-          <h5>Total de registos <span class="badge"><?=$species[0]->totalRecords?></span></h5>
+          <h5>Total records <span class="badge"><?=$species[0]->totalRecords?></span></h5>
         </div>
         <div class="col-xs-4 col-lg-4"> 
           <div class="text-center">

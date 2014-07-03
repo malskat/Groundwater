@@ -41,7 +41,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-         	<h1>Épocas</h1>
+         	<h1>Seasons</h1>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
       <div class="row">
         <div class="col-xs-12 col-lg-10"></div>
         <div class="col-xs-6 col-lg-2"> 
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/season.php'">Inserir Época</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/season.php'">Season Insert</button>
         </div>
       </div>
     </div>
@@ -69,45 +69,49 @@
                     echo '<th>' . $field . '</th>';
                   }
                 ?>
-                <th>Editar</th>
-                <th>Remover</th>
+                <th>Edit</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
             <?php
-                foreach ($seasons as $season) {
-                	if(isset($season->season_id)){
-	                    echo '<tr>
-		                        <td>' . $season->season_id . '</td>
-		                        <td>' . $season->code . '</td>
-		                        <td>' . $season->startDate . '</td>
-		                        <td>' . $season->endDate . '</td>';
+            	if (count($seasons) > 1) {
+	                foreach ($seasons as $season) {
+	                	if(isset($season->season_id)){
+		                    echo '<tr>
+			                        <td>' . $season->season_id . '</td>
+			                        <td>' . $season->code . '</td>
+			                        <td>' . $season->startDate . '</td>
+			                        <td>' . $season->endDate . '</td>';
 
-		                        if ($season->totalCampaigns > 0) {
-	                          		echo '<td><a href="campaign-list.php?season=' . $season->season_id .  '"><span id="accessTooltip_' . $season->season_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres as campanhas" class="label label-default">' . $season->totalCampaigns . '</span></a>';
-		                        } else {
-		                        	echo '<td><span class="label label-default">' . $season->totalCampaigns . '</a>';
-		                        }
+			                        if ($season->totalCampaigns > 0) {
+		                          		echo '<td><a href="campaign-list.php?season=' . $season->season_id .  '"><span id="accessTooltip_' . $season->season_id . '" data-toggle="tooltip" data-placement="left" title="Click to see campaigns" class="label label-default">' . $season->totalCampaigns . '</span></a>';
+			                        } else {
+			                        	echo '<td><span class="label label-default">' . $season->totalCampaigns . '</a>';
+			                        }
 
-	                          	echo '</td>
-		                       	<td>
-	                            	<button onclick="location.href=\'../forms/season.php?season_id=' . $season->season_id . '\'" type="button" class="btn btn-primary btn-xs">
-	                                	<span class="glyphicon glyphicon glyphicon-edit"></span>
-	                            	</button>
-	                            </td>
-	                       		<td>';
+		                          	echo '</td>
+			                       	<td>
+		                            	<button onclick="location.href=\'../forms/season.php?season_id=' . $season->season_id . '\'" type="button" class="btn btn-primary btn-xs">
+		                                	<span class="glyphicon glyphicon glyphicon-edit"></span>
+		                            	</button>
+		                            </td>
+		                       		<td>';
 
-						        if ($season->totalCampaigns == 0) {
-							        echo '<button onclick="beginDelete(\'action=delete&class=season&id=' . $season->season_id . '\',\'Queres mesmo remover esta Época?\');" type="button" class="btn btn-danger btn-xs">
-							            <span class="glyphicon glyphicon-remove-sign"></span>
-							          </button>';
-						        } else {
-						        	echo '<span id="removeTooltip_' . $season->season_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="Tem campanhas associadas">É melhor não</span>'; 
-						        }
-						        echo '</td>
-					        </tr>';
-               		}
-                }
+							        if ($season->totalCampaigns == 0) {
+								        echo '<button onclick="beginDelete(\'action=delete&class=season&id=' . $season->season_id . '\',\'Do you want to remove this season?\');" type="button" class="btn btn-danger btn-xs">
+								            <span class="glyphicon glyphicon-remove-sign"></span>
+								          </button>';
+							        } else {
+							        	echo '<span id="removeTooltip_' . $season->season_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="It has campaigns associated">Better not</span>'; 
+							        }
+							        echo '</td>
+						        </tr>';
+	               		}
+	                }
+            	} else {
+	            	echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">No data to show!</td></tr>';
+	            }
             ?>
             </tbody>
           </table>
@@ -119,7 +123,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4 col-lg-4">
-          <h5>Total de registos <span class="badge"><?=$seasons[0]->totalRecords?></span></h5>
+          <h5>Total records <span class="badge"><?=$seasons[0]->totalRecords?></span></h5>
         </div>
         <div class="col-xs-4 col-lg-4"> 
           <div class="text-center">

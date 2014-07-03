@@ -125,7 +125,7 @@
 	      	            	    							<button onclick="location.href=\'../forms/ecofisio.php?individualCode=' . $ecoFisioValue->individualCode . '&sampling_campaign_id=' . $ecoFisioValue->sampling_campaign_id . '\'" type="button" class="btn btn-primary btn-xs">
 							      	                  			<span class="glyphicon glyphicon glyphicon-edit"></span>
 							      	                  		</button>
-							      	                  		<button onclick="beginDelete(\'action=delete&class=ecofisio&id=' . $ecoFisioValue->individualCode . '|' . $ecoFisioValue->sampling_campaign_id . '\', \'Queres mesmo remover esta amostragem de Eco-Fisiologia?\');" type="button" class="btn btn-danger btn-xs">
+							      	                  		<button onclick="beginDelete(\'action=delete&class=ecofisio&id=' . $ecoFisioValue->individualCode . '|' . $ecoFisioValue->sampling_campaign_id . '\', \'Do you want to remove this Eco-Physiology sample?\');" type="button" class="btn btn-danger btn-xs">
 								                            	<span class="glyphicon glyphicon-remove-sign"></span>
 								                            </button>
 	      	            	    						</div>

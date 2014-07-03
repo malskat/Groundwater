@@ -6,7 +6,7 @@ class Campaign extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'sampling_campaign';
-		$this->_fieldList = array("#", "Título", "Local", "Época", "Início", "Fim");
+		$this->_fieldList = array("#", "Title", "Site", "Season", "Begin", "End");
 		$this->_totalRows = 10;
 		$this->_orderBy = $this->_entityName . '_id';
 	}

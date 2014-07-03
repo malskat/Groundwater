@@ -15,7 +15,7 @@ function getQueryParams(qs) {
 function beginDelete(deleteOptions, modalSentence) {
 	var deleteHref = "location.href=\"../core/core_action.php?" + deleteOptions + "\"";
 	$('#removeModalButton').attr('onclick', deleteHref);
-	$('#modalLabel').text('Remoção');
+	$('#modalLabel').text('Remove Confirmation');
 	$('#modalDescription').text(modalSentence);
 	$('#removeModal').modal('show');
 }

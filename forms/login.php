@@ -50,7 +50,7 @@
 
   		<div class="row spacer">
   			<div class="col-xs-6 col-lg-6 col-lg-offset-3 well well-sm text-center">
-  				Para fazer actualizações é necessário existir um utilizador com login activo.
+  				To change objects (create, update and remove), there must be a user logged in.
   			</div>
   		</div>
 

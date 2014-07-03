@@ -151,7 +151,7 @@
             <div class="form-group">
               <input type="text" class="form-control input-sm" name="individualCode" placeholder="Code" value=<?= (isset($_GET["individualCode"]) ? '"' . $_GET["individualCode"] . '"' : "") ?>>
             </div>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Filtrar </button>
+            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search </button>
           </form>
         </div>
         <div class="col-xs-6 col-lg-2"> 
@@ -219,7 +219,7 @@
 
 			  	                  	if ($individual->totalEcoFisio || isset($individual->struture_id) == 0) {
 			                            echo '<td>
-			                              <button onclick="beginDelete(\'action=delete&class=individual&id=' . $individual->individualCode . '\', \'Queres mesmo remover este Indivíduo?\');" type="button" class="btn btn-danger btn-xs">
+			                              <button onclick="beginDelete(\'action=delete&class=individual&id=' . $individual->individualCode . '\', \'Do you want to remove this Individual?\');" type="button" class="btn btn-danger btn-xs">
 			                                <span class="glyphicon glyphicon-remove-sign"></span>
 			                              </button>
 			                            </td>';

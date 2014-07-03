@@ -187,8 +187,8 @@
 				<p id="modalDescription" name="modalDescription"></p>
 	      	</div>
 	      	<div class="modal-footer">
-	        	<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-	        	<button id="removeModalButton" type="button" class="btn btn-primary">Sim</button>
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+	        	<button id="removeModalButton" type="button" class="btn btn-primary">Yes</button>
 	      	</div>
 	    </div>
  	</div>

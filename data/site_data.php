@@ -6,7 +6,7 @@ class Site extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'site';
-		$this->_fieldList = array("#", "Código", "Designação", "País", "CoordenadaX", "CoordenadaY", "#Plots");
+		$this->_fieldList = array("#", "Code", "Title", "Country", "CoordinateX", "CoordinateY", "#Plots");
 		$this->_totalRows = 10;
 	}
 

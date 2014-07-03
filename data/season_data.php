@@ -7,7 +7,7 @@ class Season extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'season';
-		$this->_fieldList = array("#", "Código", "Início (Europa)", "Fim (Europa)", "#Campanhas");
+		$this->_fieldList = array("#", "Code", "Begin (Europe)", "End (Europe)", "#Campaigns");
 		$this->_totalRows = 10;
 		$this->_orderBy = 's.' . $this->_entityName . '_id';
 	}

@@ -85,7 +85,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-         		<h1>Campanhas</h1>
+         		<h1>Campaigns</h1>
         </div>
       </div>
     </div>
@@ -99,7 +99,7 @@
             <input type="hidden" value="search" name="action">
             <input type="hidden" value="campaign" name="class">
             <div class="form-group">
-              <input type="text" class="form-control input-sm" name="designation" placeholder="Título" value=<?= (isset($_GET["designation"]) ? '"' . $_GET["designation"] . '"' : "") ?>>
+              <input type="text" class="form-control input-sm" name="designation" placeholder="Title" value=<?= (isset($_GET["designation"]) ? '"' . $_GET["designation"] . '"' : "") ?>>
             </div>
             <!--filtro de site -->
             <div class="form-group">
@@ -115,7 +115,7 @@
              <!--filtro de season -->
             <div class="form-group">
               <select name="season" class="form-control input-sm">
-                <option value="none">Época</option>
+                <option value="none">Season</option>
                 <?php
                   foreach($seasons as $season){
                     echo '<option ' . (isset($_GET["season"]) && $season->season_id == $_GET["season"] ? 'selected' : '') . ' value="' . $season->season_id . '">' . $season->code . '</option>';
@@ -123,11 +123,11 @@
                 ?>
               </select>
             </div>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Filtrar</button>
+            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search</button>
           </form>
         </div>
         <div class="col-xs-6 col-lg-2"> 
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/campaign.php'">Inserir Campanha</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/campaign.php'">Campaign Insert</button>
         </div>
       </div>
     </div>
@@ -144,8 +144,8 @@
                     echo '<th>' . $field . '</th>';
                   }
                 ?>
-                <th>Editar</th>
-                <th>Remover</th>
+                <th>Edit</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -156,8 +156,8 @@
 		                    echo '<tr>
 		                        <td>' . $campaign->sampling_campaign_id . '</td>
 		                        <td>' . $campaign->designation . '</td>
-	                          <td>' . $campaign->siteTitle . '</td>
-	                          <td>' . $campaign->seasonCode . '</td>
+	                        	<td>' . $campaign->siteTitle . '</td>
+	                         	<td>' . $campaign->seasonCode . '</td>
 		                        <td>' . $campaign->startDate . '</td>
 		                        <td>' . $campaign->endDate . '</td>
 		                       	<td>
@@ -166,7 +166,7 @@
 	                            	</button>
 	                            </td>
 	                            <td>
-	                            	<button onclick="beginDelete(\'action=delete&class=campaign&id=' . $campaign->sampling_campaign_id . '\', \'Queres mesmo remover esta Campanha?\');" type="button" class="btn btn-danger btn-xs">
+	                            	<button onclick="beginDelete(\'action=delete&class=campaign&id=' . $campaign->sampling_campaign_id . '\', \'Do you want to remove this Campaign?\');" type="button" class="btn btn-danger btn-xs">
 	                                	<span class="glyphicon glyphicon-remove-sign"></span>
 	                              </button>
 		                        </td>
@@ -174,7 +174,7 @@
 	               		}
 	                }
 	            } else {
-	            	echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>';
+	            	echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">No data to show!</td></tr>';
 	            }
             ?>
             </tbody>
@@ -187,7 +187,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4 col-lg-4">
-          <h5>Total de registos <span class="badge"><?=$campaigns[0]->totalRecords?></span></h5>
+          <h5>Total records <span class="badge"><?=$campaigns[0]->totalRecords?></span></h5>
         </div>
         <div class="col-xs-4 col-lg-4"> 
           <div class="text-center">

@@ -6,7 +6,7 @@ class Plot extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'plot';
-		$this->_fieldList = array("#", "Código", "Site", "Tipo", "CoordenadaX", "CoordenadaY", "#Indivíduos");
+		$this->_fieldList = array("#", "Code", "Site", "Type", "CoordinateX", "CoordinateY", "#Individuals");
 		$this->_totalRows = 10;
 	}
 

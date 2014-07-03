@@ -89,7 +89,7 @@
             <input type="hidden" value="search" name="action">
             <input type="hidden" value="plot" name="class">
             <div class="form-group">
-              <input type="text" class="form-control input-sm" name="code" placeholder="Código" value=<?= (isset($_GET["code"]) ? '"' . $_GET["code"] . '"' : "") ?>>
+              <input type="text" class="form-control input-sm" name="code" placeholder="Code" value=<?= (isset($_GET["code"]) ? '"' . $_GET["code"] . '"' : "") ?>>
             </div>
             <div class="form-group">
               <select name="site" class="form-control input-sm">
@@ -101,12 +101,12 @@
                 ?>
               </select>
             </div>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Filtrar</button>
+            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search</button>
           </form>
         </div>
         <div class="col-xs-6 col-lg-2"> 
           <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/plot.php'">Inserir Plot</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/plot.php'">Plot Insert</button>
         </div>
       </div>
     </div>
@@ -123,8 +123,8 @@
 		              			echo '<th>' . $field . '</th>';
 		              		}
 		              	?>
-                		<th>Editar</th>
-                		<th>Remover</th>
+                		<th>Edit</th>
+                		<th>Remove</th>
               		</tr>
            		 </thead>
 	            <tbody>
@@ -142,7 +142,7 @@
 	    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>';
 	    	                  			
 	    	                  			if ($plot->totalIndividuals > 0) {
-	                        				echo '<td><a href="individual-list.php?plot=' . $plot->plot_id .  '"><span id="accessTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os indivíduos" class="label label-default">' . $plot->totalIndividuals . '</span></a></td>';
+	                        				echo '<td><a href="individual-list.php?plot=' . $plot->plot_id .  '"><span id="accessTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Individuals" class="label label-default">' . $plot->totalIndividuals . '</span></a></td>';
 	    	                  			}else {
 	    	                  				echo '<td><span class="label label-default">' . $plot->totalIndividuals . '</a></td>';
 	    	                  			}
@@ -156,11 +156,11 @@
 
 							   
 								        if ($plot->totalIndividuals == 0) {
-									        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\', \'Queres mesmo remover este Plot?\');" type="button" class="btn btn-danger btn-xs">
+									        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\', \'Do you want to remove this Individual?\');" type="button" class="btn btn-danger btn-xs">
 									            <span class="glyphicon glyphicon-remove-sign"></span>
 									          </button>';
 								        } else {
-								        	echo '<span id="removeTooltip_' . $plot->plot_id . '" class="label label-info" data-toggle="tooltip" data-placement="left" title="Tem indivíduos associados">É melhor não</span>'; 
+								        	echo '<span id="removeTooltip_' . $plot->plot_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="It has Individuals associated">Better not</span>'; 
 								        }
 
 									    echo '</td>
@@ -168,7 +168,7 @@
 	                    }
 	             			}
 	                } else {
-	                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>'; 
+	                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">No data to show!</td></tr>'; 
 	                }
 	           		?>
 	            </tbody>
@@ -181,7 +181,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4 col-lg-4">
-          <h5>Total de registos <span class="badge"><?=$plots[0]->totalRecords?></span></h5></div>
+          <h5>Total records <span class="badge"><?=$plots[0]->totalRecords?></span></h5></div>
         <div class="col-xs-4 col-lg-4"> 
           <div class="text-center">
             <ul class="pagination">
