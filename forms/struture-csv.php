@@ -37,7 +37,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-         		<h1>Struture</h1>
+         		<h1>Structure</h1>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
       		<div class="col-xs-12 col-lg-12">
 	  			<div class="panel panel-primary">
 		        	<div class="panel-heading">
-					   <h3 class="panel-title">Actualizar parâmetros de Struture por csv</h3>
+					   <h3 class="panel-title">Structure updates by CSV</h3>
 					</div>
 			        <div class="panel-body">
 			        	<div class="col-xs-8 col-lg-8">
@@ -55,7 +55,7 @@
 				  				<input type="hidden" value="excel" name="submissionType" >
 
 				  				<div id="fileInputGroup" class="form-group spacer">
-				  					<label for="inputGenus" class="col-lg-2 control-label">Ficheiro*</label>
+				  					<label for="inputGenus" class="col-lg-2 control-label">File*</label>
 				  					<div class="col-lg-6">
 				  						<input type="file" class="form-control" id="file" name="file" placeholder="">
 				  				 	</div>
@@ -64,8 +64,8 @@
 
 				  				<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 									<div class="text-center">
-										<button onclick="location.href='../lists/species-list.php'" type="button" class="btn btn-xs">Cancelar</button>
-										<button class="btn btn-xs btn-primary" type="submit"><?=(isset($season) ? "Alterar" : "Submeter")?></button>
+										<button onclick="location.href='../lists/individual-list.php'" type="button" class="btn btn-xs">Cancl</button>
+										<button class="btn btn-xs btn-primary" type="submit">Submit</button>
 									</div>
 								</div>
 
@@ -74,10 +74,11 @@
 				  		<div class="col-xs-4 col-lg-4">
 				  			<div class="panel panel-default">
 								<div class="panel-body">
-									<p><span class="label label-default">Informações</span></p>
-									<p>1. A primeira linha do ficheiro está guardada para o nome dos parâmetros da Struture (estes nomes são obrigatórios): <strong>individualCode</strong>, <strong>samplingDate</strong>, <strong>diameter1</strong>, <strong>diameter2</strong>, <strong>height</strong> e <strong>perimeter</strong>.</p>
-									<p>2. É possível actualizar as coordenadas de localização do indivíduo, através deste carregamento. Para isso é necessário colocar os dois parâmetro, <strong>coordinateX</strong> e <strong>coordinateY</strong>, no final de cada um dos registos do ficheiro .csv .</p>
-									<p>3. Existe um ficheiro de referência para eventuais dúvidas que possas ter.</p>
+									<p><span class="label label-default">Info</span></p>
+									<p>To update massive individuals structure.</p>
+									<p>The submitted files must follow this structure:<strong>individualCode</strong>, <strong>samplingDate</strong>, <strong>diameter1</strong>, <strong>diameter2</strong>, <strong>height</strong> and <strong>perimeter</strong>.</p>
+									<p>This service also allows for individuals coordinate updates. For that you must join to the end of each row the fields, <strong>coordinateX</strong> and <strong>coordinateY</strong>.</p>
+									<p>Remember, there is always a reference file to consult.</p>
 								</div>
 							</div>
 						</div>

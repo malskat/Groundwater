@@ -5,4 +5,4 @@ define("PROJECT_PATH", str_replace('config', '', str_replace('\\', '/', dirname(
 define("PROJECT_DOCS_CENTER", PROJECT_PATH . 'docs_center/');
 define("PROJECT_PROCESSED_FILES", PROJECT_DOCS_CENTER . 'processed/');
 
-define("PROJECT_LOGGED_PERMITED_TIME", 300);
+define("PROJECT_LOGGED_PERMITED_TIME", 1000);

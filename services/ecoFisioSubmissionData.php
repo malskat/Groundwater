@@ -6,12 +6,12 @@ require_once '../data/individual_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=Não existe nenhum utilizador com login activo.');
+	header('Location: /forms/login.php?success=-1&reason=There is no logged user. Please login.');
 	die;
 } 
 
 
-if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
+if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 	if(isset($_POST["individualCode"]) && $_POST["individualCode"] != "" && isset($_POST["samplingDate"]) && $_POST["samplingDate"] != "" && 
 	   	isset($_POST["sampling_campaign_id"]) && $_POST["sampling_campaign_id"] != "") {
 
@@ -28,21 +28,22 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		}
 
 		if($reply['_success_'] == 1){
-			header('Location: /lists/ecofisio-list.php?individualCode=' . $_POST["individualCode"] . '&success=1');
+			header('Location: /forms/ecofisio.php?individualCode=' . $_POST["individualCode"] . '&sampling_campaign_id=' . $_POST["sampling_campaign_id"] . '&success=1');
 		} else {
-			header('Location: /lists/ecofisio-list.php?individualCode=' . $_POST["individualCode"] . '&success=-3&reason=Não houve alteração nenhuma!');
+			header('Location: /forms/ecofisio.php?individualCode=' . $_POST["individualCode"] . '&sampling_campaign_id=' . $_POST["sampling_campaign_id"] . '&success=-3&reason=No change at all!');
 		}
+
 	} else {
-		header('Location: /forms/ecofisio.php?success=-1&reason=Faltam parametros!');
+		header('Location: /forms/ecofisio.php?success=-1&reason=Missing arguments!');
 	}
 
 
 
 
-} else if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel'){
+} else if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
 
 	if(isset($_POST["sampling_campaign_id"]) &&  $_POST["sampling_campaign_id"] != "" 
-	   && isset($_POST["ecoBlock"]) &&  $_POST["ecoBlock"] != ""){
+	   && isset($_POST["ecoBlock"]) &&  $_POST["ecoBlock"] != "") {
 
 		try {
 
@@ -50,9 +51,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		  	$extension = end($extensionParts);
 
 		  	if($extension != 'csv'){
-				header('Location: /forms/ecofisio-csv.php?success=-1&reason=Ficheiro tem de ser csv!');
+				header('Location: /forms/ecofisio-csv.php?success=-1&reason=File must be csv!');
 		  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-				header('Location: /forms/ecofisio-csv.php?success=-1&reason=Ficheiro ja foi processado!');
+				header('Location: /forms/ecofisio-csv.php?success=-1&reason=File already processed!');
 		  	} else {
 				
 				//movimentacao do ficheiro da pasta temporaria para a pasta final
@@ -102,7 +103,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 
 				        	} else {
-				        		$errorString .= "» Linha " . $row . ", individualCode '" . $data[0] . "' não existe; <br />";
+				        		$errorString .= "» Line " . $row . ", individualCode '" . $data[0] . "' doesnt exist; <br />";
 				        	}
 
 				        }
@@ -124,7 +125,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 					} else {
 		  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-						header('Location: /forms/ecofisio-csv.php?success=-1&reason=ficheiro nao passou para a directoria final');
+						header('Location: /forms/ecofisio-csv.php?success=-1&reason=Could not move file to final directory!');
 					}
 				}
 
@@ -136,6 +137,6 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		}
 
 	} else {
-		header('Location: /forms/ecofisio-csv.php?success=-1&reason=Faltam parametros!');
+		header('Location: /forms/ecofisio-csv.php?success=-1&reason=Missing arguments!');
 	}
 }

@@ -57,27 +57,36 @@
 	    <div class="container">
 			<div class="row">
 				<div class="page-header">
-					<h2>Eco-Fisiologia</h2>
-					<h5>Indivíduo - <?=$_GET['individualCode']?></h5>
+					<h2>Eco-Physiology</h2>
+					<h5>Individual - <?=$_GET['individualCode']?></h5>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-6 col-lg-8">
-					<button class="btn btn-link" onclick="location.href='<?=$backUrl?>'">« voltar</button>
+					<button class="btn btn-link" onclick="location.href='<?=$backUrl?>'">« back</button>
 				</div>
 				<div class="col-xs-6 col-lg-4">
 					<div class="btn-group pull-right">
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-								Gráficos <span class="caret"></span>
+								Graphs <span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu pull-right">
 								<li><a href="../charts/ecofisio-temporaloverview.php?individualCode=<?=$_GET['individualCode']?>"><strong>Temporal Overview</strong></a></li>
 								<li><a href="../charts/ecofisio-leaf13CphotoPI.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 13C and PI / Xylem 18O</strong></a></li>
 								<li><a href="../charts/ecofisio-leaf15NleafCN.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
 							</ul>
 						</div>
-						<button type="button" class="btn btn-primary btn-sm" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/ecofisio.php?individualCode=<?=$_GET['individualCode']?>'">Inserir Amostragem</button>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?>>
+								Insert Eco-Physiology <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu pull-right">
+								<li><a href="../forms/ecofisio.php?individualCode=<?=$_GET['individualCode']?>"><strong>Complete</strong></a></li>
+								<li><a href="../forms/ecofisio-csv.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf or Xylem Water Blocks</strong></a></li>
+								<li><a href="../forms/reflectance-csv.php?individualCode=<?=$_GET['individualCode']?>"><strong>Reflectance Indices Block</strong></a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -95,7 +104,7 @@
 			              			echo '<th>' . $field . '</th>';
 			              		}
 			              	?>
-			                <th>Acções</th>
+			                <th>Actions</th>
 			              </tr>
 		            	</thead>
 		            	<tbody>
@@ -109,7 +118,8 @@
 	      	            	    					<td>' . (isset($ecoFisioValue->leaf_13C) && $ecoFisioValue->leaf_13C != "" ? $ecoFisioValue->leaf_13C : 'ND' ) . '</td>
 	      	            	    					<td>' . (isset($ecoFisioValue->leaf_15N) && $ecoFisioValue->leaf_15N != "" ? $ecoFisioValue->leaf_15N : 'ND' ) . '</td>
 	      	            	    					<td>' . (isset($ecoFisioValue->xylemWater_18O) && $ecoFisioValue->xylemWater_18O != "" ? $ecoFisioValue->xylemWater_18O : 'ND' ) . '</td>
-	      	            	    					<td>' . (isset($ecoFisioValue->photosynthetic_PI) && $ecoFisioValue->photosynthetic_PI != "" ? $ecoFisioValue->photosynthetic_PI : 'ND' ) . '</td>
+	      	            	    					<td>' . (isset($ecoFisioValue->wi) && $ecoFisioValue->wi != "" ? $ecoFisioValue->wi : 'ND' ) . '</td>
+	      	            	    					<td>' . (isset($ecoFisioValue->wi) && $ecoFisioValue->wi != "" ? $ecoFisioValue->pri : 'ND' ) . '</td>
 	      	            	    					<td>
 	      	            	    						<div class="btn-group">
 	      	            	    							<button onclick="location.href=\'../forms/ecofisio.php?individualCode=' . $ecoFisioValue->individualCode . '&sampling_campaign_id=' . $ecoFisioValue->sampling_campaign_id . '\'" type="button" class="btn btn-primary btn-xs">
@@ -124,7 +134,7 @@
 					                    }
 					                }
 					            } else {
-					            	echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>';
+					            	echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">No data to show!</td></tr>';
 					            }
 					        ?>
 		            	</tbody>
@@ -137,7 +147,7 @@
 	    <div class="container">
 	    	<div class="row">
 		        <div class="col-xs-4 col-lg-4">
-		          <h5>Total de registos <span class="badge"><?=$ecoFisioValues[0]->totalRecords?></span></h5>
+		          <h5>Total records <span class="badge"><?=$ecoFisioValues[0]->totalRecords?></span></h5>
 		        </div>
 		        <div class="col-xs-4 col-lg-4">
 		          <div class="text-center">

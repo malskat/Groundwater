@@ -45,6 +45,12 @@
 
 	» SERVIDOR
 
+		* enviar sql da tabela individual_reflectance
+		* enviar e actualizar sql das alterações da tabela eco_fisio
+		* enviar e actualizar sql da view que foi criada
+		* actualizar código no servidor
+		* actualizar código no github
+
 		* actualizar tabela plot_climate (plot_attributes) e site_climate_data - DONE
 		* criar tabela site_climate_month - DONE
 

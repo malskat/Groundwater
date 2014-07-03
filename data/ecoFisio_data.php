@@ -4,18 +4,20 @@ require_once 'gObject.php';
 
 class EcoFisio extends gObject {
 
+	private $_blocks = array(array("code" => "leaf", "designation" => "Leaf", "show" => true, "attributes" => array("leaf_13C", "leaf_15N", "leaf_perN", "leaf_perC", "leaf_CN")),
+		            array("code" => "xylem", "designation" => "Xylem Water", "show" => true, "attributes" => array("xylemWater_18O")),
+		            array("code" => "photo", "designation" => "Photo Synthetic", "show" => false, "attributes" => array("wi", "pri", "chl", "chl_ndi", "ndvi")));
+
 	function __construct (){
 		$this->_entityName = 'eco_fisio';
-		$this->_fieldList = array("Campanha", "Data de Amostragem", "Leaf_13C", "Leaf_15N", "XylenWater_18O", "PhotoSynthetic_PI");
+		$this->_fieldList = array("Campanha", "Data de Amostragem", "Leaf_13C", "Leaf_15N", "XylenWater_18O", "WI", "PRI");
 		$this->_totalRows = 5;
 		$this->_orderBy = $this->_entityName . '_id';
 	}
 
 	function getEcoFisioDataBlocks () {
 
-		return array(array("code" => "leaf", "designation" => "Leaf", "show" => true, "attributes" => array("leaf_13C", "leaf_15N", "leaf_perN", "leaf_perC", "leaf_CN")),
-		            array("code" => "xylem", "designation" => "Xylem Water", "show" => true, "attributes" => array("xylemWater_18O")),
-		            array("code" => "photo", "designation" => "Photo Synthetic", "show" => false, "attributes" => array("photosinthetic_PI", "photosinthetic_NWI", "photosinthetic_BP")));
+		return $this->_blocks;
 	}
 
 	function getEcoFisioBy ($whereClause, $orderBy = '', $page = 0){
@@ -115,9 +117,11 @@ class EcoFisio extends gObject {
 				break;
 			}
 			case "photo" : {
-				$arrayToFill['photosynthetic_PI'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
-	        	$arrayToFill['photosynthetic_NWI'] = ($line[$starter + 1] != "" ? $line[$starter + 1] : 'NULL');
-	        	$arrayToFill['photosynthetic_BP'] = ($line[$starter + 2] != "" ? $line[$starter + 2] : 'NULL');
+				$arrayToFill['wi'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
+	        	$arrayToFill['pri'] = ($line[$starter + 1] != "" ? $line[$starter + 1] : 'NULL');
+	        	$arrayToFill['chl'] = ($line[$starter + 2] != "" ? $line[$starter + 2] : 'NULL');
+	        	$arrayToFill['chl_ndi'] = ($line[$starter + 3] != "" ? $line[$starter + 3] : 'NULL');
+	        	$arrayToFill['ndvi'] = ($line[$starter + 4] != "" ? $line[$starter + 4] : 'NULL');
 				break;
 			}
 

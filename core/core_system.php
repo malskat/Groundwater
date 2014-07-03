@@ -3,7 +3,7 @@
 class CoreSystem {
 
 	private static $_systemClasses = array ('season', 'campaign', 'site', 'plot', 'species', 
-	                                        'individual', 'ecofisio', 'struture', 'user');
+	                                        'individual', 'ecofisio', 'struture', 'reflectance', 'user');
 
 	public static function retriveClassFrom($address) {
 

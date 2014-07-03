@@ -30,26 +30,26 @@
     	} else if(params["success"] == -2) {
         	$('#alert-message').show();
           	$('#alert-message').addClass('warning');
-          	$('#alert-text').html("<strong>Ups daisy!</strong> Operação concluída com sucesso. No entanto verifica o seguinte: <br />" + params["reason"]);
+          	$('#alert-text').html("<strong>Ups daisy!</strong> Operation conclued. However, please, check: <br />" + params["reason"]);
       	} else if(params["success"] == -4) {
         	$('#alert-message').show();
           	$('#alert-message').addClass('danger');
-          	$('#alert-text').html("<strong>Ups daisy!</strong> Login Inválido. Tenta novamente.");
+          	$('#alert-text').html("<strong>Ups daisy!</strong> Invalid Login. Please, try again.");
       	}else {
         	$('#alert-message').show();
         	$('#alert-message').addClass('danger');
-        	$('#alert-text').html("<strong>Shit happens!</strong> Atenção. " + params["reason"]);
+        	$('#alert-text').html("<strong>Shit happens!</strong> Atention. " + params["reason"]);
       	}
 
 
     } else if (params["success"] == 1) {
       	$('#alert-message').show();
       	$('#alert-message').addClass('success');
-      	$('#alert-text').html("<strong>Holy guacamole!</strong> Registo criado/alterado com sucesso." + (params["inserted"] != null && params["inserted"] != "" ? " Foram inseridos/actualizados: " + params["inserted"] + " registos." : ""));
+      	$('#alert-text').html("<strong>Holy guacamole!</strong> Record created/updated." + (params["inserted"] != null && params["inserted"] != "" ? " Foram inseridos/actualizados: " + params["inserted"] + " registos." : ""));
     } else if (params["success"] == 2) {
       	$('#alert-message').show();
       	$('#alert-message').addClass('success');
-      	$('#alert-text').html("<strong>Holy guacamole!</strong> Registo eliminado com sucesso.");
+      	$('#alert-text').html("<strong>Holy guacamole!</strong> Record removed.");
     }
 </script>
 
@@ -73,7 +73,7 @@
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/season.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/season-list.php"?>>List</a></li>
 			    <li role="presentation" class="divider"></li>
-			    <li role="presentation" class="dropdown-header">Samplings</li>
+			    <li role="presentation" class="dropdown-header">Campaigns</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/campaign.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/campaign-list.php"?>>List</a></li>
 			  </ul>
@@ -107,17 +107,17 @@
 			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecofisio') !== false || strpos($_SERVER['PHP_SELF'], 'struture') !== false ? 'class="active"' :  '')?> class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Individuals <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			  	<li role="presentation" class="dropdown-header">Indivíduos</li>
+			  	<li role="presentation" class="dropdown-header">Individual</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual-csv.php" : PROJECT_URL . "forms/login.php")?>>CSV Insert</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/individual-list.php"?>>List</a></li>  
 			    
 			    <li role="presentation" class="divider"></li>
-			    <li role="presentation" class="dropdown-header">Eco-Fisio</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/ecofisio-csv.php" : PROJECT_URL . "forms/login.php")?>>CSV Update</a></li>
+			    <li role="presentation" class="dropdown-header">Eco-Physiology</li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/ecofisio-csv.php" : PROJECT_URL . "forms/login.php")?>>Leaf/Xylem CSV Update</a></li>
 			    
 			    <li role="presentation" class="divider"></li>
-			    <li role="presentation" class="dropdown-header">Struture</li>
+			    <li role="presentation" class="dropdown-header">Structure</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/struture-csv.php" : PROJECT_URL . "forms/login.php")?>>CSV Update</a></li>
 			  </ul>
 			</li>
@@ -152,7 +152,7 @@
 				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
 					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>List</a></li>
-					            			<li><a href="'. PROJECT_URL . 'forms/user.php"?>Recuperar password</a></li>
+					            			<li><a href="'. PROJECT_URL . 'forms/user.php"?>Password Recover</a></li>
 					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $destination . '">Logout</a></li>
 					            		</ul>
 					            	</li>

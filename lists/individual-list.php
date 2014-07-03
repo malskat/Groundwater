@@ -48,7 +48,7 @@
 
 			if (isset($_GET["site"])) {
 				$whereClause .= "st.site_id = " . $_GET["site"];
-			   $getParameters .= "site=" . $_GET["site"];
+			   	$getParameters .= "site=" . $_GET["site"];
 			}
 
 			if (isset($_GET["plot"])) {
@@ -83,7 +83,7 @@
 
 			$individuals = $individualData->getIndividualBy($whereClause, isset($_GET["page"]) ? $_GET["page"] : 0, $withTotals = 1);
 		} else {
-			  $individuals = $individualData->getIndividualPlotSpecies(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotals = 1);
+			  $individuals = $individualData->getIndividual(isset($_GET["page"]) ? $_GET["page"] : 0, $withTotals = 1);
 		}
 
 		$fields = $individualData->getFieldList();
@@ -108,7 +108,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-         		<h1>Indivíduos</h1>
+         		<h1>Individuals</h1>
         </div>
       </div>
     </div>
@@ -116,7 +116,7 @@
     <!-- accoes -->
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-lg-10">
+        <div class="col-xs-6 col-lg-10">
           <form  class="form-inline" role="form" name="form_searchindividual_data" action="../core/core_action.php" method="post">
             <input type="hidden" value="search" name="action">
             <input type="hidden" value="individual" name="class">
@@ -140,7 +140,7 @@
             </div>
             <div class="form-group">
               <select name="species" class="form-control input-sm">
-                <option value="none">Espécie</option>
+                <option value="none">Species</option>
                 <?php
                   foreach($species as $specie){
                     echo '<option ' . (isset($_GET["species"]) && $specie->species_id == $_GET["species"] ? 'selected' : '') . ' value="' . $specie->species_id . '">' . $specie->genus . ' - ' . $specie->species . '</option>';
@@ -149,14 +149,14 @@
               </select>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control input-sm" name="individualCode" placeholder="Código" value=<?= (isset($_GET["individualCode"]) ? '"' . $_GET["individualCode"] . '"' : "") ?>>
+              <input type="text" class="form-control input-sm" name="individualCode" placeholder="Code" value=<?= (isset($_GET["individualCode"]) ? '"' . $_GET["individualCode"] . '"' : "") ?>>
             </div>
             <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Filtrar </button>
           </form>
         </div>
         <div class="col-xs-6 col-lg-2"> 
           <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/individual.php'">Inserir Indivíduo</button>
+          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/individual.php'">Individual Insert</button>
         </div>
       </div>
     </div>
@@ -173,8 +173,8 @@
 		              			echo '<th>' . $field . '</th>';
 		              		}
 		              	?>
-		                <th>Editar</th>
-		                <th>Remover</th>
+		                <th>Edit</th>
+		                <th>Remove</th>
 		              </tr>
 	            	</thead>
 		            <tbody>
@@ -188,20 +188,27 @@
 			                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>';
 			                        
 			                        //eco-fisio
-			                        if ($individual->totalEcoFisio > 0) {
+			                        if (isset($individual->totalEcoFisio)  && $individual->totalEcoFisio > 0) {
 			                        	echo '<td>
-			                            		<a href="../lists/ecofisio-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">' . $individual->totalEcoFisio . '</span></a>
+			                            		<a href="../lists/ecofisio-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Check (' . $individual->totalEcoFisio . ')</span></a>
 												</td>';
 			                        } else {
 			                        	echo '<td>
-				                            	<a href="../forms/ecofisio.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">' . $individual->totalEcoFisio . '</span></a>
+				                            	<a href="../lists/ecofisio-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">' . $individual->totalEcoFisio . '</span></a>
 											</td>';
 			                        }
 
 			                        if(isset($individual->struture_id)) {
-			                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Sim</span></a></td>';
+			                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Check</span></a></td>';
 			                        } else {
-			                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">Não</span></a></td>';
+			                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">No</span></a></td>';
+			                        }
+
+
+			                        if (isset($individual->totalReflectance) && $individual->totalReflectance > 0) {	
+			                        	echo '<td><a href="../lists/reflectance-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Check (' . $individual->totalReflectance . ')</span></a></td>';
+			                        } else {
+			                        	echo '<td><a href="../lists/reflectance-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">No</span></a></td>';
 			                        }
 
 			      	                echo '<td>
@@ -225,7 +232,7 @@
 			                    }
 		               		}
 		                } else {
-		                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">Não existem resultados para apresentar!</td></tr>'; 
+		                  echo '<tr><td colspan=' . (count($fields) + 2) . ' style="text-align:center">No data to show!</td></tr>'; 
 		                }
 		             	?>
 		            </tbody>
@@ -238,7 +245,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-4 col-lg-4">
-          <h5>Total de registos <span class="badge"><?=$individuals[0]->totalRecords?></span></h5>
+          <h5>Total records <span class="badge"><?=$individuals[0]->totalRecords?></span></h5>
         </div>
         <div class="col-xs-4 col-lg-4">
           <div class="text-center">

@@ -6,23 +6,23 @@ class Individual extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'individual';
-		$this->_fieldList = array("Código", "Espécie (Genus-Species)", "Plot", "#Eco-Fisio", "#Struture");
+		$this->_fieldList = array("Código", "Espécie (Genus-Species)", "Plot", "Eco-Fisio", "Struture", "Unispec Values");
 		$this->_totalRows = 10;
 	}
 
-	function getIndividualPlotSpecies ($page = 0, $withTotals = 0){
+	function getIndividual ($page = 0, $withTotals = 0){
 
 		require_once '../core/core_database.php';
 
 		$query = 'Select SQL_CALC_FOUND_ROWS i.*, s.species, s.genus, p.code as plotCode, st.title as siteTitle ' .
-					($withTotals == 1 ? ', count(ef.individualCode) as totalEcoFisio' : '') .
+					($withTotals == 1 ? ', (select count(1) from eco_fisio ef where ef.individualCode = i.individualCode) as totalEcoFisio ' : '') .
 					($withTotals == 1 ? ', str.struture_id' : '') .
+					($withTotals == 1 ? ', (select count(1) from individual_reflectance ir where ir.individualCode =  i.individualCode)  as totalReflectance ' : '') .
 					' From individual i 
 					Join plot p on p.plot_id = i.plot_id
 					Join site st on st.site_id = p.site_id
 					Join species s on s.species_id = i.species_id ' . 
 					($withTotals == 1 ? 'left Join struture str On str.individualCode = i.individualCode ' : '') .
-					($withTotals == 1 ? 'left Join eco_fisio ef On ef.individualCode = i.individualCode Group By i.individualCode' : '') . 
 					' Order by i.individualCode';
 
 		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
@@ -34,13 +34,13 @@ class Individual extends gObject {
 		require_once '../core/core_database.php';
 
 		$query = 'Select SQL_CALC_FOUND_ROWS i.*, s.species, s.genus, p.code as plotCode, st.title as siteTitle ' .
-					($withTotals == 1 ? ', count(ef.individualCode) as totalEcoFisio' : '') .
+					($withTotals == 1 ? ', (select count(1) from eco_fisio ef where ef.individualCode = i.individualCode) as totalEcoFisio' : '') .
 					($withTotals == 1 ? ', str.struture_id' : '') .
+					($withTotals == 1 ? ', (select count(1) from individual_reflectance ir where ir.individualCode =  i.individualCode)  as totalReflectance ' : '') .
 					' From individual i 
 					Join plot p on p.plot_id = i.plot_id
 					Join site st on st.site_id = p.site_id
 					Join species s on s.species_id = i.species_id ' . 
-					($withTotals == 1 ? 'left Join eco_fisio ef On ef.individualCode = i.individualCode ' : '') . 
 					($withTotals == 1 ? 'left Join struture str On str.individualCode = i.individualCode ' : '') .
 					' Where ' . $whereClause . ($withTotals == 1 ? ' Group By i.individualCode' : '') . 
 					' Order By i.individualCOde';

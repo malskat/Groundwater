@@ -55,7 +55,8 @@
 	    <div class="container">
 	      <div class="row">
 	      	<div class="page-header">
-	         		<h1>Eco-Fisiologia</h1>
+	         	<h1>Eco-Physiology</h1>
+				<h5>Individual - <?=$_GET['individualCode']?></h5>
 	        </div>
 	      </div>
 	    </div>
@@ -65,7 +66,7 @@
 	        <div class="col-xs-12 col-lg-12">
 	          <div class="panel panel-primary">
 	            <div class="panel-heading">
-	              <h3 class="panel-title"><?= (isset($ecoFisio) ? "Editar Amostragem" : "Inserir Amostragem") ?></h3>
+	              <h3 class="panel-title"><?= (isset($ecoFisio) ? "Sample Edition" : "Sample Insert") ?></h3>
 	            </div>
 	            <div class="panel-body">
 					<div class="col-xs-8 col-lg-8">
@@ -75,7 +76,7 @@
 							<input type="hidden" value="form" name="submissionType">
 
 							<div class="form-group">
-		  						<label class="col-lg-4 control-label">Código do Indivíduo</label>
+		  						<label class="col-lg-4 control-label">Individual Code</label>
 		  						<div class="col-lg-4">
 		  							<p class="form-control-static"><?=$individualCode?></p>
 		  					 	</div>
@@ -86,7 +87,7 @@
 		  						echo '<input type="hidden" value="' . $ecoFisio[0]->sampling_campaign_id . '" name="sampling_campaign_id" >';
 		  						echo '<input type="hidden" value="update" name="operationType" >';
 		  						echo '<div class="form-group">
-				  						<label class="col-lg-4 control-label">Campanha</label>
+				  						<label class="col-lg-4 control-label">Campaign</label>
 				  						<div class="col-lg-4">
 				  							<p class="form-control-static">'. $ecoFisio[0]->campaignDesignation . '</p>
 				  					 	</div>
@@ -94,7 +95,7 @@
 			  				} else {
 			  					echo '<input type="hidden" value="insert" name="operationType" >';
 			  					echo '<div id="campaignsInputGroup" class="form-group">
-										<label for="inputCampaigns" class="col-lg-4 control-label">Campanha*</label>
+										<label for="inputCampaigns" class="col-lg-4 control-label">Campaign*</label>
 										<div class="col-lg-4">
 											<select id="sampling_campaign_id" name="sampling_campaign_id" class="form-control input-sm">';
 
@@ -110,7 +111,7 @@
 		  					?>
 
 		  					<div id="samplingDateInputGroup" class="form-group">
-								<label for="inputSamplingDate" class="col-lg-4 control-label">Data de Amostragem*</label>
+								<label for="inputSamplingDate" class="col-lg-4 control-label">Sample Date*</label>
 								<div class="col-lg-4">
 									<div class="bfh-datepicker">
 									  <div data-toggle="bfh-datepicker">
@@ -185,31 +186,45 @@
 		  					 	</div>
 		  					</div>
 
-		  					<div id="photosyntheticPIInputGroup" class="form-group">
-		  						<label for="inputCode" class="col-lg-4 control-label">Photo Synthetic PI</label>
+		  					<div id="wiInputGroup" class="form-group">
+		  						<label for="inputCode" class="col-lg-4 control-label">WI</label>
 		  						<div class="col-lg-4">
-		  							<input type="text" class="form-control" id="photosynthetic_PI" name="photosynthetic_PI" value=<?= (isset($ecoFisio) ? '"' . $ecoFisio[0]->photosynthetic_PI . '"' : "")?> >
+		  							<input type="text" class="form-control" id="wi" name="wi" value=<?= (isset($ecoFisio) ? '"' . $ecoFisio[0]->wi . '"' : "")?> >
 		  					 	</div>
 		  					</div>
 
-		  					<div id="photosyntheticNWIInputGroup" class="form-group">
-		  						<label for="inputCode" class="col-lg-4 control-label">Photo Synthetic NWI</label>
+		  					<div id="priInputGroup" class="form-group">
+		  						<label for="inputCode" class="col-lg-4 control-label">PRI</label>
 		  						<div class="col-lg-4">
-		  							<input type="text" class="form-control" id="photosynthetic_NWI" name="photosynthetic_NWI" value=<?= (isset($ecoFisio) ? '"' . $ecoFisio[0]->photosynthetic_NWI . '"' : "")?> >
+		  							<input type="text" class="form-control" id="pri" name="pri" value=<?= (isset($ecoFisio) ? '"' . $ecoFisio[0]->pri . '"' : "")?> >
 		  					 	</div>
 		  					</div>
 
-		  					<div id="photosyntheticBPInputGroup" class="form-group">
-		  						<label for="inputCode" class="col-lg-4 control-label">Photo Synthetic BP</label>
+		  					<div id="chlInputGroup" class="form-group">
+		  						<label for="inputCode" class="col-lg-4 control-label">CHL</label>
 		  						<div class="col-lg-4">
-		  							<input type="text" class="form-control" id="photosynthetic_BP" name="photosynthetic_BP" value=<?= (isset($ecoFisio) ? '"' . $ecoFisio[0]->photosynthetic_BP . '"' : "")?> >
+		  							<input type="text" class="form-control" id="chl" name="chl" value=<?= (isset($ecoFisio) ? '"' . $ecoFisio[0]->chl . '"' : "")?> >
+		  					 	</div>
+		  					</div>
+
+		  					<div id="chl_ndiInputGroup" class="form-group">
+		  						<label for="inputCode" class="col-lg-4 control-label">CHL_NDI</label>
+		  						<div class="col-lg-4">
+		  							<input type="text" class="form-control" id="chl_ndi" name="chl_ndi" value=<?= (isset($ecoFisio) ? '"' . $ecoFisio[0]->chl_ndi . '"' : "")?> >
+		  					 	</div>
+		  					</div>
+
+		  					<div id="ndviInputGroup" class="form-group">
+		  						<label for="inputCode" class="col-lg-4 control-label">NDVI</label>
+		  						<div class="col-lg-4">
+		  							<input type="text" class="form-control" id="ndvi" name="ndvi" value=<?= (isset($ecoFisio) ? '"' . $ecoFisio[0]->ndvi . '"' : "")?> >
 		  					 	</div>
 		  					</div>
 
 		  					<?
 		  						if (isset($ecoFisio)) {
 		  							echo '<div class="form-group">
-					  						<label class="col-lg-4 control-label">Data de criação</label>
+					  						<label class="col-lg-4 control-label">Creation Date</label>
 					  						<div class="col-lg-4">
 					  							<p class="form-control-static">' . $ecoFisio[0]->creation_date . '</p>
 					  					 	</div>
@@ -221,8 +236,8 @@
 
 		  					<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 		  						<div class="text-center">
-		  							<button onclick="location.href='../lists/ecofisio-list.php?individualCode=<?=$individualCode?>'" type="button" class="btn btn-xs">Cancelar</button>
-		  							<button class="btn btn-xs btn-primary" type="submit"><?=(isset($ecoFisio) ? "Alterar" : "Submeter")?></button>
+		  							<button onclick="location.href='../lists/ecofisio-list.php?individualCode=<?=$individualCode?>'" type="button" class="btn btn-xs">Cancel</button>
+		  							<button class="btn btn-xs btn-primary" type="submit"><?=(isset($ecoFisio) ? "Change" : "Submit")?></button>
 		  						</div>
 		  					</div>
 	  					</form>
@@ -231,9 +246,9 @@
 	            	<div class="col-xs-4 col-lg-4">
 				        <div class="panel panel-default">
 					        <div class="panel-body">
-					        	<p><span class="label label-default">Informações</span></p>
-					        	<p>Neste formulário podes alterar amostragens de Eco-Fisiologia, para um indivíduo, numa campanha.</p>
-						    	<p><strong>Todos os campos com * são obrigatórios.</strong></p>
+					        	<p><span class="label label-default">Info</span></p>
+					        	<p>This form provides eco-physiology sample update, for an individual, in one campaign.</p>
+						    	<p><strong>All fields with * are mandatory.</strong></p>
 					        </div>
 				        </div>
 			   		</div>

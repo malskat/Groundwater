@@ -32,19 +32,16 @@
 	    <div class="container">
 	      <div class="row">
 	      	<div class="page-header">
-	         	<h1>Eco-Physiology</h1>
+         		<h1>Eco-Physiology</h1>
+				<h5>Individual - <?=$_GET['individualCode']?></h5>
 	        </div>
 	      </div>
 	    </div>
 
 	    <?
-	    	include '../data/campaign_data.php';
+	    	require_once '../data/campaign_data.php';
 	    	$campaignData = new Campaign();
 	    	$campaigns = $campaignData->getCampaigns(-1);
-
-	    	include '../data/ecofisio_data.php';
-	    	$ecoData = new EcoFisio();
-	    	$ecoBlocks = $ecoData->getEcoFisioDataBlocks();
 	    ?>
 
 	     <div class="container">
@@ -52,17 +49,26 @@
 	  			<div class="col-xs-12 col-lg-12">
 		  			<div class="panel panel-primary">
 			        	<div class="panel-heading">
-						   <h3 class="panel-title">CSV Update of Eco-Physiology (Leaf or Xylem)</h3>
+						   <h3 class="panel-title">Unispec Reflectance Updates By CSV</h3>
 						</div>
 				        <div class="panel-body">
 				        	<div class="col-xs-8 col-lg-8">
-					        	<form class="form-horizontal" role="form" name="form_eco_fisio_csv_data" enctype="multipart/form-data" action="../services/ecoFisioSubmissionData.php" onsubmit="return validateForm();"  method="post">
+					        	<form class="form-horizontal" role="form" name="form_eco_fisio_csv_data" enctype="multipart/form-data" action="../services/reflectanceSubmissionData.php" onsubmit="return validateForm();"  method="post">
 
+					        		<input type="hidden" value="<?=$_GET['individualCode']?>" name="individualCode">
 					        		<input type="hidden" value="excel" name="submissionType" >
 
+									<div class="form-group spacer">
+				  						<label class="col-lg-3 control-label">Individual Code</label>
+				  						<div class="col-lg-6">
+				  							<p class="form-control-static"><?=$_GET['individualCode']?></p>
+				  					 	</div>
+				  					</div>
+
+
 					        		<!-- campaigns -->
-									<div id="campaignsInputGroup" class="form-group spacer">
-										<label for="inputCampaigns" class="col-lg-2 control-label">Campaign*</label>
+									<div id="campaignsInputGroup" class="form-group">
+										<label for="inputCampaigns" class="col-lg-3 control-label">Campaign*</label>
 										<div class="col-lg-6">
 											<select id="sampling_campaign_id" name="sampling_campaign_id" class="form-control input-sm">
 												<?
@@ -78,26 +84,8 @@
 										</div>
 									</div>
 
-									<!-- bloco -->
-									<div id="ecoBlockInputGroup" class="form-group">
-										<label for="inputEcoBlock" class="col-lg-2 control-label">Block*</label>
-										<div class="col-lg-6">
-											<select id="ecoBlock" name="ecoBlock" class="form-control input-sm">
-												<?
-													echo '<option selected value="none">Choose one</option>';
-
-												  	foreach ($ecoBlocks as $block) {
-												  		if ($block["show"]) {
-												  			echo '<option value="' . $block["code"] . '">' . $block["designation"]	 . '</option>';
-												  		}
-												  	}
-												?>	
-		              						</select>								
-										</div>
-									</div>
-
 					  				<div id="fileInputGroup" class="form-group">
-					  					<label for="inputGenus" class="col-lg-2 control-label">File*</label>
+					  					<label for="inputGenus" class="col-lg-3 control-label">File*</label>
 					  					<div class="col-lg-6">
 					  						<input type="file" class="form-control" id="file" name="file" placeholder="">
 					  				 	</div>
@@ -105,7 +93,7 @@
 
 					  				<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 										<div class="text-center">
-											<button onclick="location.href='../lists/individual-list.php'" type="button" class="btn btn-xs">Cancel</button>
+											<button onclick="location.href='../lists/reflectance-list.php?individualCode=<?=$_GET['individualCode']?>'" type="button" class="btn btn-xs">Cancel</button>
 											<button class="btn btn-xs btn-primary" type="submit">Submit</button>
 										</div>
 									</div>
@@ -115,10 +103,10 @@
 								<div class="panel panel-default">
 									<div class="panel-body">
 										<p><span class="label label-default">Info</span></p>
-										<p>This service updates individuals eco-physiology samples, from one campaign.</p>
-										<p>Eco-Physiology samples must by updated in two major blocks: Leaf and Xylem Water.</p>
-										<p>Only .csv files that match the strutured rules are accepted.</p>
-										<p>Files must follow this struture: <strong>individualCode</strong>, <strong>samplingDate</strong> (only mandatory if it is the first eco-physioloy sample update, for this campaign), <strong>block values</strong> (example: leaf_13C, leaf_15N, leaf_perN, leaf_perC, leaf_CN).</p>
+										<p>To update reflectance indexes provided by Unispec.</p>
+										<p>Only .csv files are accepted.</p>
+										<p>The submitted files must follow the struture created by the Unispec:<strong>wavelength</strong>, <strong>reflectance value</strong> and <strong>reflectance white reference</strong>.</p>
+										<p><strong>Note</strong>: this service automaticaly updates the individual eco-physiology values (WI, PRI, CHL, CHL NDI and NDVI), through the reflectance indexes provided.</p>
 									</div>
 								</div>
 							</div>
@@ -133,7 +121,6 @@
 	    <script>
 	    	function validateForm(){
 	    		var campaign = $('#sampling_campaign_id').val();
-	    		var block = $('#ecoBlock').val();
 	    		var file = $('#file').val();
 	    		var hasErrors = false;
 
@@ -142,13 +129,6 @@
 	    			$('#campaignsInputGroup').addClass('has-error');
 	    		} else {
 	    			$('#campaignsInputGroup').removeClass('has-error');
-	    		}
-
-	    		if(block == "none" ) {
-	    			hasErrors = true;
-	    			$('#ecoBlockInputGroup').addClass('has-error');
-	    		} else {
-	    			$('#ecoBlockInputGroup').removeClass('has-error');
 	    		}
 
 	    		if(file == "" ) {
