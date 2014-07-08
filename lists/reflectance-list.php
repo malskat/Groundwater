@@ -80,6 +80,7 @@
 				<div class="col-xs-2 col-lg-4">
 					<button class="btn btn-link" onclick="location.href='<?=$backUrl?>'">« back</button>
 				</div>
+
 				<div class="col-xs-6 col-lg-4">
 					<form  class="form-inline" role="form" name="form_searchreflectance_data" action="../core/core_action.php" method="post">
 		            	<input type="hidden" value="search" name="action">
@@ -98,6 +99,7 @@
 		            	<button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search</button>
 		          </form>
 				</div>
+
 				<div class="col-xs-6 col-lg-4"> 
 		        	<div class="btn-group pull-right">
 		        		<button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?>>
@@ -109,6 +111,7 @@
 						</ul>
 		        	</div>
 		        </div>
+		        
 			</div>
 		</div>
 

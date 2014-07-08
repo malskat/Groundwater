@@ -76,10 +76,20 @@
             <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search</button>
           </form>
         </div>
-        <div class="col-xs-6 col-lg-2"> 
-          <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/species.php'">Insert Species</button>
+
+		<div class="col-xs-6 col-lg-2"> 
+        	<div class="btn-group pull-right">
+        		<button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?>>
+        			Insert Species <span class="caret">
+        		</button>
+        		<ul class="dropdown-menu pull-right" role="menu">
+					<li><a href="../forms/species.php"><strong>By form</strong></a></li>
+					<li><a href="../forms/species-csv.php"><strong>By CSV</strong></a></li>
+				</ul>
+        	</div>
         </div>
+
+
       </div>
     </div>
 
@@ -112,7 +122,13 @@
 							        <td>' .$specie->code . '</td>
 							        <td>' .$specie->functionalGroup . '</td>';
 							if ($specie->totalIndividuals > 0) {
-								echo '<td><a href="individual-list.php?species=' . $specie->species_id .  '"><span id="accessTooltip_' . $specie->species_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Individuals" class="label label-default">' . $specie->totalIndividuals . '</span></a></td>';
+								echo '<td>
+										<a href="individual-list.php?species=' . $specie->species_id .  '">
+											<span id="accessTooltip_' . $specie->species_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Individuals" class="label label-info">
+												Check (' . $specie->totalIndividuals . ')
+											</span>
+										</a>
+									</td>';
 							} else {
 								echo '<td><span class="label label-default">' . $specie->totalIndividuals . '</span></td>';
 							}

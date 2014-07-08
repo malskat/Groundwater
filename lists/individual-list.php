@@ -155,10 +155,20 @@
             <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search </button>
           </form>
         </div>
+
         <div class="col-xs-6 col-lg-2"> 
-          <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/individual.php'">Insert Individual</button>
+        	<div class="btn-group pull-right">
+        		<button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?>>
+        			Insert Individual <span class="caret">
+        		</button>
+        		<ul class="dropdown-menu pull-right" role="menu">
+					<li><a href="../forms/Individual.php"><strong>By form</strong></a></li>
+					<li><a href="../forms/individual-csv.php"><strong>By CSV</strong></a></li>
+				</ul>
+        	</div>
         </div>
+
+
       </div>
     </div>
 
@@ -189,7 +199,7 @@
 			                            <td>' . $individual->siteTitle . ' - ' . $individual->plotCode . '</td>';
 			                        
 			                        //eco-fisio
-			                        if (isset($individual->totalEcoFisio)  && $individual->totalEcoFisio > 0) {
+			                        if (isset($individual->totalEcoFisio) && $individual->totalEcoFisio > 0) {
 			                        	echo '<td>
 			                            		<a href="../lists/ecofisio-list.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Check (' . $individual->totalEcoFisio . ')</span></a>
 												</td>';
@@ -218,7 +228,7 @@
 			      	                  		</button>
 			      	                  	</td>';
 
-			  	                  	if ($individual->totalEcoFisio || isset($individual->struture_id) == 0) {
+			  	                  	if ((isset($individual->totalEcoFisio) && $individual->totalEcoFisio == 0) && !isset($individual->struture_id) && (isset($individual->totalReflectance) && $individual->totalReflectance == 0)) {
 			                            echo '<td>
 			                              <button onclick="beginDelete(\'action=delete&class=individual&id=' . $individual->individualCode . '\', \'Do you want to remove this Individual?\');" type="button" class="btn btn-danger btn-xs">
 			                                <span class="glyphicon glyphicon-remove-sign"></span>
@@ -226,7 +236,7 @@
 			                            </td>';
 			                      	} else {
 			                      		echo '<td>
-			                      				<span id="removeTooltip_' . $individual->individualCode . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="Tem amostragens associadas">É melhor não</span> 
+			                      				<span id="removeTooltip_' . $individual->individualCode . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="It has samples associated">Better not</span> 
 			                      			</td>';
 			                      	}
 			      	                echo '</tr>';

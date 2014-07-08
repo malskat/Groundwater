@@ -105,10 +105,19 @@
             <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon glyphicon-search"></span> Search</button>
           </form>
         </div>
+
         <div class="col-xs-6 col-lg-2"> 
-          <!-- insercao -->
-          <button class="btn btn-primary btn-sm pull-right" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?> onclick="location.href='../forms/plot.php'">Insert Plot</button>
+        	<div class="btn-group pull-right">
+        		<button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?>>
+        			Insert Plot <span class="caret">
+        		</button>
+        		<ul class="dropdown-menu pull-right" role="menu">
+					<li><a href="../forms/plot.php"><strong>By form</strong></a></li>
+					<li><a href="../forms/plot-csv.php"><strong>By CSV</strong></a></li>
+				</ul>
+        	</div>
         </div>
+
       </div>
     </div>
 
@@ -143,7 +152,13 @@
 	    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>';
 	    	                  			
 	    	                  			if ($plot->totalIndividuals > 0) {
-	                        				echo '<td><a href="individual-list.php?plot=' . $plot->plot_id .  '"><span id="accessTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Individuals" class="label label-default">' . $plot->totalIndividuals . '</span></a></td>';
+	                        				echo '<td>
+	                        							<a href="individual-list.php?plot=' . $plot->plot_id .  '">
+	                        								<span id="accessTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Individuals" class="label label-info">
+	                        									Check (' . $plot->totalIndividuals . 
+	                        								')</span>
+	                        							</a>
+	                        						</td>';
 	    	                  			}else {
 	    	                  				echo '<td><span class="label label-default">' . $plot->totalIndividuals . '</a></td>';
 	    	                  			}

@@ -65,7 +65,7 @@
 
 				  				<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 									<div class="text-center">
-										<button onclick="location.href='../lists/species-list.html'" type="button" class="btn btn-xs">Cancel</button>
+										<button onclick="location.href='../lists/species-list.php'" type="button" class="btn btn-xs">Cancel</button>
 										<button class="btn btn-xs btn-primary" type="submit">Submit</button>
 									</div>
 								</div>
