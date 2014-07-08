@@ -36,12 +36,12 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		if ($reply['_success_'] == 1){
 			header('Location: /forms/plot.php?success=1' . $urlComplement);
 		} else {
-			header('Location: /forms/plot.php?success=-3&reason=Nao houve alteracao nenhuma!' . $urlComplement);
+			header('Location: /forms/plot.php?success=-3&reason=There was no change!' . $urlComplement);
 		}
 
 		
 	}else{
-		header('Location: /forms/plot.php?success=-1&reason=Faltam parametros!');
+		header('Location: /forms/plot.php?success=-1&reason=Missing parameters!');
 	}
 }
 else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel'){
@@ -52,9 +52,9 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: /forms/plot-csv.php?success=-1&reason=Ficheiro tem de ser csv.');
+			header('Location: /forms/plot-csv.php?success=-1&reason=File must be csv format!');
 	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-			header('Location: /forms/plot-csv.php?success=-1&reason=Ficheiro ja foi processado.');
+			header('Location: /forms/plot-csv.php?success=-1&reason=File already processed!');
 	  	}else{
 			//mover o ficheiro da pasta temporaria
 	  		move_uploaded_file($_FILES["file"]["tmp_name"], PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
@@ -91,7 +91,7 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 		        			
 		        		} else {
 
-		        			$errorString .= '» Linha ' . ($row - 1) . ', code ' . $data[1] . ': local não foi encontrado; \n';
+		        			$errorString .= '» Line ' . ($row - 1) . ', code ' . $data[1] . ': unkown site; \n';
 
 		        		}
 			        }
@@ -113,7 +113,7 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 
 				}else{
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /lists/plot-list.php?success=-1&reason=ficheiro nao passou para a directoria final!');
+					header('Location: /lists/plot-list.php?success=-1&reason=Could not move file to final directory!');
 				}
 			}
 

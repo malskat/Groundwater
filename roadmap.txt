@@ -10,10 +10,12 @@
 
  		* formulário para recuperação de password:
  			* popup com recolha de email;
-
- 		* página de objectivos
+ 		
+ 		* página de tasks
+ 			* ligar na página de objectives as tasks correspondentes.
  		* listagem de campanhas - o remover também está disponível, mesmo quando existem amostragens associadas.
 
+ 		* página de objectivos - DONE
  		* listagem de indivíduos - o remover está a ser permitido para indivíduos que já possuem amostragens - DONE
  		* botões de insert nas listagens, darem também acesso aos formulários de csv: - DONE
  			* plot  - DONE

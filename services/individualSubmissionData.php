@@ -39,10 +39,10 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 		if ($reply['_success_'] == 1) {
 			header('Location: /forms/individual.php?success=1' . $urlComplement);
 		} else {
-			header('Location: /forms/individual.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+			header('Location: /forms/individual.php?success=-3&reason=There was no change!' . $urlComplement);
 		}
 	} else {
-		header('Location: /forms/individual.php?success=-1&reason=Faltam parametros!');
+		header('Location: /forms/individual.php?success=-1&reason=Missing parameters!');
 	}
 
 } else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel'){
@@ -53,9 +53,9 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: /forms/individual-csv.php?success=-1&reason=Ficheiro tem de ser csv!');
+			header('Location: /forms/individual-csv.php?success=-1&reason=File must be in csv format!');
 	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-			header('Location: /forms/individual-csv.php?success=-1&reason=Ficheiro ja foi processado!');
+			header('Location: /forms/individual-csv.php?success=-1&reason=File already processed!');
 	  	} else {
 			//mover o ficheiro da pasta temporaria
 	  		move_uploaded_file($_FILES["file"]["tmp_name"], PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
@@ -108,20 +108,20 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 										}
 
 				  					} else {
-				        				$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': espécie não foi encontrada; <br />';
+				        				$errorString .= '» Line ' . $row . ', individualCode ' . $data[4] . ': unkown species; <br />';
 				        			}
 
 			        			} else {
-			        				$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': plot não foi encontrado; <br />';
+			        				$errorString .= '» Line ' . $row . ', individualCode ' . $data[4] . ': unkown plot; <br />';
 			        			}
 
 			        			
 			        		}else {
-			        			$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': local não foi encontrado; <br />';
+			        			$errorString .= '» Line ' . $row . ', individualCode ' . $data[4] . ': unkown site; <br />';
 			        		}
 
 			    		} else {
-			    			$errorString .= '» Linha ' . $row . ', individualCode ' . $data[4] . ': já existe na BD; <br />';
+			    			$errorString .= '» Line ' . $row . ', individualCode ' . $data[4] . ': already present in DB; <br />';
 			    		}
 
 			        }
@@ -142,7 +142,7 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /lists/individual-list.php?success=-1&reason=ficheiro nao passou para a directoria final!');
+					header('Location: /lists/individual-list.php?success=-1&reason=Could not move file to final directory!');
 				}
 			}
 
@@ -154,5 +154,5 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 	}
 
 } else {
-	header('Location: /lists/individual-list.php?success=-1&reason=N&atilde;o estamos preparados para mais nenhum tipo de carregamento de informa&ccedil;&atilde;o, a n&atilde;o ser por formul&aacute;rio ou excel.');
+	header('Location: /lists/individual-list.php?success=-1&reason=Submission type not allowed.');
 }

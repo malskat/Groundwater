@@ -49,7 +49,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: /forms/species-csv.php?success=-1&reason=File must be csv!');
+			header('Location: /forms/species-csv.php?success=-1&reason=File must be csv format!');
 	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
 			header('Location: /forms/species-csv.php?success=-1&reason=File already processed!');
 	  	} else {
@@ -102,7 +102,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /forms/species-list.php?success=-1&reason=Could not move file to final directory!!');
+					header('Location: /forms/species-list.php?success=-1&reason=Could not move file to final directory!');
 				}
 			}
 

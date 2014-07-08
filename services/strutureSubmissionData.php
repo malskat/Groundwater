@@ -27,12 +27,12 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		if($reply['_success_'] == 1) {
 			header('Location: /forms/struture.php?success=1&individualCode=' . $_POST["individualCode"]);
 		} else {
-			header('Location: /forms/struture.php?success=-3&reason=Não houve alteração nenhuma!&individualCode=' . $_POST["individualCode"]);
+			header('Location: /forms/struture.php?success=-3&reason=There was no change!!&individualCode=' . $_POST["individualCode"]);
 		}
 
 		
 	} else {
-		header('Location: /forms/struture.php?success=-1&reason=Faltam parametros à estrutura!&individualCode=' . $_POST["individualCode"]);
+		header('Location: /forms/struture.php?success=-1&reason=Missing parameters!&individualCode=' . $_POST["individualCode"]);
 	}
 } else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
 
@@ -42,9 +42,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: /forms/struture-csv.php?success=-1&reason=Ficheiro tem de ser csv!');
+			header('Location: /forms/struture-csv.php?success=-1&reason=File must be csv format!');
 	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-			header('Location: /forms/struture-csv.php?success=-1&reason=Ficheiro ja foi processado!');
+			header('Location: /forms/struture-csv.php?success=-1&reason=File already processed!');
 	  	} else {
 			
 			//movimentacao do ficheiro da pasta temporaria para a pasta final
@@ -107,13 +107,13 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		        				$success = $individualData->update($individualToUpdate);
 
 		        				if ($success['_success_'] != 1) {
-			        				$errorString .= "» Linha " . $row . ", individualCode " . $data[0] . " não foi possível actualizar as coordenadas; <br />";
+			        				$errorString .= "» Line " . $row . ", individualCode " . $data[0] . " coordinates not update; <br />";
 			        			}
 
 		        			}
 
 			        	} else {
-			        		$errorString .= "» Linha " . $row . ", individualCode '" . $data[0] . "' não existe; <br />";
+			        		$errorString .= "» Line " . $row . ", individualCode '" . $data[0] . "' doesnt existe; <br />";
 			        	}
 
 
@@ -137,7 +137,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /forms/struture-csv.php?success=-1&reason=ficheiro não passou para a directoria final!');
+					header('Location: /forms/struture-csv.php?success=-1&reason=Could not move file to final directory!');
 				}
 			}
 
@@ -148,5 +148,5 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
   		header('Location: /forms/struture-csv.php?success=-1&reason=' . $e);
 	}
 } else {
-	header('Location: /forms/species.php?success=-1&reason=Tipo de submissão não suportado!');
+	header('Location: /forms/species.php?success=-1&reason=Submission not allowed!');
 }
