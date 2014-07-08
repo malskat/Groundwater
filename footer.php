@@ -8,7 +8,7 @@
 
 			<ul class="nav footer-nav pull-right">
 			<li>
-			 	<p class="text-muted">Contact: cmaantunes@fc.ul.pt (Cristina Antunes)</p>
+			 	<p class="text-muted">Contact: <a href="mailto:cmaantunes@fc.ul.pt">cmaantunes@fc.ul.pt</a> (Cristina Antunes)</p>
 			</li>
 			</ul>
     	</div>

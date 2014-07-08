@@ -51,7 +51,7 @@
 	</div>
 
 	<div class="container">
-		<div class="row">
+		<div class="row spacer">
 			<p>
 				Groundwater (GW) drawdown is of obvious importance to vegetation as reduction of water tables may sever the plants from one of their key water sources. GW lowering or surface diversions can produce dramatic changes in stand structure and species composition [1, 2], inevitably affecting GW-dependent ecosystems [e.g 3, 4]. It can induce ecological effects such as the decrease in plant species richness, changes in plant communities, performance or survival of plant species [5, 6, 7]. Sand dune habitats are particularly sensitive to GW stress, as GW is one of their primary water-source, and the stress effects are dependent on GW level variations [8, 9]. Sand dune plant communities encompass a diverse number of species that differ widely in root depth, tolerance to drought and fluctuations of the water table, and capacity to shift between seasonal varying water sources [10, 11]. This high ecological diversity can occur in different climatic regions, such is the case of Tropical, Meso-mediterranen and Mediterranean areas, where future climate change is predicted to reduce water availability, which could exacerbate GW limitation [12]. A large-climatic-scale study, covering Brazil, Portugal and Spain, would provide an excellent experimental condition to study the GW dynamics and community functioning in natural dune Forests of high ecological and economical value.
 			</p>
