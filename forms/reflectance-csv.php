@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>Projecto Ground Water</title>
+    <title>GWTropiMed Project</title>
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
 
   </head>
 
@@ -32,8 +33,10 @@
 	    <div class="container">
 	      <div class="row">
 	      	<div class="page-header">
-         		<h1>Unispec - Reflectance</h1>
-				<h5>Individual - <?=$_GET['individualCode']?></h5>
+         		<h2>
+         			Unispec - Reflectance
+					<small>Individual - <?=$_GET['individualCode']?></small>
+				</h2>
 	        </div>
 	      </div>
 	    </div>
@@ -105,7 +108,7 @@
 										<p><span class="label label-default">Info</span></p>
 										<p>To update reflectance indexes provided by Unispec.</p>
 										<p>Only .csv files are accepted.</p>
-										<p>The submitted files must follow the struture created by the Unispec:<strong>wavelength</strong>, <strong>reflectance value</strong> and <strong>reflectance white reference</strong>.</p>
+										<p>The submitted files must follow the structure created by the Unispec:<strong>wavelength</strong>, <strong>reflectance value</strong> and <strong>reflectance white reference</strong>.</p>
 										<p><strong>Note</strong>: this service automaticaly updates the individual eco-physiology values (WI, PRI, CHL, CHL NDI and NDVI), through the reflectance values provided.</p>
 									</div>
 								</div>
@@ -117,6 +120,7 @@
 	  		</div>
 	    </div>
 
+	    <?php include "../footer.php";?>
 
 	    <script>
 	    	function validateForm(){

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>Projecto Ground Water</title>
+    <title>GWTropiMed Project</title>
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -21,6 +21,7 @@
     <link href="../css/alerts.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -111,7 +112,7 @@
 							        <td>' .$specie->code . '</td>
 							        <td>' .$specie->functionalGroup . '</td>';
 							if ($specie->totalIndividuals > 0) {
-								echo '<td><a href="individual-list.php?species=' . $specie->species_id .  '"><span id="accessTooltip_' . $specie->species_id . '" data-toggle="tooltip" data-placement="left" title="Clica para veres os indivíduos" class="label label-default">' . $specie->totalIndividuals . '</span></a></td>';
+								echo '<td><a href="individual-list.php?species=' . $specie->species_id .  '"><span id="accessTooltip_' . $specie->species_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Individuals" class="label label-default">' . $specie->totalIndividuals . '</span></a></td>';
 							} else {
 								echo '<td><span class="label label-default">' . $specie->totalIndividuals . '</span></td>';
 							}
@@ -192,6 +193,8 @@
         <div class="col-xs-4 col-lg-4"></div>
       </div>
     </div>
+
+    <?php include "../footer.php";?>
 
     <script>
     <?php

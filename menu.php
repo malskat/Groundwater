@@ -61,73 +61,84 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href=<?= PROJECT_URL?>>Groundwater</a>
+      <a class="navbar-brand" href=<?= PROJECT_URL?>>GWTropiMed</a>
     </div>
     <div class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
 
-			<li <?=(strpos($_SERVER['PHP_SELF'], 'season') !== false || strpos($_SERVER['PHP_SELF'], 'campaign') !== false ? 'class="active"' :  '')?> class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campaigns <b class="caret"></b></a>
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			    <li role="presentation" class="dropdown-header">Seasons</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/season.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/season-list.php"?>>List</a></li>
-			    <li role="presentation" class="divider"></li>
-			    <li role="presentation" class="dropdown-header">Campaigns</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/campaign.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/campaign-list.php"?>>List</a></li>
+			    <li><a href=<?=PROJECT_URL . "info/state-of-the-art.php"?>><span class="glyphicon glyphicon-tag"></span> State of the Art</a></li>
+			    <li><a href=<?=PROJECT_URL . "info/objectives.php"?>><span class="glyphicon glyphicon-record"></span> Objectives</a></li>
+			    <li><a href=<?=PROJECT_URL . "info/sites.php"?>><span class="glyphicon glyphicon-map-marker"></span> Sites</a></li>
+			    <li><a href=<?=PROJECT_URL . "info/tasks.php"?>><span class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
+			    <li><a href=<?=PROJECT_URL . "info/partners.php"?>><span class="glyphicon glyphicon-leaf"></span> Partners</a></li>
 			  </ul>
 			</li>
 
-			<li <?=(strpos($_SERVER['PHP_SELF'], 'site') !== false || strpos($_SERVER['PHP_SELF'], 'plot') !== false ? 'class="active"' :  '')?> class="dropdown">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'season') !== false || strpos($_SERVER['PHP_SELF'], 'campaign') !== false ? 'active' :  '')?>">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campaigns <b class="caret"></b></a>
+			  <ul class="dropdown-menu">
+			    <li role="presentation" class="dropdown-header">Seasons</li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/season.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/season-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>
+			    <li role="presentation" class="divider"></li>
+			    <li role="presentation" class="dropdown-header">Campaigns</li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/campaign.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/campaign-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>
+			  </ul>
+			</li>
+
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'site') !== false || strpos($_SERVER['PHP_SELF'], 'plot') !== false ? 'active' :  '')?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sites <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    
 			    <li role="presentation" class="dropdown-header">Site</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/site.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/site-list.php"?>>List</a></li> 
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/site.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/site-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Plot</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot-csv.php" : PROJECT_URL . "forms/login.php")?>>CSV Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/plot-list.php"?>>List</a></li> 
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Insert</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/plot-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
 			  </ul>
 			</li>
 
-			<li <?=(strpos($_SERVER['PHP_SELF'], 'species') !== false ? 'class="active"' :  '')?> class="dropdown">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'species') !== false ? 'active' :  '')?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Species <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species-csv.php" : PROJECT_URL . "forms/login.php")?>>CSV Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/species-list.php"?>>List</a></li> 
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Insert</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/species-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
 			  </ul>
 			</li>
 
-			<li <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecofisio') !== false || strpos($_SERVER['PHP_SELF'], 'struture') !== false ? 'class="active"' :  '')?> class="dropdown">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecofisio') !== false || strpos($_SERVER['PHP_SELF'], 'struture') !== false ? 'active' :  '')?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Individuals <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Individual</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual.php" : PROJECT_URL . "forms/login.php")?>>Insert</a></li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual-csv.php" : PROJECT_URL . "forms/login.php")?>>CSV Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/individual-list.php"?>>List</a></li>  
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Insert</a></li>
+			    <li><a href=<?=PROJECT_URL . "lists/individual-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>  
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Physiology</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/ecofisio-csv.php" : PROJECT_URL . "forms/login.php")?>>Leaf/Xylem CSV Update</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/ecofisio-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> Leaf/Xylem CSV Update</a></li>
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Structure</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/struture-csv.php" : PROJECT_URL . "forms/login.php")?>>CSV Update</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/struture-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Update</a></li>
 			  </ul>
 			</li>
 		<?php
 			if ($_BIOLOGYST_LOGGED) {
-				echo '<li ' . (strpos($_SERVER['PHP_SELF'], 'use') !== false ? 'class="active"' :  '') .  ' class="dropdown">
+				echo '<li class="dropdown ' . (strpos($_SERVER['PHP_SELF'], 'use') !== false ? 'active' :  '') .  '">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
 								  	<ul class="dropdown-menu">
-								    	<li><a href="' . PROJECT_URL .'forms/user.php">Insert</a></li>
-								    	<li><a href="' . PROJECT_URL . 'lists/user-list.php">List</a></li> 
+								    	<li><a href="' . PROJECT_URL .'forms/user.php"><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
+								    	<li><a href="' . PROJECT_URL . 'lists/user-list.php"><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
 								  	</ul>
 						</li>';
 
@@ -151,7 +162,7 @@
 				            		<li class="dropdown">
 				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
-					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i>List</a></li>
+					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i><span class="glyphicon glyphicon-th-list"></span> List</a></li>
 					            			<li><a href="'. PROJECT_URL . 'forms/user.php"?>Password Recover</a></li>
 					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $destination . '">Logout</a></li>
 					            		</ul>

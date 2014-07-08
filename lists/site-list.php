@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>Projecto Ground Water</title>
+    <title>GWTropiMed Project</title>
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -20,6 +20,7 @@
     <link href="../css/alerts.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -92,7 +93,7 @@
 				    	                  	<td>' . (isset($site->coordinateY) && $site->coordinateY != "" ? $site->coordinateY : "N.D.") . '</td>';
 				                          	
 				                          	if ($site->totalPlots > 0) {
-				                          		echo '<td><a href="plot-list.php?site=' . $site->site_id .  '"><span id="accessTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Plots" class="label label-default">' . $site->totalPlots . '</span></a></td>';
+				                          		echo '<td><a href="plot-list.php?site=' . $site->site_id .  '"><span id="accessTooltip_' . $site->site_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Plots" class="label label-info">Check (' . $site->totalPlots . ')</span></a></td>';
 				                          	} else {
 				                          		echo '<td><span class="label label-default">' . $site->totalPlots . '</a></td>';
 				                          	}
@@ -170,6 +171,8 @@
         <div class="col-xs-4 col-lg-4"></div>
       </div>
     </div>
+
+    <?php include "../footer.php";?>
 
     <script>
     <?php

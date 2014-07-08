@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>Projecto Ground Water</title>
+    <title>GWTropiMed Project</title>
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
 
   </head>
 
@@ -117,8 +118,8 @@
 										<p><span class="label label-default">Info</span></p>
 										<p>This service updates individuals eco-physiology samples, from one campaign.</p>
 										<p>Eco-Physiology samples must by updated in two major blocks: Leaf and Xylem Water.</p>
-										<p>Only .csv files that match the strutured rules are accepted.</p>
-										<p>Files must follow this struture: <strong>individualCode</strong>, <strong>samplingDate</strong> (only mandatory if it is the first eco-physioloy sample update, for this campaign), <strong>block values</strong> (example: leaf_13C, leaf_15N, leaf_perN, leaf_perC, leaf_CN).</p>
+										<p>Only .csv files that match the structured rules are accepted.</p>
+										<p>Files must follow this structure: <strong>individualCode</strong>, <strong>samplingDate</strong> (only mandatory if it is the first eco-physioloy sample update, for this campaign), <strong>block values</strong> (example: leaf_13C, leaf_15N, leaf_perN, leaf_perC, leaf_CN).</p>
 									</div>
 								</div>
 							</div>
@@ -129,6 +130,7 @@
 	  		</div>
 	    </div>
 
+	    <?php include "../footer.php";?>
 
 	    <script>
 	    	function validateForm(){

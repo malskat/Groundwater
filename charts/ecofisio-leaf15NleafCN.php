@@ -10,7 +10,7 @@
 		<meta name="author" content="">
 		<link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-		<title>Projecto Ground Water</title>
+		<title>GWTropiMed Project</title>
 
 		<script src="../js/jquery-1.10.2.js"></script>
 		<script src="../js/bootstrap.min.js"></script>
@@ -20,6 +20,7 @@
 		<link href="../css/alerts.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
 		<link href="../css/mainCore.css" rel="stylesheet">
+    	<link href="../css/sticky-footer.css" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -97,13 +98,15 @@
 	    <div class="container">
 			<div class="row">
 				<div class="page-header">
-					<h2>Eco-Fisiologia</h2>
-					<h5>Indivíduo <?=$_GET['individualCode']?></h5>
+					<h2>
+						Eco-Fisiologia
+						<small>Individual - <?=$_GET['individualCode']?></small>
+					</h2>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-6 col-lg-10">
-					<button class="btn btn-link" onclick="location.href='<?=$backUrl?>'">« voltar</button>
+					<button class="btn btn-link" onclick="location.href='<?=$backUrl?>'">« back</button>
 				</div>
 				<div class="col-xs-6 col-lg-2"></div>
 			</div>
@@ -130,6 +133,9 @@
 			    </div>
 			</div>
 		</div>
+
+		<?php include "../footer.php";?>
+
 	</body>
 </html>
 

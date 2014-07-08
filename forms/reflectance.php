@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>Projecto Ground Water</title>
+    <title>GWTropiMed Project</title>
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -25,6 +25,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
   </head>
@@ -56,8 +57,10 @@
 	    <div class="container">
 	      <div class="row">
 	      	<div class="page-header">
-         		<h1>Unispec - Reflectance</h1>
-				<h5>Individual - <?=$individualCode?></h5>
+         		<h2>
+         			Unispec - Reflectance
+					<small>Individual - <?=$individualCode?></small>
+				</h2>
 	        </div>
 	      </div>
 	    </div>
@@ -266,6 +269,8 @@
         </div>
       </div>
   	</div>
+
+  	<?php include "../footer.php";?>
 
   	 <script>
     	function validateForm(){

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>Projecto Ground Water</title>
+    <title>GWTropiMed Project</title>
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -24,6 +24,7 @@
     <link href="../css/alerts.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 
@@ -52,8 +53,10 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-        	<h2>Struture</h2>
-          	<h5>Indivíduo - <?=$_GET['individualCode']?></h5>
+        	<h2>
+        		Structure
+          		<small>Individual - <?=$_GET['individualCode']?></small>
+          	</h2>
         </div>
       </div>
     </div>
@@ -63,12 +66,12 @@
         <div class="col-xs-12 col-lg-12">
           <div class="panel panel-primary">
             <div class="panel-heading clearfix">
-              <h3 class="panel-title pull-left"><?= (!isset($struture) ? "Editar Struture" : "Inserir Struture") ?></h3>
+              <h3 class="panel-title pull-left"><?= (!isset($struture) ? "Edit Structure" : "Insert Structure") ?></h3>
 				<?
 					if (count($struture) > 0) {
 						echo '<div class="pull-right">
 								<button onclick="beginDelete(\'action=delete&class=struture&id=' . $struture[0]->struture_id . '&redirect=/lists/individual-list.php\'
-								                             ,\'Queres mesmo remover a estrutura deste indivíduo?\');"" type="button" class="btn btn-danger btn-xs">Remover</button>
+								                             ,\'Do you want to remove this individual structure?\');"" type="button" class="btn btn-danger btn-xs">Remove</button>
 								</div>';
 					}
 				?>
@@ -82,7 +85,7 @@
 	  					<input type="hidden" value="<?=$_GET['individualCode']?>" name="individualCode" >
 
 	  					<div id="samplingDateInputGroup" class="form-group">
-							<label for="inputSamplingDate" class="col-lg-4 control-label">Data de Amostragem*</label>
+							<label for="inputSamplingDate" class="col-lg-3 control-label">Sampling Date*</label>
 							<div class="col-lg-4">
 								<div class="bfh-datepicker">
 								  <div data-toggle="bfh-datepicker">
@@ -116,28 +119,28 @@
 						</div>
 
 	  					<div id="diameter1InputGroup" class="form-group">
-	  						<label for="inputCode" class="col-lg-3 control-label">Diâmetro 1</label>
+	  						<label for="inputCode" class="col-lg-3 control-label">Diameter 1</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="diameter1" name="diameter1" value=<?= (count($struture) > 0 ? '"' . $struture[0]->diameter1 . '"' : "")?> >
 	  					 	</div>
 	  					</div>
 
 	  					<div id="diameter2InputGroup" class="form-group">
-	  						<label for="inputCode" class="col-lg-3 control-label">Diâmetro 2</label>
+	  						<label for="inputCode" class="col-lg-3 control-label">Diameter 2</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="diameter2" name="diameter2" value=<?= (count($struture) > 0 ? '"' . $struture[0]->diameter2 . '"' : "")?> >
 	  					 	</div>
 	  					</div>
 
 	  					<div id="heightInputGroup" class="form-group">
-	  						<label for="inputCode" class="col-lg-3 control-label">Altura</label>
+	  						<label for="inputCode" class="col-lg-3 control-label">Height</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="height" name="height" value=<?= (count($struture) > 0 ? '"' . $struture[0]->height . '"' : "")?> >
 	  					 	</div>
 	  					</div>
 
 	  					<div id="perimeterInputGroup" class="form-group">
-	  						<label for="inputCode" class="col-lg-3 control-label">Perímetro</label>
+	  						<label for="inputCode" class="col-lg-3 control-label">Perimeter</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="perimeter" name="perimeter" value=<?= (count($struture) > 0 ? '"' . $struture[0]->perimeter . '"' : "")?> >
 	  					 	</div>
@@ -152,8 +155,8 @@
 
 	  					<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 	  						<div class="text-center">
-	  							<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancelar</button>
-	  							<button class="btn btn-xs btn-primary" type="submit"><?=(count($struture) > 0 ? "Alterar" : "Submeter")?></button>
+	  							<button onclick="location.href='<?=$backUrl?>'" type="button" class="btn btn-xs">Cancel</button>
+	  							<button class="btn btn-xs btn-primary" type="submit"><?=(count($struture) > 0 ? "Change" : "Submit")?></button>
 	  						</div>
 	  					</div>
 	  				</form>
@@ -162,9 +165,9 @@
             	<div class="col-xs-4 col-lg-4">
 			        <div class="panel panel-default">
 				        <div class="panel-body">
-				        	<p><span class="label label-default">Informações</span></p>
-				        	<p>Neste formulário editar os valores da estrutura de um indivíduo.</p>
-					    	<p><strong>Todos os campos com * são obrigatórios.</strong></p>
+				        	<p><span class="label label-default">Info</span></p>
+				        	<p>This forms allows you to manage (insert and edit) individual structures.</p>
+					    	<p><strong>All fields with * are mandatory.</strong></p>
 				        </div>
 			        </div>
 		   		</div>
@@ -175,6 +178,8 @@
         
       </div>
   	</div>
+
+  	<?php include "../footer.php";?>
 
   	<script>
     	function validateForm(){

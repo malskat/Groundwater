@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>Projecto Ground Water</title>
+    <title>GWTropiMed Project</title>
 
 
     <script src="../js/jquery-1.10.2.js"></script>
@@ -22,6 +22,8 @@
 
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
+    <link href="../css/sticky-footer.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -175,5 +177,8 @@
         <div class="col-xs-4 col-lg-4"></div>
       </div>
     </div>
+
+    <?php include "../footer.php";?>
+
   </body>
 </html>
