@@ -14,7 +14,7 @@
 </div>	
 
 
-<script src="../js/utils.js"></script>
+<script src="<?=PROJECT_URL?>js/utils.js"></script>
 <script>
 
 
@@ -162,9 +162,9 @@
 				            		<li class="dropdown">
 				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
-					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><i class="fa fa-user fa-fw"></i><span class="glyphicon glyphicon-th-list"></span> List</a></li>
-					            			<li><a href="'. PROJECT_URL . 'forms/user.php"?>Password Recover</a></li>
-					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $destination . '">Logout</a></li>
+					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><span class="glyphicon glyphicon-user"></span> Edit</a></li>
+					            			<li><a href="'. PROJECT_URL . 'forms/user.php"?><span class="glyphicon glyphicon-repeat"></span> Password Recover</a></li>
+					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $destination . '"><span class="glyphicon glyphicon-eject"></span> Logout</a></li>
 					            		</ul>
 					            	</li>
 					            </ul>
@@ -174,7 +174,7 @@
 
 				//formulario de utilizador
 				echo '<div id="loginForm" name="loginForm" class="navbar-form navbar-right">
-						<button id="loginTooltip" class="btn btn-success btn-sm" onclick="location.href=\'../forms/login.php\'">Login</button>
+						<button id="loginTooltip" class="btn btn-success btn-sm" onclick="location.href=\'../forms/login.php\'">Login <span class="glyphicon glyphicon-tree-conifer"></span></button>
 					</div>';
 			}
 		?>

@@ -49,7 +49,11 @@ switch($action){
 			}
 
 		} else {
-			$newLocation = '/lists/' . $_GET["class"] . '-list.php?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'success=-1&reason=There is no logged user. Please login.';
+			if (isset($_GET["redirect"])) {
+				$newLocation = $_GET["redirect"] . '?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'success=-1&reason=There is no logged user. Please login.';
+			} else {
+				$newLocation = '/lists/' . $_GET["class"] . '-list.php?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'success=-1&reason=There is no logged user. Please login.';
+			}
 		}
 
 
