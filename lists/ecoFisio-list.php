@@ -76,8 +76,9 @@
 							</button>
 							<ul class="dropdown-menu pull-right">
 								<li><a href="../charts/ecofisio-temporaloverview.php?individualCode=<?=$_GET['individualCode']?>"><strong>Temporal Overview</strong></a></li>
+								<li><a href="../charts/ecofisio-leaf13Cleaf15N.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 13C and Leaf 15N / Xylem 18O</strong></a></li>
 								<li><a href="../charts/ecofisio-leaf13Cpri.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 13C and PRI / Xylem 18O</strong></a></li>
-								<li><a href="../charts/ecofisio-leaf15NleafCN.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
+								<li><a href="../charts/ecofisio-leaf15NleafCN.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf 15N and Leaf CN / Xylem 18O</strong></a></li>
 							</ul>
 						</div>
 						<div class="btn-group">

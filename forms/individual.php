@@ -76,11 +76,15 @@
 								Samples and Graphs <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
+			    				<li role="presentation" class="dropdown-header">Samples</li>
 								<li><a href="../lists/ecofisio-list.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Eco-Physiology</strong></a></li>
-								<li><a href="../lists/reflectance-list.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Unispec - Reflectance</strong></a></li>
+								<li><a href="../lists/reflectance-list.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Unispec - Reflectance</strong></a></li> 
+								<li role="presentation" class="divider"></li>
+			    				<li role="presentation" class="dropdown-header">Graphs</li>
 								<li><a href="../charts/ecofisio-temporaloverview.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Temporal Overview</strong></a></li>
+								<li><a href="../charts/ecofisio-leaf13Cleaf15N.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 13C and Leaf 15N / Xylem 18O</strong></a></li>
 								<li><a href="../charts/ecofisio-leaf13Cpri.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 13C and PRI / Xylem 18O</strong></a></li>
-								<li><a href="../charts/ecofisio-leaf15NleafCN.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 15N and CN / Xylem 18O</strong></a></li>
+								<li><a href="../charts/ecofisio-leaf15NleafCN.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 15N and Leaf CN / Xylem 18O</strong></a></li>
 							</ul>
 						</div>
 					</div>

@@ -66,30 +66,30 @@
 
 				var _ecoFisioValues = <?=$ecoFisioEncoded?>;
 				if(_ecoFisioValues.length > 0) {
-					var graphData = [['Xylem Water 18O', 'Leaf 15N', 'Leaf CN']];
+					var graphData = [['Xylem Water 18O', 'Leaf 13C', 'Leaf 15N']];
 					if (_ecoFisioValues != "") {
 						for (ecoFisio in _ecoFisioValues){
 							if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
-								    && _ecoFisioValues[ecoFisio].leaf_15N != null && _ecoFisioValues[ecoFisio].leaf_CN != null) {
+								    	&& _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].leaf_15N != null) {
 								graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
-								               Number(_ecoFisioValues[ecoFisio].leaf_15N), 
-								               Number(_ecoFisioValues[ecoFisio].leaf_CN)]);
+								               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
+								               Number(_ecoFisioValues[ecoFisio].leaf_15N)]);
 							}
 						}
 					}
 
 					var data = google.visualization.arrayToDataTable(graphData);
 
-					var options = {title:'Leaf 15N and leaf CN / Xylem 18O',
+					var options = {title:'Leaf 13C and leaf 15N / Xylem 18O',
 					               width:1000,
 					               height:500,
 									hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-	          						vAxes: [{title: 'leaf 15N', minValue: -40, maxValue: 40}, {title: 'Leaf CN', minValue: -20, maxValue: 20}],
+	          						vAxes: [{title: 'leaf 13C', minValue: -40, maxValue: 40}, {title: 'Leaf 15N', minValue: -20, maxValue: 20}],
 	          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
 					               lineWidth: 0,
 					               pointSize: 3};
 
-					var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf15NLeafCNGraph'));
+					var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf13CLeaf15NGraph'));
 					chart.draw(data, options);
 				}
 			}
@@ -113,16 +113,16 @@
 			</div>
 		</div>
 
-	    	<!-- tabela e gráfico -->
+	    <!-- tabela e gráfico -->
 	    <div class="container">
 	  		<div class="row spacer">
 	  			<div class="col-xs-12 col-lg-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h3 class="panel-title">Leaf 15N and Leaf CN / Xylem Water 18O</h3>
+							<h3 class="panel-title">Leaf 13C and 15N / Xylem Water 18O</h3>
 						</div>
 						<div class="panel-body">
-							<div id="ecoFisioLeaf15NLeafCNGraph">
+							<div id="ecoFisioLeaf13CLeaf15NGraph">
 								<?
 									if (count($ecoFisioValues) == 0) {
 										echo '<p>There are no Eco-Physiology values to show.</p>';

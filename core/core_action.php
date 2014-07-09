@@ -79,6 +79,22 @@ switch($action){
 		break;
 	}
 
+	case "chart" : {
+		if (count($_POST) > 1) {
+			$filterOptions = "?";
+			foreach($_POST as $key => $value){
+				if ($key != 'action' && $key != 'class' && $key != 'chart' && $value != 'none' && $value != "") {
+					$filterOptions .= $key . '='. $value . '&';
+				}
+			}
+			$filterOptions = substr($filterOptions, 0, -1);
+			header('Location: /charts/' . $_POST["class"] . '-' . $_POST["chart"] . '.php' . $filterOptions);
+		} else {
+			header('Location: /charts/' . $_POST["class"] . '-' . $_POST["chart"] . '.php');
+		} 
+		break;
+	}
+
 	default : {
 		header('Location: ' . PROJECT_URL );
 		break;

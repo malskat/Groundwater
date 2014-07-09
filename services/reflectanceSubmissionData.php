@@ -77,7 +77,7 @@
 										//actualizar os valores de eco_fisio
 										$replyCall = $reflectanceData->updateEcoFisioRefletanceValues($_POST["individualCode"], $_POST["sampling_campaign_id"]); 
 										if ($replyCall == 1) {
-											header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=1&inserted=1');
+											header('Location: /lists/reflectance-list.php?individualCode=' . $_POST["individualCode"] . '&success=1&inserted=1');
 										} else {
 											header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-3&reason=Eco Fisio indices were not updated! Please try again.');
 										}	

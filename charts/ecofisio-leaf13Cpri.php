@@ -69,7 +69,8 @@
 					var graphData = [['Xylem Water 18O', 'leaf 13C', 'PRI']];
 					if (_ecoFisioValues != "") {
 						for (ecoFisio in _ecoFisioValues){
-							if (_ecoFisioValues[ecoFisio].individualCode != null) {
+							if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
+								    && _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].pri != null) {
 								graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
 								               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
 								               Number(_ecoFisioValues[ecoFisio].pri)]);

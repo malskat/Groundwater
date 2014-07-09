@@ -66,12 +66,12 @@
     <div class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
 
-			<li class="dropdown">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'objectives') !== false || strpos($_SERVER['PHP_SELF'], 'sites_description.php') !== false || strpos($_SERVER['PHP_SELF'], 'state-of-the-art.php') !== false || strpos($_SERVER['PHP_SELF'], 'tasks') !== false || strpos($_SERVER['PHP_SELF'], 'partners') !== false ? 'active' :  '')?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    <li><a href=<?=PROJECT_URL . "info/state-of-the-art.php"?>><span class="glyphicon glyphicon-tag"></span> State of the Art</a></li>
 			    <li><a href=<?=PROJECT_URL . "info/objectives.php"?>><span class="glyphicon glyphicon-record"></span> Objectives</a></li>
-			    <li><a href=<?=PROJECT_URL . "info/sites.php"?>><span class="glyphicon glyphicon-map-marker"></span> Sites</a></li>
+			    <li><a href=<?=PROJECT_URL . "info/sites_description.php"?>><span class="glyphicon glyphicon-map-marker"></span> Sites</a></li>
 			    <li><a href=<?=PROJECT_URL . "info/tasks.php"?>><span class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
 			    <li><a href=<?=PROJECT_URL . "info/partners.php"?>><span class="glyphicon glyphicon-leaf"></span> Partners</a></li>
 			  </ul>
@@ -112,6 +112,9 @@
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Insert</a></li>
 			    <li><a href=<?=PROJECT_URL . "lists/species-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
+			    <li role="presentation" class="divider"></li>
+			    <li role="presentation" class="dropdown-header">Graphs</li>
+			    <li><a href=<?=PROJECT_URL . "charts/species-scatter.php"?>><span class="glyphicon glyphicon-signal"></span> Scatter Plot</a></li> 
 			  </ul>
 			</li>
 

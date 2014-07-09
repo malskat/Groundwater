@@ -34,6 +34,24 @@ class EcoFisio extends gObject {
 
 	}
 
+	function getEcoFisioSpeciesChart($whereClause){
+
+		require_once '../core/core_database.php';
+
+		$query = 'Select sp.species_id, sp.species, sp.genus, i.individualCode, ef.leaf_13C, ef.leaf_15N, 
+						ef.leaf_perN, ef.leaf_perC, ef.leaf_CN, ef.xylemWater_18O, ef.pri
+					From species sp
+					Left Join individual i On i.species_id = sp.species_id
+					Left Join eco_fisio ef On ef.individualCode = i.individualCode
+					Left Join plot p ON i.plot_id = p.plot_id
+					Left Join site s ON s.site_id = p.site_id
+					Where ' . $whereClause . '
+					Order by xylemWater_18O DESC';
+
+		return CoreDatabase::selectDBQuery($query, 0, -1);
+
+	}
+
 	function insert ($toInsert = array()){
 
 		require_once '../core/core_database.php';
