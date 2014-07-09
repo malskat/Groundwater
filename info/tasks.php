@@ -34,12 +34,10 @@
   		$(function(){
 	    	var hash = document.location.hash;
 	    	var prefix = "pill_";
-			console.log(hash.replace(prefix,""));
 			if (hash){
   				$('#tasks-pills a[href="' + hash.replace(prefix,"") + '"]').tab('show');
 			}
 
-			// Change hash for page-reload
 			$('#tasks-pills a').on('shown.bs.tab', function (e) {
 				console.log('funcao executada');
 			    window.location.hash = e.target.hash.replace("#", "#" + prefix);

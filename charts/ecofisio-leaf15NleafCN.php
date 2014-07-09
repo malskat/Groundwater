@@ -99,7 +99,7 @@
 			<div class="row">
 				<div class="page-header">
 					<h2>
-						Eco-Fisiologia
+						Eco-Physiology
 						<small>Individual - <?=$_GET['individualCode']?></small>
 					</h2>
 				</div>
@@ -124,7 +124,7 @@
 							<div id="ecoFisioLeaf15NLeafCNGraph">
 								<?
 									if (count($ecoFisioValues) == 0) {
-										echo '<p>Não existem valores de Eco Fisiologia que permitam exibir o gráfico.</p>';
+										echo '<p>There are no Eco-Physiology values to show.</p>';
 									}
 								?>
 				        	</div>

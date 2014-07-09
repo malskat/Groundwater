@@ -66,7 +66,7 @@
 				var _ecoFisioValues = <?=$ecoFisioEncoded?>;
 				if(_ecoFisioValues.length > 0) {
 
-					var graphData = [['Data', 'leaf 13C', 'Leaf 15N', 'Xylem Water 18O', 'PhotoSynthetic PI']];
+					var graphData = [['Data', 'leaf 13C', 'Leaf 15N', 'Xylem Water 18O', 'PRI']];
 
 					for (ecoFisio in _ecoFisioValues){
 						if (_ecoFisioValues[ecoFisio].individualCode != null) {
@@ -74,7 +74,7 @@
 							               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
 							               Number(_ecoFisioValues[ecoFisio].leaf_15N), 
 							               Number(_ecoFisioValues[ecoFisio].xylemWater_18O), 
-							               Number(_ecoFisioValues[ecoFisio].photosynthetic_PI)]);
+							               Number(_ecoFisioValues[ecoFisio].pri)]);
 						}
 					}
 
@@ -125,7 +125,7 @@
 							<div id="ecoFisioTemporalOverviewGraph">
 								<?
 									if (count($ecoFisioValues) == 0) {
-										echo '<p>Não existem valores de Eco Fisiologia que permitam exibir o gráfico.</p>';
+										echo '<p>There are no Eco-Physiology values to show.</p>';
 									}
 								?>
 				        	</div>

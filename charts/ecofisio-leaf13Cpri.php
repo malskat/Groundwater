@@ -66,29 +66,29 @@
 
 				var _ecoFisioValues = <?=$ecoFisioEncoded?>;
 				if(_ecoFisioValues.length > 0) {
-					var graphData = [['Xylem Water 18O', 'leaf 13C', 'PhotoSynthetic PI']];
+					var graphData = [['Xylem Water 18O', 'leaf 13C', 'PRI']];
 					if (_ecoFisioValues != "") {
 						for (ecoFisio in _ecoFisioValues){
 							if (_ecoFisioValues[ecoFisio].individualCode != null) {
 								graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
 								               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
-								               Number(_ecoFisioValues[ecoFisio].photosynthetic_PI)]);
+								               Number(_ecoFisioValues[ecoFisio].pri)]);
 							}
 						}
 					}
 
 					var data = google.visualization.arrayToDataTable(graphData);
 
-					var options = {title:'Leaf 13C and PI / Xylem 18O',
+					var options = {title:'Leaf 13C and PRI / Xylem 18O',
 					               width:1000,
 					               height:500,
 									hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-	          						vAxes: [{title: 'leaf 13C', minValue: -40, maxValue: 40}, {title: 'PhotoSynthetic PI', minValue: -20, maxValue: 20}],
+	          						vAxes: [{title: 'leaf 13C', minValue: -40, maxValue: 40}, {title: 'PRI', minValue: -20, maxValue: 20}],
 	          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
 					               lineWidth: 0,
 					               pointSize: 3};
 
-					var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf13CPhotPIGraph'));
+					var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf13CpriGraph'));
 					chart.draw(data, options);
 				}
 			}
@@ -106,7 +106,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-6 col-lg-10">
-					<button class="btn btn-link" onclick="location.href='<?=$backUrl?>'">« voltar</button>
+					<button class="btn btn-link" onclick="location.href='<?=$backUrl?>'">« back</button>
 				</div>
 				<div class="col-xs-6 col-lg-2"></div>
 			</div>
@@ -118,13 +118,13 @@
 	  			<div class="col-xs-12 col-lg-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h3 class="panel-title">Leaf 13C and PI / Xylem Water 18O</h3>
+							<h3 class="panel-title">Leaf 13C and PRI / Xylem Water 18O</h3>
 						</div>
 						<div class="panel-body">
-							<div id="ecoFisioLeaf13CPhotPIGraph">
+							<div id="ecoFisioLeaf13CpriGraph">
 								<?
 									if (count($ecoFisioValues) == 0) {
-										echo '<p>Não existem valores de Eco Fisiologia que permitam exibir o gráfico.</p>';
+										echo '<p>There are no Eco-Physiology values to show.</p>';
 									}
 								?>
 				        	</div>
