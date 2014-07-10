@@ -151,7 +151,7 @@
 						      	                  	</td>';
 
 						      	            echo '<td>
-						                              <button onclick="beginDelete(\'action=delete&class=reflectance&id=' . $reflectanceValue->individual_reflectance_id . '\', \'Do you want to remove this Unispec Reflectance?\');" type="button" class="btn btn-danger btn-xs">
+						                              <button onclick="beginDelete(\'action=delete&class=reflectance&id=' . $reflectanceValue->individual_reflectance_id . '\', \'Do you want to remove this Unispec Reflectance (it will recalculate all reflectance indexes on the correspondent eco-physiology sample)?\');" type="button" class="btn btn-danger btn-xs">
 						                                <span class="glyphicon glyphicon-remove-sign"></span>
 						                              </button>
 						                            </td>';

@@ -24,75 +24,96 @@
 
 					try {
 
-						$extensionParts = explode(".", $_FILES["file"]["name"]);
-					  	$extension = end($extensionParts);
+						$errorResume = '';
+						$fileOperated = 0;
 
-					  	if($extension != 'csv'){
-							header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=File must be csv!');
-					  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-							header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=File already processed!');
-					  	} else {
-							
-					  		move_uploaded_file($_FILES["file"]["tmp_name"], PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
+						for ($fileIndex = 0; $fileIndex < count($_FILES["file"]["name"]); $fileIndex++) {
 
+							$extensionParts = explode(".", $_FILES["file"]["name"][$fileIndex]);
+						  	$extension = end($extensionParts);
 
-					  		//inserir os individuos
-					  		if (($handle = fopen(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], "r")) !== FALSE) {
-					  			
-
-								require_once PROJECT_PATH . 'data/reflectance_data.php'; 
-								$reflectanceData = new Reflectance();
-								$waveLengthReference = $reflectanceData->getReferenceWaveLength();
-					  			$row = 1;
-					  			$errorString = '';
-
-					        	$reflectanceRecord = array();
-					        	$reflectanceRecord["individualCode"] = $_POST["individualCode"];
-					        	$reflectanceRecord["sampling_campaign_id"] = $_POST["sampling_campaign_id"];
-					        	$reflectanceRecord["file"] = $_FILES["file"]["name"];
-
-							    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-
-							    	$waveLength = trim($data[0]);
-							    	if(in_array($waveLength, $waveLengthReference)) {
-							        	$reflectanceRecord["c_" . substr($waveLength, 0, -2)] = $data[1];
-							        	$reflectanceRecord["c_" . substr($waveLength, 0, -2) . "w"] = $data[2];
-							    	}
-
-							        $row++;
-							    }
+						  	if($extension != 'csv'){
+						  		$errorResume .= '<br />» File ' . $_FILES["file"]["name"][$fileIndex] . ', File must be csv;';
+						  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"][$fileIndex])){
+						  		$errorResume .= '<br />» File ' . $_FILES["file"]["name"][$fileIndex] . ', File already processed;';
+						  	} else {
+								
+						  		move_uploaded_file($_FILES["file"]["tmp_name"][$fileIndex], PROJECT_DOCS_CENTER . $_FILES["file"]["name"][$fileIndex]);
 
 
-						       $reply = $reflectanceData->insert($reflectanceRecord);
-							    
-							    fclose($handle);
-							    
-						  		//mudar o ficheiro para a pasta de ficheiros processados
-								if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
+						  		//inserir os individuos
+						  		if (($handle = fopen(PROJECT_DOCS_CENTER . $_FILES["file"]["name"][$fileIndex], "r")) !== FALSE) {
+						  			
 
-									if($reply['_success_'] != 1){
-										header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-2&reason=Error inserting reflectance. Please try again.');
-									} else {
+									require_once PROJECT_PATH . 'data/reflectance_data.php'; 
+									$reflectanceData = new Reflectance();
+									$waveLengthReference = $reflectanceData->getReferenceWaveLength();
+						  			$row = 1;
 
-										//actualizar os valores de eco_fisio
-										$replyCall = $reflectanceData->updateEcoFisioRefletanceValues($_POST["individualCode"], $_POST["sampling_campaign_id"]); 
-										if ($replyCall == 1) {
-											header('Location: /lists/reflectance-list.php?individualCode=' . $_POST["individualCode"] . '&success=1&inserted=1');
+						        	$reflectanceRecord = array();
+						        	$reflectanceRecord["individualCode"] = $_POST["individualCode"];
+						        	$reflectanceRecord["sampling_campaign_id"] = $_POST["sampling_campaign_id"];
+						        	$reflectanceRecord["file"] = $_FILES["file"]["name"][$fileIndex];
+
+								    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+
+								    	$waveLength = trim($data[0]);
+								    	if(in_array($waveLength, $waveLengthReference)) {
+								        	$reflectanceRecord["c_" . substr($waveLength, 0, -2)] = $data[1];
+								        	$reflectanceRecord["c_" . substr($waveLength, 0, -2) . "w"] = $data[2];
+								    	}
+
+								        $row++;
+								    }
+
+
+							       $reply = $reflectanceData->insert($reflectanceRecord);
+								    
+								    fclose($handle);
+								    
+							  		//mudar o ficheiro para a pasta de ficheiros processados
+									if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"][$fileIndex], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"][$fileIndex]) === true) {
+
+
+										if($reply['_success_'] != 1){
+
+											$errorResume .= '<br />» File ' . $_FILES["file"]["name"][$fileIndex] . ', Error inserting reflectance;';
+
 										} else {
-											header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-3&reason=Eco Fisio indices were not updated! Please try again.');
-										}	
-									}
 
-								} else {
-					  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-									header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=Could not move file to final directory!');
+											//actualizar os valores de eco_fisio
+											$replyCall = $reflectanceData->updateEcoFisioRefletanceValues($_POST["individualCode"], $_POST["sampling_campaign_id"]); 
+											if ($replyCall == 1) {
+												$fileOperated++;
+											} else {
+												$errorResume .= '<br />» File ' . $_FILES["file"]["name"][$fileIndex] . ', Eco Fisio indices were not updated;';
+											}
+										}
+
+									} else {
+						  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"][$fileIndex]);
+										$errorResume .= '<br />» File ' . $_FILES["file"]["name"][$fileIndex] . ', Could not move file to final directory;';
+									}
 								}
 							}
-
-
 				  		}
+
+
+				  		//validacao do sucesso da operacao
+				  		if ($fileOperated > 0) {
+
+				  			if ($errorResume != '') {
+								header('Location: /lists/reflectance-list.php?individualCode=' . $_POST["individualCode"] . '&success=3&inserted=' . $fileOperated . '&reason=' . $errorResume);
+				  			} else {
+								header('Location: /lists/reflectance-list.php?individualCode=' . $_POST["individualCode"] . '&success=1&inserted=' . $fileOperated);
+				  			}
+				  		} else {
+							header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-3&reason=' . $errorResume);
+						}	
+
+				  		
 					} catch (Exception $e) {
-						unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
+						unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"][$fileIndex]);
 				  		header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=' . $e);
 					}
 					

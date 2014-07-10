@@ -11,10 +11,14 @@
  		* formulário para recuperação de password:
  			* popup com recolha de email;
  		
- 		* página de tasks
- 			* ligar na página de objectives as tasks correspondentes.
+ 		* insercao de reflectance por csv
+ 			* colocar o plugin para multiplos ficheiros
  		* listagem de campanhas - o remover também está disponível, mesmo quando existem amostragens associadas.
 
+
+
+ 		* página de tasks - DONE
+ 			* ligar na página de objectives as tasks correspondentes.
  		* página de objectivos - DONE
  		* listagem de indivíduos - o remover está a ser permitido para indivíduos que já possuem amostragens - DONE
  		* botões de insert nas listagens, darem também acesso aos formulários de csv: - DONE
@@ -24,6 +28,9 @@
 
 
  	» SERVIÇOS
+
+		* insercao de reflectance por csv
+			* reorganizar os erros de introducao de cada um dos ficheiros
 
 		* criar mecanismo de logs para relacionar utilizadores com actualizações;
 			* tabela de BD

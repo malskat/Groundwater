@@ -90,7 +90,7 @@
 					  				<div id="fileInputGroup" class="form-group">
 					  					<label for="inputGenus" class="col-lg-3 control-label">File*</label>
 					  					<div class="col-lg-6">
-					  						<input type="file" class="form-control" id="file" name="file" placeholder="">
+					  						<input type="file" class="form-control" id="file" name="file[]" multiple placeholder="">
 					  				 	</div>
 					  				</div>
 

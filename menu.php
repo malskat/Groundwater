@@ -45,11 +45,17 @@
     } else if (params["success"] == 1) {
       	$('#alert-message').show();
       	$('#alert-message').addClass('success');
-      	$('#alert-text').html("<strong>Holy guacamole!</strong> Record created/updated." + (params["inserted"] != null && params["inserted"] != "" ? " Foram inseridos/actualizados: " + params["inserted"] + " registos." : ""));
+      	$('#alert-text').html("<strong>Holy guacamole!</strong> Record(s) created/updated." + (params["inserted"] != null && params["inserted"] != "" ? " There were inserted or updated " + params["inserted"] + " records." : ""));
     } else if (params["success"] == 2) {
       	$('#alert-message').show();
       	$('#alert-message').addClass('success');
       	$('#alert-text').html("<strong>Holy guacamole!</strong> Record removed.");
+    } else if (params["success"] == 3) {
+      	$('#alert-message').show();
+      	$('#alert-message').addClass('warning');
+      	$('#alert-text').html("<strong>Ups daisy!</strong> Record(s) created/updated." + 
+      	                      (params["inserted"] != null && params["inserted"] != "" ? " There were inserted or updated " + params["inserted"] + " records." : "") +
+      	                      (params["reason"] != null && params["reason"] != "" ? " However: " + params["reason"] : ""));
     }
 </script>
 
