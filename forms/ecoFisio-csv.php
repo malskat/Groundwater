@@ -14,6 +14,7 @@
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/fileinput.min.js" type="text/javascript"></script>
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap alerts -->
@@ -22,6 +23,7 @@
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
     <link href="../css/sticky-footer.css" rel="stylesheet">
+    <link href="../css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 
   </head>
 
@@ -64,7 +66,7 @@
 					        		<!-- campaigns -->
 									<div id="campaignsInputGroup" class="form-group spacer">
 										<label for="inputCampaigns" class="col-lg-2 control-label">Campaign*</label>
-										<div class="col-lg-6">
+										<div class="col-lg-8">
 											<select id="sampling_campaign_id" name="sampling_campaign_id" class="form-control input-sm">
 												<?
 													echo '<option selected value="none">Choose one</option>';
@@ -82,7 +84,7 @@
 									<!-- bloco -->
 									<div id="ecoBlockInputGroup" class="form-group">
 										<label for="inputEcoBlock" class="col-lg-2 control-label">Block*</label>
-										<div class="col-lg-6">
+										<div class="col-lg-8">
 											<select id="ecoBlock" name="ecoBlock" class="form-control input-sm">
 												<?
 													echo '<option selected value="none">Choose one</option>';
@@ -99,7 +101,7 @@
 
 					  				<div id="fileInputGroup" class="form-group">
 					  					<label for="inputGenus" class="col-lg-2 control-label">File*</label>
-					  					<div class="col-lg-6">
+					  					<div class="col-lg-10">
 					  						<input type="file" class="form-control" id="file" name="file" placeholder="">
 					  				 	</div>
 					  				</div>
@@ -133,6 +135,12 @@
 	    <?php include "../footer.php";?>
 
 	    <script>
+
+
+	    	$("#file").fileinput({'showUpload':false});
+
+
+
 	    	function validateForm(){
 	    		var campaign = $('#sampling_campaign_id').val();
 	    		var block = $('#ecoBlock').val();

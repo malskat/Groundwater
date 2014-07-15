@@ -14,6 +14,7 @@
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/fileinput.min.js" type="text/javascript"></script>
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap alerts -->
@@ -22,6 +23,7 @@
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
     <link href="../css/sticky-footer.css" rel="stylesheet">
+    <link href="../css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -57,7 +59,7 @@
 
 				  				<div id="fileInputGroup" class="form-group spacer">
 				  					<label for="inputGenus" class="col-lg-2 control-label">File*</label>
-				  					<div class="col-lg-6">
+				  					<div class="col-lg-10">
 				  						<input type="file" class="form-control" id="file" name="file" placeholder="">
 				  				 	</div>
 				  				</div>
@@ -92,28 +94,32 @@
     <?php include "../footer.php";?>
 
     <script>
-      function validateForm(){
-        var file = $('#file').val();
-        var hasErrors = false;
 
 
-        if(file == "" ) {
-          hasErrors = true;
-          $('#fileInputGroup').addClass('has-error');
-        } else {
-			$('#fileInputGroup').removeClass('has-error');
+	    $("#file").fileinput({'showUpload':false});
+
+		function validateForm(){
+			var file = $('#file').val();
+			var hasErrors = false;
+
+
+			if(file == "" ) {
+				hasErrors = true;
+				$('#fileInputGroup').addClass('has-error');
+			} else {
+				$('#fileInputGroup').removeClass('has-error');
+			}
+
+			if (hasErrors){
+				$('#alert-message').show();
+				$('#alert-message').addClass('danger');
+				$('#alert-text').html("<strong>Shit happens!</strong>Atenção. Falta o ficheiro!");
+				return false;
+			} else {
+				return true;
+			}
+
 		}
-
-        if (hasErrors){
-          $('#alert-message').show();
-            $('#alert-message').addClass('danger');
-            $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Falta o ficheiro!");
-          return false;
-        } else {
-          return true;
-        }
-
-      }
     </script>
 
   </body>
