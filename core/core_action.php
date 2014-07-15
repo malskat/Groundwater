@@ -33,7 +33,7 @@ switch($action){
 
 			require_once PROJECT_PATH . "data/" . $_GET["class"] ."_data.php";
 
-			//chamada dinamica da funcao
+			//chamada dinamica da funcao de delete
 			$instance = new $_GET["class"];
 			$toReturn = $instance->delete($_GET["class"] . "_id = '" . $_GET["id"] . "'");
 

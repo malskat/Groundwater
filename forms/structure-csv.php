@@ -52,7 +52,7 @@
 					</div>
 			        <div class="panel-body">
 			        	<div class="col-xs-8 col-lg-8">
-				  			<form class="form-horizontal" role="form" name="form_species_csv_data" enctype="multipart/form-data" action="../services/strutureSubmissionData.php" onsubmit="return validateForm();" method="post">
+				  			<form class="form-horizontal" role="form" name="form_species_csv_data" enctype="multipart/form-data" action="../services/structureSubmissionData.php" onsubmit="return validateForm();" method="post">
 				  				<input type="hidden" value="excel" name="submissionType" >
 
 				  				<div id="fileInputGroup" class="form-group spacer">
@@ -65,7 +65,7 @@
 
 				  				<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 									<div class="text-center">
-										<button onclick="location.href='../lists/individual-list.php'" type="button" class="btn btn-xs">Cancl</button>
+										<button onclick="location.href='../lists/individual-list.php'" type="button" class="btn btn-xs">Cancel</button>
 										<button class="btn btn-xs btn-primary" type="submit">Submit</button>
 									</div>
 								</div>

@@ -30,7 +30,7 @@
     	} else if(params["success"] == -2) {
         	$('#alert-message').show();
           	$('#alert-message').addClass('warning');
-          	$('#alert-text').html("<strong>Ups daisy!</strong> Operation conclued. However, please, check: <br />" + params["reason"]);
+          	$('#alert-text').html("<strong>Ups daisy!</strong> Operation conclued. " + (params["inserted"] != null && params["inserted"] != "" ? "(There were " + params["inserted"] + " records inserted)." : "" ) + " However, please, check: <br />" + params["reason"]);
       	} else if(params["success"] == -4) {
         	$('#alert-message').show();
           	$('#alert-message').addClass('danger');
@@ -138,7 +138,7 @@
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Structure</li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/struture-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Update</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/structure-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Update</a></li>
 			  </ul>
 			</li>
 		<?php

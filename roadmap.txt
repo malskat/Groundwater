@@ -6,31 +6,24 @@
  		* criar classe para os logs;
 
  	» FRONTEND
+ 		
+ 		* insercao de reflectance por csv
+ 			* colocar o plugin para multiplos ficheiros
+
+ 		* criação dos restantes gráficos:
+ 			* indivíduos;
+ 			* espécies.
+
+ 		* listagem de campanhas - o remover também está disponível, mesmo quando existem amostragens associadas.
 
 
  		* formulário para recuperação de password:
  			* popup com recolha de email;
- 		
- 		* insercao de reflectance por csv
- 			* colocar o plugin para multiplos ficheiros
- 		* listagem de campanhas - o remover também está disponível, mesmo quando existem amostragens associadas.
 
-
-
- 		* página de tasks - DONE
- 			* ligar na página de objectives as tasks correspondentes.
- 		* página de objectivos - DONE
- 		* listagem de indivíduos - o remover está a ser permitido para indivíduos que já possuem amostragens - DONE
- 		* botões de insert nas listagens, darem também acesso aos formulários de csv: - DONE
- 			* plot  - DONE
- 			* species - DONE
- 			* individuals - DONE
 
 
  	» SERVIÇOS
 
-		* insercao de reflectance por csv
-			* reorganizar os erros de introducao de cada um dos ficheiros
 
 		* criar mecanismo de logs para relacionar utilizadores com actualizações;
 			* tabela de BD
@@ -58,9 +51,10 @@
 	
 	» Melhoramentos
 
- 		* passar todas as strings para inglês - DONE
- 			* listas - DONE
- 			* forms - DONE
+		* alterar o nome de todos os ficheiros de struture, porque está mal escrito
+
+ 		* retirar as strings de erro do endereço da página
+
  		* o caminho dos require e includes está relativo e não absoluto, pode dar problemas tal como deu na sequência de includes e requires do index.php;
  		* colocar fontawesome no menu;
  		* evitar SQL injection;

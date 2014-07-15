@@ -210,9 +210,9 @@
 			                        }
 
 			                        if(isset($individual->struture_id)) {
-			                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Check</span></a></td>';
+			                        	echo '<td><a href="../forms/structure.php?individualCode=' . $individual->individualCode .  '"><span class="label label-info">Check</span></a></td>';
 			                        } else {
-			                        	echo '<td><a href="../forms/struture.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">No</span></a></td>';
+			                        	echo '<td><a href="../forms/structure.php?individualCode=' . $individual->individualCode .  '"><span class="label label-default">No</span></a></td>';
 			                        }
 
 

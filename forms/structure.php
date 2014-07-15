@@ -35,9 +35,9 @@
   	<?
   		$struture = array();
   		if(isset ($_GET["individualCode"])){
-  			include "../data/struture_data.php"; 
+  			include "../data/structure_data.php"; 
   			
-  			$strutureData = new Struture();
+  			$strutureData = new Structure();
 			$struture = $strutureData->getObjectsBy("individualCode = '" . $_GET["individualCode"] . "'", -1);
   		}
 
@@ -70,7 +70,7 @@
 				<?
 					if (count($struture) > 0) {
 						echo '<div class="pull-right">
-								<button onclick="beginDelete(\'action=delete&class=struture&id=' . $struture[0]->struture_id . '&redirect=/lists/individual-list.php\'
+								<button onclick="beginDelete(\'action=delete&class=structure&id=' . $struture[0]->struture_id . '&redirect=/lists/individual-list.php\'
 								                             ,\'Do you want to remove this individual structure?\');"" type="button" class="btn btn-danger btn-xs">Remove</button>
 								</div>';
 					}
@@ -78,7 +78,7 @@
             </div>
             <div class="panel-body">
 				<div class="col-xs-8 col-lg-8">
-					<form class="form-horizontal" role="form" name="form_struture_data" action="../services/strutureSubmissionData.php" onsubmit="return validateForm();" method="post">
+					<form class="form-horizontal" role="form" name="form_struture_data" action="../services/structureSubmissionData.php" onsubmit="return validateForm();" method="post">
 
 						<input type="hidden" value="form" name="submissionType">
 	  					<?= (count($struture) > 0 ?'<input type="hidden" value="' . $struture[0]->struture_id . '" name="struture_id" >' : '')?>

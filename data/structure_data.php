@@ -2,7 +2,7 @@
 
 require_once 'gObject.php';
 
-class Struture extends gObject {
+class Structure extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'struture';
@@ -55,6 +55,12 @@ class Struture extends gObject {
 		$where = $this->_entityName . "_id = " . $toUpdate[$this->_entityName . '_id'];
 
 		return CoreDatabase::updateDB($this->_entityName, $set, $where);
+	}
+
+	function delete ($where) {
+		//por motivos historicos (erro na criacao da tabela no mysql) fazemos aqui este replace
+		$where = str_replace("structure_id", "struture_id", $where);
+		return parent::delete($where);
 	}
 
 }
