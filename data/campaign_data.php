@@ -6,16 +6,18 @@ class Campaign extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'sampling_campaign';
-		$this->_fieldList = array("#", "Title", "Site", "Season", "Begin", "End");
+		$this->_fieldList = array("#", "Title", "Site", "Season", "Begin", "End", "#Eco-Physiology", "#Reflectance");
 		$this->_totalRows = 10;
 		$this->_orderBy = $this->_entityName . '_id';
 	}
 
-	function getCampaigns($page = 0){
+	function getCampaigns($page = 0, $withTotals = 0){
 		
 		require_once '../core/core_database.php';
-		$query = 'Select SQL_CALC_FOUND_ROWS sc.*, s.title as siteTitle,  se.code as seasonCode
-					From sampling_campaign sc
+		$query = 'Select SQL_CALC_FOUND_ROWS sc.*, s.title as siteTitle,  se.code as seasonCode' .
+					($withTotals == 1 ? ', (select count(1) from eco_fisio ef where ef.sampling_campaign_id = sc.sampling_campaign_id) as totalEcoFisio' : '') .
+					($withTotals == 1 ? ', (select count(1) from individual_reflectance ir where ir.sampling_campaign_id = sc.sampling_campaign_id) as totalReflectance' : '') .
+					' From sampling_campaign sc
 					Join site s On s.site_id = sc.site_id
 					Join season se On se.season_id = sc.season_id 
 					Order By sc.' . $this->_orderBy; 

@@ -6,19 +6,20 @@
  		* criar classe para os logs;
 
  	» FRONTEND
- 		
- 		* insercao de reflectance por csv
- 			* colocar o plugin para multiplos ficheiros
+
+ 		* reformular ecrã de login (tomar como exemplo http://demo.mvpready.com/admin/account-login.html)
 
  		* criação dos restantes gráficos:
  			* indivíduos;
  			* espécies.
 
- 		* listagem de campanhas - o remover também está disponível, mesmo quando existem amostragens associadas.
-
-
  		* formulário para recuperação de password:
  			* popup com recolha de email;
+
+ 		* listagem de campanhas - o remover também está disponível, mesmo quando existem amostragens associadas - DONE
+ 		
+ 		* insercao de reflectance por csv - DONE
+ 			* colocar o plugin para multiplos ficheiros
 
 
 
@@ -41,6 +42,14 @@
 		
 	» DADOS
 
+		* nas classes que têm actualização com CSV, colocar um campo extra na entidade para receber o nome do ficheiro (tal como está na reflectance):
+			* species
+			* individual
+			* structure
+			* eco-physiology
+			* plot..
+			* site...
+
 		* inserir struture reais
 			* pode actualizar coordenadas do indivíduo.
 
@@ -51,9 +60,20 @@
 	
 	» Melhoramentos
 
-		* alterar o nome de todos os ficheiros de struture, porque está mal escrito
 
  		* retirar as strings de erro do endereço da página
+ 			* site
+ 			* plot
+ 			* season
+ 			* campaign
+ 			* species
+ 			* individual
+ 			* eco-physiology
+ 			* structure
+ 			* reflectance
+
+		* alterar o nome de todos os ficheiros de struture, porque está mal escrito - DONE
+
 
  		* o caminho dos require e includes está relativo e não absoluto, pode dar problemas tal como deu na sequência de includes e requires do index.php;
  		* colocar fontawesome no menu;

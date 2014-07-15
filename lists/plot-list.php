@@ -160,7 +160,7 @@
 	                        							</a>
 	                        						</td>';
 	    	                  			}else {
-	    	                  				echo '<td><span class="label label-default">' . $plot->totalIndividuals . '</a></td>';
+	    	                  				echo '<td><span class="label label-default">' . $plot->totalIndividuals . '</span></td>';
 	    	                  			}
 
 				  	                  	echo '<td>

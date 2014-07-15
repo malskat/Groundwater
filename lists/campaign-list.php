@@ -71,7 +71,7 @@
 			$campaigns = $campaignData->getCampaignBy($whereClause, isset($_GET["page"]) ? $_GET["page"] : 0);
 
 		} else {
-			$campaigns = $campaignData->getCampaigns(isset($_GET["page"]) ? $_GET["page"] : 0);
+			$campaigns = $campaignData->getCampaigns((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotals = 1);
 		}
 
 		$sites = $siteData->getSites(-1);
@@ -161,17 +161,26 @@
 	                         	<td>' . $campaign->seasonCode . '</td>
 		                        <td>' . $campaign->startDate . '</td>
 		                        <td>' . $campaign->endDate . '</td>
+		                        <td><span class="label label-default">' . $campaign->totalEcoFisio . '</span></td>
+		                        <td><span class="label label-default">' . $campaign->totalReflectance . '</span></td>
 		                       	<td>
 	                            	<button onclick="location.href=\'../forms/campaign.php?campaign_id=' . $campaign->sampling_campaign_id . '\'" type="button" class="btn btn-primary btn-xs">
 	                                	<span class="glyphicon glyphicon glyphicon-edit"></span>
 	                            	</button>
-	                            </td>
-	                            <td>
-	                            	<button onclick="beginDelete(\'action=delete&class=campaign&id=' . $campaign->sampling_campaign_id . '\', \'Do you want to remove this Campaign?\');" type="button" class="btn btn-danger btn-xs">
-	                                	<span class="glyphicon glyphicon-remove-sign"></span>
-	                              </button>
-		                        </td>
-		                    </tr>';
+	                            </td>';
+	                            if ($campaign->totalEcoFisio == 0) {
+	                            	echo '<td>
+			                            	<button onclick="beginDelete(\'action=delete&class=campaign&id=' . $campaign->sampling_campaign_id . '\', \'Do you want to remove this Campaign?\');" type="button" class="btn btn-danger btn-xs">
+			                                	<span class="glyphicon glyphicon-remove-sign"></span>
+			                              </button>
+				                        </td>';
+	                            } else {
+									echo '<td>
+											<span id="removeTooltip_' . $campaign->sampling_campaign_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="It has Eco-Physiology samples associated">Better not</span>
+										</td>'; 
+	                            }
+	                            
+		                    echo '</tr>';
 	               		}
 	                }
 	            } else {
@@ -233,6 +242,18 @@
     </div>
 
 	<?php include "../footer.php";?>
+	<script>
+    <?php
+	    foreach ($campaigns as $campaign) {
+	    	if (isset($campaign->sampling_campaign_id) && $campaign->totalEcoFisio > 0) {
+		    	echo "$('#removeTooltip_" . $campaign->sampling_campaign_id . "').tooltip({trigger: 'hover'});";
+		    	if ($campaign->totalEcoFisio > 0) {
+		    		echo "$('#accessTooltip_" . $campaign->sampling_campaign_id . "').tooltip({trigger: 'hover'});";
+		    	}
+	    	}
+	    }
+	?>
+    </script>
 
   </body>
 </html>
