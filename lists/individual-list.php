@@ -162,7 +162,7 @@
         			Insert Individual <span class="caret">
         		</button>
         		<ul class="dropdown-menu pull-right" role="menu">
-					<li><a href="../forms/Individual.php"><strong>By form</strong></a></li>
+					<li><a href="../forms/individual.php"><strong>By form</strong></a></li>
 					<li><a href="../forms/individual-csv.php"><strong>By CSV</strong></a></li>
 				</ul>
         	</div>
