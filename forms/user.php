@@ -41,7 +41,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-          <h1>Utilizador</h1>
+          <h1>User</h1>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
         <div class="col-xs-12 col-lg-12">
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title"><?= (isset($user) ? "Editar Utilizador" : "Inserir Utilizador") ?></h3>
+              <h3 class="panel-title"><?= (isset($user) ? "Edit User" : "Insert User") ?></h3>
             </div>
             <div class="panel-body">
 				<div class="col-xs-8 col-lg-8">
@@ -60,13 +60,13 @@
 	  					<?= (isset($user) ?'<input id="user_id" name="user_id" type="hidden" value="' . $user[0]->biologyst_id . '">' : '')?>
 
 	  					<div id="firstInputGroup" class="form-group">
-	  						<label for="inputCode" class="col-lg-3 control-label">Primeiro nome*</label>
+	  						<label for="inputCode" class="col-lg-3 control-label">First name*</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="first_name" name="first_name" placeholder="Primeiro nome do utilizador" value=<?= (isset($user) ? '"' . $user[0]->first_name . '"' : "")?> >
 	  					 	</div>
 	  					</div>
 	  					<div id="lastInputGroup" class="form-group">
-	  						<label for="inputGenus" class="col-lg-3 control-label">Último nome*</label>
+	  						<label for="inputGenus" class="col-lg-3 control-label">Last name*</label>
 	  						<div class="col-lg-4">
 	  							<input type="text" class="form-control" id="last_name" name="last_name" value=<?= (isset($user) ? '"' . $user[0]->last_name . '"' : "")?> >
 	  					 	</div>
@@ -93,7 +93,7 @@
 
 
 	  					<div id="passwordUserInputGroup" class="form-group">
-	  						<label for="inputPassword" class="col-lg-3 control-label"><?= (isset($user) ? 'Nova ' : "" )?>Password*</label>
+	  						<label for="inputPassword" class="col-lg-3 control-label"><?= (isset($user) ? 'New ' : "" )?>Password*</label>
 	  						<div class="col-lg-4">
 	  							<input type="password" class="form-control" id="passwordUser" name="passwordUser">
 	  					 	</div>
@@ -104,13 +104,13 @@
 	  					<?
 	  						if(isset($user)) {
 	  							echo '<div class="form-group">
-				  						<label class="col-lg-3 control-label">Data de criação</label>
+				  						<label class="col-lg-3 control-label">Creation Date</label>
 				  						<div class="col-lg-4">
 				  							<p class="form-control-static">' . $user[0]->creation_date . '</p>
 				  					 	</div>
 				  					</div>
 				  					<div class="form-group">
-				  						<label class="col-lg-3 control-label">Último login</label>
+				  						<label class="col-lg-3 control-label">Last login</label>
 				  						<div class="col-lg-4">
 				  							<p class="form-control-static">' . (isset($user[0]->last_login) ? $user[0]->last_login : '--') . '</p>
 				  					 	</div>
@@ -121,8 +121,8 @@
 
 	  					<div class="spacer well well-sm col-xs-4 col-lg-4 col-lg-offset-4">
 	  						<div class="text-center">
-	  							<button onclick="location.href='../lists/user-list.php'" type="button" class="btn btn-xs">Cancelar</button>
-	  							<button class="btn btn-xs btn-primary" type="submit"><?=(isset($user) ? "Alterar" : "Submeter")?></button>
+	  							<button onclick="location.href='../lists/user-list.php'" type="button" class="btn btn-xs">Cancel</button>
+	  							<button class="btn btn-xs btn-primary" type="submit"><?=(isset($user) ? "Change" : "Submit")?></button>
 	  						</div>
 	  					</div>
 	  				</form>
@@ -131,10 +131,11 @@
             	<div class="col-xs-4 col-lg-4">
 			        <div class="panel panel-default">
 				        <div class="panel-body">
-				        	<p><span class="label label-default">Informações</span></p>
-				        	<p>Neste formulário podes inserir ou alterar os utilizadores que acedem ao GroundWater.</p>
-				        	<p>O <strong>email</strong> e a <strong>password</strong> serão usados para identificar os utilizadores. Não podem existir diferentes utilizadores com o mesmo email.</p>
-					    	<p><strong>Todos os campos com * são obrigatórios.</strong></p>
+				        	<p><span class="label label-default">Info</span></p>
+				        	<p>This form is meant to manage GWTropiMed back office users.</p>
+				        	<p><strong>Email</strong> and <strong>password</strong> will be used to identify users on login.</p>
+				        	<p>Users <strong>Emails</strong> should be unique.</p>
+					    	<p><strong>All fieds with * are mandatory.</strong></p>
 				        </div>
 			        </div>
 		   		</div>
