@@ -96,6 +96,7 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 							        	$toInsert['individualCode'] = $data[4];
 							        	$toInsert['coordinateX'] = $data[5];
 							        	$toInsert['coordinateY'] = $data[6];
+							        	$toInsert["file"] = $_FILES["file"]["name"];
 							        	
 							        	if ($data[7] != 'ND') {
 							        		$toInsert['phenologicalType'] = $data[7];
@@ -135,7 +136,7 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 				if (rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true) {
 
 					if($errorString != ''){
-						header('Location: /lists/individual-list.php?success=-2&reason=' . $errorString);
+						header('Location: /lists/individual-list.php?success=-2&reason=' . $errorString . '&inserted=' . $inserted);
 					} else {
 						header('Location: /lists/individual-list.php?success=1&inserted=' . $inserted);	
 					}

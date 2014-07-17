@@ -43,12 +43,12 @@
 	» DADOS
 
 		* nas classes que têm actualização com CSV, colocar um campo extra na entidade para receber o nome do ficheiro (tal como está na reflectance):
-			* species
-			* individual
-			* structure
-			* eco-physiology
-			* plot..
-			* site...
+			* species - DONE
+			* individual - DONE
+			* structure - DONE
+			* eco-physiology - DONE
+			* plot.. - DONE
+			* site... - DONE
 
 		* inserir struture reais
 			* pode actualizar coordenadas do indivíduo.

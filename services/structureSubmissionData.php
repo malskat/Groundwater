@@ -80,6 +80,8 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			        		$strutureRecord["diameter2"] = ($data[3] != "" ? $data[3] : 'NULL');
 			        		$strutureRecord["height"] = ($data[4] != "" ? $data[4] : 'NULL');
 			        		$strutureRecord["perimeter"] = ($data[5] != "" ? $data[5] : 'NULL');
+			        		$strutureRecord["file"] = $_FILES["file"]["name"];
+
 
 			        		$strutureExists = $strutureData->getObjectsBy(' individualCode = "' . $data[0] . '"', -1);
 

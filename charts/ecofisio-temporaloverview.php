@@ -78,19 +78,23 @@
 						}
 					}
 
-					// Create the data table.
-					var data = google.visualization.arrayToDataTable(graphData);
+					if (graphData.length > 1 ) {
+
+						// Create the data table.
+						var data = google.visualization.arrayToDataTable(graphData);
 
 
-					// Set chart options
-					var options = {title:'Overview',
-					               width:1000,
-					               height:500,
-					               pointSize: 2};
+						// Set chart options
+						var options = {title:'Overview',
+						               width:1000,
+						               height:500,
+						               pointSize: 2};
 
-					// Instantiate and draw our chart, passing in some options.
-					var chart = new google.visualization.LineChart(document.getElementById('ecoFisioTemporalOverviewGraph'));
-					chart.draw(data, options);
+						// Instantiate and draw our chart, passing in some options.
+						var chart = new google.visualization.LineChart(document.getElementById('ecoFisioTemporalOverviewGraph'));
+						chart.draw(data, options);
+
+					}
 				}
 			}
 	    </script>
@@ -100,7 +104,7 @@
 			<div class="row">
 				<div class="page-header">
 					<h2>
-						Eco-Fisiologia
+						Eco-Physiology
 						<small>Individual - <?=$_GET['individualCode']?></small>
 					</h2>
 				</div>
@@ -124,9 +128,7 @@
 						<div class="panel-body">
 							<div id="ecoFisioTemporalOverviewGraph">
 								<?
-									if (count($ecoFisioValues) == 0) {
-										echo '<p>There are no Eco-Physiology values to show.</p>';
-									}
+									echo '<p>There are no Eco-Physiology values to show.</p>';
 								?>
 				        	</div>
 						</div>

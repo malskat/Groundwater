@@ -39,7 +39,8 @@ class EcoFisio extends gObject {
 		require_once '../core/core_database.php';
 
 		$query = 'Select sp.species_id, sp.species, sp.genus, i.individualCode, ef.leaf_13C, ef.leaf_15N, 
-						ef.leaf_perN, ef.leaf_perC, ef.leaf_CN, ef.xylemWater_18O, ef.pri
+						ef.leaf_perN, ef.leaf_perC, ef.leaf_CN, ef.xylemWater_18O, 
+						ef.pri, ef.wi, ef.chl, ef.chl_ndi, ef.ndvi
 					From species sp
 					Left Join individual i On i.species_id = sp.species_id
 					Left Join eco_fisio ef On ef.individualCode = i.individualCode
@@ -63,7 +64,7 @@ class EcoFisio extends gObject {
 			if($value != ""){
 				$fields .= '`'. $key . '`, ';
 
-				if ($key == 'individualCode' || $key == 'sampling_campaign_id' || $key == 'samplingDate') {
+				if ($key == 'individualCode' || $key == 'sampling_campaign_id' || $key == 'samplingDate' || $key == 'file') {
 					$values .= "'" . $value . "', ";
 				} else {
 					$values .= '' . str_replace(",", ".", $value) . ', ';

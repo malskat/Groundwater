@@ -20,7 +20,7 @@
 		<link href="../css/alerts.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
 		<link href="../css/mainCore.css" rel="stylesheet">
-    	<link href="../css/sticky-footer.css" rel="stylesheet">
+   		<link href="../css/sticky-footer.css" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -66,14 +66,15 @@
 
 				var _ecoFisioValues = <?=$ecoFisioEncoded?>;
 				if(_ecoFisioValues.length > 0) {
-					var graphData = [['Xylem Water 18O', 'Leaf 13C', 'Leaf 15N']];
+
+					var graphData = [['Xylem Water 18O', 'PRI', 'CHL_NDI']];
 					if (_ecoFisioValues != "") {
 						for (ecoFisio in _ecoFisioValues){
 							if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
-								    	&& _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].leaf_15N != null) {
+								    && _ecoFisioValues[ecoFisio].pri != null && _ecoFisioValues[ecoFisio].chl_ndi != null) {
 								graphData.push(["" + _ecoFisioValues[ecoFisio].xylemWater_18O + " (" + _ecoFisioValues[ecoFisio].campaignDesignation + ")", 
-								               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
-								               Number(_ecoFisioValues[ecoFisio].leaf_15N)]);
+								               Number(_ecoFisioValues[ecoFisio].pri), 
+								               Number(_ecoFisioValues[ecoFisio].chl_ndi)]);
 							}
 						}
 					}
@@ -82,18 +83,17 @@
 
 						var data = google.visualization.arrayToDataTable(graphData);
 
-						var options = {title:'Leaf 13C and leaf 15N / Xylem 18O',
+						var options = {title:'PRI and CHL_NDI / Xylem 18O',
 						               width:1000,
 						               height:500,
 										hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-		          						vAxes: [{title: 'leaf 13C', minValue: -40, maxValue: 40}, {title: 'Leaf 15N', minValue: -20, maxValue: 20}],
+		          						vAxes: [{title: 'PRI', minValue: -0.5, maxValue: 0.5}, {title: 'CHL_NDI', minValue: 0, maxValue: 1}],
 		          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
 						               lineWidth: 0,
 						               pointSize: 3};
 
-						var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf13CLeaf15NGraph'));
+						var chart = new google.visualization.LineChart(document.getElementById('ecoFisioPRI_CHLNDVIGraph'));
 						chart.draw(data, options);
-
 					}
 				}
 			}
@@ -117,16 +117,16 @@
 			</div>
 		</div>
 
-	    <!-- tabela e gráfico -->
+	    	<!-- tabela e gráfico -->
 	    <div class="container">
 	  		<div class="row spacer">
 	  			<div class="col-xs-12 col-lg-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h3 class="panel-title">Leaf 13C and 15N / Xylem Water 18O</h3>
+							<h3 class="panel-title">PRI and CHL_NDI / Xylem Water 18O</h3>
 						</div>
 						<div class="panel-body">
-							<div id="ecoFisioLeaf13CLeaf15NGraph">
+							<div id="ecoFisioPRI_CHLNDVIGraph">
 								<?
 									echo '<p>There are no Eco-Physiology values to show.</p>';
 								?>

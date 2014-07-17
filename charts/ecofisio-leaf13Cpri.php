@@ -66,31 +66,36 @@
 
 				var _ecoFisioValues = <?=$ecoFisioEncoded?>;
 				if(_ecoFisioValues.length > 0) {
+
 					var graphData = [['Xylem Water 18O', 'leaf 13C', 'PRI']];
 					if (_ecoFisioValues != "") {
 						for (ecoFisio in _ecoFisioValues){
 							if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
 								    && _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].pri != null) {
-								graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+								graphData.push(["" + _ecoFisioValues[ecoFisio].xylemWater_18O + " (" + _ecoFisioValues[ecoFisio].campaignDesignation + ")", 
 								               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
 								               Number(_ecoFisioValues[ecoFisio].pri)]);
 							}
 						}
 					}
 
-					var data = google.visualization.arrayToDataTable(graphData);
+					if (graphData.length > 1 ) {
 
-					var options = {title:'Leaf 13C and PRI / Xylem 18O',
-					               width:1000,
-					               height:500,
-									hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-	          						vAxes: [{title: 'leaf 13C', minValue: -40, maxValue: 40}, {title: 'PRI', minValue: -20, maxValue: 20}],
-	          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
-					               lineWidth: 0,
-					               pointSize: 3};
+						var data = google.visualization.arrayToDataTable(graphData);
 
-					var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf13CpriGraph'));
-					chart.draw(data, options);
+						var options = {title:'Leaf 13C and PRI / Xylem 18O',
+						               width:1000,
+						               height:500,
+										hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
+		          						vAxes: [{title: 'leaf 13C', minValue: -40, maxValue: 40}, {title: 'PRI', minValue: -20, maxValue: 20}],
+		          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
+						               lineWidth: 0,
+						               pointSize: 3};
+
+						var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf13CpriGraph'));
+						chart.draw(data, options);
+
+					}
 				}
 			}
 	    </script>
@@ -100,7 +105,7 @@
 			<div class="row">
 				<div class="page-header">
 					<h2>
-						Eco-Fisiologia
+						Eco-Physiology
 						<small>Individual - <?=$_GET['individualCode']?></small>
 					</h2>
 				</div>
@@ -124,9 +129,7 @@
 						<div class="panel-body">
 							<div id="ecoFisioLeaf13CpriGraph">
 								<?
-									if (count($ecoFisioValues) == 0) {
-										echo '<p>There are no Eco-Physiology values to show.</p>';
-									}
+									echo '<p>There are no Eco-Physiology values to show.</p>';
 								?>
 				        	</div>
 						</div>

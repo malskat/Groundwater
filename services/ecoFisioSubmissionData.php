@@ -71,7 +71,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 		  			$hasSamplingDate = false;
 				    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
 				        if ($row == 1) {
-				        	if (array_search("samplingDate", $data)) {
+				        	if (array_search("samplingdate", array_map('strtolower', $data))) {
 								$hasSamplingDate = true;
 				        	}
 				        } else {
@@ -90,6 +90,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
 				        		if (count($ecoFisioExists) == 0) {
 				        			//insercao de eco-fisiologia
+			        				$ecoFisioRecord["file"] = $_FILES["file"]["name"];
 									$reply = $ecoFisioData->insert($ecoFisioRecord);
 
 				        		} else {

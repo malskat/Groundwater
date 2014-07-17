@@ -85,98 +85,185 @@
 				var _ecoFisioValues = <?=$ecoFisioEncoded?>;
 				var chart_type = "<?=$selectedtype?>";
 
-				console.log(chart_type);
+
 
 				if(_ecoFisioValues.length > 0) {
 
+					switch (chart_type) {
 
-					if (chart_type == "13c15N") {
+						case "13c15N" : {
 
-						var graphData = [['Xylem Water 18O', 'Leaf 13C', 'Leaf 15N']];
-						if (_ecoFisioValues != "") {
-							for (ecoFisio in _ecoFisioValues){
-								if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
-								    	&& _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].leaf_15N != null) {
-									graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
-									               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
-									               Number(_ecoFisioValues[ecoFisio].leaf_15N)]);
+							var graphData = [['Xylem Water 18O', 'Leaf 13C', 'Leaf 15N']];
+							if (_ecoFisioValues != "") {
+								for (ecoFisio in _ecoFisioValues){
+									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
+									    	&& _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].leaf_15N != null) {
+										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
+										               Number(_ecoFisioValues[ecoFisio].leaf_15N)]);
+									}
 								}
 							}
-						}
 
-						var data = google.visualization.arrayToDataTable(graphData);
+							if (graphData.length > 1 ) {
 
-						var options = {title:'Leaf 13C and leaf 15N / Xylem 18O',
-						               width:1000,
-						               height:500,
-										hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-		          						vAxes: [{title: 'leaf 13C', minValue: -34, maxValue: -20}, {title: 'Leaf 15N', minValue: -10, maxValue: 10}],
-		          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
-						               lineWidth: 0,
-						               pointSize: 3};
+								var data = google.visualization.arrayToDataTable(graphData);
 
-						var chart = new google.visualization.LineChart(document.getElementById('species_chart'));
-						chart.draw(data, options);
+								var options = {title:'Leaf 13C and leaf 15N / Xylem 18O',
+								               width:1000,
+								               height:500,
+												hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
+				          						vAxes: [{title: 'leaf 13C', minValue: -34, maxValue: -20}, {title: 'Leaf 15N', minValue: -10, maxValue: 10}],
+				          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
+								               lineWidth: 0,
+								               pointSize: 3};
+
+								var chart = new google.visualization.LineChart(document.getElementById('species_chart'));
+								chart.draw(data, options);
+							}
+
+							break;
+
+						} 
 
 
-					} else if ("13cPri") { 
+						case "13cPri": { 
 
-
-						var graphData = [['Xylem Water 18O', 'leaf 13C', 'PRI']];
-						if (_ecoFisioValues != "") {
-							for (ecoFisio in _ecoFisioValues){
-								if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
-									    && _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].pri != null) {
-									graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
-									               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
-									               Number(_ecoFisioValues[ecoFisio].pri)]);
+							var graphData = [['Xylem Water 18O', 'Leaf 13C', 'PRI']];
+							if (_ecoFisioValues != "") {
+								for (ecoFisio in _ecoFisioValues){
+									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
+										    && _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].pri != null) {
+										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
+										               Number(_ecoFisioValues[ecoFisio].pri)]);
+									}
 								}
 							}
-						}
 
-						var data = google.visualization.arrayToDataTable(graphData);
+							if (graphData.length > 1 ) {
 
-						var options = {title:'Leaf 13C and PRI / Xylem 18O',
-						               width:1000,
-						               height:500,
-										hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-		          						vAxes: [{title: 'leaf 13C', minValue: -34, maxValue: -20}, {title: 'PRI', minValue: -0.3, maxValue: 0.3}],
-		          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
-						               lineWidth: 0,
-						               pointSize: 3};
+								var data = google.visualization.arrayToDataTable(graphData);
 
-						var chart = new google.visualization.LineChart(document.getElementById('species_chart'));
-						chart.draw(data, options);
+								var options = {title:'Leaf 13C and PRI / Xylem 18O',
+								               width:1000,
+								               height:500,
+												hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
+				          						vAxes: [{title: 'leaf 13C', minValue: -34, maxValue: -20}, {title: 'PRI', minValue: -0.3, maxValue: 0.3}],
+				          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
+								               lineWidth: 0,
+								               pointSize: 3};
+
+								var chart = new google.visualization.LineChart(document.getElementById('species_chart'));
+								chart.draw(data, options);
+							}
 
 
-					} else if (chart_type == "15nCn") {
+							break;
+						} 
 
+						case "15nCn": {
 
-						var graphData = [['Xylem Water 18O', 'Leaf 15N', 'Leaf CN']];
-						if (_ecoFisioValues != "") {
-							for (ecoFisio in _ecoFisioValues){
-								if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
-								    && _ecoFisioValues[ecoFisio].leaf_15N != null && _ecoFisioValues[ecoFisio].leaf_CN != null) {
-									graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
-									               Number(_ecoFisioValues[ecoFisio].leaf_15N), 
-									               Number(_ecoFisioValues[ecoFisio].leaf_CN)]);
+							var graphData = [['Xylem Water 18O', 'Leaf 15N', 'Leaf CN']];
+							if (_ecoFisioValues != "") {
+								for (ecoFisio in _ecoFisioValues){
+									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
+									    && _ecoFisioValues[ecoFisio].leaf_15N != null && _ecoFisioValues[ecoFisio].leaf_CN != null) {
+										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										               Number(_ecoFisioValues[ecoFisio].leaf_15N), 
+										               Number(_ecoFisioValues[ecoFisio].leaf_CN)]);
+									}
 								}
 							}
+
+							if (graphData.length > 1 ) {
+
+								var data = google.visualization.arrayToDataTable(graphData);
+
+								var options = {title:'Leaf 15N and Leaf CN / Xylem 18O',
+								               width:1000,
+								               height:500,
+												hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
+				          						vAxes: [{title: 'leaf 15N', minValue: -10, maxValue: 10}, {title: 'Leaf CN', minValue: 10, maxValue: 90}],
+				          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
+								               lineWidth: 0,
+								               pointSize: 3};
+
+								var chart = new google.visualization.LineChart(document.getElementById('species_chart'));
+								chart.draw(data, options);
+							}
+
+							break;
 						}
 
-						var data = google.visualization.arrayToDataTable(graphData);
+						case "Wi_Ndvi" : {
 
-						var options = {title:'Leaf 15N and leaf CN / Xylem 18O',
-						               width:1000,
-						               height:500,
-										hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-		          						vAxes: [{title: 'leaf 15N', minValue: -10, maxValue: 10}, {title: 'Leaf CN', minValue: 10, maxValue: 90}],
-		          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
-						               lineWidth: 0,
-						               pointSize: 3};
+							var graphData = [['Xylem Water 18O', 'WI', 'NDVI']];
+							if (_ecoFisioValues != "") {
+								for (ecoFisio in _ecoFisioValues){
+									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
+										    && _ecoFisioValues[ecoFisio].wi != null && _ecoFisioValues[ecoFisio].ndvi != null) {
+										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										               Number(_ecoFisioValues[ecoFisio].wi), 
+										               Number(_ecoFisioValues[ecoFisio].ndvi)]);
+									}
+								}
+							}
 
-						var chart = new google.visualization.LineChart(document.getElementById('species_chart'));
-						chart.draw(data, options);
+							if (graphData.length > 1 ) {
+
+								var data = google.visualization.arrayToDataTable(graphData);
+
+								var options = {title:'WI and NDVI / Xylem 18O',
+								               width:1000,
+								               height:500,
+												hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
+				          						vAxes: [{title: 'WI', minValue: 0, maxValue: 1.5}, {title: 'NDVI', minValue: 0, maxValue: 1}],
+				          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
+								               lineWidth: 0,
+								               pointSize: 3};
+
+								var chart = new google.visualization.LineChart(document.getElementById('species_chart'));
+								chart.draw(data, options);
+							}
+
+							break;
+						}
+
+						case "Pri_ChlNdi" : {
+
+							var graphData = [['Xylem Water 18O', 'PRI', 'CHL_NDI']];
+							if (_ecoFisioValues != "") {
+								for (ecoFisio in _ecoFisioValues){
+									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
+										    && _ecoFisioValues[ecoFisio].pri != null && _ecoFisioValues[ecoFisio].chl_ndi != null) {
+										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										               Number(_ecoFisioValues[ecoFisio].pri), 
+										               Number(_ecoFisioValues[ecoFisio].chl_ndi)]);
+									}
+								}
+							}
+
+							if (graphData.length > 1 ) {
+
+								var data = google.visualization.arrayToDataTable(graphData);
+
+								var options = {title:'PRI and CHL_NDI / Xylem 18O',
+								               width:1000,
+								               height:500,
+												hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
+				          						vAxes: [{title: 'PRI', minValue: -0.5, maxValue: 0.5}, {title: 'CHL_NDI', minValue: 0, maxValue: 1}],
+				          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
+								               lineWidth: 0,
+								               pointSize: 3};
+
+								var chart = new google.visualization.LineChart(document.getElementById('species_chart'));
+								chart.draw(data, options);
+							}
+
+							break;
+						}
+
 					}
 
 				} 
@@ -229,6 +316,8 @@
                 <option <?=($selectedtype && "13c15N" == $selectedtype ? 'selected' : '')?> value="13c15N">Leaf 13C and Leaf 15N / Xylem 18O</option>
                 <option <?=($selectedtype && "13cPri" == $selectedtype ? 'selected' : '')?> value="13cPri">Leaf 13C and PRI / Xylem 18O</option>
                 <option <?=($selectedtype && "15nCn" == $selectedtype ? 'selected' : '')?> value="15nCn">Leaf 15N and Leaf CN / Xylem 18O</option>
+                <option <?=($selectedtype && "Wi_Ndvi" == $selectedtype ? 'selected' : '')?> value="Wi_Ndvi">WI and NDVI / Xylem 18O</option>
+                <option <?=($selectedtype && "Pri_ChlNdi" == $selectedtype ? 'selected' : '')?> value="Pri_ChlNdi">PRI and CHL_NDI / Xylem 18O</option>
 			</select>
             </div>
 

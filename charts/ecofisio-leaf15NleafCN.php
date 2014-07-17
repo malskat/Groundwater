@@ -71,26 +71,30 @@
 						for (ecoFisio in _ecoFisioValues){
 							if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
 								    && _ecoFisioValues[ecoFisio].leaf_15N != null && _ecoFisioValues[ecoFisio].leaf_CN != null) {
-								graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+								graphData.push(["" + _ecoFisioValues[ecoFisio].xylemWater_18O + " (" + _ecoFisioValues[ecoFisio].campaignDesignation + ")", 
 								               Number(_ecoFisioValues[ecoFisio].leaf_15N), 
 								               Number(_ecoFisioValues[ecoFisio].leaf_CN)]);
 							}
 						}
 					}
 
-					var data = google.visualization.arrayToDataTable(graphData);
+					if (graphData.length > 1 ) {
 
-					var options = {title:'Leaf 15N and leaf CN / Xylem 18O',
-					               width:1000,
-					               height:500,
-									hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-	          						vAxes: [{title: 'leaf 15N', minValue: -40, maxValue: 40}, {title: 'Leaf CN', minValue: -20, maxValue: 20}],
-	          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
-					               lineWidth: 0,
-					               pointSize: 3};
+						var data = google.visualization.arrayToDataTable(graphData);
 
-					var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf15NLeafCNGraph'));
-					chart.draw(data, options);
+						var options = {title:'Leaf 15N and leaf CN / Xylem 18O',
+						               width:1000,
+						               height:500,
+										hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
+		          						vAxes: [{title: 'leaf 15N', minValue: -40, maxValue: 40}, {title: 'Leaf CN', minValue: -20, maxValue: 20}],
+		          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
+						               lineWidth: 0,
+						               pointSize: 3};
+
+						var chart = new google.visualization.LineChart(document.getElementById('ecoFisioLeaf15NLeafCNGraph'));
+						chart.draw(data, options);
+
+					}
 				}
 			}
 	    </script>

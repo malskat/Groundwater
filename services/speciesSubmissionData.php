@@ -77,6 +77,8 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			        	$toInsert['type'] = $data[2];
 			        	$toInsert['code'] = $data[3];
 			        	$toInsert['functionalGroup'] = $data[4];
+			        	$toInsert["file"] = $_FILES["file"]["name"];
+
 
 			        	$reply = $speciesData->insert($toInsert);
 			        	

@@ -21,7 +21,7 @@ class Structure extends gObject {
 			if($value != ""){
 				$fields .= '`'. $key . '`, ';
 
-				if ($key == 'individualCode' || $key == 'samplingDate') {
+				if ($key == 'individualCode' || $key == 'samplingDate' || $key == 'file') {
 					$values .= "'" . $value . "', ";
 				} else {
 					$values .= '' . str_replace(",", ".", $value) . ', ';
@@ -43,7 +43,7 @@ class Structure extends gObject {
 		$set = '';
 		foreach ($toUpdate as $key => $value) {
 			if($value != "" && $key != $this->_entityName . '_id') {
-				if ($key == 'individualCode' || $key == 'samplingDate') {
+				if ($key == 'individualCode' || $key == 'samplingDate' || $key == 'file') {
 						$set .= '`'. $key . '` = ' . "'" . $value . "', "; 
 				} else {
 					$set .= '`'. $key . '` = ' . str_replace(",", ".", $value) . ', ';

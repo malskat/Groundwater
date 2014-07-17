@@ -85,6 +85,8 @@
 								<li><a href="../charts/ecofisio-leaf13Cleaf15N.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 13C and Leaf 15N / Xylem 18O</strong></a></li>
 								<li><a href="../charts/ecofisio-leaf13Cpri.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 13C and PRI / Xylem 18O</strong></a></li>
 								<li><a href="../charts/ecofisio-leaf15NleafCN.php?individualCode=<?=$individual[0]->individualCode?>"><strong>Leaf 15N and Leaf CN / Xylem 18O</strong></a></li>
+								<li><a href="../charts/ecofisio-wi-ndvi.php?individualCode=<?=$individual[0]->individualCode?>"><strong>WI and NDVI / Xylem 18O</strong></a></li>
+								<li><a href="../charts/ecofisio-pri-chl-ndi.php?individualCode=<?=$individual[0]->individualCode?>"><strong>PRI and CHL_NDI / Xylem 18O</strong></a></li>
 							</ul>
 						</div>
 					</div>
@@ -203,7 +205,7 @@
 					        <div class="panel panel-default">
 						        <div class="panel-body">
 						        	<p><span class="label label-default">Info</span></p>
-						        	<p>To insert and update Individuals general information.</p>	
+						        	<p>This form is meant to insert and update Individuals general information.</p>	
 							    	<p><strong>All fields with * are mandatory.</strong></p>
 						        </div>
 					        </div>
