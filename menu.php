@@ -159,8 +159,8 @@
 		<?php
 
 			if ($_BIOLOGYST_LOGGED) {
+				
 				//utilizador logado
-
 				require_once 'core/core_system.php';
 
 				$destination = CoreSystem::retriveReturnUrl($_SERVER['PHP_SELF']);
@@ -172,14 +172,13 @@
 				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
 					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><span class="glyphicon glyphicon-user"></span> Edit</a></li>
-					            			<li><a href="'. PROJECT_URL . 'forms/user.php"?><span class="glyphicon glyphicon-repeat"></span> Password Recover</a></li>
 					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $destination . '"><span class="glyphicon glyphicon-eject"></span> Logout</a></li>
 					            		</ul>
 					            	</li>
 					            </ul>
 							</div>
 						</div>';
-			} else if (strpos($_SERVER['PHP_SELF'], 'login') === false) {
+			} else if (strpos($_SERVER['PHP_SELF'], 'login') === false && strpos($_SERVER['PHP_SELF'], 'recover-password') === false) {
 
 				//formulario de utilizador
 				echo '<div id="loginForm" name="loginForm" class="navbar-form navbar-right">

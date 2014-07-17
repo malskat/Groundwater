@@ -54,26 +54,22 @@
 		        <div class="panel panel-default">
 		            <div class="panel-body">
 		            	<div class="col-xs-10 col-lg-10 col-lg-offset-1 smallspacer">
-		            		<p class="lead text-center"><strong>Welcome to GWTropiMed</strong></p>
-		            		<h6 class="text-center">Please login to manage entities like sites or individuals.</h6>
+		            		<p class="lead text-center"><strong>Password Recover</strong></p>
+		            		<h6 class="text-center">We'll remove the old password and send you a new one.</h6>
 		            	</div>
 		            	<div id="loginForm" name="loginForm">
-							<form role="form" onsubmit="return validateLogin();" action="../services/make_entrance.php" method="post">			
-								<input id="destination" name="destination" type="hidden" value="<?=$_SERVER['HTTP_REFERER']?>">
+							<form role="form" onsubmit="return validateRecover();" action="../services/recover_password.php" method="post">
 								
 								<div id="emailInputGroup" class="form-group col-xs-10 col-lg-10 col-lg-offset-1 smallspacer">
 									<input id="email" name="email" type="text" class="form-control" placeholder="email">
 								</div> 
-								<div id="passInputGroup" class="form-group col-xs-10 col-lg-10 col-lg-offset-1">
-									<input id="password" name="password" type="password" class="form-control" placeholder="password">
-								</div>
 								<div class="text-center col-xs-10 col-lg-10 col-lg-offset-1">
-									<button id="loginTooltip" type="submit" class="btn btn-success btn-lg btn-block" data-toggle="tooltip" data-placement="left" title="Por implementar!">Login <span class="glyphicon glyphicon-play-circle"></span></button>
+									<button id="loginTooltip" type="submit" class="btn btn-warning btn-lg btn-block" data-toggle="tooltip" data-placement="left" title="Por implementar!">Recover <span class="glyphicon glyphicon-refresh"></span></button>
 								</div>
 							</form>
 						</div>
 						<div class="col-xs-10 col-lg-10 col-lg-offset-1 smallspacer">
-							<p class="text-center"><small><a href="<?=PROJECT_URL . 'forms/recover-password.php'?>">Forgot password?</a></small></p>
+							<p class="text-center"><small><a href="<?=PROJECT_URL . 'forms/login.php'?>">« Back to login</a></small></p>
 						</div>
 		            </div>
 		        </div>
@@ -86,10 +82,9 @@
 
 	<script>
 	  		//para validar o login
-		function validateLogin() {
+		function validateRecover() {
 
-			var email = $('#email').val();
-	    	var password = $('#password').val();
+	    	var email = $('#email').val();
 	    	var hasErrors = false;
 
 			if (email == '') {
@@ -98,18 +93,11 @@
 			}else {
 				$('#emailInputGroup').removeClass('has-error');
 			}
-
-			if (password == '') {
-				$('#passInputGroup').addClass('has-error');
-				hasErrors = true;
-			}else {
-				$('#passInputGroup').removeClass('has-error');
-			}
 			
 			if (hasErrors){
 				$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens! </strong>Email and Password are mandatory!");
+		        $('#alert-text').html("<strong>Shit happens! </strong> Email is mandatory!");
 				return false;
 			} else {
 				$("#loginForm").hide();
