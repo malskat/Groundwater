@@ -59,7 +59,7 @@
 		</div>
 
 		<div class="row spacer">
-			<p><a href=<?=PROJECT_URL . "info/objectives.php"?> class="btn btn-primary btn-sm" role="button">Project Objectives &raquo;</a></p>	
+			<p><a href=<?=PROJECT_URL . "about/objectives.php"?> class="btn btn-primary btn-sm" role="button">Project Objectives &raquo;</a></p>	
 		</div>
 
 		<div class="row">

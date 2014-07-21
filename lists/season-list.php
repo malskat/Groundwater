@@ -28,6 +28,13 @@
   <body>
 
     <?php
+
+
+  		if ($_BIOLOGYST_LOGGED === false) {
+  			header('Location: ' . PROJECT_URL . 'index.php?success=-1&reason=There is no logged user. Please login.');
+  			die;
+  		}
+
   		include "../data/season_data.php";
 
   		$seasonData = new Season();

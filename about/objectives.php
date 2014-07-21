@@ -54,16 +54,16 @@
 			</p>
 			<p>
 				<ol>
-					<li>Characterize and understand plant functional groups water use in a GW limitation situation in a climatic gradient: from Tropics to Mediterranean (<a href=<?=PROJECT_URL . "info/tasks.php/#pill_task1"?>>Task 1</a>);</li>
-					<li>Understand ecophysiological responses of functional groups in a GW gradient and define suitable short-term stress indicators in GW limitation scenarios (<a href=<?=PROJECT_URL . "info/tasks.php/#pill_task2"?>>Task 2</a>);</li>
-					<li>Estimate important factors that could function as GW long-term stress tracers and evaluate long-term stress sensitivity of the functional groups to temporal/seasonal changes in water availability (<a href=<?=PROJECT_URL . "info/tasks.php/#pill_task3"?>>Task 3</a>);</li>
-					<li>Develop a model to evaluate community water use and response under groundwater change scenarios through ecophysiological parameters (<a href=<?=PROJECT_URL . "info/tasks.php/#pill_task4"?>>Task 4</a>).</li>
+					<li>Characterize and understand plant functional groups water use in a GW limitation situation in a climatic gradient: from Tropics to Mediterranean (<a href=<?=PROJECT_URL . "about/tasks.php/#pill_task1"?>>Task 1</a>);</li>
+					<li>Understand ecophysiological responses of functional groups in a GW gradient and define suitable short-term stress indicators in GW limitation scenarios (<a href=<?=PROJECT_URL . "about/tasks.php/#pill_task2"?>>Task 2</a>);</li>
+					<li>Estimate important factors that could function as GW long-term stress tracers and evaluate long-term stress sensitivity of the functional groups to temporal/seasonal changes in water availability (<a href=<?=PROJECT_URL . "about/tasks.php/#pill_task3"?>>Task 3</a>);</li>
+					<li>Develop a model to evaluate community water use and response under groundwater change scenarios through ecophysiological parameters (<a href=<?=PROJECT_URL . "about/tasks.php/#pill_task4"?>>Task 4</a>).</li>
 				</ol>
 			</p>
 		</div>
 
 		<div class="row spacer">
-			<p><a href=<?=PROJECT_URL . "info/tasks.php"?> class="btn btn-primary btn-sm" role="button">Project Tasks &raquo;</a></p>	
+			<p><a href=<?=PROJECT_URL . "about/tasks.php"?> class="btn btn-primary btn-sm" role="button">Project Tasks &raquo;</a></p>	
 		</div>
 	</div>
 

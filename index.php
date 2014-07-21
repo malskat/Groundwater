@@ -35,12 +35,6 @@
 
   <body>
 
-
-    <div id="alert-message" class="alert-message" style="display:none">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>  
-      <p id="alert-text"></p>
-    </div>
-
     <!-- incluir menu principal -->
     <?php include "menu.php";?>
 
@@ -51,7 +45,7 @@
 				<h1>GWTropiMed</h1>
 				<p>Costal Dune Forests under Scenarios of Groundwater Limitation: from Tropics to Mediterranean.</p>
 				<h4><em>FCT R&D Project - <small>PTDC/AAC-CLI/118555/2010</small></em></h4>
-				<p><a href=<?=PROJECT_URL . "info/state-of-the-art.php"?> class="btn btn-primary btn-sm" role="button">Learn more &raquo;</a></p>
+				<p><a href=<?=PROJECT_URL . "about/state-of-the-art.php"?> class="btn btn-primary btn-sm" role="button">Learn more &raquo;</a></p>
 			</div>
 		</div>
 
@@ -76,7 +70,7 @@
 						<p><strong>Centro de Recursos Naturais e Ambiente</strong> (CERENA)</p>
 						<p><strong>Universitat Bielfeld</strong> (UB)</p>
 						<p><strong>Rede Eléctrica Nacional, SA</strong> (REN)</p>
-						<p><a href=<?=PROJECT_URL . "info/partners.php"?> class="btn btn-info btn-xs" role="button">Partners description &raquo;</a></p>
+						<p><a href=<?=PROJECT_URL . "about/partners.php"?> class="btn btn-info btn-xs" role="button">Partners description &raquo;</a></p>
 					</div>
 				</div>
 			</div>

@@ -7,7 +7,10 @@
 
  	» FRONTEND
 
- 		* reformular ecrã de login (tomar como exemplo http://demo.mvpready.com/admin/account-login.html)
+ 		* secção de outputs
+ 			* project meetings
+ 			* scientific events
+ 			* scientific papers
 
  		* criação dos restantes gráficos:
  			* indivíduos;
@@ -20,6 +23,8 @@
  		
  		* insercao de reflectance por csv - DONE
  			* colocar o plugin para multiplos ficheiros
+
+ 		* reformular ecrã de login (tomar como exemplo http://demo.mvpready.com/admin/account-login.html) - DONE
 
 
 

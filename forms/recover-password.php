@@ -32,18 +32,6 @@
 
   <body>
 
-
-<div class="container">
-	<div class="row">
-		<div class="col-xs-4 col-lg-offset-4 col-lg-8 col-lg-offset-2">
-		    <div id="alert-message" class="alert-message" style="display:none">
-		    	<button type="button" class="close" data-hide="alert-message" aria-hidden="true">&times;</button>  
-		    	<p id="alert-text"></p>
-		    </div>
-		</div>
-	</div>
-</div>	
-
     <!-- incluir menu principal -->
     <?php include "../menu.php";?>
 

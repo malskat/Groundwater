@@ -27,7 +27,14 @@
 
   <body>
 
-    <?php 
+    <?php
+
+
+  		if ($_BIOLOGYST_LOGGED === false) {
+  			header('Location: ' . PROJECT_URL . 'index.php?success=-1&reason=There is no logged user. Please login.');
+  			die;
+  		}
+
 		include "../data/campaign_data.php";
 		include "../data/site_data.php";
 		include "../data/season_data.php";
@@ -247,9 +254,6 @@
 	    foreach ($campaigns as $campaign) {
 	    	if (isset($campaign->sampling_campaign_id) && $campaign->totalEcoFisio > 0) {
 		    	echo "$('#removeTooltip_" . $campaign->sampling_campaign_id . "').tooltip({trigger: 'hover'});";
-		    	if ($campaign->totalEcoFisio > 0) {
-		    		echo "$('#accessTooltip_" . $campaign->sampling_campaign_id . "').tooltip({trigger: 'hover'});";
-		    	}
 	    	}
 	    }
 	?>

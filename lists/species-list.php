@@ -32,6 +32,12 @@
 
   <body>
   	<?php
+
+  		if ($_BIOLOGYST_LOGGED === false) {
+  			header('Location: ' . PROJECT_URL . 'index.php?success=-1&reason=There is no logged user. Please login.');
+  			die;
+  		}
+
   		include "../data/species_data.php";
 
   		$speciesData = new Species();

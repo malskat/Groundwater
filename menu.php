@@ -1,10 +1,7 @@
-<?php
-	require_once 'config/constants.php';
-?>
 <!-- incluir alertas -->
 <div class="container">
 	<div class="row">
-		<div class="col-xs-4 col-lg-offset-4 col-lg-8 col-lg-offset-2">
+		<div class="col-xs-4 col-lg-8 col-lg-offset-2">
 		    <div id="alert-message" class="alert-message" style="display:none">
 		    	<button type="button" class="close" data-hide="alert-message" aria-hidden="true">&times;</button>  
 		    	<p id="alert-text"></p>
@@ -72,43 +69,52 @@
     <div class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
 
-			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'objectives') !== false || strpos($_SERVER['PHP_SELF'], 'sites_description.php') !== false || strpos($_SERVER['PHP_SELF'], 'state-of-the-art.php') !== false || strpos($_SERVER['PHP_SELF'], 'tasks') !== false || strpos($_SERVER['PHP_SELF'], 'partners') !== false ? 'active' :  '')?>">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], '/about') !== false ? 'active' :  '')?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			    <li><a href=<?=PROJECT_URL . "info/state-of-the-art.php"?>><span class="glyphicon glyphicon-tag"></span> State of the Art</a></li>
-			    <li><a href=<?=PROJECT_URL . "info/objectives.php"?>><span class="glyphicon glyphicon-record"></span> Objectives</a></li>
-			    <li><a href=<?=PROJECT_URL . "info/sites_description.php"?>><span class="glyphicon glyphicon-map-marker"></span> Sites</a></li>
-			    <li><a href=<?=PROJECT_URL . "info/tasks.php"?>><span class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
-			    <li><a href=<?=PROJECT_URL . "info/partners.php"?>><span class="glyphicon glyphicon-leaf"></span> Partners</a></li>
+			    <li><a href=<?=PROJECT_URL . "about/state-of-the-art.php"?>><span class="glyphicon glyphicon-tag"></span> State of the Art</a></li>
+			    <li><a href=<?=PROJECT_URL . "about/objectives.php"?>><span class="glyphicon glyphicon-record"></span> Objectives</a></li>
+			    <li><a href=<?=PROJECT_URL . "about/sites.php"?>><span class="glyphicon glyphicon-map-marker"></span> Sites</a></li>
+			    <li><a href=<?=PROJECT_URL . "about/tasks.php"?>><span class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
+			    <li><a href=<?=PROJECT_URL . "about/partners.php"?>><span class="glyphicon glyphicon-leaf"></span> Partners</a></li>
 			  </ul>
 			</li>
+
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'outputs/') !== false ? 'active' :  '')?>">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Outuputs <b class="caret"></b></a>
+			  <ul class="dropdown-menu">
+			    <li><a href=<?=PROJECT_URL . "outputs/project-meetings.php"?>><span class="glyphicon glyphicon-adjust"></span> Project Meetings</a></li>
+			    <li><a href=<?=PROJECT_URL . "outputs/scientific-events.php"?>><span class="glyphicon glyphicon-bullhorn"></span> Scientific Events</a></li>
+			    <li><a href=<?=PROJECT_URL . "outputs/papers.php"?>><span class="glyphicon glyphicon-book"></span> Papers</a></li>
+			  </ul>
+			</li>	
 
 			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'season') !== false || strpos($_SERVER['PHP_SELF'], 'campaign') !== false ? 'active' :  '')?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campaigns <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    <li role="presentation" class="dropdown-header">Seasons</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/season.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/season-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/season-list.php": PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Campaigns</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/campaign.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/campaign-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/campaign-list.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>
 			  </ul>
 			</li>
 
-			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'site') !== false || strpos($_SERVER['PHP_SELF'], 'plot') !== false ? 'active' :  '')?>">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'lists/site') !== false || strpos($_SERVER['PHP_SELF'], 'forms/site') !== false || strpos($_SERVER['PHP_SELF'], 'plot') !== false ? 'active' :  '')?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sites <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    
 			    <li role="presentation" class="dropdown-header">Site</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/site.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/site-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/site-list.php": PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Plot</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/plot-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/plot-list.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
 			  </ul>
 			</li>
 
@@ -117,10 +123,10 @@
 			  <ul class="dropdown-menu">
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/species-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/species-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/species-list.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Graphs</li>
-			    <li><a href=<?=PROJECT_URL . "charts/species-scatter.php"?>><span class="glyphicon glyphicon-signal"></span> Scatter Plot</a></li> 
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "charts/species-scatter.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-signal"></span> Scatter Plot</a></li> 
 			  </ul>
 			</li>
 
@@ -130,7 +136,7 @@
 			  	<li role="presentation" class="dropdown-header">Individual</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/individual-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Insert</a></li>
-			    <li><a href=<?=PROJECT_URL . "lists/individual-list.php"?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>  
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/individual-list.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>  
 			    
 			    <li role="presentation" class="divider"></li>
 			    <li role="presentation" class="dropdown-header">Eco-Physiology</li>
@@ -163,7 +169,7 @@
 				//utilizador logado
 				require_once 'core/core_system.php';
 
-				$destination = CoreSystem::retriveReturnUrl($_SERVER['PHP_SELF']);
+				$destination = '';//CoreSystem::retriveReturnUrl($_SERVER['PHP_SELF']);
 
 				echo '<div id="loggedInfo" name="loggedInfo">
 							<div class="navbar-collapse collapse">
@@ -180,7 +186,7 @@
 						</div>';
 			} else if (strpos($_SERVER['PHP_SELF'], 'login') === false && strpos($_SERVER['PHP_SELF'], 'recover-password') === false) {
 
-				//formulario de utilizador
+				//acesso ao login
 				echo '<div id="loginForm" name="loginForm" class="navbar-form navbar-right">
 						<button id="loginTooltip" class="btn btn-success btn-sm" onclick="location.href=\'../forms/login.php\'">Login <span class="glyphicon glyphicon-tree-conifer"></span></button>
 					</div>';
@@ -221,39 +227,6 @@
 	        $(this).closest("." + $(this).attr("data-hide")).hide();
 	    });
 	});
-
-
-	//para validar o login
-	function validateLogin(){
-		var email = $('#email').val();
-    	var password = $('#password').val();
-    	var hasErrors = false;
-
-		if (email == '') {
-			$('#emailInputGroup').addClass('has-error');
-			hasErrors = true;
-		}else {
-			$('#emailInputGroup').removeClass('has-error');
-		}
-
-		if (password == '') {
-			$('#passInputGroup').addClass('has-error');
-			hasErrors = true;
-		}else {
-			$('#passInputGroup').removeClass('has-error');
-		}
-		
-		if (hasErrors){
-			$('#alert-message').show();
-	        $('#alert-message').addClass('danger');
-	        $('#alert-text').html("<strong>Shit happens!</strong> Faltam parâmetros ao login (email e password são obrigatórios)!");
-			return false;
-		} else {
-			$("#loginForm").hide();
-			$("#loggedInfo").show();
-			return true;
-		}
-	}
 </script>
 
 

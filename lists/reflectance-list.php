@@ -32,10 +32,12 @@
 
 	<body>
 
-	  	<!-- incluir menu principal -->
-	  	<?php include "../menu.php";?>
-
 	  	<?
+	  		if ($_BIOLOGYST_LOGGED === false) {
+	  			header('Location: ' . PROJECT_URL . 'index.php?success=-1&reason=There is no logged user. Please login.');
+	  			die;
+	  		} 
+	  		
 		    require_once '../data/reflectance_data.php';
 		    require_once '../data/campaign_data.php';
 
@@ -65,6 +67,9 @@
 				$backUrl = '../lists/individual-list.php';
 	  		}
 		?>
+
+	  	<!-- incluir menu principal -->
+	  	<?php include "../menu.php";?>
 
 	    <!-- titulo -->
 	    <div class="container">
