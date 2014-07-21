@@ -59,7 +59,7 @@
 
 
 	  	<!-- incluir menu principal -->
-	  	<?php include "../menu.php";?>
+	  	<?php include "../menu.php";?>	
 
 	    <!-- titulo -->
 	    <div class="container">

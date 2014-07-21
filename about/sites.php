@@ -124,7 +124,7 @@
 					<div class="tab-pane fade" id="ubatuba">
 						
 						<div class="row">
-							<h4>Tropical Site</h4>
+							<h3>Tropical Site</h3>
 							<p>Plot created and monitored by BIOTA/FAPESP project - Restinga, in Ubatuba -SP, Brazil (Joly et al, 2008; Vieira et al., 2008). Restinga is a vegetation formation integrated in the Parque Estadual da Serra do Mar – PESM, in the Picinguaba Nucleo. The vegetation represents the Restinga fisionomy (according to the brazilian national classification system: IBGE (Veloso et al., 1991), being considered a pristine forest in coastal areas with an elevation between 0 and 10m. Restinga soil is classified as Neosolo Quartzarenic and has a high sand content, low pH, low phosphorus concentration and a high aluminium saturation.</p>
 							<p>The climate in Ubatuba region is, according to Kopper (1948) classified as Af (Tropical rainforest climate), with a mean annual precipitation of approximately 3000 mm (and with less precipitation in june: about 87 mm) and mean annual temperature of 22ºC.</p>
 						</div>
