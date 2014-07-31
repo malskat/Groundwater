@@ -79,7 +79,7 @@
 								<div class="panel-body">
 									<p><span class="label label-default">Info</span></p>
 									<p>This form allows you to insert a lot of Individual Species, by submiting a file.</p>
-									<p>Submitted files must have be csv extension.</p>
+									<p>Submitted files must be in csv extension.</p>
 									<p>The submitted files must follow this structure: <strong>genus</strong>, <strong>species</strong>, <strong>type</strong>, <strong>code</strong> e <strong>functionalGroup</strong>.</p>
 									<p>Remember, there is always a reference file to consult.</p>
 								</div>
@@ -113,7 +113,7 @@
 			if (hasErrors){
 				$('#alert-message').show();
 				$('#alert-message').addClass('danger');
-				$('#alert-text').html("<strong>Shit happens!</strong>Atenção. Falta o ficheiro!");
+				$('#alert-text').html("<strong>Attention:</strong> Missing arguments to submission!");
 				return false;
 			} else {
 				return true;

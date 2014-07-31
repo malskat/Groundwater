@@ -78,7 +78,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		  	}
 	  	}catch(Exception $e){
 	  		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-	  		header('Location: ' . PROJECT_URL . 'index.php?success=-1&reason=' . $e);
+	  		header('Location: ' . PROJECT_URL . 'index.php?response=-7&reason=' . $e);
 	  	}
 	}
 }else{

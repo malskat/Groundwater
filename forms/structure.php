@@ -198,7 +198,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros à amostragem!");
+		        $('#alert-text').html("<strong>Attention:</strong> Missing parameters on this Individual Structure!");
     			return false;
     		} else {
     			return true;

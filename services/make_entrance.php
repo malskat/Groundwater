@@ -25,7 +25,7 @@
 
 		header('Location: ' . $next_address);
 	} else {
-		header('Location: ' . PROJECT_URL . 'forms/login.php?success=-4');
+		header('Location: ' . PROJECT_URL . 'forms/login.php?response=705');
 	}
 
 ?>

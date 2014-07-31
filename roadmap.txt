@@ -7,28 +7,22 @@
 
  	» FRONTEND
 
- 		* secção de outputs
- 			* project meetings
- 			* scientific events
+ 		* secção de about 
+ 			* partners
+
+ 		* secção de outputs 
+ 			* project meetings - DONE
+ 			* scientific events - DONE
  			* scientific papers
-
- 		* criação dos restantes gráficos:
- 			* indivíduos;
- 			* espécies.
-
- 		* formulário para recuperação de password:
- 			* popup com recolha de email;
-
- 		* listagem de campanhas - o remover também está disponível, mesmo quando existem amostragens associadas - DONE
- 		
- 		* insercao de reflectance por csv - DONE
- 			* colocar o plugin para multiplos ficheiros
-
- 		* reformular ecrã de login (tomar como exemplo http://demo.mvpready.com/admin/account-login.html) - DONE
 
 
 
  	» SERVIÇOS
+			
+ 		* recuperar password;
+ 			* configurar o envio de emails;
+ 			* enviar email com nova password;
+ 			* validar se email existe na BD;
 
 
 		* criar mecanismo de logs para relacionar utilizadores com actualizações;
@@ -39,21 +33,9 @@
 				- acção - delete, update, create
 				- sql ???
 			* registo de logs após acções;
- 		* recuperar password;
- 			* configurar o envio de emails;
- 			* enviar email com nova password;
- 			* validar se email existe na BD;
 
 		
 	» DADOS
-
-		* nas classes que têm actualização com CSV, colocar um campo extra na entidade para receber o nome do ficheiro (tal como está na reflectance):
-			* species - DONE
-			* individual - DONE
-			* structure - DONE
-			* eco-physiology - DONE
-			* plot.. - DONE
-			* site... - DONE
 
 		* inserir struture reais
 			* pode actualizar coordenadas do indivíduo.
@@ -66,7 +48,7 @@
 	» Melhoramentos
 
 
- 		* retirar as strings de erro do endereço da página
+ 		* retirar as strings de erro do endereço da página - DONE
  			* site
  			* plot
  			* season

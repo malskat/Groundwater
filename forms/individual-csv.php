@@ -113,7 +113,7 @@
 			if (hasErrors){
 			 	$('#alert-message').show();
 				$('#alert-message').addClass('danger');
-				$('#alert-text').html("<strong>Shit happens!</strong>Atenção. Falta o ficheiro!");
+				$('#alert-text').html("<strong>Attention:</strong> Missing arguments to submission!");
 				return false;
 			} else {
 				return true;

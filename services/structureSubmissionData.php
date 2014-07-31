@@ -5,7 +5,7 @@ require_once '../data/structure_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=There is no user logged in. Please log in to continue.');
+	header('Location: /forms/login.php?response=-1');
 	die;
 } 
 
@@ -25,15 +25,16 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 		}
 		
 		if($reply['_success_'] == 1) {
-			header('Location: /forms/structure.php?success=1&individualCode=' . $_POST["individualCode"]);
+			header('Location: /forms/structure.php?response=801&individualCode=' . $_POST["individualCode"]);
 		} else {
-			header('Location: /forms/structure.php?success=-3&reason=There was no change!!&individualCode=' . $_POST["individualCode"]);
+			header('Location: /forms/structure.php?response=803&individualCode=' . $_POST["individualCode"]);
 		}
 
 		
 	} else {
-		header('Location: /forms/structure.php?success=-1&reason=Missing parameters!&individualCode=' . $_POST["individualCode"]);
+		header('Location: /forms/structure.php?response=802&individualCode=' . $_POST["individualCode"]);
 	}
+
 } else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
 
 	try {
@@ -42,9 +43,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: /forms/structure-csv.php?success=-1&reason=File must be csv format!');
+			header('Location: /forms/structure-csv.php?response=-3');
 	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-			header('Location: /forms/structure-csv.php?success=-1&reason=File already processed!');
+			header('Location: /forms/structure-csv.php?response=-4');
 	  	} else {
 			
 			//movimentacao do ficheiro da pasta temporaria para a pasta final
@@ -132,14 +133,14 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 				if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
 
 					if($errorString != ''){
-						header('Location: /forms/structure-csv.php?success=-2&reason=' . $errorString . '&inserted=' . $operated);
+						header('Location: /forms/structure-csv.php?response=13&reason=' . $errorString . '&inserted=' . $operated);
 					} else {
-						header('Location: /forms/structure-csv.php?success=1&inserted=' . $operated);	
+						header('Location: /forms/structure-csv.php?response=12&inserted=' . $operated);	
 					}
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /forms/structure-csv.php?success=-1&reason=Could not move file to final directory!');
+					header('Location: /forms/structure-csv.php?response=-5');
 				}
 			}
 
@@ -147,8 +148,8 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
   		}
 	} catch (Exception $e) {
 		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-  		header('Location: /forms/structure-csv.php?success=-1&reason=' . $e);
+  		header('Location: /forms/structure-csv.php?response=-7&reason=' . $e);
 	}
 } else {
-	header('Location: /forms/species.php?success=-1&reason=Submission not allowed!');
+	header('Location: /forms/species.php?response=-6');
 }

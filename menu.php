@@ -12,11 +12,30 @@
 
 
 <script src="<?=PROJECT_URL?>js/utils.js"></script>
+<script src="<?=PROJECT_URL?>js/system_errors.js"></script>
 <script>
 
 
   //para os alertas
 	var params = getQueryParams(window.location.search);
+
+	if (params["response"]) {
+
+		try {
+
+			$('#alert-message').show();
+		  	$('#alert-message').addClass(SYSTEM_ERRORS[params["response"]].type_error);
+		  	$('#alert-text').html(SYSTEM_ERRORS[params["response"]].msg + 
+		  	         (params["inserted"] != null && params["inserted"] != "" ? " There were inserted or updated " + params["inserted"] + " records." : "") + 
+		  	         (params["reason"] != null && params["reason"] != "" && params["inserted"] != null && params["inserted"] != "" ? " However, please, check: <br />" + params["reason"] : "") +
+		  	         (params["reason"] != null && params["reason"] != "" && params["inserted"] == null ? " Please, check: <br />" + params["reason"] : ""));
+
+		} catch (err) {
+			$('#alert-message').show();
+		  	$('#alert-message').addClass("danger");
+		  	$('#alert-text').html("<strong>Error </strong>- Response not accepted.");
+		}
+	}
     
     if (params["success"] < 0) {
 
@@ -35,7 +54,7 @@
       	}else {
         	$('#alert-message').show();
         	$('#alert-message').addClass('danger');
-        	$('#alert-text').html("<strong>Shit happens!</strong> Atention. " + params["reason"]);
+        	$('#alert-text').html("<strong>Shit happens!</strong> Attention. " + params["reason"]);
       	}
 
 
@@ -130,7 +149,7 @@
 			  </ul>
 			</li>
 
-			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecofisio') !== false || strpos($_SERVER['PHP_SELF'], 'struture') !== false ? 'active' :  '')?>">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecofisio') !== false || strpos($_SERVER['PHP_SELF'], 'structure') !== false ? 'active' :  '')?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Individuals <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Individual</li>

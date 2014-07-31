@@ -5,7 +5,7 @@ require_once '../data/site_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=There is no user logged in. Please log in to continue.');
+	header('Location: /forms/login.php?response=-1');
 	die;
 } 
 
@@ -25,12 +25,12 @@ if (isset($_POST["code"]) && $_POST["code"] != "" && isset($_POST["country"]) &&
 	}
 	
 	if($reply['_success_'] == 1) {
-		header('Location: /forms/site.php?success=1' . $urlComplement);
+		header('Location: /forms/site.php?response=101' . $urlComplement);
 	} else {
-		header('Location: /forms/site.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+		header('Location: /forms/site.php?response=103' . $urlComplement);
 	}
 
 	
 } else {
-	header('Location: /forms/site.php?success=-1&reason=Faltam parametros ao local!');
+	header('Location: /forms/site.php?response=102');
 }

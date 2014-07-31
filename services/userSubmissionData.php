@@ -5,7 +5,7 @@ require_once '../data/user_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=There is no user logged in. Please log in to continue.');
+	header('Location: /forms/login.php?response=-1');
 	die;
 } 
 
@@ -70,14 +70,14 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 	}
 	
 	if($reply['_success_'] == 1) {
-		header('Location: /forms/user.php?success=1' . $urlComplement);
+		header('Location: /forms/user.php?response=701' . $urlComplement);
 	} else if ($reply['_success_'] == -4) {
-		header('Location: /forms/user.php?success=-1&reason=Já existe um utilizador com este email!');
+		header('Location: /forms/user.php?response=704');
 	} else {
-		header('Location: /forms/user.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+		header('Location: /forms/user.php?response=703' . $urlComplement);
 	}
 
 	
 } else {
-	header('Location: forms/user.php?success=-1&reason=Faltam parametros ao utilizador!');
+	header('Location: forms/user.php?response=702');
 }

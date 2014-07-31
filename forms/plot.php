@@ -116,8 +116,8 @@
 											}
 											?>
 
-											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'ch' ? 'selected' : '') ?>  value="ch">Charca</option>
-											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'du' ? 'selected' : '') ?>  value="du">Pond</option>
+											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'ch' ? 'selected' : '') ?>  value="ch">Pond</option>
+											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'du' ? 'selected' : '') ?>  value="du">Dune</option>
 	              						</select>									    
 									</div>
 								</div>
@@ -206,7 +206,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros ao Plot!");
+		        $('#alert-text').html("<strong>Attention:</strong> Missing parameters on this Plot!");
     			return false;
     		} else {
     			return true;

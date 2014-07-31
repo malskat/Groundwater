@@ -5,7 +5,7 @@ require_once '../data/campaign_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=There is no user logged in. Please log in to continue.');
+	header('Location: /forms/login.php?response=-1');
 	die;
 } 
 
@@ -28,12 +28,12 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != "" && isset($_POST["endD
 	}
 	
 	if($reply['_success_'] == 1){
-		header('Location: /forms/campaign.php?success=1' . $urlComplement);
+		header('Location: /forms/campaign.php?response=301' . $urlComplement);
 	} else {
-		header('Location: /forms/campaign.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+		header('Location: /forms/campaign.php?response=303' . $urlComplement);
 	}
 
 	
 }else{
-	header('Location: /forms/campaign.php?success=-1&reason=Faltam parametros!');
+	header('Location: /forms/campaign.php?response=302');
 }

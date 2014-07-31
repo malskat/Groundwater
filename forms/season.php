@@ -267,7 +267,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atention. Missing parameters on this season!");
+		        $('#alert-text').html("<strong>Attention:</strong> Missing parameters on this Season!");
     			return false;
     		} else {
     			return true;

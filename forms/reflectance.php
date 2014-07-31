@@ -413,7 +413,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atention. Missing arguments to Unispec Reflectance!");
+		        $('#alert-text').html("<strong>Attention:</strong> Missing arguments to Unispec Reflectance!");
     			return false;
     		} else {
     			return true;

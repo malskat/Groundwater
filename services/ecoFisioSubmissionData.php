@@ -6,7 +6,7 @@ require_once '../data/individual_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=There is no logged user. Please login.');
+	header('Location: /forms/login.php?response=-1');
 	die;
 } 
 
@@ -28,13 +28,13 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 		}
 
 		if($reply['_success_'] == 1){
-			header('Location: /forms/ecofisio.php?individualCode=' . $_POST["individualCode"] . '&sampling_campaign_id=' . $_POST["sampling_campaign_id"] . '&success=1');
+			header('Location: /forms/ecofisio.php?individualCode=' . $_POST["individualCode"] . '&sampling_campaign_id=' . $_POST["sampling_campaign_id"] . '&response=901');
 		} else {
-			header('Location: /forms/ecofisio.php?individualCode=' . $_POST["individualCode"] . '&sampling_campaign_id=' . $_POST["sampling_campaign_id"] . '&success=-3&reason=No change at all!');
+			header('Location: /forms/ecofisio.php?individualCode=' . $_POST["individualCode"] . '&sampling_campaign_id=' . $_POST["sampling_campaign_id"] . '&response=903');
 		}
 
 	} else {
-		header('Location: /forms/ecofisio.php?success=-1&reason=Missing arguments!');
+		header('Location: /forms/ecofisio.php?response=902');
 	}
 
 
@@ -51,9 +51,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 		  	$extension = end($extensionParts);
 
 		  	if($extension != 'csv'){
-				header('Location: /forms/ecofisio-csv.php?success=-1&reason=File must be csv!');
+				header('Location: /forms/ecofisio-csv.php?response=-3');
 		  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-				header('Location: /forms/ecofisio-csv.php?success=-1&reason=File already processed!');
+				header('Location: /forms/ecofisio-csv.php?response=-4');
 		  	} else {
 				
 				//movimentacao do ficheiro da pasta temporaria para a pasta final
@@ -119,14 +119,14 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 					if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
 
 						if($errorString != ''){
-							header('Location: /forms/ecofisio-csv.php?success=-2&reason=' . $errorString);
+							header('Location: /forms/ecofisio-csv.php?response=13&reason=' . $errorString);
 						} else {
-							header('Location: /forms/ecofisio-csv.php?success=1&inserted=' . $operated);	
+							header('Location: /forms/ecofisio-csv.php?response=12&inserted=' . $operated);	
 						}
 
 					} else {
 		  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-						header('Location: /forms/ecofisio-csv.php?success=-1&reason=Could not move file to final directory!');
+						header('Location: /forms/ecofisio-csv.php?response=-5');
 					}
 				}
 
@@ -134,10 +134,10 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 	  		}
 		} catch (Exception $e) {
 			unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-	  		header('Location: /forms/ecofisio-csv.php?success=-1&reason=' . $e);
+	  		header('Location: /forms/ecofisio-csv.php?response=-7&reason=' . $e);
 		}
 
 	} else {
-		header('Location: /forms/ecofisio-csv.php?success=-1&reason=Missing arguments!');
+		header('Location: /forms/ecofisio-csv.php?response=902');
 	}
 }

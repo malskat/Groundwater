@@ -35,7 +35,7 @@
   	<?php
 
   		if ($_BIOLOGYST_LOGGED === false) {
-  			header('Location: ' . PROJECT_URL . 'index.php?success=-1&reason=There is no logged user. Please login.');
+  			header('Location: ' . PROJECT_URL . 'index.php?response=-1');
   			die;
   		}
 
@@ -178,7 +178,7 @@
 
 							   
 								        if ($plot->totalIndividuals == 0) {
-									        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\', \'Do you want to remove this Individual?\');" type="button" class="btn btn-danger btn-xs">
+									        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\', \'Do you want to remove this Plot?\');" type="button" class="btn btn-danger btn-xs">
 									            <span class="glyphicon glyphicon-remove-sign"></span>
 									          </button>';
 								        } else {

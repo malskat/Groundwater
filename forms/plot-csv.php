@@ -14,6 +14,7 @@
 
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/fileinput.min.js" type="text/javascript"></script>
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap alerts -->
@@ -22,6 +23,7 @@
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
     <link href="../css/sticky-footer.css" rel="stylesheet">
+    <link href="../css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 
   </head>
 
@@ -53,7 +55,7 @@
 
 				  				<div id="fileInputGroup" class="form-group spacer">
 				  					<label for="inputGenus" class="col-lg-2 control-label">File*</label>
-				  					<div class="col-lg-6">
+				  					<div class="col-lg-10">
 				  						<input type="file" class="form-control" id="file" name="file" placeholder="">
 				  				 	</div>
 				  				</div>
@@ -87,6 +89,9 @@
     <?php include "../footer.php";?>
 
     <script>
+
+    	$("#file").fileinput({'showUpload':false});
+
     	function validateForm(){
     		var file = $('#file').val();
     		var hasErrors = false;
@@ -102,7 +107,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Falta o ficheiro!");
+		        $('#alert-text').html("<strong>Attention:</strong> Missing arguments to submission!");
     			return false;
     		} else {
     			return true;

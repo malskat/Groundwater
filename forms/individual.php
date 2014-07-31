@@ -130,23 +130,23 @@
 							      	<label for="inputGenus" class="col-lg-3 control-label">Plot*</label>
 							      	<div class="col-lg-4">
 							        	<div class="bfh-selectbox">
-							          	<input type="hidden" id="plot" name="plot_id" value=<?= (isset($individual) ? $individual[0]->plot_id : "") ?>>
-							          	<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-							            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->siteTitle . ' - ' . $individual[0]->plotCode : " - Choose one -") ?></span>
-							            	<b class="caret"></b>
-							          	</a>
-							          	<div class="bfh-selectbox-options">
-							            	<input type="text" class="bfh-selectbox-filter">
-							            	<div role="listbox">
-							            	<ul role="option">
-							              	<? 
-							              	foreach($plots as $plot){
-							                	echo '<li> <a tabindex="-1" href="#" data-option=' . $plot->plot_id . '>' . $plot->title . " - " . $plot->code . '</a></li>';
-							              	}
-							            	?>
-							            	</ul>
-							          	</div>
-							          	</div>
+								          	<input type="hidden" id="plot" name="plot_id" value=<?= (isset($individual) ? $individual[0]->plot_id : "") ?>>
+								          	<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
+								            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->siteTitle . ' - ' . $individual[0]->plotCode : " Choose one ") ?></span>
+								            	<b class="caret"></b>
+								          	</a>
+								          	<div class="bfh-selectbox-options">
+								            	<input type="text" class="bfh-selectbox-filter">
+								            	<div role="listbox">
+									            	<ul role="option">
+									              	<? 
+										              	foreach($plots as $plot){
+										                	echo '<li> <a tabindex="-1" href="#" data-option=' . $plot->plot_id . '>' . $plot->title . " - " . $plot->code . '</a></li>';
+										              	}
+									            	?>
+									            	</ul>
+								          		</div>
+								          	</div>
 							        	</div>
 							      	</div>
 						        </div>
@@ -155,23 +155,23 @@
 							    	<label for="inputGenus" class="col-lg-3 control-label">Species*</label>
 							      	<div class="col-lg-4">
 							        	<div class="bfh-selectbox">
-							          	<input type="hidden" id="species" name="species_id" value=<?= (isset($individual) ? $individual[0]->species_id : "") ?>>
-							          	<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-							            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->genus . ' - ' . $individual[0]->species : " - Choose one -") ?></span>
-							            	<b class="caret"></b>
-							          	</a>
-							          	<div class="bfh-selectbox-options">
-							            	<input type="text" class="bfh-selectbox-filter">
-							            	<div role="listbox">
-							            	<ul role="option">
-							              	<? 
-							              	foreach($species as $specie){
-							                	echo '<li> <a tabindex="-1" href="#" data-option=' . $specie->species_id . '>' . $specie->genus . " - " . $specie->species . '</a></li>';
-							              	}
-							            	?>
-							            	</ul>
-							          	</div>
-							          	</div>
+								          	<input type="hidden" id="species" name="species_id" value=<?= (isset($individual) ? $individual[0]->species_id : "") ?>>
+								          	<a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
+								            	<span class="bfh-selectbox-option input-medium" data-option=""><?= (isset($individual) ? $individual[0]->genus . ' - ' . $individual[0]->species : " Choose one ") ?></span>
+								            	<b class="caret"></b>
+								          	</a>
+								          	<div class="bfh-selectbox-options">
+								            	<input type="text" class="bfh-selectbox-filter">
+								            	<div role="listbox">
+									            	<ul role="option">
+									              	<? 
+										              	foreach($species as $specie){
+										                	echo '<li> <a tabindex="-1" href="#" data-option=' . $specie->species_id . '>' . $specie->genus . " - " . $specie->species . '</a></li>';
+										              	}
+									            	?>
+									            	</ul>
+								          		</div>
+								          	</div>
 							        	</div>
 							      	</div>
 						    	</div>
@@ -268,7 +268,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atenção. Faltam parâmetros ao indivíduo!");
+		        $('#alert-text').html("<strong>Attention - </strong> Missing parameters to this Individual!");
     			return false;
     		} else {
     			return true;

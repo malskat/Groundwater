@@ -71,7 +71,16 @@ class Individual extends gObject {
 		$fields = substr($fields, 0, -2);
 		$values = substr($values, 0, -2);
 
-		return CoreDatabase::insertDB($this->_entityName,   $fields, $values);
+		$response = null;
+		try {
+
+			$response = CoreDatabase::insertDB($this->_entityName,   $fields, $values);
+
+		} catch (PDOException $ex) {
+			throw $ex;
+		}
+
+		return $response;
 	}
 
 	function update ($toUpdate){

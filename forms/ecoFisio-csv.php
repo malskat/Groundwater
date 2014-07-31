@@ -172,7 +172,7 @@
 	    		if (hasErrors){
 	    			$('#alert-message').show();
 			        $('#alert-message').addClass('danger');
-			        $('#alert-text').html("<strong>Shit could happen!</strong>Atention. Missing arguments to submission!");
+			        $('#alert-text').html("<strong>Attention:</strong> Missing arguments to this Eco-Physiology import!");
 	    			return false;
 	    		} else {
 	    			return true;

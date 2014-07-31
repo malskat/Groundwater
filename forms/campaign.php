@@ -1,4 +1,4 @@
-<?php
+\<?php
 	include "../checkBiologyst.php";
  ?>
 <!DOCTYPE html>
@@ -289,7 +289,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit could happen!</strong>Atention. Missing parameters!");
+		        $('#alert-text').html("<strong>Shit could happen!</strong>Attention. Missing parameters!");
     			return false;
     		} else {
     			return true;

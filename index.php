@@ -38,16 +38,16 @@
     <!-- incluir menu principal -->
     <?php include "menu.php";?>
 
-	<div class="container">
-
-		<div class="jumbotron">
-			<div class="container">
-				<h1>GWTropiMed</h1>
-				<p>Costal Dune Forests under Scenarios of Groundwater Limitation: from Tropics to Mediterranean.</p>
-				<h4><em>FCT R&D Project - <small>PTDC/AAC-CLI/118555/2010</small></em></h4>
-				<p><a href=<?=PROJECT_URL . "about/state-of-the-art.php"?> class="btn btn-primary btn-sm" role="button">Learn more &raquo;</a></p>
-			</div>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>GWTropiMed</h1>
+			<p>Costal Dune Forests under Scenarios of Groundwater Limitation: from Tropics to Mediterranean.</p>
+			<h4><em>FCT R&D Project - <small>PTDC/AAC-CLI/118555/2010</small></em></h4>
+			<p><a href=<?=PROJECT_URL . "about/state-of-the-art.php"?> class="btn btn-primary btn-sm" role="button">Learn more &raquo;</a></p>
 		</div>
+	</div>
+
+	<div class="container">
 
 		<div class="row">
 			<div class="col-xs-6 col-lg-7">

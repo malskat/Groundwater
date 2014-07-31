@@ -160,7 +160,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens!</strong>Atention. Missing parameters to this Site!");
+		        $('#alert-text').html("<strong>Attention:</strong> Missing parameters to this Site!");
     			return false;
     		} else {
     			return true;

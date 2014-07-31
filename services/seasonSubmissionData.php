@@ -5,7 +5,7 @@ require_once '../data/season_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=There is no user logged in. Please log in to continue.');
+	header('Location: /forms/login.php?response=-1');
 	die;
 } 
 
@@ -27,13 +27,13 @@ if(isset($_POST["startDate"]) && $_POST["startDate"] != ""
 	}
 	
 	if($reply['_success_'] == 1){
-		header('Location: /forms/season.php?success=1' . $urlComplement);
+		header('Location: /forms/season.php?response=201' . $urlComplement);
 	} else {
-		header('Location: /forms/season.php?success=-3&reason=Não houve alteração nenhuma!' . $urlComplement);
+		header('Location: /forms/season.php?response=203' . $urlComplement);
 	}
 
 	
 }else{
-	header('Location: /forms/season.php?success=-1&reason=Faltam parametros!');
+	header('Location: /forms/season.php?response=202');
 }
 

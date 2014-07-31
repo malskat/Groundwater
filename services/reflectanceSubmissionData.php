@@ -6,7 +6,7 @@
 	require_once PROJECT_PATH . 'checkBiologyst.php';
 
 	if (!$_BIOLOGYST_LOGGED) {
-		header('Location: /forms/login.php?success=-1&reason=There is no logged user. Please login.');
+		header('Location: /forms/login.php?response=-1');
 		die;
 	} 
 
@@ -103,18 +103,18 @@
 				  		if ($fileOperated > 0) {
 
 				  			if ($errorResume != '') {
-								header('Location: /lists/reflectance-list.php?individualCode=' . $_POST["individualCode"] . '&success=3&inserted=' . $fileOperated . '&reason=' . $errorResume);
+								header('Location: /lists/reflectance-list.php?individualCode=' . $_POST["individualCode"] . '&response=1001&inserted=' . $fileOperated . '&reason=' . $errorResume);
 				  			} else {
-								header('Location: /lists/reflectance-list.php?individualCode=' . $_POST["individualCode"] . '&success=1&inserted=' . $fileOperated);
+								header('Location: /lists/reflectance-list.php?individualCode=' . $_POST["individualCode"] . '&response=12&inserted=' . $fileOperated);
 				  			}
 				  		} else {
-							header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-3&reason=' . $errorResume);
+							header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&response=-7&reason=' . $errorResume);
 						}	
 
 				  		
 					} catch (Exception $e) {
 						unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"][$fileIndex]);
-				  		header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=' . $e);
+				  		header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&response=-7&reason=' . $e);
 					}
 					
 
@@ -148,25 +148,25 @@
 							//actualizar os valores de eco_fisio
 							$replyCall = $reflectanceData->updateEcoFisioRefletanceValues($_POST["individualCode"], $_POST["sampling_campaign_id"]); 
 							if ($replyCall == 1) {
-								header('Location: /forms/reflectance.php?' . $urlComplement . '&success=1');
+								header('Location: /forms/reflectance.php?' . $urlComplement . '&response=1001');
 							} else {
-								header('Location: /forms/reflectance.php?' . $urlComplement . '&success=-3&reason=Eco Fisio indices were not updated! Please try again.');
+								header('Location: /forms/reflectance.php?' . $urlComplement . '&response=1004.');
 							}
 						} else {
-							header('Location: /forms/reflectance.php?' . $urlComplement . '&success=-3&reason=There was no change!');
+							header('Location: /forms/reflectance.php?' . $urlComplement . '&response=1003');
 						}
 
 					}
 				} else {
-					header('Location: /forms/reflectance.php?success=-1&reason=Submission not allowed!');
+					header('Location: /forms/reflectance.php?response=-6');
 				}
 
 			} else {
 
 				if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
-					header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=There are no Eco-Physiology sample for this individual, on the selected campaign!');
+					header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&response=1005');
 				} else {
-					header('Location: /forms/reflectance.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=There are no Eco-Physiology sample for this individual, on the selected campaign!');
+					header('Location: /forms/reflectance.php?individualCode=' . $_POST["individualCode"] . '&response=1005');
 				}
 			}
 
@@ -174,18 +174,18 @@
 		} else {
 
 			if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
-				header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=Invalid individual code!');
+				header('Location: /forms/reflectance-csv.php?individualCode=' . $_POST["individualCode"] . '&response=1006');
 			} else {
-				header('Location: /forms/reflectance.php?individualCode=' . $_POST["individualCode"] . '&success=-1&reason=Invalid individual code!');
+				header('Location: /forms/reflectance.php?individualCode=' . $_POST["individualCode"] . '&response=1006');
 			}
 		}
 
 	} else {
 
 		if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
-			header('Location: /forms/reflectance-csv.php?individualCode= ' . $_POST["individualCode"] . '&success=-1&reason=Missing arguments!');
+			header('Location: /forms/reflectance-csv.php?individualCode= ' . $_POST["individualCode"] . '&response=1002');
 		} else {
-			header('Location: /forms/reflectance.php?individualCode= ' . $_POST["individualCode"] . '&success=-1&reason=Missing arguments!');
+			header('Location: /forms/reflectance.php?individualCode= ' . $_POST["individualCode"] . '&response=1002');
 		}
 	}
 

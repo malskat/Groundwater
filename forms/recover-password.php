@@ -85,7 +85,7 @@
 			if (hasErrors){
 				$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit happens! </strong> Email is mandatory!");
+		        $('#alert-text').html("<strong>Attention:</strong> Email is mandatory!");
 				return false;
 			} else {
 				$("#loginForm").hide();

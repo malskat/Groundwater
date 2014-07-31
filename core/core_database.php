@@ -106,8 +106,7 @@ class CoreDatabase {
 
 		} catch (PDOException $ex) {
 			$Database->rollBack();
-			echo ($ex->getMessage());
-			die;
+			throw $ex;
 		}
 
 		return $toReturn;

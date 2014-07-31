@@ -16,9 +16,7 @@ switch($action){
 		$parametersStartIndex = strpos($_SERVER['HTTP_REFERER'], '?');
 		if ($parametersStartIndex !== false) {
 			$parameters = substr($_SERVER['HTTP_REFERER'], $parametersStartIndex + 1);
-			$parameters = str_replace("success=1", "", $parameters);
-			$parameters = str_replace("success=2", "", $parameters);
-			$parameters = str_replace("success=-1", "", $parameters);
+			$parameters = str_replace("response=11", "", $parameters);
 
 			if (substr($parameters, -1) === '&') {
 				$parameters = substr($parameters, 0,-1);
@@ -28,7 +26,7 @@ switch($action){
 				$parameters = substr($parameters, 1);
 			}
 		}
-		
+			
 		if ($userData->validateActiveUser()) {
 
 			require_once PROJECT_PATH . "data/" . $_GET["class"] ."_data.php";
@@ -40,9 +38,9 @@ switch($action){
 			if(isset($_GET["class"])){
 
 				if (isset($_GET["redirect"])) {
-					$newLocation = $_GET["redirect"] . '?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'success=' . ($toReturn == 1 ? '2' : $toReturn . '&reason=Error deleting record. Please try again.');
+					$newLocation = $_GET["redirect"] . '?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'response=' . ($toReturn == 1 ? '11' : '-2');
 				} else {
-					$newLocation = '/lists/' . $_GET["class"] . '-list.php?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'success=' . ($toReturn == 1 ? '2' : $toReturn . '&reason=Error deleting record. Please try again.');
+					$newLocation = '/lists/' . $_GET["class"] . '-list.php?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'response=' . ($toReturn == 1 ? '11' : '-2');
 				}
 			} else {
 				$newLocation = 'index.php';
@@ -50,9 +48,9 @@ switch($action){
 
 		} else {
 			if (isset($_GET["redirect"])) {
-				$newLocation = $_GET["redirect"] . '?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'success=-1&reason=There is no logged user. Please login.';
+				$newLocation = $_GET["redirect"] . '?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'response=-1';
 			} else {
-				$newLocation = '/lists/' . $_GET["class"] . '-list.php?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'success=-1&reason=There is no logged user. Please login.';
+				$newLocation = '/lists/' . $_GET["class"] . '-list.php?' . ($parameters != '' && $parameters != '&' ? $parameters . '&' : '') . 'response=-1';
 			}
 		}
 

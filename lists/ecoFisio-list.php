@@ -35,7 +35,7 @@
 	  	<?
 
 	  		if ($_BIOLOGYST_LOGGED === false) {
-	  			header('Location: ' . PROJECT_URL . 'index.php?success=-1&reason=There is no logged user. Please login.');
+	  			header('Location: ' . PROJECT_URL . 'index.php?response=-1');
 	  			die;
 	  		} 
 
@@ -94,8 +94,8 @@
 							</button>
 							<ul class="dropdown-menu pull-right">
 								<li><a href="../forms/ecofisio.php?individualCode=<?=$_GET['individualCode']?>"><strong>Complete</strong></a></li>
-								<li><a href="../forms/ecofisio-csv.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf or Xylem Water Blocks</strong></a></li>
-								<li><a href="../forms/reflectance-csv.php?individualCode=<?=$_GET['individualCode']?>"><strong>Reflectance Indices Block</strong></a></li>
+								<li><a href="../forms/ecofisio-csv.php?individualCode=<?=$_GET['individualCode']?>"><strong>Leaf or Xylem Water Blocks (CSV)</strong></a></li>
+								<li><a href="../forms/reflectance-csv.php?individualCode=<?=$_GET['individualCode']?>"><strong>Reflectance Indices Block (CSV)</strong></a></li>
 							</ul>
 						</div>
 					</div>

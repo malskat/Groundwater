@@ -8,7 +8,7 @@ require_once '../data/species_data.php';
 require_once "../checkBiologyst.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?success=-1&reason=There is no user logged in. Please log in to continue.');
+	header('Location: /forms/login.php?response=-1');
 	die;
 } 
 
@@ -22,27 +22,36 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
 		unset($_POST["submissionType"]);
 
-		$individualData = new Individual();
+		try {
 
-		if ($_POST["operationType"] == 'insert') {
-			unset($_POST["operationType"]);
-			$reply = $individualData->insert($_POST);
-		}else {
-			unset($_POST["operationType"]);
-			$reply = $individualData->update($_POST);
+			$individualData = new Individual();
+
+			if ($_POST["operationType"] == 'insert') {
+				unset($_POST["operationType"]);
+				$reply = $individualData->insert($_POST);
+			} else {
+				unset($_POST["operationType"]);
+				$reply = $individualData->update($_POST);
+			}
+
+
+			$urlComplement = '&individualCode=' . $_POST["individualCode"];
+
+			
+			if ($reply['_success_'] == 1) {
+				header('Location: /forms/individual.php?response=601' . $urlComplement);
+			} else {
+				header('Location: /forms/individual.php?response=603' . $urlComplement);
+			}
+
+
+		} catch (Exception $e) {
+  			header('Location: /forms/individual.php?response=-7&reason=' . $e->getMessage());
+  			die;
 		}
 
-
-		$urlComplement = '&individualCode=' . $_POST["individualCode"];
-
-		
-		if ($reply['_success_'] == 1) {
-			header('Location: /forms/individual.php?success=1' . $urlComplement);
-		} else {
-			header('Location: /forms/individual.php?success=-3&reason=There was no change!' . $urlComplement);
-		}
 	} else {
-		header('Location: /forms/individual.php?success=-1&reason=Missing parameters!');
+		header('Location: /forms/individual.php?response=602');
 	}
 
 } else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel'){
@@ -53,9 +62,9 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 	  	$extension = end($extensionParts);
 
 	  	if($extension != 'csv'){
-			header('Location: /forms/individual-csv.php?success=-1&reason=File must be in csv format!');
+			header('Location: /forms/individual-csv.php?response=-3');
 	  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
-			header('Location: /forms/individual-csv.php?success=-1&reason=File already processed!');
+			header('Location: /forms/individual-csv.php?response=-4');
 	  	} else {
 			//mover o ficheiro da pasta temporaria
 	  		move_uploaded_file($_FILES["file"]["tmp_name"], PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
@@ -136,14 +145,14 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 				if (rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true) {
 
 					if($errorString != ''){
-						header('Location: /lists/individual-list.php?success=-2&reason=' . $errorString . '&inserted=' . $inserted);
+						header('Location: /lists/individual-list.php?response=13&reason=' . $errorString . '&inserted=' . $inserted);
 					} else {
-						header('Location: /lists/individual-list.php?success=1&inserted=' . $inserted);	
+						header('Location: /lists/individual-list.php?response=12&inserted=' . $inserted);	
 					}
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /lists/individual-list.php?success=-1&reason=Could not move file to final directory!');
+					header('Location: /lists/individual-list.php?response=-5');
 				}
 			}
 
@@ -151,9 +160,9 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
   		}
 	} catch (Exception $e) {
 		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-  		header('Location: /lists/individual-list.php?success=-1&reason=' . $e);
+  		header('Location: /lists/individual-list.php?response=-7&reason=' . $e);
 	}
 
 } else {
-	header('Location: /lists/individual-list.php?success=-1&reason=Submission type not allowed.');
+	header('Location: /lists/individual-list.php?response=-6');
 }
