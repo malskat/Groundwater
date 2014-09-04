@@ -82,8 +82,21 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 	  			$inserted = 0;
 			    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
 			        
-		       		//inserir na BD
-			        if ($row > 1) {
+			        if ($row == 1) {
+
+			        	$lowerData = array_map('strtolower', $data);
+
+		       			if (array_search("individualcode", $lowerData) === false || 
+		       			    array_search("sitecode", $lowerData) === false || 
+	  					    array_search("plotcode", $lowerData) === false || 
+	  					    array_search("genus", $lowerData) === false) {
+
+							unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
+							header('Location: /forms/individual-csv.php?response=604');
+							die;
+			        	}
+
+			        } else {
 
 			    		//validar se o individuo ja esta inserido
 			    		$individual = $individualData->getIndividualBy(" individualCode = '" . $data[4] . "'", $page = -1);
@@ -99,6 +112,8 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 			        				$species = $speciesData->getSpeciesBy("upper(genus) = upper('". $data[2]."') and upper(species) = upper('" . $data[3] . "')", -1);
 				        			
 				        			if (count($species) == 1) {
+		       		
+		       							//inserir na BD
 
 				        				$toInsert['plot_id'] = $plot[0]->plot_id;
 						        		$toInsert['species_id'] = $species[0]->species_id;
@@ -145,14 +160,14 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 				if (rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true) {
 
 					if($errorString != ''){
-						header('Location: /lists/individual-list.php?response=13&reason=' . $errorString . '&inserted=' . $inserted);
+						header('Location: /forms/individual-csv.php?response=13&reason=' . $errorString . '&inserted=' . $inserted);
 					} else {
-						header('Location: /lists/individual-list.php?response=12&inserted=' . $inserted);	
+						header('Location: /forms/individual-csv.php?response=12&inserted=' . $inserted);	
 					}
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /lists/individual-list.php?response=-5');
+					header('Location: /forms/individual-csv.php?response=-5');
 				}
 			}
 
@@ -160,9 +175,9 @@ if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
   		}
 	} catch (Exception $e) {
 		unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-  		header('Location: /lists/individual-list.php?response=-7&reason=' . $e);
+  		header('Location: /forms/individual-csv.php?response=-7&reason=' . $e);
 	}
 
 } else {
-	header('Location: /lists/individual-list.php?response=-6');
+	header('Location: /forms/individual-csv.php?response=-6');
 }

@@ -73,7 +73,7 @@
 							<div class="panel-body">
 								<p><span class="label label-default">Info</span></p>
 								<p>This form allows you to insert a large number of Plots, by submiting a file.</p>
-								<p>Submitted files must have be csv extension.</p>
+								<p>Submitted files must have csv extension.</p>
 								<p>The submitted files must follow this structure: <strong>siteCode</strong>, <strong>plotCode</strong>, <strong>coordinateX</strong>, <strong>coordinateY</strong>.</p>
 								<p>Remember, there is always a reference file to consult.</p>
 							</div>

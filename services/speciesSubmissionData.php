@@ -58,7 +58,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 	  		move_uploaded_file($_FILES["file"]["tmp_name"], PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
 
 
-	  		//inserir os individuos
+	  		//inserir os especies
 	  		if (($handle = fopen(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], "r")) !== FALSE) {
 	  			
 	  			$speciesData = new Species();
@@ -67,7 +67,20 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
 			        
 		       		//inserir na BD
-			        if ($row > 1){
+		       		if ($row == 1) {
+
+		       			$lowerData = array_map('strtolower', $data);
+
+		       			if (array_search("genus", $lowerData) === false || 
+	  					    array_search("species", $lowerData) === false || 
+	  					    array_search("code", $lowerData) === false) {
+
+							unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
+							header('Location: /forms/species-csv.php?response=504');
+							die;
+			        	}
+
+		       		} else {
 
 		        		$toInsert = array();
 

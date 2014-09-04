@@ -1,4 +1,4 @@
-\<?php
+<?php
 	include "../checkBiologyst.php";
  ?>
 <!DOCTYPE html>
@@ -16,7 +16,6 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootstrap-formhelpers-datepicker.js"></script>
     <script src="../js/bootstrap-formhelpers-datepicker.pt_PT.js"></script>
-    <script src="../js/bootstrap-formhelpers-selectbox.js"></script>
     <link href="../css/bootstrap-formhelpers.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -32,10 +31,9 @@
 
   <body>
 
-  	<?php
-  		//dados necessarios para o formulario
-  		include "../data/site_data.php"; 
-  		include "../data/season_data.php"; 
+  	<?
+  		require_once "../data/site_data.php"; 
+  		require_once "../data/season_data.php"; 
 
   		$siteData = new Site();
 		$sites = $siteData->getSites(-1);
@@ -44,7 +42,7 @@
 		$seasons = $seasonData->getSeasons(-1);
 
   		if(isset ($_GET["campaign_id"])){
-  			include "../data/campaign_data.php"; 
+  			require_once "../data/campaign_data.php"; 
 
   			$campaignData = new Campaign();
 			$campaign = $campaignData->getCampaignBy("sampling_campaign_id = " . $_GET["campaign_id"], -1);
@@ -53,7 +51,7 @@
   		$backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
   		if (false === strpos($backUrl, 'campaign-list')) {
 			$backUrl = '../lists/campaign-list.php';
-  		} 
+  		}
   	?>
 
   	<!-- incluir menu principal -->
@@ -289,7 +287,7 @@
     		if (hasErrors){
     			$('#alert-message').show();
 		        $('#alert-message').addClass('danger');
-		        $('#alert-text').html("<strong>Shit could happen!</strong>Attention. Missing parameters!");
+		        $('#alert-text').html("<strong>Shit could happen!</strong>Attention. Missing parameters on this Campaign!");
     			return false;
     		} else {
     			return true;

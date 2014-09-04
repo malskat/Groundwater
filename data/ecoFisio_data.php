@@ -20,7 +20,7 @@ class EcoFisio extends gObject {
 		return $this->_blocks;
 	}
 
-	function getEcoFisioBy ($whereClause, $orderBy = '', $page = 0){
+	function getEcoFisioBy ($whereClause, $orderBy = '', $page = 0) {
 
 		require_once '../core/core_database.php';
 
@@ -34,7 +34,7 @@ class EcoFisio extends gObject {
 
 	}
 
-	function getEcoFisioSpeciesChart($whereClause){
+	function getEcoFisioSpeciesChart ($whereClause) {
 
 		require_once '../core/core_database.php';
 
@@ -53,7 +53,7 @@ class EcoFisio extends gObject {
 
 	}
 
-	function insert ($toInsert = array()){
+	function insert ($toInsert = array()) {
 
 		require_once '../core/core_database.php';
 
@@ -78,7 +78,7 @@ class EcoFisio extends gObject {
 		return CoreDatabase::insertDB($this->_entityName, $fields, $values);
 	}
 
-	function update ($toUpdate){
+	function update ($toUpdate) {
 
 		require_once '../core/core_database.php';
 
@@ -101,7 +101,7 @@ class EcoFisio extends gObject {
 		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 	}
 
-	function delete ($parameters = '' ){
+	function delete ($parameters = '' ) {
 
 		list($dummyKey, $privateKeys) = explode("=", $parameters);
 		list($individualCode, $sampling_campaign_id) = explode("|", $privateKeys);

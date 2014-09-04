@@ -38,7 +38,7 @@
 		$sites = $siteData->getSites();
 
 
-		if(isset ($_GET["plot_id"])){
+		if(isset ($_GET["plot_id"])) {
   			include "../data/plot_data.php"; 
 
   			$plotData = new Plot();
@@ -49,6 +49,7 @@
   		if (false === strpos($backUrl, 'plot-list')) {
 			$backUrl = '../lists/plot-list.php';
   		} 
+
 	?>
 
   	<!-- incluir menu principal -->
@@ -116,8 +117,8 @@
 											}
 											?>
 
-											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'ch' ? 'selected' : '') ?>  value="ch">Pond</option>
-											<option <? (isset($plot[0]->plotType) && $plot[0]->plotType == 'du' ? 'selected' : '') ?>  value="du">Dune</option>
+											<option <?= (isset($plot[0]->plotType) && $plot[0]->plotType == 'ch' ? 'selected' : '') ?>  value="ch">Pond</option>
+											<option <?= (isset($plot[0]->plotType) && $plot[0]->plotType == 'du' ? 'selected' : '') ?>  value="du">Dune</option>
 	              						</select>									    
 									</div>
 								</div>

@@ -7,17 +7,45 @@
 
  	» FRONTEND
 
+ 		* edicao de plot_attribute - DONE
+ 		* insercao massiva de plot_attribute - DONE
+ 		
+ 		* listagem de plot_attribute
+ 			* colocar N.D., caso não tenho valores
+ 		* listagem de plot_soil
+ 			* colocar N.D., caso não tenho valores
+
+ 		* edicao de plot_soil - DONE
+ 		* insercao massiva de plot_soil
+
  		* secção de about 
  			* partners
+
+ 		* login - focus na input de email
 
  		* secção de outputs 
  			* project meetings - DONE
  			* scientific events - DONE
- 			* scientific papers
+ 			* scientific papers - PARCIAL DONE
 
 
 
  	» SERVIÇOS
+
+ 		* inserção de plot_atribute
+ 			* simples - DONe
+ 			* massiva - DONE
+ 		* inserção de plot_soil 
+ 			* simples - DONE
+ 			* massiva
+
+ 		* validar a estrutura de todos os ficheiros .csv, nos SubmissionData;
+
+ 		* validação de permissões de utilizadores
+ 			* registo de operações feitas por utilizadores no mongo
+
+ 		* inserção de site_climate_data e site_climate_month
+
 			
  		* recuperar password;
  			* configurar o envio de emails;
@@ -36,6 +64,10 @@
 
 		
 	» DADOS
+
+		* plot_atribute - separar as amostras de solo da amostragem de plot, porque são várias por plot, por amostragem - DONE
+
+ 		* tabela de validação de permissões de utilizadores
 
 		* inserir struture reais
 			* pode actualizar coordenadas do indivíduo.

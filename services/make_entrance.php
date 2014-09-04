@@ -19,7 +19,7 @@
 		session_write_close(); 
 
 		$next_address = $_POST['destination'];
-		if (strpos($_POST['destination'], 'login') !== false || strpos($_POST['destination'], 'recover-password') !== false) {
+		if (strpos($_POST['destination'], 'index') !== false || strpos($_POST['destination'], 'login') !== false || strpos($_POST['destination'], 'recover-password') !== false) {
 			$next_address = PROJECT_URL . '/index.php';
 		}
 

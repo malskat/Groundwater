@@ -6,38 +6,40 @@ class Plot extends gObject {
 
 	function __construct (){
 		$this->_entityName = 'plot';
-		$this->_fieldList = array("#", "Code", "Site", "Type", "CoordinateX", "CoordinateY", "#Individuals");
+		$this->_fieldList = array("#", "Code", "Site", "Type", "CoordinateX", "CoordinateY", "#Individuals", "#Water Info", "#Soil Info");
 		$this->_totalRows = 10;
 	}
 
 
-	function getPlotsSite($page = 0, $withTotalIndividuals = 0){
+	function getPlotsSite($page = 0, $withTotals = 0) {
 
 		include_once '../core/core_database.php';
 		return CoreDatabase::selectDBQuery('Select SQL_CALC_FOUND_ROWS p.*, s.code as siteCode, s.title ' .
-							($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . ' 
-							From plot p 
+							($withTotals == 1 ? ', (select count(1) from individual i where i.plot_id =  p.plot_id)  as totalIndividuals ' : '') .
+							($withTotals == 1 ? ', (select count(1) from plot_attribute pa where pa.plot_id =  p.plot_id)  as totalWaterSamples ' : '') .
+							($withTotals == 1 ? ', (select count(1) from plot_soil ps where ps.plot_id =  p.plot_id)  as totalSoilSamples ' : '') .
+							' From plot p 
 							Join site s On s.site_id = p.site_id ' . 
-							($withTotalIndividuals == 1 ? ' Left Join individual i On i.plot_id = p.plot_id Group by p.plot_id ' : '') . '
-							Order By s.title', $this->_totalRows, $page);
+							' Order By s.title', $this->_totalRows, $page);
 	}
 
-	function getPlotBy($whereClause, $page = 0, $withTotalIndividuals = 0){
+	function getPlotBy($whereClause, $page = 0, $withTotals = 0) {
 
 		include_once '../core/core_database.php';
 		$query = 'Select SQL_CALC_FOUND_ROWS p.*, s.code as siteCode, s.title' .
-					($withTotalIndividuals == 1 ? ', count(i.individualCode) as totalIndividuals' : '') . '
-				From plot p
-				Join site s On s.site_id = p.site_id ' . 
-					($withTotalIndividuals == 1 ? ' Left Join individual i On i.plot_id = p.plot_id ' : '') . '
-				Where ' . $whereClause . ($withTotalIndividuals == 1 ? ' Group by p.plot_id ' : '') . 
+				($withTotals == 1 ? ', (select count(1) from individual i where i.plot_id =  p.plot_id)  as totalIndividuals ' : '') .
+				($withTotals == 1 ? ', (select count(1) from plot_attribute pa where pa.plot_id =  p.plot_id)  as totalWaterSamples ' : '') .
+				($withTotals == 1 ? ', (select count(1) from plot_soil ps where ps.plot_id =  p.plot_id)  as totalSoilSamples ' : '') .
+				' From plot p
+				Join site s On s.site_id = p.site_id
+				Where ' . $whereClause .  
 				' Order By s.title';
 				
 		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 
 	}
 
-	function insert($toInsert = array()){
+	function insert($toInsert = array()) {
 
 		require_once '../core/core_database.php';
 
@@ -63,7 +65,7 @@ class Plot extends gObject {
 
 	}
 
-	function update($toUpdate){
+	function update($toUpdate) {
 
 		require_once '../core/core_database.php';
 

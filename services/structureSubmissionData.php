@@ -10,7 +10,7 @@ if (!$_BIOLOGYST_LOGGED) {
 } 
 
 
-if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
+if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
 	if (isset($_POST["individualCode"]) && $_POST["individualCode"] != "" && isset($_POST["samplingDate"]) && $_POST["samplingDate"] != "" ) {
 
@@ -68,6 +68,19 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
 			        
 		       		//inserir na BD
 			        if ($row == 1) {
+
+			        	$lowerData = array_map('strtolower', $data);
+
+		       			if (array_search("diameter1", $lowerData) === false || 
+	  					    array_search("diameter2", $lowerData) === false || 
+	  					    array_search("perimeter", $lowerData) === false) {
+
+							unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
+							header('Location: /forms/structure-csv.php?response=804');
+							die;
+			        	}
+
+
 			        	if (array_search("coordinateX", $data)) {
 							$hasCoordinates = true;
 			        	}
@@ -151,5 +164,5 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form'){
   		header('Location: /forms/structure-csv.php?response=-7&reason=' . $e);
 	}
 } else {
-	header('Location: /forms/species.php?response=-6');
+	header('Location: /forms/structure.php?response=-6');
 }

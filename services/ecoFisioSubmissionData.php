@@ -19,15 +19,15 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
 		$ecoFisioData = new EcoFisio();
 
-		if($_POST["operationType"] == 'insert'){
+		if($_POST["operationType"] == 'insert') {
 			unset($_POST["operationType"]);
 			$reply = $ecoFisioData->insert($_POST);
-		}else {
+		} else {
 			unset($_POST["operationType"]);
 			$reply = $ecoFisioData->update($_POST);
 		}
 
-		if($reply['_success_'] == 1){
+		if ($reply['_success_'] == 1) {
 			header('Location: /forms/ecofisio.php?individualCode=' . $_POST["individualCode"] . '&sampling_campaign_id=' . $_POST["sampling_campaign_id"] . '&response=901');
 		} else {
 			header('Location: /forms/ecofisio.php?individualCode=' . $_POST["individualCode"] . '&sampling_campaign_id=' . $_POST["sampling_campaign_id"] . '&response=903');
@@ -40,9 +40,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
 
 
-} else if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
+} else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel') {
 
-	if(isset($_POST["sampling_campaign_id"]) &&  $_POST["sampling_campaign_id"] != "" 
+	if (isset($_POST["sampling_campaign_id"]) &&  $_POST["sampling_campaign_id"] != "" 
 	   && isset($_POST["ecoBlock"]) &&  $_POST["ecoBlock"] != "") {
 
 		try {
@@ -50,9 +50,9 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 			$extensionParts = explode(".", $_FILES["file"]["name"]);
 		  	$extension = end($extensionParts);
 
-		  	if($extension != 'csv'){
+		  	if ($extension != 'csv') {
 				header('Location: /forms/ecofisio-csv.php?response=-3');
-		  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])){
+		  	} else if (file_exists(PROJECT_PROCESSED_FILES . $_FILES["file"]["name"])) {
 				header('Location: /forms/ecofisio-csv.php?response=-4');
 		  	} else {
 				
@@ -60,7 +60,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 		  		move_uploaded_file($_FILES["file"]["tmp_name"], PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
 
 
-		  		//inserir os individuos
+		  		//inserir amostras
 		  		if (($handle = fopen(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], "r")) !== FALSE) {
 		  			
 		  			$individualData = new Individual();
@@ -69,9 +69,17 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 		  			$operated = 0;
 		  			$errorString = '';
 		  			$hasSamplingDate = false;
+
 				    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+
+				    	$lowerData = array_map('strtolower', $data);
+
 				        if ($row == 1) {
-				        	if (array_search("samplingdate", array_map('strtolower', $data))) {
+
+				        	
+
+				        	
+				        	if (array_search("samplingdate", $lowerData)) {
 								$hasSamplingDate = true;
 				        	}
 				        } else {
@@ -116,10 +124,10 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 
 				    
 			  		//mudar o ficheiro para a pasta de ficheiros processados
-					if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true){
+					if(rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true) {
 
 						if($errorString != ''){
-							header('Location: /forms/ecofisio-csv.php?response=13&reason=' . $errorString);
+							header('Location: /forms/ecofisio-csv.php?response=13&inserted=' . $operated . '&reason=' . $errorString);
 						} else {
 							header('Location: /forms/ecofisio-csv.php?response=12&inserted=' . $operated);	
 						}

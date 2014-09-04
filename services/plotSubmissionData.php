@@ -69,25 +69,46 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 	  			$errorString = '';
 	  			$inserted = 0;
 			    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-			        
-		       		//inserir na BD
-			        if ($row > 1){
+			        if ($row == 1) {
+
+		       			$lowerData = array_map('strtolower', $data);
+
+			        	if (array_search("sitecode", $lowerData) === false ||
+			        	    array_search("plotcode", $lowerData) === false || 
+	  					    array_search("coordinatex", $lowerData) === false || 
+	  					    array_search("coordinatey", $lowerData) === false) {
+
+							unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
+							header('Location: /forms/plot-csv.php?response=405');
+							die;
+			        	}
+
+			        } else {
 
 		        		$toInsert = array();
 
 		        		$site = $siteData->getSiteBy("code = '". $data[0]."'", -1);
-		        		if (count($site) == 1){
+		        		if (count($site) == 1) {
 
-	        				$toInsert['site_id'] = $site[0]->site_id;
-				        	$toInsert['code'] = $data[1];
-				        	$toInsert['coordinateX'] = $data[2];
-				        	$toInsert['coordinateY'] = $data[3];
+		        			//validar se o plot ja existe na BD
+		        			$plot = $plotData->getPlotBy("p.site_id = " . $site[0]->site_id . " and p.code = '" . $data[1] . "'", -1);
 
-				        	$reply = $plotData->insert($toInsert);
+		        			if (count($plot) == 0) {
 
-							if ($reply['_success_'] == 1 ) {
-								$inserted++;
-							}
+			       				//inserir na BD
+		        				$toInsert['site_id'] = $site[0]->site_id;
+					        	$toInsert['code'] = $data[1];
+					        	$toInsert['coordinateX'] = $data[2];
+					        	$toInsert['coordinateY'] = $data[3];
+
+					        	$reply = $plotData->insert($toInsert);
+
+								if ($reply['_success_'] == 1 ) {
+									$inserted++;
+								}
+		        			} else {
+		        				$errorString .= '» Line ' . ($row - 1) . ', code ' . $data[1] . ': Plot already inserted; <br />';
+		        			}
 		        			
 		        		} else {
 
@@ -106,14 +127,14 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
 				if (rename(PROJECT_DOCS_CENTER . $_FILES["file"]["name"], PROJECT_PROCESSED_FILES . $_FILES["file"]["name"]) === true) {
 
 					if ($errorString != '') {
-						header('Location: /lists/plot-list.php?response=13&reason=' . $errorString);
+						header('Location: /forms/plot-csv.php?response=13&reason=' . $errorString);
 					} else {
-						header('Location: /lists/plot-list.php?response=12&inserted=' . $inserted);	
+						header('Location: /forms/plot-csv.php?response=12&inserted=' . $inserted);	
 					}
 
 				} else {
 	  				unlink(PROJECT_DOCS_CENTER . $_FILES["file"]["name"]);
-					header('Location: /lists/plot-list.php?response=-5');
+					header('Location: /forms/plot-csv.php?response=-5');
 				}
 			}
 

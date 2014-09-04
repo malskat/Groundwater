@@ -11,7 +11,7 @@ class Campaign extends gObject {
 		$this->_orderBy = $this->_entityName . '_id';
 	}
 
-	function getCampaigns($page = 0, $withTotals = 0){
+	function getCampaigns($page = 0, $withTotals = 0) {
 		
 		require_once '../core/core_database.php';
 		$query = 'Select SQL_CALC_FOUND_ROWS sc.*, s.title as siteTitle,  se.code as seasonCode' .
@@ -24,10 +24,10 @@ class Campaign extends gObject {
 		return CoreDatabase::selectDBQuery($query, $this->_totalRows, $page);
 	}
 
-	function getCampaignBy($whereClause, $page = 0, $withTotals = 0){
+	function getCampaignBy($whereClause, $page = 0, $withTotals = 0) {
 
 		require_once '../core/core_database.php';
-		$query = 'Select SQL_CALC_FOUND_ROWS sc.*, s.title as siteTitle,  se.code as seasonCode' .
+		$query = 'Select SQL_CALC_FOUND_ROWS sc.*, s.code as siteCode, s.title as siteTitle,  se.code as seasonCode' .
 					($withTotals == 1 ? ', (select count(1) from eco_fisio ef where ef.sampling_campaign_id = sc.sampling_campaign_id) as totalEcoFisio' : '') .
 					($withTotals == 1 ? ', (select count(1) from individual_reflectance ir where ir.sampling_campaign_id = sc.sampling_campaign_id) as totalReflectance' : '') .
 					' From sampling_campaign sc
@@ -39,7 +39,7 @@ class Campaign extends gObject {
 
 	}
 
-	function insert($toInsert = array()){
+	function insert($toInsert = array()) {
 
 		require_once '../core/core_database.php';
 
@@ -60,7 +60,7 @@ class Campaign extends gObject {
 	}
 
 
-	function update($toUpdate){
+	function update($toUpdate) {
 
 		require_once '../core/core_database.php';
 
@@ -78,7 +78,7 @@ class Campaign extends gObject {
 		return CoreDatabase::updateDB($this->_entityName, $set, $where);
 	}
 
-	function delete($where){
+	function delete($where) {
 
 		require_once '../core/core_database.php';
 		$where = str_replace("campaign", "sampling_campaign", $where);

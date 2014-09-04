@@ -79,8 +79,8 @@
 								<div class="panel-body">
 									<p><span class="label label-default">Info</span></p>
 									<p>This form allows you to insert a lot of Individual Species, by submiting a file.</p>
-									<p>Submitted files must be in csv extension.</p>
-									<p>The submitted files must follow this structure: <strong>genus</strong>, <strong>species</strong>, <strong>type</strong>, <strong>code</strong> e <strong>functionalGroup</strong>.</p>
+									<p>Submitted files must have csv extension.</p>
+									<p>The submitted files must follow this structure: <strong>genus</strong>, <strong>species</strong>, <strong>type</strong>, <strong>code</strong> and <strong>functionalGroup</strong> (not mandatory).</p>
 									<p>Remember, there is always a reference file to consult.</p>
 								</div>
 							</div>

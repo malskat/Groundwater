@@ -26,7 +26,7 @@
 			$('#alert-message').show();
 		  	$('#alert-message').addClass(SYSTEM_ERRORS[params["response"]].type_error);
 		  	$('#alert-text').html(SYSTEM_ERRORS[params["response"]].msg + 
-		  	         (params["inserted"] != null && params["inserted"] != "" ? " There were inserted or updated " + params["inserted"] + " records." : "") + 
+		  	         (params["inserted"] != null && params["inserted"] != "" ? " " + params["inserted"] + " records have been inserted." : "") + 
 		  	         (params["reason"] != null && params["reason"] != "" && params["inserted"] != null && params["inserted"] != "" ? " However, please, check: <br />" + params["reason"] : "") +
 		  	         (params["reason"] != null && params["reason"] != "" && params["inserted"] == null ? " Please, check: <br />" + params["reason"] : ""));
 
@@ -36,43 +36,6 @@
 		  	$('#alert-text').html("<strong>Error </strong>- Response not accepted.");
 		}
 	}
-    
-    if (params["success"] < 0) {
-
-      	if(params["success"] == -3) {
-        	$('#alert-message').show();
-          	$('#alert-message').addClass('warning');
-          	$('#alert-text').html("<strong>Ups daisy!</strong>" +  params["reason"]);
-    	} else if(params["success"] == -2) {
-        	$('#alert-message').show();
-          	$('#alert-message').addClass('warning');
-          	$('#alert-text').html("<strong>Ups daisy!</strong> Operation conclued. " + (params["inserted"] != null && params["inserted"] != "" ? "(There were " + params["inserted"] + " records inserted)." : "" ) + " However, please, check: <br />" + params["reason"]);
-      	} else if(params["success"] == -4) {
-        	$('#alert-message').show();
-          	$('#alert-message').addClass('danger');
-          	$('#alert-text').html("<strong>Ups daisy!</strong> Invalid Login. Please, try again.");
-      	}else {
-        	$('#alert-message').show();
-        	$('#alert-message').addClass('danger');
-        	$('#alert-text').html("<strong>Shit happens!</strong> Attention. " + params["reason"]);
-      	}
-
-
-    } else if (params["success"] == 1) {
-      	$('#alert-message').show();
-      	$('#alert-message').addClass('success');
-      	$('#alert-text').html("<strong>Holy guacamole!</strong> Record(s) created/updated." + (params["inserted"] != null && params["inserted"] != "" ? " There were inserted or updated " + params["inserted"] + " records." : ""));
-    } else if (params["success"] == 2) {
-      	$('#alert-message').show();
-      	$('#alert-message').addClass('success');
-      	$('#alert-text').html("<strong>Holy guacamole!</strong> Record removed.");
-    } else if (params["success"] == 3) {
-      	$('#alert-message').show();
-      	$('#alert-message').addClass('warning');
-      	$('#alert-text').html("<strong>Ups daisy!</strong> Record(s) created/updated." + 
-      	                      (params["inserted"] != null && params["inserted"] != "" ? " There were inserted or updated " + params["inserted"] + " records." : "") +
-      	                      (params["reason"] != null && params["reason"] != "" ? " However: " + params["reason"] : ""));
-    }
 </script>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -121,19 +84,32 @@
 			  </ul>
 			</li>
 
-			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'lists/site') !== false || strpos($_SERVER['PHP_SELF'], 'forms/site') !== false || strpos($_SERVER['PHP_SELF'], 'plot') !== false ? 'active' :  '')?>">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'lists/site') !== false || strpos($_SERVER['PHP_SELF'], 'forms/site') !== false )?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sites <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-			    
-			    <li role="presentation" class="dropdown-header">Site</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/site.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
-			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/site-list.php": PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
-			    
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/site-list.php": PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>
+
 			    <li role="presentation" class="divider"></li>
-			    <li role="presentation" class="dropdown-header">Plot</li>
+			    <li role="presentation" class="dropdown-header">Clima Info</li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/siteclima-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Update</a></li> 
+			  </ul>
+			</li>
+
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'plot') !== false ? 'active' :  '')?>">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Plots <b class="caret"></b></a>
+			  <ul class="dropdown-menu">
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-plus"></span> Insert</a></li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plot-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Insert</a></li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/plot-list.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li> 
+
+			    <li role="presentation" class="divider"></li>
+			    <li role="presentation" class="dropdown-header">Water Info Update</li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plotattribute-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Update</a></li>
+
+			    <li role="presentation" class="divider"></li>
+			    <li role="presentation" class="dropdown-header">Soil Info Update</li>
+			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/plotsoil-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Update</a></li>
 			  </ul>
 			</li>
 
@@ -149,7 +125,7 @@
 			  </ul>
 			</li>
 
-			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecofisio') !== false || strpos($_SERVER['PHP_SELF'], 'structure') !== false ? 'active' :  '')?>">
+			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'individual') !== false || strpos($_SERVER['PHP_SELF'], 'ecofisio') !== false || strpos($_SERVER['PHP_SELF'], 'structure') !== false || strpos($_SERVER['PHP_SELF'], 'reflectance') !== false ? 'active' :  '') ?>">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Individuals <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			  	<li role="presentation" class="dropdown-header">Individual</li>

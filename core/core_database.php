@@ -106,7 +106,8 @@ class CoreDatabase {
 
 		} catch (PDOException $ex) {
 			$Database->rollBack();
-			throw $ex;
+			echo ($ex->getMessage());
+			die;
 		}
 
 		return $toReturn;
@@ -121,7 +122,6 @@ class CoreDatabase {
 		try{
 
 			$updateSQL = ' UPDATE ' . $table . ' SET ' . $set . ' WHERE ' . $where . ';';
-
 			$Database->beginTransaction();
 			$toReturn['_success_'] = $Database->exec($updateSQL);
 

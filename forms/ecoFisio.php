@@ -17,11 +17,10 @@
     <script src="../js/bootstrap-formhelpers-datepicker.js"></script>
     <script src="../js/bootstrap-formhelpers-datepicker.pt_PT.js"></script>
     <script src="../js/bootstrap-formhelpers-selectbox.js"></script>
-    <link href="../css/bootstrap-formhelpers.css" rel="stylesheet">
-    <!-- Bootstrap core CSS -->
+    
     <link href="../css/bootstrap.css" rel="stylesheet">
-    <!-- Bootstrap alerts -->
     <link href="../css/alerts.css" rel="stylesheet">
+    <link href="../css/bootstrap-formhelpers.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="../css/mainCore.css" rel="stylesheet">
@@ -86,31 +85,31 @@
 		  					</div>
 
 		  					<? 
-		  					if (isset($ecoFisio)) {
-		  						echo '<input type="hidden" value="' . $ecoFisio[0]->sampling_campaign_id . '" name="sampling_campaign_id" >';
-		  						echo '<input type="hidden" value="update" name="operationType" >';
-		  						echo '<div class="form-group">
-				  						<label class="col-lg-4 control-label">Campaign</label>
-				  						<div class="col-lg-4">
-				  							<p class="form-control-static">'. $ecoFisio[0]->campaignDesignation . '</p>
-				  					 	</div>
-				  					</div>'; 
-			  				} else {
-			  					echo '<input type="hidden" value="insert" name="operationType" >';
-			  					echo '<div id="campaignsInputGroup" class="form-group">
-										<label for="inputCampaigns" class="col-lg-4 control-label">Campaign*</label>
-										<div class="col-lg-4">
-											<select id="sampling_campaign_id" name="sampling_campaign_id" class="form-control input-sm">';
+			  					if (isset($ecoFisio)) {
+			  						echo '<input type="hidden" value="' . $ecoFisio[0]->sampling_campaign_id . '" name="sampling_campaign_id" >';
+			  						echo '<input type="hidden" value="update" name="operationType" >';
+			  						echo '<div class="form-group">
+					  						<label class="col-lg-4 control-label">Campaign</label>
+					  						<div class="col-lg-4">
+					  							<p class="form-control-static">'. $ecoFisio[0]->campaignDesignation . '</p>
+					  					 	</div>
+					  					</div>'; 
+				  				} else {
+				  					echo '<input type="hidden" value="insert" name="operationType" >';
+				  					echo '<div id="campaignsInputGroup" class="form-group">
+											<label for="inputCampaigns" class="col-lg-4 control-label">Campaign*</label>
+											<div class="col-lg-4">
+												<select id="sampling_campaign_id" name="sampling_campaign_id" class="form-control input-sm">';
 
-							  	foreach($campaigns as $campaign){
-							  		if(isset($campaign->sampling_campaign_id)) {
-							  			echo '<option value="' . $campaign->sampling_campaign_id . '">' . $campaign->designation . '</option>';
-							  		}
-							  	}
-		              			echo '		</select>								
-										</div>
-									</div>';
-			  				}
+								  	foreach($campaigns as $campaign){
+								  		if(isset($campaign->sampling_campaign_id)) {
+								  			echo '<option value="' . $campaign->sampling_campaign_id . '">' . $campaign->designation . '</option>';
+								  		}
+								  	}
+			              			echo '		</select>								
+											</div>
+										</div>';
+				  				}
 		  					?>
 
 		  					<div id="samplingDateInputGroup" class="form-group">

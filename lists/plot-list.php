@@ -66,9 +66,9 @@
 				  }
 				}
 
-				$plots = $plotData->getPlotBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1);
+				$plots = $plotData->getPlotBy($whereClause, (isset($_GET["page"]) ? $_GET["page"] : 0), $withTotal = 1);
 			} else {
-				$plots = $plotData->getPlotsSite((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotalIndividuals = 1); 
+				$plots = $plotData->getPlotsSite((isset($_GET["page"]) ? $_GET["page"] : 0), $withTotal = 1); 
 			}
 
 	  		$fields = $plotData->getFieldList();
@@ -83,7 +83,7 @@
     <div class="container">
       <div class="row">
       	<div class="page-header">
-       		<h1>Plots</h1>
+       		<h2>Plots</h2>
       	</div>
       </div>
     </div>
@@ -115,7 +115,7 @@
         <div class="col-xs-6 col-lg-2"> 
         	<div class="btn-group pull-right">
         		<button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" <?=(!$_BIOLOGYST_LOGGED ? 'disabled="disabled"' : '')?>>
-        			Insert Plot <span class="caret">
+        			Insert Plot <span class="caret"></span>
         		</button>
         		<ul class="dropdown-menu pull-right" role="menu">
 					<li><a href="../forms/plot.php"><strong>By form</strong></a></li>
@@ -157,16 +157,40 @@
 	    	                  			<td>' . (isset($plot->coordinateX) && $plot->coordinateX != "" && $plot->coordinateX !== "-1"? $plot->coordinateX : "N.D.") . '</td>
 	    	                  			<td>' . (isset($plot->coordinateY) && $plot->coordinateY != "" && $plot->coordinateY !== "-1"? $plot->coordinateY : "N.D.") . '</td>';
 	    	                  			
-	    	                  			if ($plot->totalIndividuals > 0) {
+	    	                  			// total de individuos
+	    	                  			if (isset($plot->totalIndividuals) && $plot->totalIndividuals > 0) {
 	                        				echo '<td>
 	                        							<a href="individual-list.php?plot=' . $plot->plot_id .  '">
-	                        								<span id="accessTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Individuals" class="label label-info">
-	                        									Check (' . $plot->totalIndividuals . 
-	                        								')</span>
+	                        								<span id="accessIndividualsTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Individuals" class="label label-info">
+	                        									Check (' . $plot->totalIndividuals . ')</span>
 	                        							</a>
 	                        						</td>';
-	    	                  			}else {
-	    	                  				echo '<td><span class="label label-default">' . $plot->totalIndividuals . '</span></td>';
+	    	                  			} else {
+	    	                  				echo '<td><span class="label label-default">0</span></td>';
+	    	                  			}
+
+	    	                  			// total de amostras
+	    	                  			if (isset($plot->totalWaterSamples) && $plot->totalWaterSamples > 0) {
+	                        				echo '<td>
+	                        							<a href="plotattribute-list.php?plot=' . $plot->plot_id .  '">
+	                        								<span id="accessSamplesTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Plot Water Info" class="label label-info">
+	                        									Check (' . $plot->totalWaterSamples . ')</span>
+	                        							</a>
+	                        						</td>';
+	    	                  			} else {
+	    	                  				echo '<td><span class="label label-default">0</span></td>';
+	    	                  			}
+
+	    	                  			// total de amostras
+	    	                  			if (isset($plot->totalSoilSamples) && $plot->totalSoilSamples > 0) {
+	                        				echo '<td>
+	                        							<a href="plotsoil-list.php?plot=' . $plot->plot_id .  '">
+	                        								<span id="accessSamplesTooltip_' . $plot->plot_id . '" data-toggle="tooltip" data-placement="left" title="Click to see this Plot Soil samples" class="label label-info">
+	                        									Check (' . $plot->totalSoilSamples . ')</span>
+	                        							</a>
+	                        						</td>';
+	    	                  			} else {
+	    	                  				echo '<td><span class="label label-default">0</span></td>';
 	    	                  			}
 
 				  	                  	echo '<td>
@@ -177,12 +201,12 @@
 								        <td>';
 
 							   
-								        if ($plot->totalIndividuals == 0) {
+								        if ($plot->totalIndividuals == 0 && $plot->totalWaterSamples == 0 && $plot->totalSoilSamples == 0) {
 									        echo '<button onclick="beginDelete(\'action=delete&class=plot&id=' . $plot->plot_id . '\', \'Do you want to remove this Plot?\');" type="button" class="btn btn-danger btn-xs">
 									            <span class="glyphicon glyphicon-remove-sign"></span>
 									          </button>';
 								        } else {
-								        	echo '<span id="removeTooltip_' . $plot->plot_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="It has Individuals associated">Better not</span>'; 
+								        	echo '<span id="removeTooltip_' . $plot->plot_id . '" class="label label-default" data-toggle="tooltip" data-placement="left" title="It has Individuals or Samples associated">Better not</span>'; 
 								        }
 
 									    echo '</td>
@@ -253,10 +277,14 @@
     <script>
     <?php
 	    foreach ($plots as $plot) {
-	    	if (isset($plot->plot_id) && $plot->totalIndividuals > 0) {
+	    	if (isset($plot->plot_id) && ( $plot->totalIndividuals > 0 || $plot->totalSamples > 0 )) {
 		    	echo "$('#removeTooltip_" . $plot->plot_id . "').tooltip({trigger: 'hover'});";
 		    	if ($plot->totalIndividuals > 0) {
-		    		echo "$('#accessTooltip_" . $plot->plot_id . "').tooltip({trigger: 'hover'});";
+		    		echo "$('#accessIndividualsTooltip_" . $plot->plot_id . "').tooltip({trigger: 'hover'});";
+		    	}
+
+		    	if ($plot->totalSamples > 0) {
+		    		echo "$('#accessSamplesTooltip_" . $plot->plot_id . "').tooltip({trigger: 'hover'});";
 		    	}
 	    	}
 	    }

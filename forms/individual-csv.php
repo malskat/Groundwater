@@ -79,7 +79,7 @@
 								<div class="panel-body">
 									<p><span class="label label-default">Info</span></p>
 									<p>This form allows you to insert massive lists of Individuals.</p>
-									<p>Submitted files must have be csv extension.</p>
+									<p>Submitted files must have csv extension.</p>
 									<p>The submitted files must follow this structure: <strong>siteCode</strong>, <strong>plotCode</strong>, <strong>Genus</strong>, <strong>Species</strong>, <strong>individualCode</strong>, <strong>coordinateX</strong>, <strong>coordinateY</strong> e <strong>phenologicalType</strong>.</p>
 									<p>Remember, there is always a reference file to consult.</p>
 									<p><strong>Note</strong>:Individuals already inserted are ignored.</p>
