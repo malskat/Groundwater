@@ -1,5 +1,33 @@
 <?php
 	include "../checkBiologyst.php";
+
+	if(isset ($_GET["user_id"])){
+
+			if ($_BIOLOGYST_LOGGED === false || ( array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) === false && $_GET["user_id"] != $_BIOLOGYST_LOGGED['userInfo']['id'])) {
+				header('Location: ' . PROJECT_URL . 'index.php?response=' . ($_BIOLOGYST_LOGGED === false ? '-1' : '-8' ));
+				die;
+			}
+
+  			require_once "../data/user_data.php"; 
+  			$userData = new User();
+			$user = $userData->getUserBy("biologyst_id = " . $_GET["user_id"], -1);
+
+
+
+			//encontrar permissioes
+			$permissionToUser = array();
+			if (array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) !== false) {
+				require_once "../data/userpermission_data.php"; 
+	  			$userPermissionData = new UserPermission();
+				$permissionToUser = $userPermissionData->getUserPermissionBy ("biologyst_id = " .  $_GET["user_id"] . " and module = 'user'");
+			}
+
+  		} else {
+  			if ($_BIOLOGYST_LOGGED === false) {
+				header('Location: ' . PROJECT_URL . 'index.php?response=-1' );
+				die;
+			}
+  		}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,37 +54,6 @@
   </head>
 
   <body>
-
-  	<?
-
-  		if(isset ($_GET["user_id"])){
-
-			if ($_BIOLOGYST_LOGGED === false || ( array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) === false && $_GET["user_id"] != $_BIOLOGYST_LOGGED['userInfo']['id'])) {
-				header('Location: ' . PROJECT_URL . 'index.php?response=' . ($_BIOLOGYST_LOGGED === false ? '-1' : '-8' ));
-				die;
-			}
-
-  			require_once "../data/user_data.php"; 
-  			$userData = new User();
-			$user = $userData->getUserBy("biologyst_id = " . $_GET["user_id"], -1);
-
-
-
-			//encontrar permissioes
-			$permissionToUser = array();
-			if (array_search('user', $_BIOLOGYST_LOGGED) !== false) {
-				require_once "../data/userpermission_data.php"; 
-	  			$userPermissionData = new UserPermission();
-				$permissionToUser = $userPermissionData->getUserPermissionBy ("biologyst_id = " .  $_GET["user_id"] . " and module = 'user'");
-			}
-
-  		} else {
-  			if ($_BIOLOGYST_LOGGED === false) {
-				header('Location: ' . PROJECT_URL . 'index.php?response=-1' );
-				die;
-			}
-  		}
-  	?>
 
   	<!-- incluir menu principal -->
   	<?php include "../menu.php"; ?>
@@ -125,7 +122,7 @@
 	  					<?
 
 	  						//permissoes de utilizador
-	  						if(array_search('user', $_BIOLOGYST_LOGGED) !== false) {
+	  						if(array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) !== false) {
 
 								echo '<div class="form-group">
 									<label for="inputPermissions" class="col-lg-3 control-label">Permissões</label>

@@ -70,12 +70,10 @@ if(isset($_POST["first_name"]) && $_POST["first_name"] != "" && isset($_POST["la
 
 		//actualizar, caso seja necessario, o nome e sobrenome do utilizador logado
 		if ($_SESSION['user']['user_id'] == $_POST["biologyst_id"]) {
-			session_start();
 			$_SESSION['user']['first_name'] = $_POST["first_name"];
 			$_SESSION['user']['last_name'] = $_POST["last_name"];
-			session_write_close(); 
 		}
-		
+
 		$urlComplement = '&user_id=' . $_POST["biologyst_id"];
 		$biologyst_id = $_POST["biologyst_id"];
 
