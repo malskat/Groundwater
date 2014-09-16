@@ -37,6 +37,11 @@ var SYSTEM_ERRORS = {
 		"msg" : "<strong>Attention - </strong> Service reported error(s).",
 		"class" : "generic"
 	},
+	"-8" : {
+		"type_error" : "danger",
+		"msg" : "<strong>Attention - </strong> Access denied. You don't have permissions to access this operation.",
+		"class" : "generic"
+	},
 	"11" : {
 		"type_error" : "success",
 		"msg" : "<strong>Holy guacamole!</strong> Record removed.",
@@ -166,7 +171,7 @@ var SYSTEM_ERRORS = {
 	//USERS ERRORS
 	"701" : {
 		"type_error" : "success",
-		"msg" : "<strong>Holy guacamole!</strong> Individual inserted/udpated.",
+		"msg" : "<strong>Holy guacamole!</strong> User inserted/udpated.",
 		"class" : "users"
 	},
 	"702" : {

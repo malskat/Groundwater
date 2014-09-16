@@ -143,7 +143,7 @@
 			  </ul>
 			</li>
 		<?php
-			if ($_BIOLOGYST_LOGGED) {
+			if ($_BIOLOGYST_LOGGED && array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) !== false) {
 				echo '<li class="dropdown ' . (strpos($_SERVER['PHP_SELF'], 'use') !== false ? 'active' :  '') .  '">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
 								  	<ul class="dropdown-menu">
@@ -162,7 +162,7 @@
 			if ($_BIOLOGYST_LOGGED) {
 				
 				//utilizador logado
-				require_once 'core/core_system.php';
+				//require_once 'core/core_system.php';
 
 				$destination = '';//CoreSystem::retriveReturnUrl($_SERVER['PHP_SELF']);
 
@@ -170,9 +170,9 @@
 							<div class="navbar-collapse collapse">
 				        		<ul class="nav navbar-nav navbar-right">
 				            		<li class="dropdown">
-				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' <b class="caret"></b></a>
+				            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $_BIOLOGYST_LOGGED['userInfo']['first_name'] . ' ' . $_BIOLOGYST_LOGGED['userInfo']['last_name'] . ' <b class="caret"></b></a>
 					            		<ul class="dropdown-menu">
-					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_SESSION['user']['user_id'] . '"><span class="glyphicon glyphicon-user"></span> Edit</a></li>
+					            			<li><a href="'. PROJECT_URL . 'forms/user.php?user_id=' . $_BIOLOGYST_LOGGED['userInfo']['id'] . '"><span class="glyphicon glyphicon-user"></span> Edit</a></li>
 					            			<li><a href="'. PROJECT_URL . 'services/make_exit.php?destination=' . $destination . '"><span class="glyphicon glyphicon-eject"></span> Logout</a></li>
 					            		</ul>
 					            	</li>
@@ -183,7 +183,7 @@
 
 				//acesso ao login
 				echo '<div id="loginForm" name="loginForm" class="navbar-form navbar-right">
-						<button id="loginTooltip" class="btn btn-success btn-sm" onclick="location.href=\'../forms/login.php\'">Login <span class="glyphicon glyphicon-tree-conifer"></span></button>
+						<button id="loginTooltip" class="btn btn-success btn-sm" onclick="location.href=\'/forms/login.php\'">Login <span class="glyphicon glyphicon-tree-conifer"></span></button>
 					</div>';
 			}
 		?>

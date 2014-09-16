@@ -46,7 +46,16 @@
 
 	<div class="container">
 		<div class="row">
-			<p class="lead">More news on this issue soon.</p>
+			<dl>
+				<dt><a target="_blank" href="http://www.fc.ul.pt/">Faculdade de Ciências da Universidade de Lisboa <small>(FCT)</small></a></dt>
+				<dl>Texto para descrever a parceria com o projecto.</dl>
+				<dt><a target="_blank" href="http://cba.fc.ul.pt/">Centro de Biologia Ambiental <small>(CBA - FCUL)</small></a></dt>
+				<dl>The CBA is a research centre housed at Faculdade de Ciências, with an extension at the Museu Nacional de História Natural e da Ciência, both part of the Universidade de Lisboa. CBA develops activities of research and technology transfer in the areas of Biodiversity, Environmental Biology and Evolutionary Biology.
+					<ul class="list-unstyled">
+						<li>Cristina Mágoas</li>
+					</ul>
+				</dl>
+			</dl>
 		</div>
 
 	</div>

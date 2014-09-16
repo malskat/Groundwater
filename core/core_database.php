@@ -4,7 +4,7 @@ class CoreDatabase {
 
 	public static function selectDB($table, $totalRows = 0, $page = 0){
 
-		include '../init.php';
+		include PROJECT_PATH . 'init.php';
 		
 		try {
 
@@ -47,7 +47,7 @@ class CoreDatabase {
 	}
 
 	public static function selectDBQuery($query, $totalRows = 0, $page = 0){
-		include '../init.php';
+		include PROJECT_PATH . 'init.php';
 		try {
 
 			$Database->beginTransaction();
@@ -88,7 +88,7 @@ class CoreDatabase {
 
 	public static function insertDB($table, $fields, $values){
 
-		include '../init.php';
+		include PROJECT_PATH . '/init.php';
 
 		$toReturn = array();
 
@@ -115,7 +115,7 @@ class CoreDatabase {
 
 	public static function updateDB($table, $set, $where){
 
-		include '../init.php';
+		include PROJECT_PATH . 'init.php';
 
 		$toReturn = array();
 
@@ -138,7 +138,7 @@ class CoreDatabase {
 
 	public static function deleteDB ($table, $where){
 
-		include '../init.php';
+		include PROJECT_PATH . 'init.php';
 
 		try{
 
@@ -171,7 +171,7 @@ class CoreDatabase {
 
 	public static function callBD ($routine) {
 
-		include '../init.php';
+		include PROJECT_PATH . 'init.php';
 
 		try {
 

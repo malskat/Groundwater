@@ -59,6 +59,21 @@ class User extends gObject {
 
 			if (password_verify($passwordFromPost, $user[0]->password)) {
 			    $logged = $user;
+
+		    	//encontrar as permissoes do utilizador
+				if ($logged) {
+
+					$permissions = array();
+
+					$userPermissionData = new UserPermission();
+					$permissionsTest = $userPermissionData->getUserPermissionBy ("biologyst_id= " . $logged[0]->biologyst_id); 
+					foreach ($permissionsTest as $permission) {
+						$permissions[] = $permission->module;
+					}
+
+					$logged[0]->permissions = $permissions;
+				}
+
 			}
 		}
 
@@ -70,9 +85,13 @@ class User extends gObject {
 		
 		$logged = false;
 		session_start();
-		
+
+
 		if(isset($_SESSION['user']) && ($_SESSION['user']['entrance'] + PROJECT_LOGGED_PERMITED_TIME) >= time()) {
-			$logged = true;
+			$logged["userInfo"]["permissions"] = $_SESSION['user']['permissions'];
+			$logged["userInfo"]["id"] = $_SESSION['user']['user_id'];
+			$logged["userInfo"]["first_name"] = $_SESSION['user']['first_name'];
+			$logged["userInfo"]["last_name"] = $_SESSION['user']['last_name'];
 		} else if (isset($_SESSION['user'])) {
 			//retirar o user de sessao caso tenha passado o tempo permitido de acesso autorizado
 			unset($_SESSION['user']);
@@ -100,7 +119,7 @@ class User extends gObject {
 		$values = substr($values, 0, -2);
 
 
-		return CoreDatabase::insertDB($this->_entityName,   $fields, $values);
+		return CoreDatabase::insertDB($this->_entityName, $fields, $values);
 
 	}
 

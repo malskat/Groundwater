@@ -29,9 +29,8 @@
   <body>
 
     <?php
-
-  		if ($_BIOLOGYST_LOGGED === false) {
-  			header('Location: ' . PROJECT_URL . 'index.php?response=-1');
+  		if ($_BIOLOGYST_LOGGED === false || array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) === false) {
+  			header('Location: ' . PROJECT_URL . 'index.php?response=' . ($_BIOLOGYST_LOGGED === false ? '-1' : '-8' ));
   			die;
   		}
 

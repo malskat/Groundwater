@@ -28,10 +28,33 @@
   <body>
 
   	<?
+
   		if(isset ($_GET["user_id"])){
+
+			if ($_BIOLOGYST_LOGGED === false || ( array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) === false && $_GET["user_id"] != $_BIOLOGYST_LOGGED['userInfo']['id'])) {
+				header('Location: ' . PROJECT_URL . 'index.php?response=' . ($_BIOLOGYST_LOGGED === false ? '-1' : '-8' ));
+				die;
+			}
+
   			require_once "../data/user_data.php"; 
   			$userData = new User();
 			$user = $userData->getUserBy("biologyst_id = " . $_GET["user_id"], -1);
+
+
+
+			//encontrar permissioes
+			$permissionToUser = array();
+			if (array_search('user', $_BIOLOGYST_LOGGED) !== false) {
+				require_once "../data/userpermission_data.php"; 
+	  			$userPermissionData = new UserPermission();
+				$permissionToUser = $userPermissionData->getUserPermissionBy ("biologyst_id = " .  $_GET["user_id"] . " and module = 'user'");
+			}
+
+  		} else {
+  			if ($_BIOLOGYST_LOGGED === false) {
+				header('Location: ' . PROJECT_URL . 'index.php?response=-1' );
+				die;
+			}
   		}
   	?>
 
@@ -98,6 +121,25 @@
 	  							<input type="password" class="form-control" id="passwordUser" name="passwordUser">
 	  					 	</div>
 	  					</div>
+
+	  					<?
+
+	  						//permissoes de utilizador
+	  						if(array_search('user', $_BIOLOGYST_LOGGED) !== false) {
+
+								echo '<div class="form-group">
+									<label for="inputPermissions" class="col-lg-3 control-label">Permissões</label>
+									<div class="col-lg-4">
+										<select id="permission" name="permission" class="form-control input-sm">
+											<option ' . (count($permissionToUser) == 0 ? "selected" : '') . '  value="regular">Utilizador regular</option>
+											<option ' . (count($permissionToUser) == 1 ? "selected" : '') . ' value="master">Utilizador master</option>
+	              						</select>									    
+									</div>
+								</div>';
+
+	  						}
+
+	  					?>
 
 	  					
 

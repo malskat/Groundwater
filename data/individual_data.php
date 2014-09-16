@@ -10,7 +10,7 @@ class Individual extends gObject {
 		$this->_totalRows = 10;
 	}
 
-	function getIndividual ($page = 0, $withTotals = 0){
+	function getIndividual ($page = 0, $withTotals = 0) {
 
 		require_once '../core/core_database.php';
 
@@ -29,7 +29,7 @@ class Individual extends gObject {
 
 	}
 
-	function getIndividualBy ($whereClause, $page = 0, $withTotals = 0){
+	function getIndividualBy ($whereClause, $page = 0, $withTotals = 0) {
 
 		require_once '../core/core_database.php';
 
@@ -49,7 +49,7 @@ class Individual extends gObject {
 
 	}
 
-	function insert ($toInsert = array()){
+	function insert ($toInsert = array()) {
 
 		require_once '../core/core_database.php';
 
@@ -83,7 +83,7 @@ class Individual extends gObject {
 		return $response;
 	}
 
-	function update ($toUpdate){
+	function update ($toUpdate) {
 
 		require_once '../core/core_database.php';
 
