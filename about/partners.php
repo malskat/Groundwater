@@ -46,16 +46,73 @@
 
 	<div class="container">
 		<div class="row">
-			<dl>
-				<dt><a target="_blank" href="http://www.fc.ul.pt/">Faculdade de Ciências da Universidade de Lisboa <small>(FCT)</small></a></dt>
-				<dl>Texto para descrever a parceria com o projecto.</dl>
-				<dt><a target="_blank" href="http://cba.fc.ul.pt/">Centro de Biologia Ambiental <small>(CBA - FCUL)</small></a></dt>
-				<dl>The CBA is a research centre housed at Faculdade de Ciências, with an extension at the Museu Nacional de História Natural e da Ciência, both part of the Universidade de Lisboa. CBA develops activities of research and technology transfer in the areas of Biodiversity, Environmental Biology and Evolutionary Biology.
-					<ul class="list-unstyled">
-						<li>Cristina Mágoas</li>
-					</ul>
-				</dl>
-			</dl>
+			<p class="lead">
+				Sentence to introduce this page
+			</p>
+		</div>
+		<div class="row spacer">
+			<div class="col-xs-6 col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a target="_blank" href="http://www.fc.ul.pt/">Faculdade de Ciências da Universidade de Lisboa <small>(FCT)</small></a>
+					</div>
+					<div class="panel-body">
+						<dl>
+							<dt><a target="_blank" href="http://cba.fc.ul.pt/">Centro de Biologia Ambiental</a> <small>(CBA - FCUL)</small></dt>
+							<dd>Texto para Descrever a participacao desta departamento</dd>
+							<dt><a target="_blank" href="http://www.researcherid.com/rid/G-3441-2011">Cristina Mágoas</a></dt>
+							<dt><a target="_blank" href="http://www.researcherid.com/rid/G-3441-2011">Cristina Antunes</a></dt>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a target="_blank" href="http://www.ib.unicamp.br/">Universidade Estadual de Campinas <small>(Unicamp)</small></a>
+					</div>
+					<div class="panel-body">
+						<dl>
+							<dt><a target="_blank" href="http://cba.fc.ul.pt/">Centro de Biologia Ambiental</a> <small>(CBA - FCUL)</small></dt>
+							<dd>Texto para Descrever a participacao desta departamento</dd>
+							<dt><a target="_blank" href="http://www.researcherid.com/rid/G-3441-2011">Cristina Mágoas</a></dt>
+							<dt><a target="_blank" href="http://www.researcherid.com/rid/G-3441-2011">Cristina Antunes</a></dt>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a target="_blank" href="http://www.ib.unicamp.br/">Universidad de Sevilla <small>(US)</small></a>
+					</div>
+					<div class="panel-body">
+						<dl>
+							<dt><a target="_blank" href="http://cba.fc.ul.pt/">Centro de Biologia Ambiental</a> <small>(CBA - FCUL)</small></dt>
+							<dd>Texto para Descrever a participacao desta departamento</dd>
+							<dt><a target="_blank" href="http://www.researcherid.com/rid/G-3441-2011">Cristina Mágoas</a></dt>
+							<dt><a target="_blank" href="http://www.researcherid.com/rid/G-3441-2011">Cristina Antunes</a></dt>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Others
+					</div>
+					<div class="panel-body">
+						<dl>
+							<dt><a target="_blank" href="http://cba.fc.ul.pt/">Centro de Biologia Ambiental</a> <small>(CBA - FCUL)</small></dt>
+							<dd>Texto para Descrever a participacao desta departamento</dd>
+							<dt><a target="_blank" href="http://www.researcherid.com/rid/G-3441-2011">Cristina Mágoas</a></dt>
+							<dt><a target="_blank" href="http://www.researcherid.com/rid/G-3441-2011">Cristina Antunes</a></dt>
+						</dl>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>

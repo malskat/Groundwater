@@ -1,6 +1,8 @@
 <?php
 	include "../checkBiologyst.php";
 
+	$permissionToUser = array();
+
 	if(isset ($_GET["user_id"])){
 
 			if ($_BIOLOGYST_LOGGED === false || ( array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) === false && $_GET["user_id"] != $_BIOLOGYST_LOGGED['userInfo']['id'])) {
@@ -15,7 +17,6 @@
 
 
 			//encontrar permissioes
-			$permissionToUser = array();
 			if (array_search('user', $_BIOLOGYST_LOGGED['userInfo']['permissions']) !== false) {
 				require_once "../data/userpermission_data.php"; 
 	  			$userPermissionData = new UserPermission();
