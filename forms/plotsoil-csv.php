@@ -112,7 +112,7 @@
 										<p><span class="label label-default">Info</span></p>
 										<p>This service updates Plot Soil Info, <strong>to one campaign</strong>, for <strong>one or multiple Plots</strong>, <strong> in one Site</strong>.</p>
 										<p>Only .csv files that match the structured rules are accepted.</p>
-										<p>Files must follow this structure: <strong>siteCode</strong> (for better file identification and organization), <strong>plotCode</strong>, <strong>measureDate</strong> (not mandatory), <strong>hole</strong> (code to identify the hole within this plot sample, like <em>Soil1</em> or <em>Soil2</em>), <strong>depth</strong> (range from 1 to 3, been 1 equivalent 10 cm, the only mandatory), <strong>value</strong> and <strong>soilWaterContent</strong> (only one value per hole).</p>
+										<p>Files must follow this structure: <strong>siteCode</strong> (for better file identification and organization), <strong>plotCode</strong>, <strong>measureDate</strong> (not mandatory), <strong>hole</strong> (code to identify the hole within this plot sample, like <em>Soil1</em> or <em>Soil2</em>), <strong>depth</strong> (range from 1 to 3, been 1 equivalent to 10 cm, the only mandatory), <strong>value</strong> and <strong>soilWaterContent</strong> (only one value per hole).</p>
 										<p>Remember, there is always a reference file to consult.</p>
 									</div>
 								</div>

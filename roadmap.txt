@@ -45,6 +45,7 @@
  			* registo de operações feitas por utilizadores no mongo
 
  		* inserção de site_climate_data e site_climate_month
+ 			* /forms/siteclima-csv.php
 
 			
  		* recuperar password;
@@ -95,7 +96,7 @@
 
 
  		* o caminho dos require e includes está relativo e não absoluto, pode dar problemas tal como deu na sequência de includes e requires do index.php;
- 		* colocar fontawesome no menu;
+
  		* evitar SQL injection;
 
  	

@@ -145,3 +145,5 @@ else if (isset($_POST["submissionType"]) && $_POST["submissionType"] == 'excel')
   		header('Location: /lists/plot-list.php?response=-7&reason=' . $e);
 	}
 }
+
+?>
