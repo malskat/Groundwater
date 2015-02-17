@@ -91,7 +91,7 @@
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "lists/site-list.php": PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-th-list"></span> List</a></li>
 
 			    <li role="presentation" class="divider"></li>
-			    <li role="presentation" class="dropdown-header">Clima Info</li>
+			    <li role="presentation" class="dropdown-header">Climatic Info</li>
 			    <li><a href=<?=($_BIOLOGYST_LOGGED ? PROJECT_URL . "forms/siteclima-csv.php" : PROJECT_URL . "forms/login.php")?>><span class="glyphicon glyphicon-import"></span> CSV Update</a></li> 
 			  </ul>
 			</li>
