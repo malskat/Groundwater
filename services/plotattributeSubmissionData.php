@@ -8,7 +8,7 @@ require_once "../data/plot_data.php";
 require_once "../data/plotattribute_data.php";
 
 if (!$_BIOLOGYST_LOGGED) {
-	header('Location: /forms/login.php?response=-1');
+	header('Location: ' . PROJECT_URL . 'forms/login.php?response=-1');
 	die;
 } 
 

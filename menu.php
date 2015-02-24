@@ -160,11 +160,8 @@
 		<?php
 
 			if ($_BIOLOGYST_LOGGED) {
-				
-				//utilizador logado
-				//require_once 'core/core_system.php';
 
-				$destination = '';//CoreSystem::retriveReturnUrl($_SERVER['PHP_SELF']);
+				$destination = '';
 
 				echo '<div id="loggedInfo" name="loggedInfo">
 							<div class="navbar-collapse collapse">

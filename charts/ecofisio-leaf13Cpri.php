@@ -1,5 +1,9 @@
 <?php
 	include "../checkBiologyst.php";
+
+	if (!$_BIOLOGYST_LOGGED)
+		header('Location: ' . PROJECT_URL . 'forms/login.php?response=-1');
+
  ?>
 <!DOCTYPE html>
 <html lang="en">

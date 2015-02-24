@@ -47,7 +47,8 @@ class EcoFisio extends gObject {
 					Left Join plot p ON i.plot_id = p.plot_id
 					Left Join site s ON s.site_id = p.site_id
 					Where ' . $whereClause . '
-					Order by xylemWater_18O DESC';
+					Order by xylemWater_18O';
+
 
 		return CoreDatabase::selectDBQuery($query, 0, -1);
 
@@ -124,15 +125,19 @@ class EcoFisio extends gObject {
 
 		switch ($block) {
 			case "leaf" : {
-				$arrayToFill['leaf_13C'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
-	        	$arrayToFill['leaf_15N'] = ($line[$starter + 1] != "" ? $line[$starter + 1] : 'NULL');
-	        	$arrayToFill['leaf_perN'] = ($line[$starter + 2] != "" ? $line[$starter + 2] : 'NULL');
-	        	$arrayToFill['leaf_perC'] = ($line[$starter + 3] != "" ? $line[$starter + 3] : 'NULL');
-	        	$arrayToFill['leaf_CN'] = ($line[$starter + 4] != "" ? $line[$starter + 4] : 'NULL');
+				if (is_numeric(str_replace(",", ".", $line[$starter]))) {
+					$arrayToFill['leaf_13C'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
+		        	$arrayToFill['leaf_15N'] = ($line[$starter + 1] != "" ? $line[$starter + 1] : 'NULL');
+		        	$arrayToFill['leaf_perN'] = ($line[$starter + 2] != "" ? $line[$starter + 2] : 'NULL');
+		        	$arrayToFill['leaf_perC'] = ($line[$starter + 3] != "" ? $line[$starter + 3] : 'NULL');
+		        	$arrayToFill['leaf_CN'] = ($line[$starter + 4] != "" ? $line[$starter + 4] : 'NULL');
+		        }
 				break;
 			}
 			case "xylem" : {
-				$arrayToFill['xylemWater_18O'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
+				if (is_numeric(str_replace(",", ".", $line[$starter]))) {
+					$arrayToFill['xylemWater_18O'] = ($line[$starter] != "" ? $line[$starter] : 'NULL');
+				}
 				break;
 			}
 			case "photo" : {

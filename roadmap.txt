@@ -32,10 +32,13 @@
 
  	» SERVIÇOS
 
+ 		* inserção de indivíduos
+ 			* tem de validar se já existe
+
  		* inserção de plot_atribute
  			* simples - DONe
  			* massiva - DONE
- 			
+
  		* inserção de plot_soil 
  			* simples - DONE
  			* massiva

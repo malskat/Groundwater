@@ -98,7 +98,7 @@
 								for (ecoFisio in _ecoFisioValues){
 									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
 									    	&& _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].leaf_15N != null) {
-										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										graphData.push([Number(_ecoFisioValues[ecoFisio].xylemWater_18O), 
 										               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
 										               Number(_ecoFisioValues[ecoFisio].leaf_15N)]);
 									}
@@ -112,8 +112,8 @@
 								var options = {title:'Leaf 13C and leaf 15N / Xylem 18O',
 								               width:1000,
 								               height:500,
-												hAxis: {title: 'Xylem 18O', minValue: 0, maxValue: 15},
-				          						vAxes: [{title: 'leaf 13C', minValue: -34, maxValue: -20}, {title: 'Leaf 15N', minValue: -10, maxValue: 10}],
+												hAxis: {title: 'Xylem 18O', minValue: -5, maxValue: 1},
+				          						vAxes: [{title: 'leaf 13C', minValue: -32, maxValue: -20}, {title: 'Leaf 15N', minValue: -10, maxValue: 10}],
 				          						series:[{targetAxisIndex:0},{targetAxisIndex:1}],
 								               lineWidth: 0,
 								               pointSize: 3};
@@ -134,7 +134,7 @@
 								for (ecoFisio in _ecoFisioValues){
 									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
 										    && _ecoFisioValues[ecoFisio].leaf_13C != null && _ecoFisioValues[ecoFisio].pri != null) {
-										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										graphData.push([Number(_ecoFisioValues[ecoFisio].xylemWater_18O), 
 										               Number(_ecoFisioValues[ecoFisio].leaf_13C), 
 										               Number(_ecoFisioValues[ecoFisio].pri)]);
 									}
@@ -169,7 +169,7 @@
 								for (ecoFisio in _ecoFisioValues){
 									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
 									    && _ecoFisioValues[ecoFisio].leaf_15N != null && _ecoFisioValues[ecoFisio].leaf_CN != null) {
-										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										graphData.push([Number(_ecoFisioValues[ecoFisio].xylemWater_18O), 
 										               Number(_ecoFisioValues[ecoFisio].leaf_15N), 
 										               Number(_ecoFisioValues[ecoFisio].leaf_CN)]);
 									}
@@ -203,7 +203,7 @@
 								for (ecoFisio in _ecoFisioValues){
 									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
 										    && _ecoFisioValues[ecoFisio].wi != null && _ecoFisioValues[ecoFisio].ndvi != null) {
-										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										graphData.push([Number(_ecoFisioValues[ecoFisio].xylemWater_18O), 
 										               Number(_ecoFisioValues[ecoFisio].wi), 
 										               Number(_ecoFisioValues[ecoFisio].ndvi)]);
 									}
@@ -237,7 +237,7 @@
 								for (ecoFisio in _ecoFisioValues){
 									if (_ecoFisioValues[ecoFisio].individualCode != null && _ecoFisioValues[ecoFisio].xylemWater_18O != null 
 										    && _ecoFisioValues[ecoFisio].pri != null && _ecoFisioValues[ecoFisio].chl_ndi != null) {
-										graphData.push([_ecoFisioValues[ecoFisio].xylemWater_18O, 
+										graphData.push([Number(_ecoFisioValues[ecoFisio].xylemWater_18O), 
 										               Number(_ecoFisioValues[ecoFisio].pri), 
 										               Number(_ecoFisioValues[ecoFisio].chl_ndi)]);
 									}
