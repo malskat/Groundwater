@@ -132,7 +132,7 @@ if(isset($_POST["submissionType"]) && $_POST["submissionType"] == 'form') {
 										if (!isset($soilsToInsert[$data[0].$data[1].$data[(3 - $noMeasureDate)]])) {
 
 											$soil = array();
-											$soil["soilCode"] = $data[0].$data[1].$data[(3 - $noMeasureDate)];
+											$soil["soilCode"] = $data[0].$data[1]. '_' . $data[(3 - $noMeasureDate)];
 											if ($noMeasureDate === 0) {
 												$soil["measureDate"] = $data[2];
 											} 

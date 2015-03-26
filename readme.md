@@ -10,7 +10,6 @@
 
 	* mysql
 		* Software version: 5.5.16 - MySQL Community Server (GPL)
-		* Protocol version: 10
 	* php 
 		* 5.3.8
 		* phpinfo();
