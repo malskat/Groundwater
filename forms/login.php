@@ -50,7 +50,7 @@
 								<input id="destination" name="destination" type="hidden" value="<?=$_SERVER['HTTP_REFERER']?>">
 								
 								<div id="emailInputGroup" class="form-group col-xs-10 col-lg-10 col-lg-offset-1 smallspacer">
-									<input id="email" name="email" type="text" class="form-control" placeholder="email">
+									<input id="email" name="email" type="text" class="form-control" placeholder="email" autofocus>
 								</div> 
 								<div id="passInputGroup" class="form-group col-xs-10 col-lg-10 col-lg-offset-1">
 									<input id="password" name="password" type="password" class="form-control" placeholder="password">

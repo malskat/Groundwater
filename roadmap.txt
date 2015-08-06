@@ -7,6 +7,10 @@
 
  	» FRONTEND
 
+ 		* drop de filtro da campanha mostrar só as campanhas relacionadas com o site do indivíduo
+ 			- plotsoil-list
+ 			- reflectance-list - DONE
+
  		* secção de about 
  			* partners
 
