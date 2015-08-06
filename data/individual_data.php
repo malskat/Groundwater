@@ -14,7 +14,7 @@ class Individual extends gObject {
 
 		require_once '../core/core_database.php';
 
-		$query = 'Select SQL_CALC_FOUND_ROWS i.*, s.species, s.genus, p.code as plotCode, st.title as siteTitle ' .
+		$query = 'Select SQL_CALC_FOUND_ROWS i.*, s.species, s.genus, p.code as plotCode, st.site_id, st.title as siteTitle ' .
 					($withTotals == 1 ? ', (select count(1) from eco_fisio ef where ef.individualCode = i.individualCode) as totalEcoFisio ' : '') .
 					($withTotals == 1 ? ', str.struture_id' : '') .
 					($withTotals == 1 ? ', (select count(1) from individual_reflectance ir where ir.individualCode =  i.individualCode)  as totalReflectance ' : '') .
@@ -33,7 +33,7 @@ class Individual extends gObject {
 
 		require_once '../core/core_database.php';
 
-		$query = 'Select SQL_CALC_FOUND_ROWS i.*, s.species, s.genus, p.code as plotCode, st.title as siteTitle ' .
+		$query = 'Select SQL_CALC_FOUND_ROWS i.*, s.species, s.genus, p.code as plotCode, st.site_id, st.title as siteTitle ' .
 					($withTotals == 1 ? ', (select count(1) from eco_fisio ef where ef.individualCode = i.individualCode) as totalEcoFisio' : '') .
 					($withTotals == 1 ? ', str.struture_id' : '') .
 					($withTotals == 1 ? ', (select count(1) from individual_reflectance ir where ir.individualCode =  i.individualCode)  as totalReflectance ' : '') .

@@ -1,5 +1,6 @@
 <?php
-	include "../checkBiologyst.php";
+	require_once '../config/constants.php';
+	include PROJECT_PATH . "/checkBiologyst.php";
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,7 @@
 	<body>
 	    
 	  	<!-- incluir menu principal -->
-	    <?php include "../menu.php"; ?>
+	    <?php include PROJECT_PATH . "/menu.php"; ?>
 
 	    <div class="container">
 	      <div class="row">
@@ -44,7 +45,12 @@
 	    </div>
 
 	    <?
-	    	require_once '../data/campaign_data.php';
+	    	require_once PROJECT_PATH . '/data/campaign_data.php';
+		    require_once PROJECT_PATH . 'data/individual_data.php';
+
+		    $individualData = new Individual();
+		    $individual = $individualData->getIndividualBy($whereClause = ' individualCode = "' . $_GET["individualCode"] . '"' , $page = -1);
+
 	    	$campaignData = new Campaign();
 	    	$campaigns = $campaignData->getCampaigns(-1);
 	    ?>
@@ -80,7 +86,7 @@
 													echo '<option selected value="none">Choose one</option>';
 
 												  	foreach($campaigns as $campaign){
-												  		if(isset($campaign->sampling_campaign_id)) {
+												  		if(isset($campaign->sampling_campaign_id) && $campaign->site_id == $individual[0]->site_id) {
 												  			echo '<option value="' . $campaign->sampling_campaign_id . '">' . $campaign->designation	 . '</option>';
 												  		}
 												  	}

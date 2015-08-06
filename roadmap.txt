@@ -7,21 +7,21 @@
 
  	» FRONTEND
 
- 		* edicao de plot_attribute - DONE
- 		* insercao massiva de plot_attribute - DONE
- 		
- 		* listagem de plot_attribute
- 			* colocar N.D., caso não tenho valores
- 		* listagem de plot_soil
- 			* colocar N.D., caso não tenho valores
-
- 		* edicao de plot_soil - DONE
- 		* insercao massiva de plot_soil
-
  		* secção de about 
  			* partners
 
  		* login - focus na input de email
+
+ 		* edicao de plot_attribute - DONE
+ 		* insercao massiva de plot_attribute - DONE
+ 		
+ 		* listagem de plot_attribute - DONE
+ 			* colocar N.D., caso não tenho valores
+ 		* listagem de plot_soil - DONE
+ 			* colocar N.D., caso não tenho valores
+
+ 		* edicao de plot_soil - DONE
+ 		* insercao massiva de plot_soil
 
  		* secção de outputs 
  			* project meetings - DONE
@@ -36,12 +36,12 @@
  			* tem de validar se já existe
 
  		* inserção de plot_atribute
- 			* simples - DONe
+ 			* simples - DONE
  			* massiva - DONE
 
  		* inserção de plot_soil 
  			* simples - DONE
- 			* massiva
+ 			* massiva - DONE
 
  		* validar a estrutura de todos os ficheiros .csv, nos SubmissionData;
 
@@ -83,6 +83,8 @@
 
 	
 	» Melhoramentos
+
+		* bug do logout forçado
 
 
  		* retirar as strings de erro do endereço da página - DONE

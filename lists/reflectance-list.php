@@ -1,5 +1,6 @@
 <?php
-	include "../checkBiologyst.php";
+	require_once '../config/constants.php';
+	include PROJECT_PATH . "checkBiologyst.php";
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +39,11 @@
 	  			die;
 	  		} 
 	  		
-		    require_once '../data/reflectance_data.php';
-		    require_once '../data/campaign_data.php';
+		    require_once PROJECT_PATH . 'data/reflectance_data.php';
+		    require_once PROJECT_PATH . 'data/campaign_data.php';
+		    require_once PROJECT_PATH . 'data/individual_data.php';
+
+		    $individualData = new Individual();
 
 	    	$campaignData = new Campaign();
 	    	$campaigns = $campaignData->getCampaigns(-1);
@@ -50,12 +54,15 @@
 		    $getParameters = "";
 
 			if (isset($_GET['individualCode'])) {
+
+		   		$individual = $individualData->getIndividualBy($whereClause = ' individualCode = "' . $_GET["individualCode"] . '"' , $page = -1);
+
 				$whereClause = 'ir.individualCode = "' . $_GET['individualCode'] . '"';
 
-			if (isset($_GET["campaign"])) {
-				$whereClause .= "and ir.sampling_campaign_id = " . $_GET["campaign"];
-			   	$getParameters .= "&campaign=" . $_GET["campaign"];
-			}
+				if (isset($_GET["campaign"])) {
+					$whereClause .= "and ir.sampling_campaign_id = " . $_GET["campaign"];
+				   	$getParameters .= "&campaign=" . $_GET["campaign"];
+				}
 
 		    	$reflectanceValues = $reflectanceData->getReflectanceBy($whereClause, $orderBy = '', isset($_GET["page"]) ? $_GET["page"] : 0);
 			}
@@ -63,13 +70,14 @@
 			$fields = $reflectanceData->getFieldList();
 
 			$backUrl = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "");
+
 	  		if (false === strpos($backUrl, 'individual.php') && false === strpos($backUrl, 'individual-list')) {
-				$backUrl = '../lists/individual-list.php';
+				$backUrl = '../lists/individual-list.php?site=' . $individual[0]->site_id . '&plot=' . $individual[0]->plot_id;
 	  		}
 		?>
 
 	  	<!-- incluir menu principal -->
-	  	<?php include "../menu.php";?>
+	  	<?php include PROJECT_PATH . "/menu.php";?>
 
 	    <!-- titulo -->
 	    <div class="container">
@@ -96,7 +104,9 @@
 								<option value="none">Campaign</option>
 								<?php
 									foreach($campaigns as $campaign){
-										echo '<option ' . (isset($_GET["campaign"]) && $campaign->sampling_campaign_id == $_GET["campaign"] ? 'selected' : '') . ' value="' . $campaign->sampling_campaign_id . '">' . $campaign->designation . '</option>';
+										if ($campaign->site_id == $individual[0]->site_id) {
+											echo '<option ' . (isset($_GET["campaign"]) && $campaign->sampling_campaign_id == $_GET["campaign"] ? 'selected' : '') . ' value="' . $campaign->sampling_campaign_id . '">' . $campaign->designation . '</option>';
+										}
 									}
 								?>
 							</select>
