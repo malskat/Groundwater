@@ -46,7 +46,7 @@
 
 	<div class="container">
 		<div class="row">
-			<p class="lead">The meetings are a gathering of project related people with the purpose of sharing information and discussing project topics.</p>
+			<p class="lead">The meetings are a gathering of project related people with the purpose of sharing information and discussing project topics</p>
 		</div>
 
 		<div class="row spacer">

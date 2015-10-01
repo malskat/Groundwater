@@ -46,7 +46,7 @@
 
 	<div class="container">
 		<div class="row">
-			<p class="lead">Scientific events that we have participated with project related communications.</p>
+			<p class="lead">Scientific events that we have participated with project related communications</p>
 		</div>
 
 		<div class="row spacer">

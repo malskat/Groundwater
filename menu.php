@@ -67,6 +67,7 @@
 			  <ul class="dropdown-menu">
 			    <li><a href=<?=PROJECT_URL . "outputs/project-meetings.php"?>><span class="glyphicon glyphicon-adjust"></span> Project Meetings</a></li>
 			    <li><a href=<?=PROJECT_URL . "outputs/scientific-events.php"?>><span class="glyphicon glyphicon-bullhorn"></span> Scientific Events</a></li>
+			    <li><a href=<?=PROJECT_URL . "outputs/workshop.php"?>><span class="glyphicon glyphicon-globe"></span> Workshop</a></li>
 			    <li><a href=<?=PROJECT_URL . "outputs/papers.php"?>><span class="glyphicon glyphicon-book"></span> Papers</a></li>
 			  </ul>
 			</li>	

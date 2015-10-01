@@ -47,7 +47,7 @@
 	<div class="container">
 		<div class="row">
 			<p class="lead">
-				The core idea of this study is to evaluate the capacity of different plant communities to adapt to future scenarios of changing Groundwater (GW) by an integrative spatial approach of GW stress indicators. This approach will contribute to trace GW stress in vegetation in an early stage and help to manage vulnerable communities.
+				The core idea of this study is to evaluate the capacity of different plant communities to adapt to future scenarios of changing Groundwater (GW) by an integrative spatial approach of GW stress indicators. This approach will contribute to trace GW stress in vegetation in an early stage and help to manage vulnerable communities
 			</p>
 			<p>
 				Moreover, we aim to:
