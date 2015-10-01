@@ -83,7 +83,7 @@
 			<div class="col-xs-4 col-lg-4">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="panel-title"><strong>Jornadas de investigación</strong></h4>
+						<h4 class="panel-title"><strong>Jornadas de Investigación</strong></h4>
 					</div>
 			        <div class="panel-body">
 			        	<p>Jornadas de investigación sobre la conservación de Doñana.</p>
@@ -95,7 +95,7 @@
 			        	<hr/>
 			        	<div class="row">
 				        	<div class="col-xs-4 col-lg-4">
-				        		<p><a target="_blank" href=<?=PROJECT_URL . "docs_center/outputs/events/abstracts/JornadasDonana_CAntunes_nov2013.pdf"?> class="btn btn-primary btn-sm" role="button">Get abstract <span class="glyphicon glyphicon-tree-deciduous"></span></a></p>	
+				        		<p><a target="_blank" href=<?=PROJECT_URL . "docs_center/outputs/events/abstracts/JornadasDonana_CAntunes_nov2013.pdf"?> class="btn btn-primary btn-sm" role="button">Get abstract <span class="glyphicon glyphicon-leaf"></span></a></p>	
 				        	</div>
 				        </div>
 			        </div>
@@ -131,6 +131,7 @@
 		</div>
 
 		<div class="row">
+
 			<div class="col-xs-4 col-lg-4">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -155,6 +156,57 @@
 			        </div>
 				</div>
 			</div>
+
+			<div class="col-xs-4 col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title"><strong>4&ordm; Encontro Ibérico de Ecologia</strong></h4>
+					</div>
+			        <div class="panel-body">
+			        	<p>4&ordm; Encontro Ibérico de Ecologia - A Ecologia e os desafios societais.</p>
+			        	<p><strong>Title</strong> - <small>Assessing the impact of groundwater lowering in coastal.</small></p>
+			        	<p><strong>Authors</strong> - <small>Diaz Antunes-Barradas MC; Antunes C; Pereira A; Anjos A; Vieira S; Zunzunegui M; Serrano L; Pereira M; Máguas C.</small></p>
+			        	<p><strong>Type</strong> - <small>Poster</small></p>
+			        	<p><strong>When</strong> - <small>16-19th June 2015</small></p>
+			        	<p><strong>Where</strong> - <small>Coimbra, Portugal</small></p>
+			        	<hr/>
+			        	<div class="row">
+			        		<div class="col-xs-4 col-lg-4">
+				        		<p><a target="_blank" href=<?=PROJECT_URL . "docs_center/outputs/events/abstracts/Abstract_Coimbra.pdf"?> class="btn btn-primary btn-sm" role="button">Get abstract <span class="glyphicon glyphicon-leaf"></span></a></p>	
+				        	</div>
+				        	<div class="col-xs-4 col-lg-4">
+				        		<p><a target="_blank" href=<?=PROJECT_URL . "docs_center/outputs/events/posters/Poster_definitivo_4EIEcologia_Coimbra.pdf"?> class="btn btn-warning btn-sm" role="button">Get document <span class="glyphicon glyphicon-tree-deciduous"></span></a></p>	
+				        	</div>
+				        </div>
+			        </div>
+				</div>
+			</div>
+
+			<div class="col-xs-4 col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title"><strong>13th European Ecological Federation</strong></h4>
+					</div>
+			        <div class="panel-body">
+			        	<p>EEF Conference - Ecology at the Interface.</p>
+			        	<p><strong>Title</strong> - <small>Ecophysiological responses of coastal forests to groundwater changes: comparing functional groups and climatic regions.</small></p>
+			        	<p><strong>Authors</strong> - <small>Cristina Antunes, Ângela Pereira, Andreia Anjos, Simone Vieira, Maria Cruz Diaz Barradas, Maria Zunzunegui, Maria João Pereira, Cristina Máguas</small></p>
+			        	<p><strong>Type</strong> - <small>Poster</small></p>
+			        	<p><strong>When</strong> - <small>21-25th September 2015</small></p>
+			        	<p><strong>Where</strong> - <small>Rome, Italy</small></p>
+			        	<hr/>
+			        	<div class="row">
+			        		<div class="col-xs-4 col-lg-4">
+				        		<p><a target="_blank" href=<?=PROJECT_URL . "docs_center/outputs/events/abstracts/Antunes_et_al_Abstract_eef.pdf"?> class="btn btn-primary btn-sm" role="button">Get abstract <span class="glyphicon glyphicon-leaf"></span></a></p>	
+				        	</div>
+				        	<div class="col-xs-4 col-lg-4">
+				        		<p><a target="_blank" href=<?=PROJECT_URL . "docs_center/outputs/events/posters/EEF_CAntunes_2015_VF.pdf"?> class="btn btn-warning btn-sm" role="button">Get document <span class="glyphicon glyphicon-tree-deciduous"></span></a></p>	
+				        	</div>
+				        </div>
+			        </div>
+				</div>
+			</div>
+
 		</div>
 
 	</div>

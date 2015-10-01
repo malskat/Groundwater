@@ -46,7 +46,7 @@
 
 	<div class="container">
 		<div class="row">
-			<p class="lead">The meetings are a gathering of people related to the project for the purpose of sharing information and discussing one or more project topics in a formal setting.</p>
+			<p class="lead">The meetings are a gathering of project related people with the purpose of sharing information and discussing project topics.</p>
 		</div>
 
 		<div class="row spacer">
@@ -84,7 +84,7 @@
 			        	<div class="row">
 				        	<div class="col-xs-4 col-lg-4">
 				        		<p>
-				        			<a target="_blank" href=<?=PROJECT_URL . "info/state_of_the_art.php"?> class="btn btn-warning btn-sm" role="button" disabled="disabled">
+				        			<a target="_blank" class="btn btn-warning btn-sm" role="button" disabled="disabled">
 					        			Document unavailable <span class="glyphicon glyphicon-tree-deciduous"></span>
 					        		</a>
 					        	</p>	
@@ -100,15 +100,12 @@
 						<h4 class="panel-title"><strong>Progress Meeting</strong></h4>
 					</div>
 			        <div class="panel-body">
-			        	<p>Meeting intended to evaluate the project progress: discussion about what we have accomplished, where we are and future strategies.</p>
+			        	<p>Meeting intended to evaluate the project progress: discussion about what we have accomplished and future strategies.</p>
 			        	<p><strong>When</strong> - <small>10 July 2014</small></p>
 			        	<p><strong>Where</strong> - <small> FCUL, Lisbon, Portugal</small></p>
 			        	<p><strong>Participants</strong> - <small>C. Máguas, O. Correia, M.C.Barradas, C.Antunes, S. Vieira, P.Pinho, M. Ramos.</small></p>
 			        	<hr/>
 			        	<div class="row">
-				        	<!-- <div class="col-xs-4 col-lg-4">
-				        		<p><a href=<?=PROJECT_URL . "info/objectives.php"?> class="btn btn-primary btn-sm" role="button">Get abstract <span class="glyphicon glyphicon-leaf"></span></a></p>	
-				        	</div> -->
 				        	<div class="col-xs-4 col-lg-4">
 				        		<p><a target="_blank" href=<?=PROJECT_URL . "docs_center/outputs/meetings/GWTropiMed_meeting_10july14_v2.pdf"?> class="btn btn-warning btn-sm" role="button">Get document <span class="glyphicon glyphicon-tree-deciduous"></span></a></p>	
 				        	</div>
@@ -117,6 +114,36 @@
 				</div>
 			</div>
 
+		</div>
+
+		<div class="row">
+
+			<div class="col-xs-4 col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title"><strong>Final Meeting</strong></h4>
+					</div>
+			        <div class="panel-body">
+			        	<p>Meeting intended to evaluate the project achievements, first results  and future perspectives.</p>
+			        	<p><strong>When</strong> - <small>14 September 2015.</small></p>
+			        	<p><strong>Where</strong> - <small> FCUL, Lisbon, Portugal</small></p>
+			        	<p><strong>Participants</strong> - <small>C. Máguas, C. Antunes, O. Correia, M. C. Barradas, M. Zunzunegui, S. Vieira, M. Ramos, A. Pereira, M.J. Pereira, R. Siegwolf.</small></p>
+			        	<hr/>
+			        	<div class="row">
+				        	<!-- <div class="col-xs-4 col-lg-4">
+				        		<p><a href=<?=PROJECT_URL . "info/objectives.php"?> class="btn btn-primary btn-sm" role="button">Get abstract <span class="glyphicon glyphicon-leaf"></span></a></p>	
+				        	</div> -->
+				        	<div class="col-xs-4 col-lg-4">
+				        		<p>
+				        			<a target="_blank" class="btn btn-warning btn-sm" role="button" disabled="disabled">
+					        			Document unavailable <span class="glyphicon glyphicon-tree-deciduous"></span>
+					        		</a>
+				        		</p>	
+				        	</div>
+				        </div>
+			        </div>
+				</div>
+			</div>
 
 		</div>
 

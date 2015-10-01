@@ -14,13 +14,14 @@
  		* secção de about 
  			* partners
 
- 		* login - focus na input de email
+ 		* login - focus na input de email - DONE
 
  		* edicao de plot_attribute - DONE
  		* insercao massiva de plot_attribute - DONE
  		
  		* listagem de plot_attribute - DONE
  			* colocar N.D., caso não tenho valores
+
  		* listagem de plot_soil - DONE
  			* colocar N.D., caso não tenho valores
 
