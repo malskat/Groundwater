@@ -63,7 +63,7 @@
 			</li>
 
 			<li class="dropdown <?=(strpos($_SERVER['PHP_SELF'], 'outputs/') !== false ? 'active' :  '')?>">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Outuputs <b class="caret"></b></a>
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Outputs <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
 			    <li><a href=<?=PROJECT_URL . "outputs/project-meetings.php"?>><span class="glyphicon glyphicon-adjust"></span> Project Meetings</a></li>
 			    <li><a href=<?=PROJECT_URL . "outputs/scientific-events.php"?>><span class="glyphicon glyphicon-bullhorn"></span> Scientific Events</a></li>
